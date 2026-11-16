@@ -10,11 +10,17 @@ export default async function handler(req, res) {
     database_works: null
   };
   if (out.anthropic_key_set) {
+    const k = process.env.ANTHROPIC_API_KEY;
+    out.anthropic_key_checks = {
+      looks_like_api_key: /^sk-ant-api\d*-/.test(k.trim()),
+      has_spaces_or_newlines: /\s/.test(k),
+      has_quotes: /["']/.test(k)
+    };
     try {
       const r = await fetch('https://api.anthropic.com/v1/models?limit=1', { headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' } });
       out.anthropic_key_works = r.ok;
       if (!r.ok) out.anthropic_status = r.status;
-    } catch (e) { out.anthropic_key_works = false; }
+    } catch (e) { out.anthropic_key_works = false; out.anthropic_error = (e && (e.name || 'error')) + (e && e.cause && e.cause.code ? ':' + e.cause.code : ''); }
   }
   if (persistent) {
     try { const v = Date.now(); await kset('health:ping', v, 60); out.database_works = (await kget('health:ping')) === v; }
