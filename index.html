@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumina · কুরআন, হাদিস ও আরবি শেখা</title>
+<meta name="description" content="Lumina: বাংলায় পূর্ণ কুরআন (অনুবাদসহ), ৪০ হাদিস, তাফসীর ব্যাখ্যা আর আরবি শেখা। যেকোনো প্রশ্ন করো বাংলা, English বা আরবিতে।">
+<meta property="og:title" content="Lumina · সহজে আরবি শেখো">
+<meta property="og:description" content="প্রশ্ন করো, আরবি শেখো, নিজের ভাষায়।">
+<meta name="theme-color" content="#0f5c4a">
+<meta name="author" content="Adnan">
+<link rel="stylesheet" href="lib/katex/katex.min.css">
+<script src="lib/chem.js"></script>
+<script src="lib/plans.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230f5c4a'/%3E%3Cg transform='translate(32 32)' fill='none' stroke='%23e2c069' stroke-width='2.4'%3E%3Crect x='-14' y='-14' width='28' height='28' rx='2'/%3E%3Crect x='-14' y='-14' width='28' height='28' rx='2' transform='rotate(45)'/%3E%3C/g%3E%3Cpath d='M32 22c4 5 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 2-7 6-12z' fill='%23f4d98a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Hind+Siliguri:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#17231f;--soft:#6b7672;--line:#ece8df;--green:#0f5c4a;--mint:#e7f2ee;--gold:#c8a24a;--rose:#b4544a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hind Siliguri',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+[dir=rtl] body{font-family:'Amiri','Hind Siliguri',serif}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:720px;margin:0 auto;padding:16px 18px 32px}
+
+header{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.brand svg{width:36px;height:36px;display:block}
+.brand b{font-family:'Fraunces',serif;font-size:21px;font-weight:600;letter-spacing:.2px}
+.lang{border:0;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.07);color:var(--ink);border-radius:999px;padding:7px 14px;font-size:14px}
+.menu{position:relative}
+.menu .list{position:absolute;top:110%;inset-inline-end:0;background:var(--card);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:6px;display:none;z-index:5;min-width:120px}
+.menu.open .list{display:block}
+.list button{display:block;width:100%;text-align:start;border:0;background:none;padding:9px 12px;border-radius:10px;font-size:15px}
+.list button:hover{background:var(--mint)}
+
+.tabs{display:flex;background:#f1eee7;border-radius:14px;padding:4px;margin:18px 0 6px}
+.tabs button{flex:1;border:0;background:none;color:var(--soft);padding:9px 4px;border-radius:11px;font-size:14.5px;white-space:nowrap}
+.tabs button.on{background:var(--card);color:var(--green);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.view{display:none;padding-top:14px}.view.on{display:block}
+
+.hero{text-align:center;padding:34px 0 8px}
+.hero .mark svg{width:76px;height:76px;filter:drop-shadow(0 8px 18px rgba(15,92,74,.25))}
+.hero h1{font-size:28px;line-height:1.35;font-weight:700;margin-top:18px}
+.hero p{color:var(--soft);margin-top:8px;font-size:15.5px;line-height:1.6}
+.hero.hide{display:none}
+.box{display:flex;align-items:flex-end;gap:8px;background:var(--card);border-radius:24px;padding:8px 8px 8px 18px;margin-top:22px;box-shadow:0 2px 6px rgba(0,0,0,.04),0 12px 32px rgba(15,60,50,.08)}
+[dir=rtl] .box{padding:8px 18px 8px 8px}
+.box textarea{flex:1;border:0;outline:none;resize:none;background:none;font:inherit;font-size:16px;color:var(--ink);padding:9px 0;max-height:130px}
+.go{width:42px;height:42px;flex:0 0 42px;border:0;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center}
+.go:disabled{opacity:.4}
+.go svg{width:19px;height:19px}
+[dir=rtl] .go svg{transform:scaleX(-1)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{border:0;background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.chip:hover{color:var(--green)}
+.chip.on{background:var(--green);color:#fff}
+
+.thread{display:flex;flex-direction:column;gap:18px;padding:6px 0 14px}
+.row{display:flex;gap:10px;align-items:flex-start}
+.row.me{justify-content:flex-end}
+.row .av svg{width:30px;height:30px;display:block}
+.bubble{max-width:86%;line-height:1.8;font-size:16px;white-space:pre-wrap;word-wrap:break-word}
+.row.bot .bubble{padding-top:2px}
+.row.me .bubble{background:var(--mint);padding:10px 16px;border-radius:20px}
+.arw{font-family:'Amiri',serif;font-size:1.3em;color:var(--green)}
+.typing{color:var(--soft);font-size:14px}
+.listen{border:0;background:var(--mint);color:var(--green);border-radius:999px;padding:5px 13px;font-size:13px;margin-top:8px}
+.dock{position:sticky;bottom:12px;display:none}.dock.on{display:block}
+.dock .box{margin-top:0}
+.reset{display:none;border:0;background:none;color:var(--green);font-size:14px;margin:4px auto 10px}
+.notice{margin:16px 0 0;padding:12px 16px;border-radius:14px;background:#f8f0dc;color:#6e531b;font-size:14px;line-height:1.6;display:none}
+
+.lead{color:var(--soft);margin-bottom:14px;font-size:15px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:10px}
+.letter{border:0;background:var(--card);border-radius:16px;padding:10px 4px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.letter.on{background:var(--green);color:#fff}
+.letter .ch{font-family:'Amiri',serif;font-size:34px;line-height:1.3}
+.letter .nm{font-size:12.5px;opacity:.7}
+.detail{margin-top:16px;background:var(--card);border-radius:20px;padding:18px;display:none;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.detail.on{display:block}
+.forms{display:flex;gap:8px;justify-content:center;margin:14px 0;direction:rtl;flex-wrap:wrap}
+.forms div{background:var(--bg);border-radius:12px;padding:6px 12px;text-align:center}
+.forms .f{font-family:'Amiri',serif;font-size:30px}
+.forms small{display:block;color:var(--soft);font-size:11px;direction:ltr}
+
+.cats{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none;padding:2px}
+.cats::-webkit-scrollbar{display:none}
+.cats .chip{flex:0 0 auto}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{perspective:800px;height:138px;cursor:pointer}
+.card .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.face .w{font-family:'Amiri',serif;font-size:30px}
+.face .t{font-size:12px;color:var(--soft)}
+.face.back{background:var(--green);color:#fff;transform:rotateY(180deg)}
+.face.back .bn{font-size:19px;font-weight:600}
+.face.back .en{font-size:13px;opacity:.8}
+
+.quiz{background:var(--card);border-radius:22px;padding:22px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.score{color:var(--soft);font-size:14px}
+.score b{color:var(--green)}
+.quiz .q{font-family:'Amiri',serif;font-size:50px;margin:12px 0 2px}
+.quiz .qt{color:var(--soft);font-size:15px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.opt{border:0;background:var(--bg);color:var(--ink);padding:14px 8px;border-radius:14px;font-size:15.5px}
+.opt.ok{background:var(--mint);color:var(--green);font-weight:600}
+.opt.bad{background:#f8e5e1;color:var(--rose)}
+.fb{margin-top:12px;min-height:24px;font-size:15px}
+.next{margin-top:10px;border:0;background:var(--green);color:#fff;border-radius:999px;padding:11px 26px;font-weight:600;display:none}
+.subtabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
+.subtabs button{border:0;background:var(--card);color:var(--soft);padding:8px 16px;border-radius:999px;font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.subtabs button.on{background:var(--green);color:#fff}
+.sub{display:none}.sub.on{display:block}
+.search input{width:100%;border:0;background:var(--card);border-radius:16px;padding:13px 16px;font:inherit;font-size:15.5px;color:var(--ink);outline:none;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:12px}
+.search input:focus{box-shadow:0 0 0 2px var(--green)}
+.slist{display:flex;flex-direction:column;gap:8px}
+.srow{display:flex;align-items:center;gap:12px;background:var(--card);border:0;border-radius:16px;padding:12px 14px;text-align:start;box-shadow:0 1px 3px rgba(0,0,0,.05);width:100%;color:var(--ink)}
+.srow .num{width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;background:var(--mint);color:var(--green);border-radius:10px;font-weight:600;font-size:14px;transform:rotate(45deg)}
+.srow .num span{transform:rotate(-45deg)}
+.srow .mid{flex:1;min-width:0}
+.srow .mid b{display:block;font-size:15.5px}
+.srow .mid small{color:var(--soft);font-size:13px}
+.srow .an{font-family:'Amiri',serif;font-size:22px;color:var(--green)}
+.back{border:0;background:none;color:var(--green);font-size:15px;margin-bottom:10px}
+.shead{text-align:center;background:linear-gradient(135deg,#17826a,#0b4a3c);color:#fff;border-radius:22px;padding:22px 16px;margin-bottom:14px}
+.shead .an{font-family:'Amiri',serif;font-size:36px;color:#f6e2a2}
+.shead small{opacity:.8;font-size:14px}
+.shead .bism{font-family:'Amiri',serif;font-size:26px;margin-top:12px}
+.ayah{background:var(--card);border-radius:18px;padding:16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.ayah .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ayah .k{background:var(--mint);color:var(--green);font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px}
+.ayah .acts{display:flex;gap:6px}
+.ayah .acts button{border:0;background:var(--bg);color:var(--green);border-radius:999px;padding:5px 11px;font-size:13px}
+.ayah .arv{font-family:'Amiri',serif;font-size:27px;line-height:2.1;direction:rtl;text-align:right}
+.ayah .tl{color:var(--soft);font-size:13.5px;font-style:italic;margin-top:6px;line-height:1.6}
+.ayah .tx{font-size:15.5px;line-height:1.8;margin-top:6px}
+.src{color:var(--soft);font-size:12px;text-align:center;margin-top:16px}
+.hcard{background:var(--card);border-radius:18px;padding:16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.hcard .k{display:inline-block;background:var(--mint);color:var(--green);font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px}
+.hcard .by{color:var(--soft);font-size:13.5px;margin-top:8px}
+.hcard .harr{font-family:'Amiri',serif;font-size:21px;line-height:2;direction:rtl;text-align:right;margin-top:8px;max-height:9.5em;overflow:hidden;position:relative}
+.hcard.open .harr{max-height:none}
+.hcard .hen{font-size:15px;line-height:1.75;margin-top:8px}
+.hcard .row2{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.hcard .row2 button{border:0;background:var(--bg);color:var(--green);border-radius:999px;padding:6px 13px;font-size:13.5px}
+.loading{color:var(--soft);text-align:center;padding:30px 0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.colc{border:0;background:var(--card);border-radius:18px;padding:16px 12px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.05);color:var(--ink)}
+.colc .an{font-family:'Amiri',serif;font-size:20px;color:var(--green)}
+.colc b{display:block;font-size:15.5px;margin-top:2px}
+.colc small{color:var(--soft);font-size:12.5px}
+.secTitle{font-weight:700;font-size:17px;margin:2px 0 12px}
+.grades{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.grade{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--mint);color:var(--green)}
+.grade.weak{background:#f8e5e1;color:var(--rose)}
+.grade.mid{background:#f8f0dc;color:#6e531b}
+.hcard .hbn{font-size:15.5px;line-height:1.85;margin-top:8px;white-space:pre-wrap}
+.hcard .harr{display:none}
+.hcard.ar-open .harr{display:block;max-height:none}
+.tpanel{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
+.tsrc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tsrc button{border:0;background:var(--bg);color:var(--soft);border-radius:999px;padding:6px 12px;font-size:13px}
+.tsrc button.on{background:var(--green);color:#fff}
+.ttext{font-size:15px;line-height:1.85;white-space:pre-wrap;max-height:16em;overflow:hidden;position:relative}
+.ttext.full{max-height:none}
+.tmore{border:0;background:none;color:var(--green);font-size:14px;margin-top:6px;padding:0}
+.tcredit{color:var(--soft);font-size:12px;margin-top:8px}
+footer{text-align:center;color:var(--soft);font-size:13px;margin-top:34px}
+
+/* ===== visual refresh ===== */
+:root{--bg:#f7f5ef;--ink:#14211d;--green:#0f5c4a;--green2:#17826a;--mint:#e5f1ec;--gold:#c8a24a;--gold2:#f6e2a2}
+body{background:var(--bg)}
+header{position:sticky;top:0;z-index:20;padding:10px 18px;margin:-16px -18px 0;background:rgba(247,245,239,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tabs{background:var(--card);padding:5px;border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.05),0 8px 24px rgba(20,60,50,.06);margin:12px 0 4px}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 7px;border-radius:13px;font-size:13px}
+.tabs button svg{width:21px;height:21px}
+.tabs button.on{background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;box-shadow:0 6px 14px rgba(15,92,74,.25)}
+.hero{padding:10px 0 4px}
+.heroCard{position:relative;overflow:hidden;border-radius:28px;padding:30px 18px 18px;color:#fff;
+  background:linear-gradient(150deg,#1a8a70 0%,#0f5c4a 55%,#0a3f33 100%);box-shadow:0 18px 40px rgba(15,92,74,.28)}
+.heroCard::before{content:"";position:absolute;inset:0;opacity:.16;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23f6e2a2' stroke-width='1.1'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='18' y='18' width='28' height='28' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3C/g%3E%3C/svg%3E")}
+.heroCard::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;top:-120px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(246,226,162,.35),rgba(246,226,162,0) 70%);pointer-events:none}
+.heroCard>*{position:relative;z-index:1}
+.hero .mark svg{width:70px;height:70px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.25))}
+.hero h1{color:#fff;font-size:26px;margin-top:14px}
+.hero p{color:rgba(255,255,255,.82)}
+.heroCard .box{margin-top:18px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.heroCard .go{background:linear-gradient(135deg,#e2c069,#c8a24a);color:#1d1a0e}
+.rl{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.rl .lbl{font-size:13px;opacity:.85;margin-inline-end:2px}
+.rl button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:4px 12px;font-size:13px}
+.rl button.on{background:#fff;color:var(--green);border-color:#fff;font-weight:600}
+.rl.small{justify-content:flex-start;margin:0 0 6px}
+.rl.small .lbl{color:var(--soft)}
+.rl.small button{border-color:var(--line);background:var(--card);color:var(--soft)}
+.rl.small button.on{background:var(--green);color:#fff;border-color:var(--green)}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.feat button{border:0;background:var(--card);border-radius:20px;padding:14px;text-align:start;display:flex;gap:12px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 18px rgba(20,60,50,.05);color:var(--ink)}
+.feat .fi{width:42px;height:42px;flex:0 0 42px;border-radius:14px;display:grid;place-items:center;font-size:20px}
+.feat b{display:block;font-size:15px}
+.feat small{color:var(--soft);font-size:12.5px;line-height:1.35;display:block}
+.dock .box{box-shadow:0 10px 30px rgba(20,60,50,.14)}
+.modebar{display:none;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(135deg,#fff7e2,#f6ebcd);color:#6e531b;border-radius:14px;padding:9px 14px;margin:4px 0 12px;font-size:14px}
+.modebar.on{display:flex}
+.modebar button{border:0;background:#fff;color:#6e531b;border-radius:999px;padding:4px 12px;font-size:13px}
+.shead{background:linear-gradient(150deg,#1a8a70,#0f5c4a 60%,#0a3f33);position:relative;overflow:hidden;box-shadow:0 12px 28px rgba(15,92,74,.22)}
+.srow,.ayah,.hcard,.colc,.letter,.face,.quiz,.detail,.chip,.search input{box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.colc{border-radius:22px;padding:18px 12px}
+.lsw{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.lsw button{border:2px solid transparent;background:var(--card);border-radius:22px;padding:14px;display:flex;align-items:center;gap:12px;text-align:start;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 18px rgba(20,60,50,.05)}
+.lsw button.on{border-color:var(--green);background:linear-gradient(180deg,#fff,#f2faf6)}
+.lsw .big{width:46px;height:46px;flex:0 0 46px;border-radius:15px;display:grid;place-items:center;font-size:26px;color:#fff;background:linear-gradient(135deg,var(--green2),var(--green))}
+.lsw .big.en{background:linear-gradient(135deg,#3d6fd8,#2a4fa8);font-family:'Fraunces',serif;font-size:21px}
+.lsw .big.ar{font-family:'Amiri',serif}
+.lsw b{display:block;font-size:16px}
+.lsw small{color:var(--soft);font-size:12.5px}
+.subtabs{overflow-x:auto;justify-content:flex-start;scrollbar-width:none;padding:2px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{flex:0 0 auto}
+.face .w.en{font-family:'Fraunces',serif;font-size:26px}
+.face .ex{font-size:12.5px;opacity:.85;margin-top:6px;line-height:1.4}
+.prow{background:var(--card);border-radius:18px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:center;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.prow .pt{flex:1;min-width:0}
+.prow .tx1{font-size:18px;font-weight:600}
+.prow .tx1.ar{font-family:'Amiri',serif;font-size:24px;direction:rtl;text-align:right;font-weight:400;color:var(--green)}
+.prow .pr{color:var(--soft);font-size:13.5px;margin-top:2px}
+.prow .mn{font-size:15px;margin-top:4px}
+.prow .sp{border:0;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--mint);color:var(--green);font-size:16px}
+.lgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lcard{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;border:0;background:var(--card);border-radius:18px;padding:14px;text-align:start;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.lcard .no{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mint);color:var(--green);font-weight:700;font-size:13px}
+.lcard b{display:block;font-size:15px;margin-top:8px;line-height:1.4}
+.lcard small{color:var(--soft);font-size:12.5px;line-height:1.45;display:block;margin-top:3px}
+.quiz .q.en{font-family:'Fraunces',serif;font-size:40px}
+.talk{background:var(--card);border-radius:24px;padding:26px 20px;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.talkIcon{width:64px;height:64px;margin:0 auto;border-radius:20px;display:grid;place-items:center;font-size:30px;color:#fff;background:linear-gradient(135deg,var(--green2),var(--green))}
+.talk h3{font-size:20px;margin-top:12px}
+.talk p{color:var(--soft);margin-top:6px;line-height:1.6;font-size:15px}
+.levels{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+
+/* design tab */
+.tabs button{font-size:12.5px}
+.dAi{background:linear-gradient(150deg,#1a8a70,#0f5c4a 60%,#0a3f33);color:#fff;border-radius:24px;padding:18px 16px;box-shadow:0 14px 32px rgba(15,92,74,.25)}
+.dAi>b{display:block;font-size:16px;margin-bottom:10px}
+.dAi .box{margin-top:0}
+.dAi .go{background:linear-gradient(135deg,#e2c069,#c8a24a);color:#1d1a0e}
+.dAi .chips{justify-content:flex-start;margin-top:12px}
+.dAi .chip{background:rgba(255,255,255,.12);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.25);font-size:13px;padding:6px 12px}
+.dStatus{font-size:13.5px;margin-top:8px;opacity:.9}
+.dStage{margin-top:14px;background:repeating-conic-gradient(#ece8df 0 25%,#f7f5ef 0 50%) 0 0/18px 18px;border-radius:20px;padding:14px;display:flex;justify-content:center}
+.dStage canvas{max-width:100%;max-height:62vh;width:auto;height:auto;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:block}
+.dActions{text-align:center;margin-top:12px}
+.dPanel{background:var(--card);border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.dPanel>label{display:block;font-size:13px;font-weight:600;color:var(--soft);margin:12px 0 6px}
+.dPanel>label:first-child{margin-top:0}
+.dPanel input,.dPanel textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);outline:none;resize:vertical}
+.dPanel input:focus,.dPanel textarea:focus{border-color:var(--green)}
+#fAr{font-family:'Amiri',serif;font-size:19px}
+.dRow{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:3px}
+.dRow::-webkit-scrollbar{display:none}
+.dRow .chip{flex:0 0 auto;font-size:13.5px;padding:7px 13px;cursor:pointer}
+.sw{width:34px;height:34px;flex:0 0 34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer}
+.sw.on{box-shadow:0 0 0 2.5px var(--green)}
+.dModal{position:fixed;inset:0;background:rgba(10,20,18,.75);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.dModal.on{display:flex}
+.dModal>div{background:var(--card);border-radius:20px;padding:16px;text-align:center;max-width:520px;width:100%}
+.dModal img{max-width:100%;max-height:60vh;border-radius:8px;margin:10px 0}
+.dModal p{font-size:14.5px;color:var(--soft)}
+.feat .wide{grid-column:1/-1}
+
+/* attachments & voice */
+.box{align-items:center}
+.ib{width:38px;height:38px;flex:0 0 38px;border:0;border-radius:50%;background:transparent;color:var(--soft);display:grid;place-items:center}
+.ib svg{width:21px;height:21px}
+.ib:hover{background:var(--mint);color:var(--green)}
+.box{padding-inline-start:6px}
+.mic.rec{background:#e5484d;color:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}70%{box-shadow:0 0 0 12px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+.atts{display:none;gap:8px;flex-wrap:wrap;margin:12px 0 -8px}
+.dock .atts{margin:0 0 6px}
+.att{position:relative;display:flex;align-items:center;gap:6px;background:var(--card);border-radius:14px;padding:6px 30px 6px 8px;box-shadow:0 2px 8px rgba(0,0,0,.08);max-width:220px;color:var(--ink)}
+.att img{width:52px;height:52px;object-fit:cover;border-radius:10px;display:block}
+.att:has(img){padding:4px}
+.att .an{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.att .ax{position:absolute;top:-6px;inset-inline-end:-6px;width:22px;height:22px;border-radius:50%;border:0;background:#1b2824;color:#fff;font-size:11px;display:grid;place-items:center}
+.attNote{display:none;font-size:13px;margin-top:10px;color:#fff;opacity:.9}
+.dock .attNote{color:var(--rose);margin:0 0 6px}
+.vrow{display:flex;justify-content:center;margin-top:8px}
+.spk{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:4px 12px;font-size:13px}
+.spk.on{background:#fff;color:var(--green);font-weight:600}
+.rl.small .spk{border-color:var(--line);background:var(--card);color:var(--soft)}
+.rl.small .spk.on{background:var(--green);color:#fff;border-color:var(--green)}
+.uatts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:flex-start;margin-bottom:6px;max-width:86%}
+.uatts img{width:120px;height:120px;object-fit:cover;border-radius:14px;display:block}
+.uatts .uf{background:var(--card);border-radius:12px;padding:8px 12px;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.row.me{flex-direction:column;align-items:flex-end}
+
+/* solve tab */
+.tabs{overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1 0 auto;min-width:60px;padding-inline:6px}
+.sHero{background:linear-gradient(150deg,#3d6fd8,#2a4fa8 55%,#1b2f6b);color:#fff;border-radius:24px;padding:20px 18px;box-shadow:0 14px 32px rgba(42,79,168,.25);text-align:center}
+.sIcons{display:flex;justify-content:center;gap:10px;margin-bottom:10px}
+.sIcons span{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:20px}
+.sHero b{display:block;font-size:19px}
+.sHero small{display:block;opacity:.85;font-size:14px;margin-top:4px;line-height:1.5}
+.subj{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.subj button{border:2px solid transparent;background:var(--card);border-radius:20px;padding:14px 12px;display:flex;align-items:center;gap:10px;text-align:start;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.subj button.on{border-color:#2a4fa8;background:linear-gradient(180deg,#fff,#f1f5ff)}
+.subj .si{width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:#fff}
+.subj b{font-size:15px}
+.sCard,.tool{background:var(--card);border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
+.sCard>label{display:block;font-size:13px;font-weight:600;color:var(--soft);margin:12px 0 6px}
+.sCard>label:first-child{margin-top:0}
+.sCard textarea,.tool input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:15.5px;color:var(--ink);background:var(--bg);outline:none;resize:vertical}
+.sCard textarea:focus,.tool input:focus{border-color:#2a4fa8}
+.sCard .atts{margin:10px 0 0}
+.sCard .attNote{color:var(--rose)}
+.sBtns{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sBtns .next,.tool .next{margin-top:0;background:linear-gradient(135deg,#3d6fd8,#2a4fa8)}
+.sEx{display:flex;flex-direction:column;gap:6px}
+.sEx button{border:0;background:var(--bg);border-radius:12px;padding:9px 12px;text-align:start;font-size:14px;color:var(--ink)}
+.sEx button:hover{background:#eef3ff}
+.sH{font-size:16px;margin:22px 0 2px}
+.tool b{display:block;font-size:15.5px}
+.tool small{display:block;color:var(--soft);font-size:13px;margin-top:2px}
+.trow{display:flex;gap:8px;align-items:center;margin-top:10px}
+.trow.small input{max-width:90px}
+.trow .pre{color:var(--soft);font-size:14px;white-space:nowrap}
+.tout{margin-top:10px;font-size:15px;line-height:1.7}
+.tout:empty{display:none}
+.tout .big{font-size:19px;font-weight:700;color:#2a4fa8}
+.tout table{border-collapse:collapse;margin-top:6px;font-size:14px}
+.tout td,.tout th{border-bottom:1px solid var(--line);padding:4px 10px;text-align:start}
+.tout .err{color:var(--rose)}
+.fig{margin:10px 0;background:#fff;border-radius:14px;padding:6px;box-shadow:0 1px 4px rgba(0,0,0,.08);max-width:100%;overflow:hidden}
+.fig svg{display:block;width:100%;height:auto}
+pre.code{background:#1b2824;color:#e8f1ec;border-radius:12px;padding:10px 12px;overflow-x:auto;font-size:13px;white-space:pre}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.bubble .katex{font-size:1.08em}
+footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
+
+/* plans & limits */
+.hdrR{display:flex;align-items:center;gap:8px}
+.usePill{border:0;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.07);color:var(--green);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:3px}
+.usePill small{color:var(--soft);font-weight:500;font-size:12px}
+.usePill.low{color:var(--rose)}
+.usePill.paid{background:linear-gradient(135deg,#fff7e2,#f6ebcd);color:#7a5a12}
+.limCard{background:linear-gradient(135deg,#fff7e2,#f6ebcd);border-radius:18px;padding:14px 16px;max-width:86%;color:#5d4510}
+.limCard b{font-size:16px}
+.limCard p{margin:6px 0 10px;font-size:14.5px;line-height:1.6}
+.limCard .next{margin-top:0;background:linear-gradient(135deg,#c8a24a,#a07c2c)}
+.sheet{position:fixed;inset:0;background:rgba(10,20,18,.55);display:none;z-index:60;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheetIn{background:var(--bg);width:100%;max-width:720px;max-height:92vh;overflow-y:auto;border-radius:26px 26px 0 0;padding:20px 16px 28px;position:relative;animation:up .25s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.sheetIn h2{font-size:21px;text-align:center;margin-bottom:12px}
+.sx{position:absolute;top:14px;inset-inline-end:14px;width:34px;height:34px;border-radius:50%;border:0;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.08);font-size:15px}
+.cur{background:var(--card);border-radius:20px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.curTop{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.badge{font-weight:700;font-size:13px;padding:3px 12px;border-radius:999px;background:var(--mint);color:var(--green)}
+.badge.b-go{background:#e6efff;color:#2a4fa8}.badge.b-plus{background:#f3e8fb;color:#7a3aa0}.badge.b-pro,.badge.pro{background:#fff1d6;color:#8a6212}
+.curTop small,.rs{color:var(--soft);font-size:12.5px;display:block}
+.rs{margin-top:8px}
+.meter{margin-top:8px}
+.ml{display:flex;justify-content:space-between;font-size:13.5px}
+.mb{height:8px;border-radius:999px;background:#ece8df;overflow:hidden;margin-top:4px}
+.mb i{display:block;height:100%;background:linear-gradient(90deg,#17826a,#0f5c4a);border-radius:999px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.pcard{position:relative;background:var(--card);border-radius:20px;padding:16px 12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 18px rgba(20,60,50,.05);border:2px solid transparent;display:flex;flex-direction:column}
+.pcard.pop{border-color:#7a3aa0}
+.pcard.cur{border-color:var(--green)}
+.pcard>b{font-size:18px}
+.pcard.pl-go>b{color:#2a4fa8}.pcard.pl-plus>b{color:#7a3aa0}.pcard.pl-pro>b{color:#8a6212}
+.pp{font-size:22px;font-weight:700;margin:4px 0 6px}
+.pp small{font-size:12.5px;font-weight:500;color:var(--soft)}
+.pcard ul{list-style:none;font-size:13px;line-height:1.75;color:var(--ink);flex:1}
+.pcard .next{margin-top:10px;padding:9px 12px;font-size:14px;width:100%}
+.pcard.pl-go .next{background:linear-gradient(135deg,#3d6fd8,#2a4fa8)}.pcard.pl-plus .next{background:linear-gradient(135deg,#9b51c4,#7a3aa0)}.pcard.pl-pro .next{background:linear-gradient(135deg,#d8ad45,#a07c2c)}
+.pcard .next:disabled{background:var(--mint);color:var(--green)}
+.ptag{position:absolute;top:-10px;inset-inline-start:12px;background:#7a3aa0;color:#fff;font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:999px}
+.pay{display:none;background:#fffaf0;border:1.5px dashed #d8b45a;border-radius:18px;padding:14px 16px;margin-top:14px;font-size:14.5px;line-height:1.7}
+.pay ol{padding-inline-start:20px;margin-top:6px}
+.pay .sel{user-select:all;color:var(--green)}
+.redeem{background:var(--card);border-radius:18px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.redeem input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;background:var(--bg);outline:none;letter-spacing:.5px}
+.redeem .next{margin-top:0}
+.pmsg{font-size:14px;margin-top:8px}.pmsg.ok{color:var(--green)}.pmsg.err{color:var(--rose)}
+
+.unl{font-size:20px;font-weight:700;color:var(--green);margin-top:6px}
+.pid{flex:1;min-width:0;font-size:12.5px;background:var(--bg);border-radius:10px;padding:9px 10px;overflow-wrap:anywhere;user-select:all}
+#pStaff input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;background:var(--bg);outline:none}
+#pStaff .next{margin-top:0}
+#pStaff a.chip{text-decoration:none}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17826a"/><stop offset="1" stop-color="#0b4a3c"/></linearGradient>
+    <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6e2a2"/><stop offset="1" stop-color="#c8a24a"/></linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#fff6d6" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
+    <symbol id="logo" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="18" fill="url(#lg)"/>
+      <circle cx="32" cy="33" r="13" fill="url(#glow)"/>
+      <g transform="translate(32 32)" fill="none" stroke="url(#gg)" stroke-width="2.2" stroke-linejoin="round">
+        <rect x="-14" y="-14" width="28" height="28" rx="2"/>
+        <rect x="-14" y="-14" width="28" height="28" rx="2" transform="rotate(45)"/>
+      </g>
+      <path d="M32 21.5c4.2 5.2 6.3 8.8 6.3 12.4a6.3 6.3 0 0 1-12.6 0c0-3.6 2.1-7.2 6.3-12.4z" fill="url(#gg)"/>
+      <path d="M32 29c1.8 2.3 2.7 3.9 2.7 5.4a2.7 2.7 0 0 1-5.4 0c0-1.5.9-3.1 2.7-5.4z" fill="#fffaf0"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="brand" id="home"><svg><use href="#logo"/></svg><b>Lumina</b></div>
+    <div class="hdrR"><button class="usePill" id="usePill" aria-label="plans"></button>
+    <div class="menu" id="menu">
+      <button class="lang" id="langBtn"></button>
+      <div class="list"><button data-l="bn">বাংলা</button><button data-l="en">English</button><button data-l="ar">العربية</button></div>
+    </div></div>
+  </header>
+
+  <nav class="tabs">
+    <button data-v="ask" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 10.5h6M9 13.5h4"/></svg><span data-t="tAsk"></span></button>
+    <button data-v="quran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span data-t="tQuran"></span></button>
+    <button data-v="hadith"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h10a2 2 0 0 1 2 2V17H9a2 2 0 0 0-2 2"/><path d="M7 3.5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h12v-4"/><path d="M10 8h6M10 11h4"/></svg><span data-t="tHadith"></span></button>
+    <button data-v="solve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L12 4l8 16z"/><path d="M8.5 13h7"/><circle cx="18.5" cy="6" r="2.2"/></svg><span data-t="tSolve"></span></button>
+    <button data-v="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7M7.5 3v2M5 11c2-1 4-3.5 4.5-6M6 8c.8 1.6 2.2 2.8 4 3.5"/><path d="M12 21l4.5-10L21 21M13.5 17.5h6"/></svg><span data-t="tLearn"></span></button>
+    <button data-v="design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9" r="1.8"/><path d="M20.5 15l-4.5-4.5L6 20.5"/></svg><span data-t="tDesign"></span></button>
+  </nav>
+
+  <section class="view on" id="v-ask">
+    <div class="hero" id="hero">
+      <div class="heroCard">
+        <div class="mark"><svg><use href="#logo"/></svg></div>
+        <h1 data-t="h"></h1>
+        <p data-t="sub"></p>
+        <div class="atts" id="atts1"></div><div class="attNote" id="attNote1"></div><form class="box" id="f1"><button type="button" class="ib attach" aria-label="attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button><textarea id="q1" rows="1"></textarea><button type="button" class="ib mic" data-ta="q1" aria-label="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button><button class="go" id="g1" aria-label="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+        <div class="rl" id="rl1"></div><div class="vrow"><button type="button" class="spk"></button></div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="feat" id="feat"></div>
+    </div>
+    <div class="notice" id="notice"></div>
+    <button class="reset" id="reset" data-t="reset"></button>
+    <div class="modebar" id="modebar"><span id="modeText"></span><button id="modeEnd"></button></div>
+    <div class="thread" id="thread"></div>
+    <input type="file" id="fileIn" multiple hidden accept="image/*,.pdf,.docx,.txt,.md,.csv,.tsv,.json,.html,.htm,.xml,.srt">
+    <div class="dock" id="dock">
+      <div class="rl small" id="rl2"><span></span></div>
+      <div class="atts" id="atts2"></div><div class="attNote" id="attNote2"></div><form class="box" id="f2"><button type="button" class="ib attach" aria-label="attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button><textarea id="q2" rows="1"></textarea><button type="button" class="ib mic" data-ta="q2" aria-label="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button><button class="go" id="g2" aria-label="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+    </div>
+  </section>
+
+  <!-- QURAN -->
+  <section class="view" id="v-quran">
+    <div id="surahList">
+      <div class="search"><input id="sq" type="search"></div>
+      <div class="slist" id="slist"></div>
+    </div>
+    <div id="reader" style="display:none">
+      <button class="back" id="rback"></button>
+      <div class="shead" id="shead"></div>
+      <div id="ayahs"></div>
+    </div>
+    <p class="src" data-t="qSrc"></p>
+  </section>
+
+  <!-- HADITH -->
+  <section class="view" id="v-hadith">
+    <div id="hHome">
+      <p class="lead" data-t="hLead"></p>
+      <div class="cols" id="cols"></div>
+    </div>
+    <div id="hCol" style="display:none">
+      <button class="back" id="hBack1"></button>
+      <div class="shead" id="hColHead"></div>
+      <form class="search" id="hNumForm"><input id="hNum" type="search" inputmode="numeric"></form>
+      <div class="slist" id="hSecs"></div>
+    </div>
+    <div id="hSec" style="display:none">
+      <button class="back" id="hBack2"></button>
+      <div class="secTitle" id="hSecHead"></div>
+      <div id="hItems"></div>
+    </div>
+    <p class="src" data-t="hSrc"></p>
+  </section>
+
+  <!-- SOLVE: math, geometry, physics, chemistry -->
+  <section class="view" id="v-solve">
+    <div class="sHero">
+      <div class="sIcons"><span>∑</span><span>△</span><span>⚛</span><span>⚗</span></div>
+      <b data-t="sTitle"></b>
+      <small data-t="sSub"></small>
+    </div>
+    <div class="subj" id="subj"></div>
+    <div class="sCard">
+      <label data-t="sLevel"></label><div class="dRow" id="sLevels"></div>
+      <label data-t="sProblem"></label>
+      <textarea id="sProb" rows="4"></textarea>
+      <div class="atts" id="atts3"></div><div class="attNote" id="attNote3"></div>
+      <div class="sBtns"><button type="button" class="chip" id="sPhoto" data-t="sPhotoBtn"></button><button type="button" class="next" id="sGo" style="display:inline-block" data-t="sGoBtn"></button></div>
+      <label data-t="sExamples"></label><div class="sEx" id="sEx"></div>
+    </div>
+    <h3 class="sH" data-t="sTools"></h3>
+    <div class="tool">
+      <b data-t="tlBal"></b><small data-t="tlBalSub"></small>
+      <div class="trow"><input id="tBal" placeholder="Fe + O2 -> Fe2O3"><button type="button" class="next" id="tBalGo" style="display:inline-block" data-t="tlGo"></button></div>
+      <div class="tout" id="tBalOut"></div>
+    </div>
+    <div class="tool">
+      <b data-t="tlMol"></b><small data-t="tlMolSub"></small>
+      <div class="trow"><input id="tMol" placeholder="H2SO4"><button type="button" class="next" id="tMolGo" style="display:inline-block" data-t="tlGo"></button></div>
+      <div class="tout" id="tMolOut"></div>
+    </div>
+    <div class="tool">
+      <b data-t="tlGraph"></b><small data-t="tlGraphSub"></small>
+      <div class="trow"><span class="pre">y =</span><input id="tFx" value="x^2 - 4" dir="ltr"><button type="button" class="next" id="tFxGo" style="display:inline-block" data-t="tlDraw"></button></div>
+      <div class="trow small"><span class="pre">x:</span><input id="tX1" value="-5" inputmode="decimal"><span class="pre">→</span><input id="tX2" value="5" inputmode="decimal"></div>
+      <div class="tout" id="tFxOut"></div>
+    </div>
+    <div class="tool">
+      <b data-t="tlCalc"></b><small data-t="tlCalcSub"></small>
+      <div class="trow"><input id="tCalc" placeholder="sqrt(3^2 + 4^2)" dir="ltr"><button type="button" class="next" id="tCalcGo" style="display:inline-block">=</button></div>
+      <div class="tout" id="tCalcOut"></div>
+    </div>
+  </section>
+
+  <!-- LANGUAGE LEARNING -->
+  <section class="view" id="v-learn">
+    <div class="lsw">
+      <button data-p="ar" class="on"><span class="big ar">ع</span><span><b data-t="lAr"></b><small data-t="lArSub"></small></span></button>
+      <button data-p="en"><span class="big en">Aa</span><span><b data-t="lEn"></b><small data-t="lEnSub"></small></span></button>
+    </div>
+    <div class="subtabs" id="lsub"></div>
+
+    <div class="sub" id="s-abc">
+      <p class="lead" data-t="abcHint"></p>
+      <div class="grid" id="grid"></div>
+      <div class="detail" id="detail"></div>
+    </div>
+    <div class="sub" id="s-words">
+      <p class="lead" data-t="vocabHint"></p>
+      <div class="cats" id="cats"></div>
+      <div class="vgrid" id="vgrid"></div>
+    </div>
+    <div class="sub" id="s-phrases">
+      <p class="lead" data-t="phHint"></p>
+      <div id="plist"></div>
+    </div>
+    <div class="sub" id="s-lessons">
+      <p class="lead" data-t="lsHint"></p>
+      <div class="lgrid" id="lgrid"></div>
+    </div>
+    <div class="sub" id="s-quiz">
+      <div class="quiz">
+        <div class="score"><span data-t="score"></span> <b id="sc">0</b> / <b id="tot">0</b></div>
+        <div class="q" id="q"></div>
+        <div class="qt" id="qt"></div>
+        <div class="opts" id="opts"></div>
+        <div class="fb" id="fb"></div>
+        <button class="next" id="qnext" data-t="next"></button>
+      </div>
+    </div>
+    <div class="sub" id="s-talk">
+      <div class="talk">
+        <div class="talkIcon" id="talkIcon"></div>
+        <h3 id="talkTitle"></h3>
+        <p id="talkDesc"></p>
+        <div class="levels" id="levels"></div>
+        <button class="next" id="talkGo" style="display:inline-block"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="view" id="v-design">
+    <div class="dAi">
+      <b data-t="dAiTitle"></b>
+      <form class="box" id="dForm"><textarea id="dPrompt" rows="1"></textarea><button class="go" id="dGo" aria-label="make"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button></form>
+      <div class="chips" id="dIdeas"></div>
+      <div class="dStatus" id="dStatus"></div>
+    </div>
+    <div class="dStage"><canvas id="dCanvas"></canvas></div>
+    <div class="dActions">
+      <button class="next" id="dSave" style="display:inline-block" data-t="dSave"></button>
+    </div>
+    <div class="dPanel">
+      <label data-t="dTpl"></label><div class="dRow" id="dTpls"></div>
+      <label data-t="dSize"></label><div class="dRow" id="dSizes"></div>
+      <label data-t="dColor"></label><div class="dRow" id="dColors"></div>
+      <label data-t="dArabic"></label><input id="fAr" dir="rtl">
+      <label data-t="dTitle"></label><input id="fTitle">
+      <label data-t="dSub"></label><input id="fSub">
+      <label data-t="dBody"></label><textarea id="fBody" rows="3"></textarea>
+      <label data-t="dFoot"></label><input id="fFoot">
+      <label data-t="dPhoto"></label>
+      <div class="dRow"><label class="chip upl"><input type="file" id="fPhoto" accept="image/*" hidden><span data-t="dPick"></span></label><button class="chip" id="fPhotoX" style="display:none" data-t="dRemove"></button></div>
+    </div>
+    <div class="dModal" id="dModal"><div><p data-t="dHold"></p><img id="dImg" alt=""><br><button class="next" id="dClose" style="display:inline-block" data-t="dClose"></button></div></div>
+  </section>
+
+  <!-- PLANS -->
+  <div class="sheet" id="plans"><div class="sheetIn">
+    <button class="sx" id="plansX" aria-label="close">✕</button>
+    <h2 data-t="pTitle"></h2>
+    <div class="cur" id="pCur"></div>
+    <div class="pgrid" id="pGrid"></div>
+    <div class="pay" id="pPay"></div>
+    <div class="redeem"><b data-t="pYourId"></b><div class="trow"><code class="pid" id="pId"></code><button class="chip" id="pIdCopy">📋</button></div><small class="rs" data-t="pIdNote"></small></div>
+    <div class="redeem"><b data-t="staffTitle"></b><div id="pStaff"></div></div>
+    <div class="redeem"><b data-t="pHaveCode"></b><div class="trow"><input id="pCode" placeholder="LUMI-XXXX-XXXX" autocapitalize="characters"><button class="next" id="pRedeem" style="display:inline-block" data-t="pActivate"></button></div><div class="pmsg" id="pMsg"></div></div>
+  </div></div>
+
+  <footer><span data-t="foot"></span><span class="cr" data-t="creator"></span></footer>
+</div>
+
+<script>
+const T={
+ bn:{roleSuper:"সুপার অ্যাডমিন",roleAdmin:"অ্যাডমিন",unlimited:"∞ সব কিছু সীমাহীন",pYourId:"তোমার আইডি",pIdNote:"প্ল্যান কিনলে বা সাহায্য লাগলে এই আইডিটা অ্যাডমিনকে পাঠাতে পারো।",staffTitle:"অ্যাডমিন লগইন",staffLocal:"তুমি এই পেজের মালিক/এডিটর, তাই তোমার জন্য কোনো সীমা নেই।",staffLocalNo:"অ্যাডমিন লগইন শুধু আসল Lumina ওয়েবসাইটে কাজ করে।",adminKeyPh:"অ্যাডমিন কী",login:"লগইন",logout:"লগআউট",openPanel:"⚙️ অ্যাডমিন প্যানেল",loginOk:"লগইন হয়েছে। এখন সীমাহীন 👑",loginBad:"কী সঠিক নয়।",pTitle:"Lumina প্ল্যান",limTitle:"এই সময়ের সীমা শেষ ⏳",lim_chat:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো প্রশ্ন করা যায়, সব শেষ।",lim_upload:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ছবি/ফাইল পাঠানো যায়, সব শেষ।",lim_design:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ডিজাইন বানানো যায়, সব শেষ।",limReset:"আবার পাবে {t} পরে।",seePlans:"প্ল্যান দেখো",k_chat:"💬 প্রশ্ন",k_upload:"📎 ছবি ও ফাইল",k_design:"🎨 ডিজাইন বানানো",pUntil:"মেয়াদ: {d} পর্যন্ত",pFresh:"প্রথম ব্যবহারের {h} ঘণ্টা পর সীমা আবার নতুন হয়।",pLocalNote:"এখানে (claude.ai) সীমা শুধু এই ব্রাউজারে গোনা হয়। আসল ওয়েবসাইটে সার্ভার গুনবে।",pPopular:"জনপ্রিয়",pMonth:"মাস",pFreeLbl:"ফ্রি",f_chat:"প্রতি ৪ ঘণ্টায় {n}টি প্রশ্ন",f_upload:"{n}টি ছবি/ফাইল",f_design:"{n}টি ডিজাইন",f_reset:"প্রতি {h} ঘণ্টায় রিসেট",pCurrent:"এখন চালু",pBuy:"{p} নাও",payTitle:"{p} প্ল্যান নেওয়ার নিয়ম",pay1:"{m} দিয়ে {a} পাঠাও এই নম্বরে: {n}",pay2:"Transaction ID আর \"{p}\" লিখে মেসেজ দাও: {c}",pay3:"একটা অ্যাক্টিভেশন কোড পাবে। নিচে কোডটা বসালেই {d} দিনের জন্য চালু হয়ে যাবে।",paySoon:"শীঘ্রই যোগ হবে",pHaveCode:"অ্যাক্টিভেশন কোড আছে?",pActivate:"চালু করো",pCodeWeb:"কোড শুধু আসল Lumina ওয়েবসাইটে চালু করা যায়।",pCodeOk:"অভিনন্দন! {p} প্ল্যান চালু হয়েছে 🎉",pCodeUsed:"এই কোড আগেই ব্যবহার হয়ে গেছে।",pCodeBad:"কোডটা সঠিক নয়। আবার দেখে লেখো।",tSolve:"সমাধান",creator:"নির্মাতা: আদনান (Adnan)",sTitle:"গণিত, জ্যামিতি, পদার্থ ও রসায়ন",sSub:"প্রশ্ন লেখো বা খাতার ছবি তোলো। Lumina ধাপে ধাপে সমাধান করবে, চিত্র আর গ্রাফও এঁকে দেবে।",sLevel:"তুমি কোন শ্রেণিতে পড়ো?",sProblem:"তোমার প্রশ্ন",sPh:"যেমন: x² − 5x + 6 = 0 সমাধান করো",sPhotoBtn:"📷 প্রশ্নের ছবি দাও",sGoBtn:"ধাপে ধাপে সমাধান করো",sExamples:"উদাহরণ (চাপ দিলে বসে যাবে)",sTools:"🧰 দ্রুত টুল (সাথে সাথে উত্তর)",tlBal:"⚗ রাসায়নিক সমীকরণ সমতাকরণ",tlBalSub:"সমীকরণ লেখো, সঠিক সহগ বসিয়ে দেবে",tlMol:"⚖ আণবিক / মোলার ভর",tlMolSub:"সংকেত লেখো, যেমন H2SO4, CuSO4·5H2O",tlGraph:"📈 গ্রাফ আঁকো",tlGraphSub:"যেকোনো ফাংশন: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 বৈজ্ঞানিক ক্যালকুলেটর",tlCalcSub:"একক সহ হিসাবও পারে: 20 m/s * 5 s, 5 km to m",tlGo:"করো",tlDraw:"আঁকো",drawing:"চিত্র আঁকছি…",subjects:[["math", "∑", "গণিত", "বীজগণিত, ক্যালকুলাস, পাটিগণিত"], ["geometry", "△", "জ্যামিতি", "ত্রিভুজ, বৃত্ত, স্থানাঙ্ক"], ["physics", "⚛", "পদার্থবিজ্ঞান", "গতি, বল, বিদ্যুৎ, আলো"], ["chemistry", "⚗", "রসায়ন", "সমীকরণ, মোল, দ্রবণ"]],sLevels:["৬ষ্ঠ–৮ম শ্রেণি", "SSC (৯ম–১০ম)", "HSC (১১শ–১২শ)", "বিশ্ববিদ্যালয়"],modeSolve:"🧮 সমাধান মোড",ex:{"math": ["x² − 5x + 6 = 0 সমীকরণটি সমাধান করো", "a + b = 5 এবং ab = 6 হলে a² + b² এর মান কত?", "∫ x·eˣ dx নির্ণয় করো", "y = x² − 4x + 3 এর গ্রাফ আঁকো এবং শীর্ষবিন্দু বের করো"], "geometry": ["একটি সমকোণী ত্রিভুজের দুই বাহু 6 cm ও 8 cm। অতিভুজ ও ক্ষেত্রফল নির্ণয় করো এবং চিত্র আঁকো", "প্রমাণ করো: ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ", "5 cm ব্যাসার্ধের বৃত্তের ক্ষেত্রফল ও পরিধি কত?", "(2, 3) ও (6, 7) বিন্দু দুটির দূরত্ব ও সংযোগ রেখার সমীকরণ নির্ণয় করো"], "physics": ["একটি গাড়ি 20 m/s বেগে চলছিল, 5 s এ থেমে গেল। মন্দন কত?", "10 kg ভরের বস্তু 5 m উঁচু থেকে পড়লে মাটিতে পৌঁছানোর মুহূর্তে বেগ কত?", "12 V ব্যাটারির সাথে 4 Ω রোধ যুক্ত। বিদ্যুৎ প্রবাহ ও ক্ষমতা কত?", "30° কোণে 20 m/s বেগে বল ছুড়লে পাল্লা ও সর্বোচ্চ উচ্চতা কত?"], "chemistry": ["Fe + O2 → Fe2O3 সমীকরণটি সমতা করো", "H2SO4 এর আণবিক ভর কত?", "0.5 mol NaOH এর ভর কত গ্রাম?", "pH = 3 হলে দ্রবণে [H⁺] কত?"]},attachDefault:"এটা দেখে আমাকে বুঝিয়ে দাও।",fTooBig:"ফাইলটা অনেক বড় (৩০MB-এর বেশি):",fMaxImg:"একবারে এর বেশি ছবি পাঠানো যাবে না।",fNoImg:"এখানে ছবি পাঠানো যাচ্ছে না। claude.ai-তে ব্রাউজারে খুলে চেষ্টা করো।",fScanPart:"স্ক্যান করা PDF: শুধু প্রথম কয়েকটা পৃষ্ঠা পাঠানো হচ্ছে।",fUnsupported:"এই ধরনের ফাইল পড়া যায় না:",fEmpty:"ফাইলে কোনো লেখা পাওয়া যায়নি:",fFail:"ফাইলটা খোলা গেল না:",vLangNo:"এই ভাষায় ভয়েস চালু নেই। আবার 🎤 চাপলে সাধারণ ভাষায় শুনবে।",vNo:"এখানে ভয়েস দিয়ে বলা যাচ্ছে না। কম্পিউটার বা ফোনের Chrome ব্রাউজারে খুলে চেষ্টা করো।",vDenied:"মাইক্রোফোনের অনুমতি দেওয়া হয়নি।",vSpeakOn:"🔊 উত্তর শোনাবে: চালু",vSpeakOff:"🔈 উত্তর শোনাবে: বন্ধ",vStop:"⏹ থামাও",listenAll:"🔊 শোনো",tDesign:"ডিজাইন",dAiTitle:"✨ কী বানাতে চাও? লিখলেই Lumina সাজিয়ে দেবে",dPh:"যেমন: জুমার দিনের শুভেচ্ছা পোস্টার",dIdeas:["জুমা মোবারক পোস্টার", "ঈদ মোবারক শুভেচ্ছা", "মাদ্রাসায় ভর্তি চলছে ব্যানার", "ইসলামিক আলোচনা সভার পোস্টার", "অনুপ্রেরণার উক্তি"],dTpl:"টেমপ্লেট",dSize:"মাপ",dColor:"রং",dArabic:"আরবি লাইন (ঐচ্ছিক)",dTitle:"শিরোনাম",dSub:"উপশিরোনাম",dBody:"বিস্তারিত (প্রতি লাইনে একটা তথ্য)",dFoot:"নিচের লেখা (প্রতিষ্ঠান, ফোন, ওয়েবসাইট)",dPhoto:"ছবি (ঐচ্ছিক)",dPick:"📷 ছবি বেছে নাও",dRemove:"ছবি সরাও",dSave:"⬇ ছবি হিসেবে সেভ করো",dHold:"ছবিটা চেপে ধরে রাখো, তারপর \"Save image\" বা \"ছবি সেভ করুন\" চাপো।",dClose:"ঠিক আছে",dMaking:"Lumina ডিজাইন সাজাচ্ছে…",dDone:"হয়ে গেছে! নিচে লেখা, রং বা মাপ বদলে নিতে পারো।",dFail:"এখন বানানো গেল না। নিচে নিজে লিখে ডিজাইন করতে পারো।",dSaved:"সেভ হয়েছে ✓",tpls:["ইসলামিক", "ঈদ ও উৎসব", "ইভেন্ট", "উক্তি", "বিজ্ঞপ্তি", "ছবিসহ"],sizes:["পোস্ট ১:১", "স্টোরি", "ফেসবুক কভার", "পোস্টার A4", "থাম্বনেইল"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"জুমা মোবারক",defSub:"সপ্তাহের শ্রেষ্ঠ দিন",defBody:"বেশি বেশি দরুদ পড়ি\nসূরা কাহফ তিলাওয়াত করি",defFoot:"Lumina",fDesign:["🎨", "পোস্টার ও ব্যানার বানাও", "লিখলেই Lumina ডিজাইন করে দেবে"],lAr:"আরবি",lArSub:"কুরআনের ভাষা",lEn:"English",lEnSub:"ইংরেজি শেখো",tWords:"শব্দ",tPhrases:"বাক্য",tLessons:"পাঠ",tTalk:"কথা বলো",phHint:"রোজকার কাজে লাগে এমন বাক্য। 🔊 চাপলে উচ্চারণ শুনবে।",lsHint:"একটা পাঠ বেছে নাও, Lumina ধাপে ধাপে শেখাবে।",rlLbl:"উত্তরের ভাষা:",rlOpts:["অটো","বাংলা","English","العربية"],qtAr:"এই আরবি শব্দের অর্থ কী?",qtEn:"এই ইংরেজি শব্দের অর্থ কী?",
+talkTitleEn:"ইংরেজিতে কথা বলার অনুশীলন",talkDescEn:"Lumina তোমার সাথে সহজ ইংরেজিতে গল্প করবে। ভুল হলে বাংলায় ছোট করে শুধরে দেবে।",talkTitleAr:"আরবিতে কথা বলার অনুশীলন",talkDescAr:"Lumina তোমার সাথে সহজ আরবিতে কথা বলবে, সাথে বাংলা উচ্চারণ ও অর্থ দেবে, ভুল হলে শুধরে দেবে।",
+levels:["নতুন শিখছি","কিছুটা পারি","ভালো পারি"],talkGo:"শুরু করো",modeEn:"🗣 ইংরেজি অনুশীলন চলছে",modeAr:"🗣 আরবি অনুশীলন চলছে",endMode:"শেষ করো",
+feat:[["📖","কুরআন","অনুবাদ ও তাফসীরসহ"],["📜","হাদিস","৮টি গ্রন্থ, মানসহ"],["ع","আরবি শেখো","হরফ থেকে কথা বলা"],["Aa","English শেখো","শব্দ, বাক্য, গ্রামার"]],tQuran:"কুরআন",tHadith:"হাদিস",tLearn:"ভাষা শিখি",qSrc:"আরবি পাঠ ও অনুবাদ: quran-json (CC BY 4.0) · তাফসীর: Quranic Universal Library (Tarteel) / quran.com",hLead:"কুতুবুস সিত্তাহ, মুয়াত্তা মালিক আর নববীর ৪০ হাদিস: আরবি মূল পাঠ, বাংলা অনুবাদ আর হাদিসের মান (সহীহ/হাসান/যঈফ) সহ।",hSrc:"বাংলা অনুবাদ: hadithbd.com · সংকলন: fawazahmed0/hadith-api · হাদিসের মান: আলবানী, যুবাইর আলী যাঈ প্রমুখ",numPh:"হাদিস নম্বর লেখো, যেমন ১",allCols:"← সব কিতাব",allSecs:"← সব অধ্যায়",ch:"অধ্যায়",hadithW:"হাদিস",notFound:"এই নম্বরের হাদিস পাওয়া যায়নি",showAr:"আরবি পাঠ",simple:"সহজে বুঝিয়ে দাও",readMore:"আরও পড়ো ↓",ik:"তাফসীর ইবনে কাসীর",zk:"আবু বকর যাকারিয়া",ab:"আহসানুল বায়ান",other:"অন্যান্য",sqPh:"সূরা খোঁজো: নাম বা নম্বর",hqPh:"হাদিস খোঁজো…",back:"← সব সূরা",tafsir:"ব্যাখ্যা",verses:"আয়াত",meccan:"মাক্কী",medinan:"মাদানী",hExplain:"বাংলায় বুঝিয়ে দাও",more:"পুরোটা দেখাও",langName:"বাংলা",tAsk:"প্রশ্ন",tAbc:"বর্ণমালা",tVocab:"শব্দ",tQuiz:"অনুশীলন",
+  h:"কুরআন, হাদিস, আরবি আর ইংরেজি, এক জায়গায়",sub:"যেকোনো প্রশ্ন করো। উত্তর পাবে বাংলা, English বা আরবিতে, তুমি যেটা চাও।",
+  ph:"কী জানতে চাও?",ph2:"আরও কিছু জিজ্ঞেস করো…",reset:"← নতুন প্রশ্ন",
+  abcHint:"হরফে চাপ দিলে উচ্চারণ আর লেখার রূপ দেখবে",vocabHint:"কার্ডে চাপ দিলে অর্থ দেখবে",
+  score:"সঠিক",next:"পরেরটা",qt:"এই শব্দের অর্থ কী?",good:["দারুণ! ঠিক বলেছ।","একদম ঠিক!","বাহ, চমৎকার!"],bad:"প্রায় হয়েছে! সঠিক উত্তর সবুজে দেখানো আছে।",
+  foot:"Lumina · আলোয় আলোয় শেখা",listen:"উচ্চারণ শোনো",askAbout:"এই হরফ নিয়ে জিজ্ঞেস করো",typing:"লিখছি…",
+  noAi:"এখন প্রশ্নের উত্তর দেওয়া যাচ্ছে না। একটু পরে আবার চেষ্টা করো। বর্ণমালা, শব্দ আর অনুশীলন ব্যবহার করতে পারো।",
+  err:"একটু সমস্যা হলো, আবার চেষ্টা করবে?",rate:"একসাথে অনেক প্রশ্ন হয়ে গেছে, একটু পরে আবার জিজ্ঞেস করো।",
+  isolated:"একা",initial:"শুরুতে",medial:"মাঝে",final:"শেষে",
+  chips:["আয়াতুল কুরসির অর্থ ও ফজিলত","সূরা ফাতিহার তাফসীর","Tenses সহজে বুঝিয়ে দাও","আরবি পড়া কোথা থেকে শুরু করব?"]},
+ en:{roleSuper:"Super admin",roleAdmin:"Admin",unlimited:"∞ Everything unlimited",pYourId:"Your ID",pIdNote:"Send this ID to an admin when you buy a plan or need help.",staffTitle:"Admin login",staffLocal:"You own or can edit this page, so you have no limits.",staffLocalNo:"Admin login works on the real Lumina website.",adminKeyPh:"Admin key",login:"Log in",logout:"Log out",openPanel:"⚙️ Admin panel",loginOk:"Logged in. Unlimited now 👑",loginBad:"That key isn't right.",pTitle:"Lumina plans",limTitle:"Limit reached for now ⏳",lim_chat:"You've used all the questions in this plan's 4-hour window.",lim_upload:"You've used all the photo/file uploads in this plan's 4-hour window.",lim_design:"You've used all the designs in this plan's 4-hour window.",limReset:"They come back in {t}.",seePlans:"See plans",k_chat:"💬 Questions",k_upload:"📎 Photos & files",k_design:"🎨 Designs",pUntil:"Valid until {d}",pFresh:"Limits renew {h} hours after your first use.",pLocalNote:"Here on claude.ai, limits are counted in this browser only. On the real website, the server counts them.",pPopular:"Popular",pMonth:"month",pFreeLbl:"Free",f_chat:"{n} questions every 4 hours",f_upload:"{n} photos/files",f_design:"{n} designs",f_reset:"Resets every {h} hours",pCurrent:"Current plan",pBuy:"Get {p}",payTitle:"How to get {p}",pay1:"Send {a} via {m} to: {n}",pay2:"Message your Transaction ID and \"{p}\" to: {c}",pay3:"You'll get an activation code. Enter it below to unlock {d} days.",paySoon:"coming soon",pHaveCode:"Have an activation code?",pActivate:"Activate",pCodeWeb:"Codes can only be activated on the real Lumina website.",pCodeOk:"Congratulations! {p} is active 🎉",pCodeUsed:"This code has already been used.",pCodeBad:"That code isn't valid. Please check it.",tSolve:"Solve",creator:"Created by Adnan",sTitle:"Maths, Geometry, Physics & Chemistry",sSub:"Type a problem or take a photo. Lumina solves it step by step, with diagrams and graphs.",sLevel:"Your level",sProblem:"Your problem",sPh:"e.g. Solve x² − 5x + 6 = 0",sPhotoBtn:"📷 Add a photo",sGoBtn:"Solve step by step",sExamples:"Examples (tap to use)",sTools:"🧰 Quick tools (instant)",tlBal:"⚗ Balance a chemical equation",tlBalSub:"Type the equation, get the right coefficients",tlMol:"⚖ Molar mass",tlMolSub:"Type a formula, e.g. H2SO4, CuSO4·5H2O",tlGraph:"📈 Draw a graph",tlGraphSub:"Any function: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 Scientific calculator",tlCalcSub:"Works with units too: 20 m/s * 5 s, 5 km to m",tlGo:"Go",tlDraw:"Draw",drawing:"Drawing the figure…",subjects:[["math", "∑", "Maths", "Algebra, calculus, arithmetic"], ["geometry", "△", "Geometry", "Triangles, circles, coordinates"], ["physics", "⚛", "Physics", "Motion, force, electricity"], ["chemistry", "⚗", "Chemistry", "Equations, moles, solutions"]],sLevels:["Class 6–8", "SSC (9–10)", "HSC (11–12)", "University"],modeSolve:"🧮 Solve mode",ex:{"math": ["Solve x² − 5x + 6 = 0", "If a + b = 5 and ab = 6, find a² + b²", "Find ∫ x·eˣ dx", "Graph y = x² − 4x + 3 and find its vertex"], "geometry": ["A right triangle has legs 6 cm and 8 cm. Find the hypotenuse and area, and draw it", "Prove that the angles of a triangle add up to 180°", "Find the area and circumference of a circle of radius 5 cm", "Find the distance between (2, 3) and (6, 7) and the equation of the line"], "physics": ["A car moving at 20 m/s stops in 5 s. Find the deceleration", "A 10 kg object falls from 5 m. Find its speed just before it hits the ground", "A 4 Ω resistor is connected to a 12 V battery. Find current and power", "A ball is thrown at 20 m/s at 30°. Find the range and maximum height"], "chemistry": ["Balance Fe + O2 → Fe2O3", "What is the molar mass of H2SO4?", "What is the mass of 0.5 mol NaOH?", "Find [H⁺] when pH = 3"]},attachDefault:"Please look at this and explain it to me.",fTooBig:"File is too large (over 30MB):",fMaxImg:"Can't send more images at once.",fNoImg:"Images can't be sent here. Try opening it on claude.ai in a browser.",fScanPart:"Scanned PDF: only the first pages are sent.",fUnsupported:"Can't read this file type:",fEmpty:"No text found in:",fFail:"Couldn't open:",vLangNo:"Voice isn't available in this language. Tap 🎤 again to use the default language.",vNo:"Voice isn't available here. Try Chrome on a computer or phone.",vDenied:"Microphone permission was not given.",vSpeakOn:"🔊 Read replies aloud: on",vSpeakOff:"🔈 Read replies aloud: off",vStop:"⏹ Stop",listenAll:"🔊 Listen",tDesign:"Design",dAiTitle:"✨ What do you want to make? Lumina will design it",dPh:"e.g. A Jumu'ah greeting poster",dIdeas:["Jumu'ah Mubarak poster", "Eid Mubarak greeting", "Admission open banner", "Islamic talk event poster", "Motivational quote"],dTpl:"Template",dSize:"Size",dColor:"Colour",dArabic:"Arabic line (optional)",dTitle:"Title",dSub:"Subtitle",dBody:"Details (one per line)",dFoot:"Footer (organisation, phone, website)",dPhoto:"Photo (optional)",dPick:"📷 Choose photo",dRemove:"Remove photo",dSave:"⬇ Save as image",dHold:"Press and hold the image, then choose \"Save image\".",dClose:"OK",dMaking:"Lumina is designing…",dDone:"Done! Change the text, colours or size below.",dFail:"Couldn't make it now. You can design it yourself below.",dSaved:"Saved ✓",tpls:["Islamic", "Eid & festive", "Event", "Quote", "Notice", "With photo"],sizes:["Post 1:1", "Story", "Facebook cover", "Poster A4", "Thumbnail"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"Jumu'ah Mubarak",defSub:"The best day of the week",defBody:"Send salawat on the Prophet ﷺ\nRecite Surah al-Kahf",defFoot:"Lumina",fDesign:["🎨", "Make posters & banners", "Describe it, Lumina designs it"],lAr:"Arabic",lArSub:"Language of the Quran",lEn:"English",lEnSub:"Speak with confidence",tWords:"Words",tPhrases:"Phrases",tLessons:"Lessons",tTalk:"Speak",phHint:"Everyday sentences. Tap 🔊 to hear them.",lsHint:"Pick a lesson and Lumina will teach you step by step.",rlLbl:"Answer in:",rlOpts:["Auto","বাংলা","English","العربية"],qtAr:"What does this Arabic word mean?",qtEn:"What does this English word mean?",
+talkTitleEn:"English speaking practice",talkDescEn:"Chat with Lumina in simple English. Mistakes get gently corrected in Bangla.",talkTitleAr:"Arabic speaking practice",talkDescAr:"Chat with Lumina in simple Arabic with Bangla pronunciation and meaning, plus gentle corrections.",
+levels:["Beginner","Intermediate","Advanced"],talkGo:"Start",modeEn:"🗣 English practice on",modeAr:"🗣 Arabic practice on",endMode:"End",
+feat:[["📖","Quran","With translation & tafsir"],["📜","Hadith","8 books, with grades"],["ع","Learn Arabic","Letters to conversation"],["Aa","Learn English","Words, phrases, grammar"]],tQuran:"Quran",tHadith:"Hadith",tLearn:"Languages",qSrc:"Arabic text & translations: quran-json (CC BY 4.0) · Tafsir: Quranic Universal Library (Tarteel) / quran.com",hLead:"The six major collections, Muwatta Malik and Nawawi's 40: Arabic text, Bangla translation and grading.",hSrc:"Bangla translation: hadithbd.com · Collection data: fawazahmed0/hadith-api · Grades: al-Albani, Zubair Ali Zai and others",numPh:"Hadith number, e.g. 1",allCols:"← All books",allSecs:"← All chapters",ch:"Chapter",hadithW:"Hadith",notFound:"No hadith with that number",showAr:"Arabic text",simple:"Explain simply",readMore:"Read more ↓",ik:"Ibn Kathir",zk:"Abu Bakr Zakaria",ab:"Ahsanul Bayan",other:"Other",sqPh:"Search surah by name or number",hqPh:"Search hadith…",back:"← All surahs",tafsir:"Tafsir",verses:"verses",meccan:"Meccan",medinan:"Medinan",hExplain:"Explain this",more:"Show all",langName:"English",tAsk:"Ask",tAbc:"Letters",tVocab:"Words",tQuiz:"Practice",
+  h:"Quran, Hadith, Arabic and English in one place",sub:"Ask anything. Get answers in Bangla, English or Arabic.",
+  ph:"What would you like to know?",ph2:"Ask something else…",reset:"← New question",
+  abcHint:"Tap a letter to see its sound and forms",vocabHint:"Tap a card to see its meaning",
+  score:"Correct",next:"Next",qt:"What does this word mean?",good:["Great, that's right!","Exactly!","Well done!"],bad:"Almost! The right answer is in green.",
+  foot:"Lumina · Learning in the light",listen:"Listen",askAbout:"Ask about this letter",typing:"Writing…",
+  noAi:"Answers aren't available right now. Please try again shortly. Letters, words and practice still work.",
+  err:"Something went wrong. Try again?",rate:"Too many questions at once, please try again in a bit.",
+  isolated:"Alone",initial:"Start",medial:"Middle",final:"End",
+  chips:["Meaning of Ayat al-Kursi","Tafsir of Surah al-Fatiha","Explain English tenses simply","Where do I start reading Arabic?"]},
+ ar:{roleSuper:"المشرف العام",roleAdmin:"مشرف",unlimited:"∞ كل شيء بلا حدود",pYourId:"معرّفك",pIdNote:"أرسل هذا المعرّف إلى المشرف عند الاشتراك أو طلب المساعدة.",staffTitle:"دخول المشرف",staffLocal:"أنت مالك/محرر هذه الصفحة، فلا حدود لك.",staffLocalNo:"دخول المشرف يعمل على موقع لومينا فقط.",adminKeyPh:"مفتاح المشرف",login:"دخول",logout:"خروج",openPanel:"⚙️ لوحة الإدارة",loginOk:"تم الدخول. بلا حدود الآن 👑",loginBad:"المفتاح غير صحيح.",pTitle:"خطط لومينا",limTitle:"انتهى الحد مؤقتًا ⏳",lim_chat:"استخدمت كل الأسئلة المتاحة في هذه الساعات الأربع.",lim_upload:"استخدمت كل رفع الصور والملفات المتاح في هذه الساعات الأربع.",lim_design:"استخدمت كل التصاميم المتاحة في هذه الساعات الأربع.",limReset:"تتجدد بعد {t}.",seePlans:"عرض الخطط",k_chat:"💬 أسئلة",k_upload:"📎 صور وملفات",k_design:"🎨 تصاميم",pUntil:"صالحة حتى {d}",pFresh:"تتجدد الحدود بعد {h} ساعات من أول استخدام.",pLocalNote:"هنا على claude.ai تُحسب الحدود في هذا المتصفح فقط.",pPopular:"الأكثر طلبًا",pMonth:"شهر",pFreeLbl:"مجاني",f_chat:"{n} سؤالًا كل 4 ساعات",f_upload:"{n} صورة/ملف",f_design:"{n} تصميمًا",f_reset:"تتجدد كل {h} ساعات",pCurrent:"الخطة الحالية",pBuy:"اشترك في {p}",payTitle:"طريقة الاشتراك في {p}",pay1:"أرسل {a} عبر {m} إلى: {n}",pay2:"أرسل رقم العملية و\"{p}\" إلى: {c}",pay3:"ستصلك رمز تفعيل، أدخله بالأسفل لتفعيل {d} يومًا.",paySoon:"قريبًا",pHaveCode:"لديك رمز تفعيل؟",pActivate:"تفعيل",pCodeWeb:"يمكن تفعيل الرموز على موقع لومينا فقط.",pCodeOk:"مبروك! تم تفعيل {p} 🎉",pCodeUsed:"هذا الرمز مستخدم من قبل.",pCodeBad:"الرمز غير صحيح.",tSolve:"حلول",creator:"من إنشاء عدنان (Adnan)",sTitle:"الرياضيات والهندسة والفيزياء والكيمياء",sSub:"اكتب المسألة أو صوّرها، وستحلها لومينا خطوة بخطوة مع الرسوم.",sLevel:"المستوى",sProblem:"مسألتك",sPh:"مثال: حل x² − 5x + 6 = 0",sPhotoBtn:"📷 أضف صورة",sGoBtn:"حل خطوة بخطوة",sExamples:"أمثلة",sTools:"🧰 أدوات سريعة",tlBal:"⚗ موازنة معادلة كيميائية",tlBalSub:"اكتب المعادلة لتحصل على المعاملات",tlMol:"⚖ الكتلة المولية",tlMolSub:"اكتب الصيغة مثل H2SO4",tlGraph:"📈 ارسم دالة",tlGraphSub:"x^2، sin(x)، 2*x+1 …",tlCalc:"🧮 آلة حاسبة علمية",tlCalcSub:"تدعم الوحدات: 20 m/s * 5 s",tlGo:"احسب",tlDraw:"ارسم",drawing:"أرسم الشكل…",subjects:[["math", "∑", "الرياضيات", "جبر وتفاضل وحساب"], ["geometry", "△", "الهندسة", "مثلثات ودوائر وإحداثيات"], ["physics", "⚛", "الفيزياء", "حركة وقوة وكهرباء"], ["chemistry", "⚗", "الكيمياء", "معادلات ومولات ومحاليل"]],sLevels:["الصف ٦–٨", "SSC (٩–١٠)", "HSC (١١–١٢)", "الجامعة"],modeSolve:"🧮 وضع الحل",ex:{"math": ["حل x² − 5x + 6 = 0", "إذا كان a + b = 5 و ab = 6 فأوجد a² + b²", "أوجد ∫ x·eˣ dx", "ارسم y = x² − 4x + 3 وأوجد الرأس"], "geometry": ["مثلث قائم ضلعاه 6 cm و 8 cm، أوجد الوتر والمساحة وارسمه", "برهن أن مجموع زوايا المثلث 180°", "أوجد مساحة ومحيط دائرة نصف قطرها 5 cm", "أوجد المسافة بين (2, 3) و (6, 7) ومعادلة المستقيم"], "physics": ["سيارة سرعتها 20 m/s توقفت خلال 5 s، أوجد التباطؤ", "جسم كتلته 10 kg سقط من ارتفاع 5 m، أوجد سرعته عند الأرض", "مقاومة 4 Ω موصولة ببطارية 12 V، أوجد التيار والقدرة", "قُذفت كرة بسرعة 20 m/s بزاوية 30°، أوجد المدى وأقصى ارتفاع"], "chemistry": ["وازن Fe + O2 → Fe2O3", "ما الكتلة المولية لـ H2SO4؟", "ما كتلة 0.5 mol من NaOH؟", "أوجد [H⁺] إذا كان pH = 3"]},attachDefault:"انظر إلى هذا واشرحه لي.",fTooBig:"الملف كبير جدًا (أكثر من 30MB):",fMaxImg:"لا يمكن إرسال المزيد من الصور مرة واحدة.",fNoImg:"لا يمكن إرسال الصور هنا.",fScanPart:"ملف PDF ممسوح: تُرسل الصفحات الأولى فقط.",fUnsupported:"لا يمكن قراءة هذا النوع:",fEmpty:"لا يوجد نص في:",fFail:"تعذّر فتح:",vLangNo:"الصوت غير متاح بهذه اللغة. اضغط 🎤 مرة أخرى.",vNo:"الصوت غير متاح هنا. جرّب متصفح Chrome.",vDenied:"لم يُسمح باستخدام الميكروفون.",vSpeakOn:"🔊 قراءة الردود: تشغيل",vSpeakOff:"🔈 قراءة الردود: إيقاف",vStop:"⏹ إيقاف",listenAll:"🔊 استمع",tDesign:"تصميم",dAiTitle:"✨ ماذا تريد أن تصمم؟ ستصممه لومينا",dPh:"مثال: ملصق تهنئة بيوم الجمعة",dIdeas:["جمعة مباركة", "عيد مبارك", "التسجيل مفتوح", "محاضرة إسلامية", "حكمة ملهمة"],dTpl:"القالب",dSize:"المقاس",dColor:"اللون",dArabic:"سطر عربي (اختياري)",dTitle:"العنوان",dSub:"العنوان الفرعي",dBody:"التفاصيل (سطر لكل معلومة)",dFoot:"التذييل",dPhoto:"صورة (اختياري)",dPick:"📷 اختر صورة",dRemove:"إزالة الصورة",dSave:"⬇ حفظ كصورة",dHold:"اضغط مطولًا على الصورة ثم اختر حفظ الصورة.",dClose:"حسنًا",dMaking:"لومينا تصمم…",dDone:"تم! يمكنك تعديل النص والألوان والمقاس.",dFail:"تعذّر التصميم الآن، صمّمه بنفسك بالأسفل.",dSaved:"تم الحفظ ✓",tpls:["إسلامي", "عيد ومناسبات", "فعالية", "اقتباس", "إعلان", "مع صورة"],sizes:["منشور ١:١", "ستوري", "غلاف فيسبوك", "ملصق A4", "صورة مصغرة"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"جمعة مباركة",defSub:"خير يوم طلعت عليه الشمس",defBody:"أكثروا من الصلاة على النبي ﷺ\nاقرؤوا سورة الكهف",defFoot:"Lumina",fDesign:["🎨", "صمّم ملصقات ولافتات", "صِف ما تريد وستصممه لومينا"],lAr:"العربية",lArSub:"لغة القرآن",lEn:"English",lEnSub:"تعلّم الإنجليزية",tWords:"كلمات",tPhrases:"جمل",tLessons:"دروس",tTalk:"تحدّث",phHint:"جمل يومية. اضغط 🔊 لتسمعها.",lsHint:"اختر درسًا وستعلّمك لومينا خطوة بخطوة.",rlLbl:"لغة الجواب:",rlOpts:["تلقائي","বাংলা","English","العربية"],qtAr:"ما معنى هذه الكلمة؟",qtEn:"ما معنى هذه الكلمة الإنجليزية؟",
+talkTitleEn:"تدريب المحادثة بالإنجليزية",talkDescEn:"تحدّث مع لومينا بإنجليزية بسيطة مع تصحيح لطيف للأخطاء.",talkTitleAr:"تدريب المحادثة بالعربية",talkDescAr:"تحدّث مع لومينا بعربية بسيطة مع تصحيح لطيف للأخطاء.",
+levels:["مبتدئ","متوسط","متقدم"],talkGo:"ابدأ",modeEn:"🗣 تدريب الإنجليزية",modeAr:"🗣 تدريب العربية",endMode:"إنهاء",
+feat:[["📖","القرآن","مع الترجمة والتفسير"],["📜","الحديث","٨ كتب مع الدرجات"],["ع","تعلّم العربية","من الحروف إلى المحادثة"],["Aa","تعلّم الإنجليزية","كلمات وجمل وقواعد"]],tQuran:"القرآن",tHadith:"الحديث",tLearn:"اللغات",qSrc:"النص والترجمات: quran-json (CC BY 4.0) · التفاسير: Quranic Universal Library (Tarteel) / quran.com",hLead:"الكتب الستة وموطأ مالك والأربعون النووية: النص العربي والترجمة البنغالية ودرجة الحديث.",hSrc:"الترجمة البنغالية: hadithbd.com · البيانات: fawazahmed0/hadith-api · الدرجات: الألباني وزبير علي زئي وغيرهم",numPh:"رقم الحديث، مثل ١",allCols:"كل الكتب →",allSecs:"كل الأبواب →",ch:"باب",hadithW:"حديث",notFound:"لا يوجد حديث بهذا الرقم",showAr:"النص العربي",simple:"اشرح ببساطة",readMore:"اقرأ المزيد ↓",ik:"تفسير ابن كثير",zk:"أبو بكر زكريا",ab:"أحسن البيان",other:"أخرى",sqPh:"ابحث عن سورة بالاسم أو الرقم",hqPh:"ابحث في الأحاديث…",back:"كل السور →",tafsir:"تفسير",verses:"آية",meccan:"مكية",medinan:"مدنية",hExplain:"اشرح الحديث",more:"عرض الكل",langName:"العربية",tAsk:"اسأل",tAbc:"الحروف",tVocab:"كلمات",tQuiz:"تدريب",
+  h:"القرآن والحديث والعربية والإنجليزية في مكان واحد",sub:"اسأل أي سؤال، واحصل على الجواب بالبنغالية أو الإنجليزية أو العربية.",
+  ph:"ماذا تريد أن تعرف؟",ph2:"اسأل سؤالًا آخر…",reset:"سؤال جديد →",
+  abcHint:"اضغط على حرف لترى نطقه وأشكاله",vocabHint:"اضغط على البطاقة لترى المعنى",
+  score:"صحيح",next:"التالي",qt:"ما معنى هذه الكلمة؟",good:["أحسنت!","صحيح تمامًا!","ممتاز!"],bad:"قريب! الجواب الصحيح بالأخضر.",
+  foot:"لومينا · نتعلّم في النور",listen:"استمع",askAbout:"اسأل عن هذا الحرف",typing:"أكتب…",
+  noAi:"الإجابات غير متاحة الآن. حاول بعد قليل. الحروف والكلمات والتدريب تعمل.",
+  err:"حدث خطأ، هل تحاول مرة أخرى؟",rate:"أسئلة كثيرة معًا، حاول بعد قليل.",
+  isolated:"منفصل",initial:"أول",medial:"وسط",final:"آخر",
+  chips:["معنى آية الكرسي","تفسير سورة الفاتحة","حديث النية","من أين أبدأ تعلم العربية؟"]}
+};
+let L='bn'; try{L=localStorage.getItem('lumina-lang')||'bn'}catch(e){}
+const t=k=>T[L][k];
+
+const ABC=[["ا","Alif","আলিফ","আ"],["ب","Ba","বা","ব"],["ت","Ta","তা","ত"],["ث","Tha","ছা","ছ (জিভের ডগা দাঁতে)"],["ج","Jim","জীম","জ"],["ح","Ha","হা","হ (গলার মাঝখান থেকে)"],["خ","Kha","খা","খ (গলার ভেতর থেকে)"],["د","Dal","দাল","দ"],["ذ","Dhal","যাল","য (জিভের ডগা দাঁতে)"],["ر","Ra","রা","র"],["ز","Zay","যা","য"],["س","Sin","সীন","স"],["ش","Shin","শীন","শ"],["ص","Sad","সোয়াদ","ভারী স"],["ض","Dad","দোয়াদ","ভারী দ"],["ط","Ta","ত্বোয়া","ভারী ত"],["ظ","Dha","যোয়া","ভারী য"],["ع","Ayn","আইন","গলার গভীর থেকে আ"],["غ","Ghayn","গাইন","গড়গড়ে গ"],["ف","Fa","ফা","ফ"],["ق","Qaf","ক্বাফ","ভারী ক"],["ك","Kaf","কাফ","ক"],["ل","Lam","লাম","ল"],["م","Mim","মীম","ম"],["ن","Nun","নূন","ন"],["ه","Ha","হা","হ"],["و","Waw","ওয়াও","ও"],["ي","Ya","ইয়া","ই"]];
+const NOJOIN=new Set(["ا","د","ذ","ر","ز","و"]);
+const VOCAB={
+ "সালাম":[["السَّلَامُ عَلَيْكُمْ","আসসালামু আলাইকুম","Peace be upon you","as-salāmu ʿalaykum"],["مَرْحَبًا","স্বাগতম","Hello","marḥaban"],["شُكْرًا","ধন্যবাদ","Thank you","shukran"],["مَعَ السَّلَامَة","বিদায়","Goodbye","maʿa as-salāma"],["صَبَاحُ الْخَيْر","শুভ সকাল","Good morning","ṣabāḥ al-khayr"],["كَيْفَ حَالُكَ؟","কেমন আছ?","How are you?","kayfa ḥāluka"]],
+ "পড়াশোনা":[["كِتَاب","বই","Book","kitāb"],["قَلَم","কলম","Pen","qalam"],["مَدْرَسَة","স্কুল","School","madrasa"],["مُعَلِّم","শিক্ষক","Teacher","muʿallim"],["طَالِب","ছাত্র","Student","ṭālib"],["دَرْس","পাঠ","Lesson","dars"],["عِلْم","জ্ঞান","Knowledge","ʿilm"],["سُؤَال","প্রশ্ন","Question","suʾāl"]],
+ "ঘর":[["بَيْت","ঘর","House","bayt"],["بَاب","দরজা","Door","bāb"],["مَاء","পানি","Water","māʾ"],["خُبْز","রুটি","Bread","khubz"],["أُمّ","মা","Mother","umm"],["أَب","বাবা","Father","ab"],["أَخ","ভাই","Brother","akh"],["أُخْت","বোন","Sister","ukht"]],
+ "সংখ্যা":[["وَاحِد","এক","One","wāḥid"],["اِثْنَان","দুই","Two","ithnān"],["ثَلَاثَة","তিন","Three","thalātha"],["أَرْبَعَة","চার","Four","arbaʿa"],["خَمْسَة","পাঁচ","Five","khamsa"],["عَشَرَة","দশ","Ten","ʿashara"]],
+ "প্রকৃতি":[["شَمْس","সূর্য","Sun","shams"],["قَمَر","চাঁদ","Moon","qamar"],["نُور","আলো","Light","nūr"],["سَمَاء","আকাশ","Sky","samāʾ"],["نَجْم","তারা","Star","najm"],["بَحْر","সমুদ্র","Sea","baḥr"]]
+};
+const CAT_EN={"সালাম":"Greetings","পড়াশোনা":"Study","ঘর":"Home","সংখ্যা":"Numbers","প্রকৃতি":"Nature"};
+const CAT_AR={"সালাম":"التحية","পড়াশোনা":"الدراسة","ঘর":"البيت","সংখ্যা":"الأرقام","প্রকৃতি":"الطبيعة"};
+const ALLV=Object.values(VOCAB).flat();
+const $=id=>document.getElementById(id);
+
+function applyLang(){
+  document.documentElement.lang=L; document.documentElement.dir=L==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
+  $('langBtn').textContent=t('langName')+' ▾';
+  q1.placeholder=t('ph'); q2.placeholder=t('ph2');
+  const c=$('chips'); c.innerHTML='';
+  t('chips').forEach(x=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=x;b.onclick=()=>ask(x);c.appendChild(b);});
+  document.querySelectorAll('.listen').forEach(b=>b.textContent=t('listen'));
+  if(sel!==null) showLetter(sel,false);
+  $('sq').placeholder=t('sqPh'); $('hNum').placeholder=t('numPh'); $('rback').textContent=t('back'); $('hBack1').textContent=t('allCols'); $('hBack2').textContent=t('allSecs');
+  renderRL(); renderFeat(); renderLearn(); refreshVoiceUI(); renderUsage(); if(typeof renderSolveUI==='function') renderSolveUI(); if(chatMode) setMode(chatMode);
+  if(typeof renderDesignUI==='function'){renderDesignUI(); if($('v-design').classList.contains('on')) drawDesign();}
+  if($('slist').children.length) renderSurahList();
+  if(curSurah) openSurah(curSurah);
+  if($('cols').children.length) renderCols();
+  if(curSec!==null&&curCol) openSec(curCol,curSec); else if(curCol) openCol(curCol);
+}
+$('langBtn').onclick=e=>{e.stopPropagation();$('menu').classList.toggle('open');};
+document.addEventListener('click',()=>$('menu').classList.remove('open'));
+document.querySelectorAll('.list button').forEach(b=>b.onclick=()=>{L=b.dataset.l;try{localStorage.setItem('lumina-lang',L)}catch(e){}applyLang();});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
+});
+const goTab=v=>document.querySelector(`.tabs button[data-v="${v}"]`).click();
+
+/* Answer engine: inside claude.ai uses the built-in model; on your own website uses /api/chat */
+let sample=null, tts=null, checked=!window.claude, imgLimits=null;
+if(window.claude){
+  (async()=>{try{sample=await window.claude.use("sample")}catch(e){sample=null}
+    try{imgLimits=sample?((await sample.limits())?.images||null):null}catch(e){imgLimits=null}checked=true;})();
+  (async()=>{try{dict=await window.claude.use("dictation")}catch(e){dict=null}setupDict();refreshVoiceUI();})();
+  (async()=>{try{tts=await window.claude.use("tts")}catch(e){tts=null}document.querySelectorAll('.listen').forEach(b=>b.style.display=tts?'':'none');refreshVoiceUI();})();
+}
+function speakAr(text){speak(text,'ar');}
+const canSpeak=()=>!!tts||(!window.claude&&'speechSynthesis' in window);
+function listenBtn(text,lang){
+  const b=document.createElement('button');b.type='button';b.className='listen';b.textContent=t('listen');
+  b.style.display=canSpeak()?'':'none';
+  b.onclick=e=>{e.stopPropagation();speak(text,lang||'ar');};return b;
+}
+
+const SYSTEM=`You are Lumina, a warm, knowledgeable teacher for learners in Bangladesh. You know the Quran, tafsir, hadith, seerah, fiqh basics, Islamic history and Arabic, and you also help with any general question (studies, science, maths, life advice, technology, etc.). Talk like a real, caring human teacher, never like a robot.
+
+Language & tone:
+- Reply in the language the student uses (Bangla, English or Arabic). If they write Banglish (Bangla in English letters), reply in natural everyday Bangla script. Use "তুমি" in Bangla.
+- Natural, friendly, clear. No filler openers like "অবশ্যই!" or "Great question!". Don't call yourself an AI or bot. No markdown headings. Short paragraphs; a short numbered list only when it really helps. **Bold** only a few key words.
+- Length: simple questions 2–5 sentences; Islamic or detailed topics up to ~300 words. Offer to go deeper with a short question only when natural.
+
+Your library (use these tools; they hold verified texts):
+- get_quran_verses: exact Arabic + Bangla + English of any ayah. ALWAYS use it before quoting or translating an ayah. Cite like (সূরা আল-বাকারা ২:২৫৫). Never quote ayahs from memory.
+- get_tafsir: Bangla tafsir for an ayah from: "ibnkathir" (তাফসীর ইবনে কাসীর, Tawheed Publication translation), "zakaria" (ড. আবু বকর মুহাম্মাদ যাকারিয়া, King Fahd Complex), "ahsanul" (তাফসীর আহসানুল বায়ান). For tafsir questions, call it (usually ibnkathir first, add another if helpful), then explain the meaning in your own simple words and name which tafsir it comes from. Don't paste long passages; summarise.
+- get_hadith: exact hadith (Arabic + Bangla + grades) by collection and number. Collections: bukhari, muslim, abudawud, tirmidhi, nasai, ibnmajah, malik, nawawi. Whenever you cite a hadith with a number, verify it with get_hadith first; if the returned text doesn't match what you meant, don't give that number. Mention the grade (সহীহ/হাসান/যঈফ) when the data gives one; Bukhari and Muslim are sahih.
+- Never invent a hadith, its wording, number or grade. If you can't verify, say so honestly.
+- Tafhimul Quran (Maududi) is NOT in this library, so you cannot quote it. If asked, say it isn't available here and suggest reading the published book; you may only describe its general approach in a sentence if you're confident.
+- Fiqh: give the common view, note where madhhabs differ (Bangladesh mostly Hanafi); for personal or serious rulings, gently suggest asking a trusted alem/mufti.
+- Write Arabic with harakat; for Arabic words give Bangla pronunciation in brackets and the meaning, e.g. كِتَابٌ (কিতাবুন) মানে বই।
+- Homework: guide and explain rather than just giving the answer. Quizzes: one question at a time.
+- About you: Lumina was created by Adnan (আদনান). If asked who made, built or owns you, say Adnan created Lumina. If asked which AI technology powers you, say honestly that Lumina runs on Claude, an AI model made by Anthropic.
+- Maths & science: write formulas in LaTeX ($...$ inline, $$...$$ on its own line). Use the calculate tool for every non-trivial calculation, unit conversion and to check final answers; use balance_chemical_equation and molar_mass for chemistry. Never guess numbers.
+- Diagrams: when a figure helps (geometry, vectors, circuits as simple shapes), add a fenced block with language "figure" containing JSON: {"points":{"A":[0,0],"B":[4,0],"C":[0,3]},"segments":[["A","B","4 cm"]],"polygons":[["A","B","C"]],"circles":[{"center":"O","r":2}],"angles":[{"vertex":"A","from":"B","to":"C","right":true},{"vertex":"B","from":"C","to":"A","label":"37°"}],"labels":[{"at":[2,1],"text":"…"}]} (coordinates must be geometrically correct). For graphs add a fenced block with language "plot": {"functions":[{"expr":"x^2-4","label":"y = x² − 4"}],"x":[-5,5],"points":[[2,0,"(2, 0)"]]} (math.js syntax). Keep JSON valid.
+- This website has a "ডিজাইন" (Design) tab that makes posters, banners, social posts and greeting cards. If the student asks you to create an image, poster or banner, write the text for it briefly and tell them to open the ডিজাইন tab and describe it there (you cannot draw images in chat).`;
+
+/* ---------- data: bundled inside claude.ai, from public CDNs on your own website ---------- */
+const BUNDLED=!!window.claude;
+const CDN={
+  quran:(lang,n)=>`https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/chapters/${lang}/${n}.json`,
+  tafsir:(slug,n)=>`https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/${slug}/${n}.json`,
+  hadith:(ed,s)=>`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${ed}/sections/${s}.min.json`
+};
+const TAFSIRS=[{id:'ibnkathir',slug:'bn-tafseer-ibn-e-kaseer',k:'ik',credit:'তাফসীর ইবনে কাসীর · বাংলা অনুবাদ: তাওহীদ পাবলিকেশন্স'},
+               {id:'zakaria',slug:'bn-tafsir-abu-bakr-zakaria',k:'zk',credit:'তাফসীর: ড. আবু বকর মুহাম্মাদ যাকারিয়া · বাদশাহ ফাহাদ কুরআন মুদ্রণ কমপ্লেক্স'},
+               {id:'ahsanul',slug:'bn-tafsir-ahsanul-bayaan',k:'ab',credit:'তাফসীর আহসানুল বায়ান'}];
+const cache={};
+const getJSON=url=>cache[url]||(cache[url]=fetch(url).then(r=>{if(!r.ok)throw new Error('load');return r.json();}).catch(e=>{delete cache[url];throw e;}));
+const memo=(k,f)=>cache[k]||(cache[k]=f().catch(e=>{delete cache[k];throw e;}));
+const surahIndex=()=>getJSON('data/quran/index.json');
+const getSurah=n=>BUNDLED?getJSON(`data/quran/${n}.json`):memo('q'+n,async()=>{
+  const [b,e]=await Promise.all([getJSON(CDN.quran('bn',n)),getJSON(CDN.quran('en',n))]);
+  return {id:b.id,name:b.name,tr:b.transliteration,bn:b.translation,en:e.translation,type:b.type,n:b.total_verses,
+    v:b.verses.map((v,i)=>[v.text,v.transliteration||'',v.translation,e.verses[i]?.translation||''])};});
+const getTafsir=(id,n)=>{const T0=TAFSIRS.find(x=>x.id===id);
+  return BUNDLED?getJSON('data/b/map.json').then(m=>getJSON(`data/b/${m.tafsir[id][n]}.json`)).then(g=>g[n]):memo('t'+id+n,async()=>{
+    const d=await getJSON(CDN.tafsir(T0.slug,n)); const m={}; d.forEach(x=>m[x.ayah]=(x.text||'').trim());
+    const mx=Math.max(...Object.keys(m).map(Number)); return Array.from({length:mx},(_,i)=>m[i+1]||'');});};
+const hadithIndex=()=>getJSON('data/hadith/index.json');
+const getSection=(col,s)=>BUNDLED?getJSON('data/b/map.json').then(m=>getJSON(`data/b/${m.hadith[col][s]}.json`)).then(g=>g[s]):memo('h'+col+s,async()=>{
+  const [b,a]=await Promise.all([getJSON(CDN.hadith('ben-'+col,s)),getJSON(CDN.hadith('ara-'+col,s))]);
+  const am={};a.hadiths.forEach(h=>am[h.hadithnumber]=h);
+  const cl=x=>(x||'').replace(/[­‏‎]/g,'').trim();
+  return b.hadiths.map(h=>[h.hadithnumber,cl(am[h.hadithnumber]?.text),cl(h.text),((h.grades&&h.grades.length?h.grades:am[h.hadithnumber]?.grades)||[]).map(g=>[g.name,g.grade])]).filter(x=>x[1]||x[2]);});
+async function findHadith(col,num){
+  const idx=await hadithIndex(); const c=idx.find(x=>x.id===col); if(!c) return null;
+  const cands=c.sections.filter(s=>num>=s[2]&&num<=s[3]).sort((a,b)=>(a[0]===0)-(b[0]===0)||(a[3]-a[2])-(b[3]-b[2]));
+  for(const s of cands){const items=await getSection(col,s[0]);const h=items.find(x=>x[0]===num);if(h) return {col:c,sec:s,h};}
+  return null;
+}
+
+/* ---------- tools Lumina uses while answering ---------- */
+async function toolQuran({surah,from_ayah,to_ayah}){
+  surah=+surah; const f=+from_ayah||1;
+  if(!(surah>=1&&surah<=114)) throw new Error('surah must be 1-114');
+  const s=await getSurah(surah); if(f<1||f>s.n) throw new Error(`surah ${surah} has ${s.n} ayahs`);
+  const t2=Math.min(+to_ayah||f,f+19,s.n);
+  return {surah:s.id,name_ar:s.name,name:s.tr,meaning_bn:s.bn,total_ayahs:s.n,
+    verses:s.v.slice(f-1,t2).map((v,i)=>({ayah:f+i,arabic:v[0],bangla:v[2],english:v[3]}))};
+}
+async function toolTafsir({surah,ayah,source}){
+  surah=+surah;ayah=+ayah; const src=TAFSIRS.find(x=>x.id===source)||TAFSIRS[0];
+  const arr=await getTafsir(src.id,surah); let txt=arr[ayah-1];
+  if(txt===undefined) throw new Error('ayah out of range');
+  return {source:src.credit,surah,ayah,text:txt.length>9000?txt.slice(0,9000)+' …':txt};
+}
+async function toolHadith({collection,number}){
+  const r=await findHadith(String(collection||'').toLowerCase(),+number);
+  if(!r) return {error:'Not found. Check collection name and number.'};
+  const [n,ar,bn,g]=r.h;
+  return {collection:r.col.en,collection_bn:r.col.bn,number:n,chapter:r.sec[1],arabic:ar.slice(0,4000),bangla:bn.slice(0,4000),grades:g.map(x=>x[0]+': '+x[1])};
+}
+const TOOLS=[
+ {name:'get_quran_verses',description:'Exact Quran ayahs (Arabic + Bangla + English). Use before quoting or translating any ayah. Max 20 ayahs per call.',
+  inputSchema:{type:'object',properties:{surah:{type:'integer'},from_ayah:{type:'integer'},to_ayah:{type:'integer'}},required:['surah','from_ayah']},execute:toolQuran},
+ {name:'get_tafsir',description:'Bangla tafsir text for one ayah. source: ibnkathir | zakaria | ahsanul.',
+  inputSchema:{type:'object',properties:{surah:{type:'integer'},ayah:{type:'integer'},source:{type:'string',enum:['ibnkathir','zakaria','ahsanul']}},required:['surah','ayah','source']},execute:toolTafsir},
+ {name:'get_hadith',description:'Exact hadith (Arabic, Bangla, grades) by collection and hadith number. collection: bukhari | muslim | abudawud | tirmidhi | nasai | ibnmajah | malik | nawawi.',
+  inputSchema:{type:'object',properties:{collection:{type:'string'},number:{type:'integer'}},required:['collection','number']},execute:toolHadith}
+];
+
+async function getAnswer(history,onText,images,nUploads){
+  if(window.claude){
+    if(!sample) throw {code:'unavailable'};
+    const input=[{role:'user',content:buildSystem()+"\n\nThe student's conversation follows. Reply to their latest message."},{role:'assistant',content:'ঠিক আছে।'},...history];
+    const opts={cache:false,modelTier:'complex',tools:TOOLS,onText:({text})=>{if(text&&text!=='Thinking...')onText(text);}};
+    if(images&&images.length) opts.images=images;
+    const r=await sample(input,opts);
+    return r.text||'';
+  }
+  const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({uploads:nUploads||0,messages:history,replyLang,mode:chatMode,level:talkLevel,voice:voiceTurn,subject:solveSubj,solveLevel,images:images&&images.length?await Promise.all(images.map(blobToB64)):undefined})});
+  if(res.status===429){const j=await res.json().catch(()=>({}));if(j.error==='limit'){applyServerUsage(j.usage);throw {code:'limit',kind:j.kind};}throw {code:'rate_limited'};}
+  if(!res.ok) throw {code:'error'};
+  const j=await res.json(); applyServerUsage(j.usage); return j.text||'';
+}
+
+function blobToB64(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res({media_type:b.type||'image/jpeg',data:String(r.result).split(',')[1]});r.onerror=rej;r.readAsDataURL(b);});}
+
+/* sub tabs (Arabic learning) */
+document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.subtabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.sub').forEach(v=>v.classList.toggle('on',v.id==='s-'+b.dataset.s));
+});
+
+const toBn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const toAr=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const num=n=>L==='bn'?toBn(n):L==='ar'?toAr(n):n;
+const fromBn=s=>String(s).replace(/[০-৯]/g,d=>'০১২৩৪৫৬৭৮৯'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* ---------- Quran ---------- */
+let curSurah=null;
+async function renderSurahList(){
+  const box=$('slist'); let idx;
+  try{idx=await surahIndex();}catch(e){box.innerHTML=`<div class="loading">${t('err')}</div>`;return;}
+  const q=fromBn(($('sq').value||'').trim().toLowerCase());
+  box.innerHTML='';
+  idx.filter(s=>!q||String(s[0])===q||s[2].toLowerCase().replace(/[^a-z]/g,'').includes(q.replace(/[^a-z]/g,'')||'\u0000')||s[1].includes(q)||s[3].includes(q)||s[4].toLowerCase().includes(q))
+   .forEach(([n,ar,tr,bn,en,type,cnt])=>{
+    const b=document.createElement('button');b.className='srow';
+    b.innerHTML=`<div class="num"><span>${num(n)}</span></div><div class="mid"><b>${tr}</b><small>${L==='en'?en:bn} · ${num(cnt)} ${t('verses')} · ${t(type)}</small></div><div class="an">${ar}</div>`;
+    b.onclick=()=>openSurah(n);box.appendChild(b);});
+}
+$('sq').addEventListener('input',renderSurahList);
+function tafsirPanel(n,i,s){
+  const p=document.createElement('div');p.className='tpanel';
+  p.innerHTML=`<div class="tsrc"></div><div class="ttext"><span class="typing">…</span></div><button class="tmore" style="display:none"></button><div class="tcredit"></div><div class="row2" style="display:flex;gap:8px;margin-top:10px"></div>`;
+  const bar=p.querySelector('.tsrc'),tx=p.querySelector('.ttext'),more=p.querySelector('.tmore'),cr=p.querySelector('.tcredit');
+  let cur=TAFSIRS[0].id;
+  async function show(id){cur=id;[...bar.children].forEach(b=>b.classList.toggle('on',b.dataset.id===id));
+    tx.classList.remove('full');tx.innerHTML='<span class="typing">…</span>';more.style.display='none';
+    const T0=TAFSIRS.find(x=>x.id===id);cr.textContent=T0.credit;
+    try{const arr=await getTafsir(id,n);if(cur!==id)return;const txt=arr[i]||'—';tx.textContent=txt;
+      if(txt.length>600){more.textContent=t('readMore');more.style.display='block';more.onclick=()=>{tx.classList.add('full');more.style.display='none';};}
+    }catch(e){tx.textContent=t('err');}}
+  TAFSIRS.forEach(T0=>{const b=document.createElement('button');b.dataset.id=T0.id;b.textContent=t(T0.k);b.onclick=()=>show(T0.id);bar.appendChild(b);});
+  const sb=document.createElement('button');sb.className='chip';sb.textContent=t('simple');
+  sb.onclick=()=>ask(L==='en'?`Explain the tafsir of Surah ${s.tr} ${n}:${i+1} simply, based on Tafsir Ibn Kathir.`:L==='ar'?`اشرح تفسير سورة ${s.name} الآية ${i+1} ببساطة اعتمادًا على تفسير ابن كثير.`:`সূরা ${s.tr} (${toBn(n)}:${toBn(i+1)}) আয়াতের তাফসীর ইবনে কাসীর অনুযায়ী সহজ ভাষায় বুঝিয়ে দাও।`);
+  p.querySelector('.row2').appendChild(sb);
+  show(cur);return p;
+}
+async function openSurah(n,scrollTo){
+  curSurah=n;$('surahList').style.display='none';$('reader').style.display='block';
+  $('ayahs').innerHTML=`<div class="loading">…</div>`;$('shead').innerHTML='';
+  let s; try{s=await getSurah(n);}catch(e){$('ayahs').innerHTML=`<div class="loading">${t('err')}</div>`;return;}
+  if(curSurah!==n) return;
+  $('shead').innerHTML=`<div class="an">${s.name}</div><b>${s.tr}</b><br><small>${L==='en'?s.en:s.bn} · ${num(s.n)} ${t('verses')} · ${t(s.type)}</small>`+(n!==1&&n!==9?`<div class="bism">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>`:'');
+  const box=$('ayahs');box.innerHTML='';
+  const frag=document.createDocumentFragment();
+  s.v.forEach((v,i)=>{
+    const a=document.createElement('div');a.className='ayah';a.id=`a-${n}-${i+1}`;
+    a.innerHTML=`<div class="top"><span class="k">${num(n)}:${num(i+1)}</span><div class="acts"></div></div><div class="arv">${v[0]} <span style="color:var(--gold)">﴿${toAr(i+1)}﴾</span></div><div class="tl">${esc(v[1])}</div><div class="tx">${esc(L==='en'?v[3]:v[2])}</div>`;
+    const acts=a.querySelector('.acts');
+    if(canSpeak()){const l=document.createElement('button');l.textContent='🔊';l.onclick=()=>speakAr(v[0]);acts.appendChild(l);}
+    const tf=document.createElement('button');tf.textContent=t('tafsir');
+    tf.onclick=()=>{const ex=a.querySelector('.tpanel');if(ex){ex.remove();return;}a.appendChild(tafsirPanel(n,i,s));};
+    acts.appendChild(tf);frag.appendChild(a);});
+  box.appendChild(frag);
+  if(scrollTo) document.getElementById(`a-${n}-${scrollTo}`)?.scrollIntoView({block:'center'}); else window.scrollTo({top:0});
+}
+$('rback').onclick=()=>{curSurah=null;$('reader').style.display='none';$('surahList').style.display='block';};
+
+/* ---------- Hadith ---------- */
+function gradeLabel(g){ if(L!=='bn') return g;
+  return g.replace(/Sahih/gi,'সহীহ').replace(/Hasan/gi,'হাসান').replace(/Da.?if/gi,'যঈফ').replace(/Isnaad/gi,'সনদ').replace(/Mawdu/gi,'মাওযূ').replace(/Munkar/gi,'মুনকার').replace(/Shadh/gi,'শায').replace(/Jayyid/gi,'জাইয়িদ').replace(/Lighairihi/gi,'লি-গাইরিহী').replace(/Lizatihi/gi,'লি-যাতিহী'); }
+let curCol=null,curSec=null;
+const colName=c=>L==='en'?c.en:L==='ar'?c.ar:c.bn;
+function hView(v){['hHome','hCol','hSec'].forEach(id=>$(id).style.display=id===v?'block':'none');window.scrollTo({top:0});}
+async function renderCols(){
+  const box=$('cols'); let idx;
+  try{idx=await hadithIndex();}catch(e){box.innerHTML=`<div class="loading">${t('err')}</div>`;return;}
+  box.innerHTML='';
+  idx.forEach(c=>{const b=document.createElement('button');b.className='colc';
+    b.innerHTML=`<div class="an">${c.ar}</div><b>${colName(c)}</b><small>${num(c.count)} ${t('hadithW')}</small>`;
+    b.onclick=()=>openCol(c.id);box.appendChild(b);});
+}
+async function openCol(id){
+  const idx=await hadithIndex();const c=idx.find(x=>x.id===id);curCol=id;curSec=null;hView('hCol');
+  $('hColHead').innerHTML=`<div class="an">${c.ar}</div><b>${colName(c)}</b><br><small>${num(c.count)} ${t('hadithW')}</small>`;
+  const box=$('hSecs');box.innerHTML='';
+  c.sections.forEach(s=>{const b=document.createElement('button');b.className='srow';
+    const nm=s[1]||t('other');
+    b.innerHTML=`<div class="num"><span>${num(s[0])}</span></div><div class="mid"><b>${esc(nm)}</b><small>${num(s[4])} ${t('hadithW')}${s[0]?` · ${num(s[2])}–${num(s[3])}`:''}</small></div>`;
+    b.onclick=()=>openSec(id,s[0]);box.appendChild(b);});
+}
+$('hNumForm').addEventListener('submit',async e=>{e.preventDefault();
+  const n=parseInt(fromBn($('hNum').value));if(!n)return;
+  const r=await findHadith(curCol,n).catch(()=>null);
+  if(!r){$('hNum').value='';$('hNum').placeholder=t('notFound');return;}
+  openSec(curCol,r.sec[0],n);});
+async function openSec(col,s,focus){
+  curSec=s;hView('hSec');
+  const idx=await hadithIndex();const c=idx.find(x=>x.id===col);const sec=c.sections.find(x=>x[0]===s);
+  $('hSecHead').textContent=`${colName(c)} · ${t('ch')} ${num(s)}: ${sec[1]||t('other')}`;
+  const box=$('hItems');box.innerHTML=`<div class="loading">…</div>`;
+  let items;try{items=await getSection(col,s);}catch(e){box.innerHTML=`<div class="loading">${t('err')}</div>`;return;}
+  if(curSec!==s)return;
+  box.innerHTML='';const frag=document.createDocumentFragment();
+  items.forEach(([n,ar,bn,g])=>{
+    const card=document.createElement('div');card.className='hcard';card.id=`h-${col}-${n}`;
+    card.innerHTML=`<span class="k">${colName(c)} ${num(n)}</span><div class="grades"></div><div class="hbn"></div><div class="harr"></div><div class="row2"></div>`;
+    const gb=card.querySelector('.grades');
+    g.forEach(([who,gr])=>{const x=document.createElement('span');const lg=gr.toLowerCase();
+      x.className='grade'+(/da.?if|weak|munkar|mawdu|fabricat|موضوع|ضعيف/.test(lg)?' weak':/hasan|حسن/.test(lg)?' mid':'');x.textContent=`${gradeLabel(gr)} · ${who}`;gb.appendChild(x);});
+    card.querySelector('.hbn').textContent=bn.replace(/^[।\s]+/,'');card.querySelector('.harr').textContent=ar;
+    const r=card.querySelector('.row2');
+    if(ar){const sa=document.createElement('button');sa.textContent=t('showAr');sa.onclick=()=>card.classList.toggle('ar-open');r.appendChild(sa);}
+    const ex=document.createElement('button');ex.textContent=t('simple');
+    ex.onclick=()=>ask(L==='en'?`Explain ${c.en} hadith no. ${n} simply, with its lessons.`:L==='ar'?`اشرح حديث ${c.ar} رقم ${n} ببساطة مع الفوائد.`:`${c.bn}-এর ${toBn(n)} নম্বর হাদিসটা সহজ ভাষায় বুঝিয়ে দাও, আর এর শিক্ষাগুলো বলো।`);
+    r.appendChild(ex);
+    if(ar&&canSpeak()){const l=document.createElement('button');l.textContent='🔊';l.onclick=()=>speakAr(ar.slice(0,1500));r.appendChild(l);}
+    frag.appendChild(card);});
+  box.appendChild(frag);
+  if(focus){const el=document.getElementById(`h-${col}-${focus}`);if(el){el.scrollIntoView({block:'start'});el.style.boxShadow='0 0 0 2px var(--green)';}}
+}
+$('hBack1').onclick=()=>{curCol=null;hView('hHome');};
+$('hBack2').onclick=()=>{curSec=null;hView('hCol');};
+document.querySelector('.tabs button[data-v="quran"]').addEventListener('click',()=>{if(!$('slist').children.length)renderSurahList();});
+document.querySelector('.tabs button[data-v="hadith"]').addEventListener('click',()=>{if(!$('cols').children.length)renderCols();});
+
+const q1=$('q1'),q2=$('q2'),thread=$('thread'),hero=$('hero'),dock=$('dock'),reset=$('reset'),notice=$('notice');
+let history=[],busy=false;
+function md(s){
+  const e=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return e.replace(/^#{1,6}\s*/gm,'').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .replace(/([؀-ۿ][؀-ۿً-ْٰ\s،؟]*[؀-ۿً-ْٰ؟])/g,'<span class="arw">$1</span>');
+}
+function addRow(role,text){
+  const r=document.createElement('div');r.className='row '+(role==='user'?'me':'bot');
+  r.innerHTML=(role==='user'?'':'<div class="av"><svg><use href="#logo"/></svg></div>')+'<div class="bubble"></div>';
+  const b=r.querySelector('.bubble');b.innerHTML=md(text);thread.appendChild(r);
+  r.scrollIntoView({behavior:'smooth',block:'end'});return b;
+}
+reset.onclick=()=>{setMode(null);history=[];thread.innerHTML='';hero.classList.remove('hide');dock.classList.remove('on');reset.style.display='none';window.scrollTo({top:0,behavior:'smooth'});};
+$('home').onclick=()=>goTab('ask');
+
+async function ask(text){
+  text=(text||'').trim(); if((!text&&!atts.some(a=>a.kind!=='loading'))||busy) return;
+  if(atts.some(a=>a.kind==='loading')){setTimeout(()=>ask(text),500);return;}
+  goTab('ask');
+  if(!checked){setTimeout(()=>ask(text),700);return;}
+  if(left('chat')<=0){blockChat('chat');voiceTurn=false;return;}
+  notice.style.display='none';attNote('');
+  hero.classList.add('hide');dock.classList.add('on');reset.style.display='block';
+  const sent=atts.slice();atts=[];renderAtts();
+  const nUploads=new Set(sent.map(a=>a.src)).size;
+  if(!text) text=t('attachDefault');
+  const imgs=sent.filter(a=>a.kind==='image'),docs=sent.filter(a=>a.kind==='text');
+  let full=text,short=text;
+  docs.forEach(d=>{full+=`\n\n[ফাইল: ${d.name}]\n"""\n${d.text.slice(0,60000)}${d.text.length>60000?'\n…(বাকি অংশ বাদ)':''}\n"""`;short+=`\n\n[ফাইল: ${d.name}]\n"""\n${d.text.slice(0,5000)}${d.text.length>5000?'\n…':''}\n"""`;});
+  if(imgs.length){const note=`\n\n[${imgs.length}টি ছবি সংযুক্ত: ${imgs.map(i=>i.name).join(', ')}]`;full+=note;short+=note+' (ছবিগুলো আগের প্রশ্নে দেখানো হয়েছিল)';}
+  const ub=addRow('user',text);
+  if(sent.length){const u=document.createElement('div');u.className='uatts';
+    imgs.forEach(i=>{const im=document.createElement('img');im.src=i.url;u.appendChild(im);});
+    docs.forEach(d=>{const f=document.createElement('div');f.className='uf';f.textContent='📄 '+d.name;u.appendChild(f);});
+    ub.parentNode.insertBefore(u,ub);}
+  history.push({role:'user',content:full,short});
+  q1.value='';q2.value='';grow(q1);grow(q2);
+  busy=true;setBusy(true);
+  const isVoice=voiceTurn;
+  const b=addRow('bot','');b.innerHTML=`<span class="typing">${t('typing')}</span>`;
+  try{
+    let hist=history.slice(-12).map((m,i,arr)=>({role:m.role,content:(i<arr.length-1&&m.short)?m.short:m.content}));
+    while(hist.length>2&&JSON.stringify(hist).length>200000) hist.splice(0,2);
+    const out=(await getAnswer(hist,txt=>setBot(b,txt,false),imgs.map(i=>i.blob),nUploads)).trim();
+    await setBot(b,out,true);history.push({role:'assistant',content:out});
+    useLocal('chat',1);useLocal('upload',nUploads);
+    if(canSpeak()){b.appendChild(document.createElement('br'));b.appendChild(replyListenBtn(out));}
+    if(canSpeak()&&(isVoice||autoSpeak)) speakReply(out,b.querySelector('.listen'));
+  }catch(e){
+    history.pop();
+    if(e?.code==='unavailable'||e?.code==='not_granted'){b.closest('.row').remove();notice.textContent=t('noAi');notice.style.display='block';}
+    else if(e?.code==='images_unavailable'||e?.code==='image_rejected'){b.textContent=t('fNoImg');}
+    else if(e?.code==='limit'){b.closest('.row').remove();blockChat(e.kind||'chat');}
+    else b.textContent=e?.code==='rate_limited'?t('rate'):(e?.text||t('err'));
+  }finally{busy=false;voiceTurn=false;setBusy(false);}
+}
+function setBusy(v){$('g1').disabled=v;$('g2').disabled=v;}
+function grow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px';}
+[['f1',q1],['f2',q2]].forEach(([f,el])=>{
+  $(f).addEventListener('submit',e=>{e.preventDefault();ask(el.value);});
+  el.addEventListener('input',()=>grow(el));
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!('ontouchstart' in window)){e.preventDefault();ask(el.value);}});
+});
+
+/* ================= ATTACHMENTS (photos & files) ================= */
+let atts=[];                  // {kind:'image'|'text', name, blob?, url?, text?}
+const MAX_IMG=()=>window.claude?(imgLimits?imgLimits.maxCount:0):4;
+const libs={};
+function loadScript(src){return libs[src]||(libs[src]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>{delete libs[src];rej(new Error('load'));};document.head.appendChild(s);}));}
+async function loadPdfJs(){
+  await loadScript('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js');  // runs in the page (no separate worker)
+  await loadScript('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js');
+  return window.pdfjsLib;
+}
+async function toJpeg(src,maxSide=1568,q=.85){
+  const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=typeof src==='string'?src:URL.createObjectURL(src);});
+  const r=Math.min(1,maxSide/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);
+  const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+  return await new Promise(r=>c.toBlob(r,'image/jpeg',q));
+}
+function attNote(msg){[$('attNote1'),$('attNote2'),$('attNote3')].forEach(x=>{x.textContent=msg||'';x.style.display=msg?'block':'none';});}
+async function addFiles(list){
+  attNote('');
+  for(const f of [...list]){
+    if(f.size>30*1024*1024){attNote(t('fTooBig')+' '+f.name);continue;}
+    const name=f.name||'file',ext=(name.split('.').pop()||'').toLowerCase();
+    const pendingSrc=new Set(atts.map(a=>a.src)).size;
+    if(left('upload')-pendingSrc<=0){attNote(limitText('upload'));renderAtts();openPlans();break;}
+    const src=Math.random().toString(36).slice(2);
+    const ph={kind:'loading',name,src};atts.push(ph);renderAtts();
+    try{
+      if(f.type.startsWith('image/')){
+        if(atts.filter(a=>a.kind==='image').length>=MAX_IMG()){atts.splice(atts.indexOf(ph),1);attNote(MAX_IMG()?t('fMaxImg'):t('fNoImg'));renderAtts();continue;}
+        const blob=await toJpeg(f);Object.assign(ph,{kind:'image',blob,url:URL.createObjectURL(blob)});
+      }else if(ext==='pdf'||f.type==='application/pdf'){
+        const pdfjs=await loadPdfJs();const pdf=await pdfjs.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;
+        let text='';for(let i=1;i<=Math.min(pdf.numPages,80)&&text.length<80000;i++){const pg=await pdf.getPage(i);const tc=await pg.getTextContent();text+=`\n[পৃষ্ঠা ${i}]\n`+tc.items.map(it=>it.str+(it.hasEOL?'\n':' ')).join('');}
+        if(text.replace(/\[পৃষ্ঠা \d+\]|\s/g,'').length>150){Object.assign(ph,{kind:'text',text:text.trim(),pages:pdf.numPages});}
+        else{ // scanned PDF: send page pictures
+          atts.splice(atts.indexOf(ph),1);
+          const room=MAX_IMG()-atts.filter(a=>a.kind==='image').length;
+          if(room<=0){attNote(MAX_IMG()?t('fMaxImg'):t('fNoImg'));renderAtts();continue;}
+          for(let i=1;i<=Math.min(pdf.numPages,room);i++){const pg=await pdf.getPage(i);const vp=pg.getViewport({scale:1});const sc=Math.min(2,1568/Math.max(vp.width,vp.height));const v2=pg.getViewport({scale:sc});
+            const c=document.createElement('canvas');c.width=v2.width;c.height=v2.height;await pg.render({canvasContext:c.getContext('2d'),viewport:v2}).promise;
+            const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.85));atts.push({kind:'image',name:`${name} · ${i}`,blob,url:URL.createObjectURL(blob),src});}
+          if(pdf.numPages>room) attNote(t('fScanPart'));
+        }
+      }else if(ext==='docx'){
+        await loadScript('https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js');
+        const r=await window.mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()});Object.assign(ph,{kind:'text',text:r.value.trim()});
+      }else if(/^(txt|md|csv|tsv|json|html?|xml|js|py|java|c|cpp|css|srt|log)$/.test(ext)||f.type.startsWith('text/')){
+        Object.assign(ph,{kind:'text',text:(await f.text()).trim()});
+      }else{atts.splice(atts.indexOf(ph),1);attNote(t('fUnsupported')+' '+name);}
+      if(ph.kind==='text'&&!ph.text){atts.splice(atts.indexOf(ph),1);attNote(t('fEmpty')+' '+name);}
+    }catch(e){const i=atts.indexOf(ph);if(i>=0)atts.splice(i,1);attNote(t('fFail')+' '+name);}
+    renderAtts();
+  }
+}
+function renderAtts(){
+  ['atts1','atts2','atts3'].forEach(id=>{const box=$(id);box.innerHTML='';box.style.display=atts.length?'flex':'none';
+    atts.forEach((a,i)=>{const c=document.createElement('div');c.className='att';
+      c.innerHTML=a.kind==='image'?`<img src="${a.url}" alt="">`:`<span class="ai">${a.kind==='loading'?'⏳':'📄'}</span><span class="an"></span>`;
+      if(a.kind!=='image')c.querySelector('.an').textContent=a.name;
+      if(a.kind!=='loading'){const x=document.createElement('button');x.type='button';x.className='ax';x.textContent='✕';x.onclick=()=>{atts.splice(i,1);renderAtts();};c.appendChild(x);}
+      box.appendChild(c);});});
+}
+$('fileIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value='';});
+document.querySelectorAll('.attach').forEach(b=>b.onclick=()=>$('fileIn').click());
+// drag & drop and paste
+document.addEventListener('dragover',e=>{if($('v-ask').classList.contains('on'))e.preventDefault();});
+document.addEventListener('drop',e=>{if(!$('v-ask').classList.contains('on'))return;e.preventDefault();if(e.dataTransfer?.files?.length)addFiles(e.dataTransfer.files);});
+[q1,q2].forEach(el=>el.addEventListener('paste',e=>{const fs=[...(e.clipboardData?.files||[])];if(fs.length){e.preventDefault();addFiles(fs);}}));
+
+/* ================= VOICE ================= */
+let dict=null,listening=false,voiceTA=null,voiceBase='',silTimer=null,voiceTurn=false,rec=null,autoSpeak=false,speakingBtn=null;
+try{autoSpeak=localStorage.getItem('lumina-speak')==='1'}catch(e){}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const voiceLang=()=>({bn:'bn',en:'en',ar:'ar'})[replyLang!=='auto'?replyLang:L];
+let voiceLangFailed=false;
+function canListen(){return window.claude?!!dict:!!SR;}
+function refreshVoiceUI(){document.querySelectorAll('.mic').forEach(b=>{b.style.display=canListen()?'':'none';b.classList.toggle('rec',listening);});
+  document.querySelectorAll('.spk').forEach(b=>{b.style.display=canSpeak()?'':'none';b.classList.toggle('on',autoSpeak);b.textContent=autoSpeak?t('vSpeakOn'):t('vSpeakOff');});}
+function setupDict(){ if(!dict) return;
+  dict.onPartial(({text})=>{if(voiceTA){voiceTA.value=(voiceBase+' '+text).trim();grow(voiceTA);armSilence();}});
+  dict.onFinal(({text})=>{if(voiceTA){voiceBase=(voiceBase+text).replace(/^\s+/,'');voiceTA.value=voiceBase;grow(voiceTA);armSilence();}});
+  dict.onState(({state,reason})=>{listening=state!=='idle';refreshVoiceUI();
+    if(state==='idle'){clearTimeout(silTimer);
+      if(reason==='unavailable'){ if(!voiceLangFailed){voiceLangFailed=true;attNote(t('vLangNo'));} else {dict=null;refreshVoiceUI();attNote(t('vNo'));} }
+      else if(reason==='not_granted'){attNote(t('vDenied'));}
+      else if(reason==='stopped'||reason==='viewer_stopped') finishVoice();}});
+}
+function armSilence(){clearTimeout(silTimer);silTimer=setTimeout(()=>stopVoice(),2300);}
+function micClick(ta){
+  stopSpeaking();
+  if(listening){stopVoice();return;}
+  voiceTA=ta;voiceBase=ta.value.trim();attNote('');
+  if(window.claude&&dict){
+    const lang=voiceLangFailed?undefined:voiceLang();
+    dict.start(lang?{language:lang}:{}).then(()=>armSilence()).catch(e=>{
+      if(e?.code==='unavailable'&&lang){voiceLangFailed=true;attNote(t('vLangNo'));}
+      else if(e?.code==='not_granted'){attNote(t('vDenied'));}
+      else if(e?.code!=='stopped'&&e?.code!=='dismissed') attNote(t('vNo'));});
+    return;
+  }
+  if(SR){rec=new SR();rec.lang=({bn:'bn-BD',en:'en-US',ar:'ar-SA'})[voiceLang()];rec.interimResults=true;rec.continuous=false;
+    rec.onresult=e=>{let fin='',inter='';for(const r of e.results){if(r.isFinal)fin+=r[0].transcript;else inter+=r[0].transcript;}ta.value=(voiceBase+' '+fin+' '+inter).trim();grow(ta);};
+    rec.onerror=e=>{if(e.error==='not-allowed')attNote(t('vDenied'));};
+    rec.onend=()=>{listening=false;refreshVoiceUI();finishVoice();};
+    try{rec.start();listening=true;refreshVoiceUI();}catch(e){attNote(t('vNo'));}
+    return;
+  }
+  attNote(t('vNo'));
+}
+async function stopVoice(){clearTimeout(silTimer);if(dict&&listening){try{await dict.stop();}catch(e){}}else if(rec){try{rec.stop();}catch(e){}}}
+function finishVoice(){const ta=voiceTA;voiceTA=null;if(!ta)return;const v=ta.value.trim();if(v||atts.length){voiceTurn=true;ask(v);}}
+document.querySelectorAll('.mic').forEach(b=>b.onclick=()=>micClick(b.dataset.ta==='q2'?q2:q1));
+document.querySelectorAll('.spk').forEach(b=>b.onclick=()=>{autoSpeak=!autoSpeak;try{localStorage.setItem('lumina-speak',autoSpeak?'1':'0')}catch(e){}refreshVoiceUI();if(!autoSpeak)stopSpeaking();});
+
+function plainForSpeech(s){return String(s).replace(/```[\s\S]*?```/g,'').replace(/\$\$?([^$]*)\$\$?/g,'$1').replace(/\\(frac|cdot|times|sqrt|left|right|text|mathrm)/g,' ').replace(/\*\*|__|`|#+\s/g,'').replace(/✏️/g,'').replace(/[•●]/g,'').replace(/\n{2,}/g,'\n').trim().slice(0,1990);}
+function detectLang(s){const bn=(s.match(/[ঀ-৿]/g)||[]).length,ar=(s.match(/[؀-ۿ]/g)||[]).length,la=(s.match(/[A-Za-z]/g)||[]).length;return bn>=ar&&bn>=la?'bn':ar>=la?'ar':'en';}
+function stopSpeaking(){try{tts?.stop();}catch(e){}if('speechSynthesis' in window)speechSynthesis.cancel();if(speakingBtn){speakingBtn.textContent=t('listenAll');speakingBtn=null;}}
+function speakReply(text,btn){
+  stopSpeaking();const s=plainForSpeech(text);if(!s)return;const lang=detectLang(s);
+  if(btn){btn.textContent=t('vStop');speakingBtn=btn;}
+  const done=()=>{if(btn&&speakingBtn===btn){btn.textContent=t('listenAll');speakingBtn=null;}};
+  if(tts){tts.speak(s,{language:lang,rate:1}).then(done).catch(()=>tts.speak(s).then(done).catch(done));return;}
+  if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(s);u.lang=({bn:'bn-BD',en:'en-US',ar:'ar-SA'})[lang];u.onend=done;u.onerror=done;speechSynthesis.speak(u);}
+}
+function replyListenBtn(text){const b=document.createElement('button');b.type='button';b.className='listen';b.textContent=t('listenAll');
+  b.onclick=e=>{e.stopPropagation();if(speakingBtn===b){stopSpeaking();return;}speakReply(text,b);};return b;}
+
+/* ================= MATH / SCIENCE ENGINE ================= */
+async function loadMath(){ if(window.math) return window.math; await loadScript('https://cdn.jsdelivr.net/npm/mathjs@13.2.3/lib/browser/math.js'); return window.math; }
+async function loadKatex(){ if(window.renderMathInElement) return; await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'); }
+function normExpr(e){return String(e||'').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/π/g,'pi').replace(/√\s*\(/g,'sqrt(').replace(/√\s*([0-9.]+)/g,'sqrt($1)').replace(/²/g,'^2').replace(/³/g,'^3').replace(/[০-৯]/g,d=>'০১২৩৪৫৬৭৮৯'.indexOf(d));}
+async function calcAll(expr){
+  const m=await loadMath(); const sc={}; const out=[];
+  for(const line of normExpr(expr).split(/[;\n]+/).map(x=>x.trim()).filter(Boolean)){const v=m.evaluate(line,sc);out.push({input:line,result:typeof v==='function'?'function':m.format(v,{precision:12})});}
+  if(!out.length) throw new Error('empty expression');
+  return out;
+}
+async function calcExpr(expr){const r=await calcAll(expr);return r[r.length-1].result;}
+async function toolCalc({expression}){ try{const r=await calcAll(expression);return r.length===1?{expression,result:r[0].result}:{results:r};}catch(e){throw new Error('math.js could not evaluate: '+e.message);} }
+async function toolBalance({equation}){ return window.LuminaChem.balance(equation); }
+async function toolMolar({formula}){ return window.LuminaChem.molarMass(formula); }
+TOOLS.push(
+ {name:'calculate',description:'Exact calculator (math.js). Evaluates arithmetic, powers, roots, trig (sin(30 deg)), log(x, base), factorials, fractions, matrices, unit conversions and physics with units (e.g. "20 m/s * 5 s", "5 km to m", "0.5 * 9.8 m/s^2 * (3 s)^2"), derivative("x^3","x"), simplify("2x+3x"). Several statements may be separated by ";" (variables are kept). Use it for every non-trivial number and to verify answers.',
+  inputSchema:{type:'object',properties:{expression:{type:'string'}},required:['expression']},execute:toolCalc},
+ {name:'balance_chemical_equation',description:'Balances a chemical equation exactly, e.g. "Fe + O2 -> Fe2O3". Returns the balanced equation and coefficients.',
+  inputSchema:{type:'object',properties:{equation:{type:'string'}},required:['equation']},execute:toolBalance},
+ {name:'molar_mass',description:'Molar mass (g/mol) of a chemical formula with an element-by-element breakdown, e.g. "H2SO4", "Ca3(PO4)2", "CuSO4·5H2O".',
+  inputSchema:{type:'object',properties:{formula:{type:'string'}},required:['formula']},execute:toolMolar});
+
+/* ---- rich text: code blocks, figures, plots, math ---- */
+function escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function mdRich(s){
+  const blocks=[];
+  s=String(s).replace(/```(\w*)[^\n]*\n?([\s\S]*?)```/g,(m,lang,body)=>{blocks.push({lang:(lang||'').toLowerCase(),body});return `\u0001B${blocks.length-1}\u0001`;});
+  let pending=false;const k=s.indexOf('```');if(k>=0){s=s.slice(0,k);pending=true;}
+  s=s.replace(/\n*(\u0001B\d+\u0001)\n*/g,'$1').replace(/\n*(\$\$[\s\S]*?\$\$)\n*/g,'$1').replace(/\n{3,}/g,'\n\n');
+  let h=md(s);
+  h=h.replace(/\u0001B(\d+)\u0001/g,(m,i)=>{const b=blocks[+i];
+    if(b.lang==='figure'||b.lang==='plot') return `<div class="fig" data-kind="${b.lang}" data-spec="${encodeURIComponent(b.body)}"></div>`;
+    return `<pre class="code">${escHTML(b.body)}</pre>`;});
+  if(pending) h+=`<div class="typing">${t('drawing')}</div>`;
+  return h;
+}
+async function postRender(el){
+  for(const f of el.querySelectorAll('.fig:not([data-done])')){
+    f.dataset.done='1';
+    try{const spec=JSON.parse(decodeURIComponent(f.dataset.spec));
+      f.innerHTML=f.dataset.kind==='plot'?await drawPlot(spec):drawFigure(spec);}
+    catch(e){f.remove();}
+  }
+  if(/\$|\\\(|\\\[/.test(el.textContent)){
+    try{await loadKatex();window.renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredClasses:['fig']});}catch(e){}
+  }
+}
+let prTimer=null;
+function setBot(b,text,final){
+  b.innerHTML=mdRich(text);
+  clearTimeout(prTimer);
+  if(final) return postRender(b);
+  prTimer=setTimeout(()=>postRender(b),350);
+}
+
+/* geometry figure: {points:{A:[x,y]}, segments:[["A","B","5 cm"]|{from,to,label,dashed}], polygons:[["A","B","C"]], circles:[{center:"O",r:3}|{center,through}], angles:[{vertex,from,to,label,right}], labels:[{at:"A"|[x,y],text}]} */
+function drawFigure(sp){
+  const P={};const pts=sp.points||{};
+  if(Array.isArray(pts)) pts.forEach(p=>{P[p.name||p[0]]=[+(p.x??p[1]),+(p.y??p[2])];}); else for(const k in pts)P[k]=[+pts[k][0],+pts[k][1]];
+  const get=a=>Array.isArray(a)?[+a[0],+a[1]]:P[a];
+  const circles=(sp.circles||[]).map(c=>{const ce=get(c.center);let r=+c.r;if(!r&&c.through){const q=get(c.through);r=Math.hypot(q[0]-ce[0],q[1]-ce[1]);}return {ce,r,label:c.label,cn:typeof c.center==='string'?c.center:null};}).filter(c=>c.ce&&c.r>0);
+  let xs=[],ys=[];Object.values(P).forEach(p=>{xs.push(p[0]);ys.push(p[1]);});circles.forEach(c=>{xs.push(c.ce[0]-c.r,c.ce[0]+c.r);ys.push(c.ce[1]-c.r,c.ce[1]+c.r);});
+  if(!xs.length) throw new Error('empty');
+  let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const span=Math.max(x1-x0,y1-y0)||1,m=span*.18;x0-=m;x1+=m;y0-=m;y1+=m;
+  const Wd=360,sc=Wd/(x1-x0),Ht=Math.min(420,Math.max(160,(y1-y0)*sc));const sc2=Math.min(sc,Ht/(y1-y0));
+  const ox=(Wd-(x1-x0)*sc2)/2,oy=(Ht-(y1-y0)*sc2)/2;
+  const X=x=>ox+(x-x0)*sc2,Y=y=>Ht-oy-(y-y0)*sc2;
+  const cx=Object.values(P).reduce((a,p)=>a+p[0],0)/(Object.keys(P).length||1),cy=Object.values(P).reduce((a,p)=>a+p[1],0)/(Object.keys(P).length||1);
+  let g='';const G='#0f5c4a',A='#c8a24a',T='#1b2824';
+  (sp.polygons||[]).forEach(pl=>{const q=pl.map(get).filter(Boolean);if(q.length>2)g+=`<polygon points="${q.map(p=>X(p[0])+','+Y(p[1])).join(' ')}" fill="rgba(15,92,74,.08)" stroke="none"/>`;});
+  circles.forEach(c=>{g+=`<circle cx="${X(c.ce[0])}" cy="${Y(c.ce[1])}" r="${c.r*sc2}" fill="none" stroke="${G}" stroke-width="2"/>`;});
+  const segs=(sp.segments||[]).map(s=>Array.isArray(s)?{from:s[0],to:s[1],label:s[2]}:s);
+  (sp.polygons||[]).forEach(pl=>pl.forEach((a,i)=>{const b=pl[(i+1)%pl.length];if(!segs.some(s=>(s.from===a&&s.to===b)||(s.from===b&&s.to===a)))segs.push({from:a,to:b});}));
+  segs.forEach(s=>{const a=get(s.from),b=get(s.to);if(!a||!b)return;
+    g+=`<line x1="${X(a[0])}" y1="${Y(a[1])}" x2="${X(b[0])}" y2="${Y(b[1])}" stroke="${G}" stroke-width="2.2" ${s.dashed?'stroke-dasharray="6 5"':''} stroke-linecap="round"/>`;
+    if(s.label){let mx=(X(a[0])+X(b[0]))/2,my=(Y(a[1])+Y(b[1]))/2;const dx=X(b[0])-X(a[0]),dy=Y(b[1])-Y(a[1]),L=Math.hypot(dx,dy)||1;let nx=-dy/L,ny=dx/L;
+      const ccx=X(cx),ccy=Y(cy);if((mx+nx*10-ccx)*nx+(my+ny*10-ccy)*ny<0){nx=-nx;ny=-ny;}
+      g+=`<text x="${mx+nx*15}" y="${my+ny*15}" font-size="13" fill="${A}" font-weight="700" text-anchor="middle" dominant-baseline="middle">${escHTML(s.label)}</text>`;}});
+  (sp.angles||[]).forEach(an=>{const v=get(an.vertex),a=get(an.from),b=get(an.to);if(!v||!a||!b)return;
+    const a1=Math.atan2(-(a[1]-v[1]),a[0]-v[0]),a2=Math.atan2(-(b[1]-v[1]),b[0]-v[0]);const R=22;const vx=X(v[0]),vy=Y(v[1]);
+    if(an.right){const u1=[Math.cos(a1),Math.sin(a1)],u2=[Math.cos(a2),Math.sin(a2)],r=12;
+      g+=`<path d="M${vx+u1[0]*r},${vy+u1[1]*r} L${vx+(u1[0]+u2[0])*r},${vy+(u1[1]+u2[1])*r} L${vx+u2[0]*r},${vy+u2[1]*r}" fill="none" stroke="${A}" stroke-width="1.8"/>`;}
+    else{let d=a2-a1;while(d<=-Math.PI)d+=2*Math.PI;while(d>Math.PI)d-=2*Math.PI;
+      g+=`<path d="M${vx+R*Math.cos(a1)},${vy+R*Math.sin(a1)} A${R},${R} 0 0 ${d>0?1:0} ${vx+R*Math.cos(a1+d)},${vy+R*Math.sin(a1+d)}" fill="none" stroke="${A}" stroke-width="1.8"/>`;
+      if(an.label){const am=a1+d/2;g+=`<text x="${vx+(R+13)*Math.cos(am)}" y="${vy+(R+13)*Math.sin(am)}" font-size="12" fill="${A}" font-weight="700" text-anchor="middle" dominant-baseline="middle">${escHTML(an.label)}</text>`;}}});
+  for(const k in P){const p=P[k];const px=X(p[0]),py=Y(p[1]);let dx=px-X(cx),dy=py-Y(cy);const L=Math.hypot(dx,dy)||1;dx/=L;dy/=L;if(L<2){dx=-.7;dy=-.7;}
+    g+=`<circle cx="${px}" cy="${py}" r="3.6" fill="${T}"/><text x="${px+dx*14}" y="${py+dy*14}" font-size="14" font-weight="700" fill="${T}" text-anchor="middle" dominant-baseline="middle" font-family="Fraunces,serif">${escHTML(k)}</text>`;}
+  circles.forEach(c=>{if(c.label)g+=`<text x="${X(c.ce[0])}" y="${Y(c.ce[1]+c.r)-8}" font-size="12" fill="${G}" text-anchor="middle">${escHTML(c.label)}</text>`;});
+  (sp.labels||[]).forEach(l=>{const p=get(l.at);if(p)g+=`<text x="${X(p[0])}" y="${Y(p[1])}" font-size="12.5" fill="${G}" text-anchor="middle" dominant-baseline="middle">${escHTML(l.text)}</text>`;});
+  return `<svg viewBox="0 0 ${Wd} ${Ht}" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
+}
+/* plot: {functions:[{expr:"x^2-4",label}], x:[-5,5], y:[min,max]?, points:[[x,y,"label"]]} */
+async function drawPlot(sp){
+  const m=await loadMath();
+  const fns=(sp.functions||(sp.expr?[{expr:sp.expr}]:[])).map(f=>typeof f==='string'?{expr:f}:f);
+  let [xa,xb]=(sp.x||[-5,5]).map(Number);if(!(xb>xa)){xa=-5;xb=5;}
+  const N=320,series=[];let all=[];
+  for(const f of fns){const c=m.compile(normExpr(f.expr).replace(/^\s*y\s*=\s*/,''));const pts=[];
+    for(let i=0;i<=N;i++){const x=xa+(xb-xa)*i/N;let y;try{y=c.evaluate({x,e:Math.E,pi:Math.PI});if(typeof y!=='number')y=Number(y);}catch(e){y=NaN;}pts.push([x,isFinite(y)?y:NaN]);if(isFinite(y))all.push(y);}
+    series.push({pts,label:f.label||('y = '+f.expr)});}
+  (sp.points||[]).forEach(p=>all.push(+p[1]));
+  let ya,yb;if(sp.y){[ya,yb]=sp.y.map(Number);}else{all.sort((a,b)=>a-b);ya=all[Math.floor(all.length*.02)]??-5;yb=all[Math.ceil(all.length*.98)-1]??5;if(ya===yb){ya-=1;yb+=1;}const pad=(yb-ya)*.1;ya-=pad;yb+=pad;ya=Math.min(ya,0);yb=Math.max(yb,0);}
+  const Wd=360,Ht=260,L=34,R=10,Tp=12,B=26;const X=x=>L+(x-xa)/(xb-xa)*(Wd-L-R),Y=y=>Tp+(yb-y)/(yb-ya)*(Ht-Tp-B);
+  const nice=(a,b)=>{const r=(b-a)/6,p=Math.pow(10,Math.floor(Math.log10(r))),n=r/p;return (n<1.5?1:n<3?2:n<7?5:10)*p;};
+  let g='';const sx=nice(xa,xb),sy=nice(ya,yb);
+  for(let v=Math.ceil(xa/sx)*sx;v<=xb+1e-9;v+=sx){g+=`<line x1="${X(v)}" y1="${Tp}" x2="${X(v)}" y2="${Ht-B}" stroke="#eee"/><text x="${X(v)}" y="${Ht-B+14}" font-size="10" fill="#777" text-anchor="middle">${+v.toFixed(6)}</text>`;}
+  for(let v=Math.ceil(ya/sy)*sy;v<=yb+1e-9;v+=sy){g+=`<line x1="${L}" y1="${Y(v)}" x2="${Wd-R}" y2="${Y(v)}" stroke="#eee"/><text x="${L-5}" y="${Y(v)}" font-size="10" fill="#777" text-anchor="end" dominant-baseline="middle">${+v.toFixed(6)}</text>`;}
+  if(ya<=0&&yb>=0)g+=`<line x1="${L}" y1="${Y(0)}" x2="${Wd-R}" y2="${Y(0)}" stroke="#555" stroke-width="1.2"/>`;
+  if(xa<=0&&xb>=0)g+=`<line x1="${X(0)}" y1="${Tp}" x2="${X(0)}" y2="${Ht-B}" stroke="#555" stroke-width="1.2"/>`;
+  const cols=['#0f5c4a','#2a5bd7','#c8541b','#8e44ad'];
+  series.forEach((s,i)=>{let d='',pen=false,prev=null;s.pts.forEach(([x,y])=>{if(!isFinite(y)||y<ya-(yb-ya)*3||y>yb+(yb-ya)*3){pen=false;prev=null;return;}if(prev&&Math.abs(y-prev)>(yb-ya)*1.5)pen=false;d+=(pen?'L':'M')+X(x).toFixed(1)+','+Y(Math.max(ya-(yb-ya),Math.min(yb+(yb-ya),y))).toFixed(1);pen=true;prev=y;});
+    g+=`<path d="${d}" fill="none" stroke="${cols[i%4]}" stroke-width="2.4" clip-path="url(#pc)"/>`;
+    g+=`<text x="${L+6}" y="${Tp+12+i*15}" font-size="11.5" fill="${cols[i%4]}" font-weight="700">${escHTML(s.label)}</text>`;});
+  (sp.points||[]).forEach(p=>{g+=`<circle cx="${X(+p[0])}" cy="${Y(+p[1])}" r="4" fill="#c8a24a"/>`+(p[2]?`<text x="${X(+p[0])+6}" y="${Y(+p[1])-8}" font-size="11" fill="#1b2824">${escHTML(p[2])}</text>`:'');});
+  return `<svg viewBox="0 0 ${Wd} ${Ht}" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="pc"><rect x="${L}" y="${Tp}" width="${Wd-L-R}" height="${Ht-Tp-B}"/></clipPath></defs>${g}</svg>`;
+}
+
+/* ---- Solve tab ---- */
+let solveSubj='math',solveLevel=1;
+try{solveLevel=+(localStorage.getItem('lumina-level')||1)}catch(e){}
+const SUBJ_BG={math:'linear-gradient(135deg,#3d6fd8,#2a4fa8)',geometry:'linear-gradient(135deg,#17826a,#0f5c4a)',physics:'linear-gradient(135deg,#8e44ad,#5b2c83)',chemistry:'linear-gradient(135deg,#d9822b,#a85d14)'};
+function renderSolveUI(){
+  const sj=$('subj');sj.innerHTML='';
+  t('subjects').forEach(([id,ic,nm,su])=>{const b=document.createElement('button');b.type='button';b.className=id===solveSubj?'on':'';
+    b.innerHTML=`<span class="si" style="background:${SUBJ_BG[id]}">${ic}</span><span><b>${nm}</b><small style="display:block;color:var(--soft);font-size:12px">${su}</small></span>`;
+    b.onclick=()=>{solveSubj=id;renderSolveUI();};sj.appendChild(b);});
+  const lv=$('sLevels');lv.innerHTML='';t('sLevels').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===solveLevel?' on':'');b.textContent=x;b.onclick=()=>{solveLevel=i;try{localStorage.setItem('lumina-level',i)}catch(e){}renderSolveUI();};lv.appendChild(b);});
+  $('sProb').placeholder=t('sPh');
+  const ex=$('sEx');ex.innerHTML='';(t('ex')[solveSubj]||[]).forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>{$('sProb').value=x;$('sProb').focus();};ex.appendChild(b);});
+}
+$('sPhoto').onclick=()=>$('fileIn').click();
+$('sGo').onclick=()=>{const q=$('sProb').value.trim();if(!q&&!atts.length)return;
+  history=[];thread.innerHTML='';setMode('solve');$('sProb').value='';ask(q);};
+$('sProb').addEventListener('paste',e=>{const fs=[...(e.clipboardData?.files||[])];if(fs.length){e.preventDefault();addFiles(fs);}});
+
+/* quick tools */
+const chemHTML=s=>escHTML(s).replace(/([A-Za-z\)\]])(\d+)/g,'$1<sub>$2</sub>');
+function bnNum(x){return L==='bn'?String(x).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]):String(x);}
+$('tBalGo').onclick=()=>{const o=$('tBalOut');try{const r=window.LuminaChem.balance($('tBal').value);o.innerHTML=`<div class="big">${chemHTML(r.balanced)}</div>`;}catch(e){o.innerHTML=`<span class="err">${escHTML(e.message)}</span>`;}};
+$('tMolGo').onclick=()=>{const o=$('tMolOut');try{const r=window.LuminaChem.molarMass($('tMol').value);
+  o.innerHTML=`<div class="big">${chemHTML(r.formula)} = ${r.molar_mass_g_per_mol} g/mol</div><table>${r.breakdown.map(b=>`<tr><td>${b.element}</td><td>${b.count} × ${b.atomic_mass}</td><td>= ${b.subtotal}</td></tr>`).join('')}</table>`;}catch(e){o.innerHTML=`<span class="err">${escHTML(e.message)}</span>`;}};
+$('tFxGo').onclick=async()=>{const o=$('tFxOut');o.innerHTML='…';try{o.innerHTML=`<div class="fig">${await drawPlot({functions:[{expr:$('tFx').value}],x:[+fromBn($('tX1').value),+fromBn($('tX2').value)]})}</div>`;}catch(e){o.innerHTML=`<span class="err">${escHTML(e.message||'error')}</span>`;}};
+$('tCalcGo').onclick=async()=>{const o=$('tCalcOut');o.textContent='…';try{o.innerHTML=`<div class="big">= ${escHTML(await calcExpr($('tCalc').value))}</div>`;}catch(e){o.innerHTML=`<span class="err">${escHTML(e.message)}</span>`;}};
+[['tBal','tBalGo'],['tMol','tMolGo'],['tFx','tFxGo'],['tCalc','tCalcGo']].forEach(([i,b])=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$(b).click();}}));
+
+/* ================= PLANS & USAGE LIMITS ================= */
+const LP=window.LuminaPlans;
+const LOCAL=!!window.claude;      // inside claude.ai: counted in this browser; on the website: counted by the server
+let deviceId='';
+try{deviceId=localStorage.getItem('lumina-device')||'';if(!deviceId){deviceId=(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));localStorage.setItem('lumina-device',deviceId);}}catch(e){deviceId='anon-'+Math.random().toString(36).slice(2);}
+let usage={plan:'free',until:null,used:LP.fresh(null),resetAt:null};
+function loadLocal(){const role=usage.role;let u=null;try{u=JSON.parse(localStorage.getItem('lumina-usage')||'null');}catch(e){}usage.used=LP.fresh(u);usage.resetAt=LP.resetAt(usage.used);usage.role=role;}
+function saveLocal(){try{localStorage.setItem('lumina-usage',JSON.stringify(usage.used))}catch(e){}}
+function applyServerUsage(u){if(u&&u.used){if(u.plans)LP.PLANS=u.plans;if(u.payment)LP.PAYMENT=u.payment;if(u.windowHours)LP.WINDOW_HOURS=u.windowHours;
+  usage={plan:u.plan||'free',until:u.until||null,used:u.used,resetAt:u.resetAt||null,role:u.role||null,adminName:u.adminName||''};renderUsage();}}
+async function syncUsage(){
+  if(LOCAL){loadLocal();renderUsage();return;}
+  try{const r=await fetch('/api/usage',{headers:{'x-lumina-device':deviceId}});if(r.ok)applyServerUsage(await r.json());}catch(e){}
+}
+const isStaff=()=>usage.role==='super'||usage.role==='admin';
+const lim=k=>{if(isStaff())return Infinity;const v=(LP.PLANS[usage.plan]||LP.PLANS.free).limits[k];return v<0?Infinity:v;};
+function refreshWindow(){
+  if(LOCAL){usage.used=LP.fresh(usage.used);usage.resetAt=LP.resetAt(usage.used);}
+  else if(usage.resetAt&&Date.now()>=usage.resetAt){usage.used=LP.fresh(null);usage.resetAt=null;}
+}
+function left(k){refreshWindow();const l=lim(k);return l===Infinity?Infinity:Math.max(0,l-(usage.used[k]||0));}
+function useLocal(k,n){if(!LOCAL||!n||isStaff())return;refreshWindow();if(!usage.used.start)usage.used.start=Date.now();usage.used[k]=(usage.used[k]||0)+n;usage.resetAt=LP.resetAt(usage.used);saveLocal();renderUsage();}
+function timeLeft(){refreshWindow();if(!usage.resetAt)return '';const ms=Math.max(0,usage.resetAt-Date.now());const h=Math.floor(ms/3600000),m=Math.ceil((ms%3600000)/60000);
+  return L==='en'?`${h?h+' h ':''}${m} min`:L==='ar'?`${h?toAr(h)+' ساعة ':''}${toAr(m)} دقيقة`:`${h?toBn(h)+' ঘণ্টা ':''}${toBn(m)} মিনিট`;}
+function renderUsage(){
+  const p=$('usePill');if(p){if(isStaff()){p.innerHTML=`<span class="pz">👑</span>∞<small>${usage.role==='super'?' Super':' Admin'}</small>`;p.classList.remove('low');p.classList.add('paid');}
+    else{const c=left('chat');p.innerHTML=`<span class="pz">${usage.plan==='free'?'⚡':'👑'}</span>${num(c)}<small>/${num(lim('chat'))}</small>`;p.classList.toggle('low',c<=2);p.classList.toggle('paid',usage.plan!=='free');}}
+  if($('plans').classList.contains('on')) renderPlans();
+}
+function limitText(k){return t('lim_'+k)+' '+(usage.resetAt?t('limReset').replace('{t}',timeLeft()):'');}
+function limitCard(k){
+  const d=document.createElement('div');d.className='limCard';
+  d.innerHTML=`<b>${t('limTitle')}</b><p></p><button class="next" style="display:inline-block">${t('seePlans')}</button>`;
+  d.querySelector('p').textContent=limitText(k);d.querySelector('button').onclick=openPlans;return d;
+}
+function blockChat(k){
+  goTab('ask');hero.classList.add('hide');dock.classList.add('on');reset.style.display='block';
+  const r=document.createElement('div');r.className='row bot';r.innerHTML='<div class="av"><svg><use href="#logo"/></svg></div>';
+  r.appendChild(limitCard(k));thread.appendChild(r);r.scrollIntoView({behavior:'smooth',block:'end'});
+}
+
+/* plans sheet */
+let buyPlan=null;
+function openPlans(){buyPlan=null;$('pMsg').textContent='';renderPlans();$('plans').classList.add('on');syncUsage();}
+$('plansX').onclick=()=>$('plans').classList.remove('on');
+$('plans').addEventListener('click',e=>{if(e.target.id==='plans')$('plans').classList.remove('on');});
+$('usePill').onclick=openPlans;
+function renderPlans(){
+  refreshWindow();
+  const P=LP.PLANS[usage.plan]||LP.PLANS.free;
+  const until=usage.until?new Date(usage.until).toLocaleDateString(L==='en'?'en-GB':L==='ar'?'ar':'bn-BD'):'';
+  const bars=LP.KINDS.map(k=>{const u=Math.min(usage.used[k]||0,lim(k)),l=lim(k);return `<div class="meter"><div class="ml"><span>${t('k_'+k)}</span><span>${num(u)} / ${num(l)}</span></div><div class="mb"><i style="width:${Math.round(u/l*100)}%"></i></div></div>`;}).join('');
+  if(isStaff()){$('pCur').innerHTML=`<div class="curTop"><span class="badge pro">👑 ${usage.role==='super'?t('roleSuper'):t('roleAdmin')}</span>${usage.adminName?`<small>${escHTML(usage.adminName)}</small>`:''}</div><div class="unl">${t('unlimited')}</div>`;}
+  else $('pCur').innerHTML=`<div class="curTop"><span class="badge b-${usage.plan}">${P.name}</span>${until?`<small>${t('pUntil').replace('{d}',until)}</small>`:''}</div>${bars}<small class="rs">${usage.resetAt?t('limReset').replace('{t}',timeLeft()):t('pFresh').replace('{h}',num(LP.WINDOW_HOURS))}</small>${LOCAL?`<small class="rs">${t('pLocalNote')}</small>`:''}`;
+  const g=$('pGrid');g.innerHTML='';
+  Object.entries(LP.PLANS).forEach(([id,pl])=>{const c=document.createElement('div');c.className='pcard pl-'+id+(pl.popular?' pop':'')+(id===usage.plan?' cur':'');
+    c.innerHTML=`${pl.popular?`<span class="ptag">${t('pPopular')}</span>`:''}<b>${pl.name}</b><div class="pp">${pl.price?`৳${num(pl.price)}<small>/${t('pMonth')}</small>`:t('pFreeLbl')}</div>
+      <ul><li>💬 ${t('f_chat').replace('{n}',num(pl.limits.chat))}</li><li>📎 ${t('f_upload').replace('{n}',num(pl.limits.upload))}</li><li>🎨 ${t('f_design').replace('{n}',num(pl.limits.design))}</li><li>⏱ ${t('f_reset').replace('{h}',num(LP.WINDOW_HOURS))}</li></ul>`;
+    const b=document.createElement('button');b.className='next';b.style.display='inline-block';
+    if(id===usage.plan){b.textContent=t('pCurrent');b.disabled=true;}else if(id==='free'){b.style.display='none';}else{b.textContent=t('pBuy').replace('{p}',pl.name);b.onclick=()=>{buyPlan=id;renderPay();};}
+    c.appendChild(b);g.appendChild(c);});
+  renderPay();renderStaff();
+}
+function renderPay(){
+  const box=$('pPay');if(!buyPlan){box.innerHTML='';box.style.display='none';return;}
+  const pl=LP.PLANS[buyPlan],pay=LP.PAYMENT,ph=s=>/^\[.*\]$/.test(s);
+  box.style.display='block';
+  box.innerHTML=`<b>${t('payTitle').replace('{p}',pl.name)}</b><ol>
+   <li>${t('pay1').replace('{m}',escHTML(pay.methods)).replace('{a}','৳'+num(pl.price)).replace('{n}',ph(pay.number)?`<i>${t('paySoon')}</i>`:`<b class="sel">${escHTML(pay.number)}</b>`)}</li>
+   <li>${t('pay2').replace('{c}',ph(pay.contact)?`<i>${t('paySoon')}</i>`:`<b class="sel">${escHTML(pay.contact)}</b>`).replace('{p}',pl.name)}</li>
+   <li>${t('pay3').replace('{d}',num(LP.PLAN_DAYS))}</li></ol>`;
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+$('pRedeem').onclick=async()=>{
+  const code=$('pCode').value.trim().toUpperCase();const msg=$('pMsg');if(!code)return;
+  if(LOCAL){msg.textContent=t('pCodeWeb');msg.className='pmsg err';return;}
+  msg.textContent='…';msg.className='pmsg';
+  try{const r=await fetch('/api/redeem',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({code})});const j=await r.json();
+    if(r.ok&&j.usage){applyServerUsage(j.usage);$('pCode').value='';msg.textContent=t('pCodeOk').replace('{p}',(LP.PLANS[j.usage.plan]||{}).name||'');msg.className='pmsg ok';renderPlans();}
+    else{msg.textContent=j.error==='used'?t('pCodeUsed'):t('pCodeBad');msg.className='pmsg err';}
+  }catch(e){msg.textContent=t('err');msg.className='pmsg err';}
+};
+
+/* ---- staff (super admin / admin) ---- */
+function renderStaff(){
+  $('pId').textContent=deviceId;
+  const box=$('pStaff');
+  if(LOCAL){box.innerHTML=isStaff()?`<small>${t('staffLocal')}</small>`:`<small>${t('staffLocalNo')}</small>`;return;}
+  if(isStaff()){box.innerHTML=`<div class="trow"><a class="chip" href="admin.html" target="_blank" rel="noopener">${t('openPanel')}</a><button class="chip" id="stOut">${t('logout')}</button></div>`;
+    $('stOut').onclick=async()=>{await adminCall({action:'logout'});syncUsage();};return;}
+  box.innerHTML=`<div class="trow"><input id="stKey" type="password" placeholder="${t('adminKeyPh')}"><button class="next" id="stIn" style="display:inline-block">${t('login')}</button></div><div class="pmsg" id="stMsg"></div>`;
+  $('stIn').onclick=async()=>{const k=$('stKey').value.trim();if(!k)return;const m=$('stMsg');m.textContent='…';m.className='pmsg';
+    const r=await adminCall({action:'login'},k);if(r&&r.usage){applyServerUsage(r.usage);m.textContent=t('loginOk');m.className='pmsg ok';}else{m.textContent=t('loginBad');m.className='pmsg err';}};
+}
+async function adminCall(body,key){try{const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId,...(key?{'x-admin-key':key}:{})},body:JSON.stringify(body)});return r.ok?await r.json():null;}catch(e){return null;}}
+$('pIdCopy').onclick=async()=>{try{await navigator.clipboard.writeText(deviceId);$('pIdCopy').textContent='✓';}catch(e){}};
+/* inside claude.ai: the artifact's owner is the super admin, editors are admins */
+if(window.claude)(async()=>{try{const u=await window.claude.use('user');if(u){if(u.isOwner())usage.role='super';else if(u.canEdit())usage.role='admin';renderUsage();}}catch(e){}})();
+setInterval(()=>{if(usage.resetAt&&Date.now()>=usage.resetAt){refreshWindow();renderUsage();}},60000);
+
+/* ---------- language packs ---------- */
+const EN_WORDS={
+ "রোজকার":[["water","ওয়াটার","পানি","Please give me some water."],["food","ফুড","খাবার","The food is delicious."],["house","হাউস","বাড়ি","This is my house."],["friend","ফ্রেন্ড","বন্ধু","She is my best friend."],["family","ফ্যামিলি","পরিবার","I love my family."],["morning","মর্নিং","সকাল","I wake up early in the morning."],["money","মানি","টাকা","I need some money."],["road","রোড","রাস্তা","The road is very busy."]],
+ "পড়াশোনা":[["book","বুক","বই","I am reading a book."],["pen","পেন","কলম","May I borrow your pen?"],["teacher","টিচার","শিক্ষক","Our teacher is very kind."],["student","স্টুডেন্ট","ছাত্র/ছাত্রী","He is a good student."],["exam","এগজ্যাম","পরীক্ষা","My exam starts tomorrow."],["question","কোয়েশ্চন","প্রশ্ন","Can I ask a question?"],["answer","আনসার","উত্তর","Write the answer here."],["knowledge","নলেজ","জ্ঞান","Knowledge is power."]],
+ "অনুভূতি":[["happy","হ্যাপি","খুশি","I am happy today."],["sad","স্যাড","দুঃখিত / মন খারাপ","Why are you sad?"],["angry","অ্যাংরি","রাগান্বিত","Don't be angry with me."],["tired","টায়ার্ড","ক্লান্ত","I am very tired."],["hungry","হাংরি","ক্ষুধার্ত","Are you hungry?"],["afraid","আফ্রেইড","ভীত","I am afraid of dogs."],["proud","প্রাউড","গর্বিত","We are proud of you."],["worried","ওয়ারিড","চিন্তিত","She looks worried."]],
+ "ক্রিয়া":[["go","গো","যাওয়া","I go to school every day."],["come","কাম","আসা","Please come here."],["eat","ইট","খাওয়া","We eat rice."],["read","রিড","পড়া","I read the Quran every morning."],["write","রাইট","লেখা","Write your name."],["speak","স্পিক","কথা বলা","Can you speak English?"],["learn","লার্ন","শেখা","I want to learn Arabic."],["help","হেল্প","সাহায্য করা","Can you help me?"]]
+};
+const EN_CAT={"রোজকার":["Daily","يومي"],"পড়াশোনা":["Study","الدراسة"],"অনুভূতি":["Feelings","المشاعر"],"ক্রিয়া":["Verbs","الأفعال"]};
+const EN_PHRASES=[["How are you?","হাউ আর ইউ?","তুমি কেমন আছ?"],["I'm fine, thank you.","আইম ফাইন, থ্যাংক ইউ।","আমি ভালো আছি, ধন্যবাদ।"],["What is your name?","হোয়াট ইজ ইওর নেইম?","তোমার নাম কী?"],["My name is Rahim.","মাই নেইম ইজ রহিম।","আমার নাম রহিম।"],["Where are you from?","হোয়্যার আর ইউ ফ্রম?","তুমি কোথা থেকে এসেছ?"],["I am from Bangladesh.","আই অ্যাম ফ্রম বাংলাদেশ।","আমি বাংলাদেশ থেকে এসেছি।"],["Nice to meet you.","নাইস টু মিট ইউ।","তোমার সাথে পরিচিত হয়ে ভালো লাগলো।"],["Can you help me?","ক্যান ইউ হেল্প মি?","তুমি কি আমাকে সাহায্য করতে পারবে?"],["I don't understand.","আই ডোন্ট আন্ডারস্ট্যান্ড।","আমি বুঝতে পারছি না।"],["Please speak slowly.","প্লিজ স্পিক স্লোলি।","দয়া করে আস্তে বলো।"],["How much is this?","হাউ মাচ ইজ দিস?","এটার দাম কত?"],["Excuse me.","এক্সকিউজ মি।","শুনছেন? / মাফ করবেন।"],["I am sorry.","আই অ্যাম সরি।","আমি দুঃখিত।"],["See you later.","সি ইউ লেটার।","পরে দেখা হবে।"],["Have a nice day!","হ্যাভ আ নাইস ডে!","তোমার দিনটা ভালো কাটুক!"]];
+const AR_PHRASES=[["مَا اسْمُكَ؟","মাসমুকা?","তোমার নাম কী?"],["اِسْمِي أَحْمَدُ","ইসমী আহমাদু","আমার নাম আহমাদ।"],["كَيْفَ حَالُكَ؟","কাইফা হালুকা?","তুমি কেমন আছ?"],["أَنَا بِخَيْرٍ، اَلْحَمْدُ لِلّٰهِ","আনা বিখাইরিন, আলহামদু লিল্লাহ","আমি ভালো আছি, আলহামদুলিল্লাহ।"],["مِنْ أَيْنَ أَنْتَ؟","মিন আইনা আনতা?","তুমি কোথা থেকে এসেছ?"],["أَنَا مِنْ بَنْغْلَادِيشَ","আনা মিন বাংলাদেশ","আমি বাংলাদেশ থেকে এসেছি।"],["شُكْرًا جَزِيلًا","শুকরান জাযীলান","অনেক ধন্যবাদ।"],["عَفْوًا","আফওয়ান","কোনো ব্যাপার না / স্বাগতম।"],["مِنْ فَضْلِكَ","মিন ফাদলিকা","অনুগ্রহ করে।"],["لَا أَفْهَمُ","লা আফহামু","আমি বুঝতে পারছি না।"],["أَيْنَ الْمَسْجِدُ؟","আইনাল মাসজিদু?","মসজিদ কোথায়?"],["أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ","উহিব্বুল লুগাতাল আরাবিয়্যাহ","আমি আরবি ভাষা ভালোবাসি।"],["نَعَمْ / لَا","না'আম / লা","হ্যাঁ / না"],["إِلَى اللِّقَاءِ","ইলাল লিকা","আবার দেখা হবে।"]];
+const EN_LESSONS=[["Parts of Speech","পদ প্রকরণ: Noun, Verb, Adjective…","English Parts of Speech"],["Am / Is / Are","কখন কোনটা বসবে","when to use am, is and are"],["A / An / The","Article-এর সহজ নিয়ম","the articles a, an and the"],["Tenses","১২টা কাল সহজ ভাষায়","the 12 English tenses (start with the 3 simple tenses)"],["Present Continuous","এখন কী করছি, বলা শেখো","the present continuous tense"],["Making Questions","Wh-question বানানো","making Wh-questions and yes/no questions"],["In / On / At","Preposition-এর ব্যবহার","the prepositions in, on and at"],["Common Mistakes","বাংলাভাষীদের সাধারণ ভুল","common English mistakes Bangladeshi learners make"],["Self Introduction","নিজের পরিচয় দেওয়া","how to introduce myself in English"],["Writing a Paragraph","সহজ অনুচ্ছেদ লেখা","how to write a simple paragraph in English"]];
+const AR_LESSONS=[["হারাকাত","যবর, যের, পেশ","the Arabic harakat (fatha, kasra, damma)"],["সুকূন ও তাশদীদ","জযম আর তাশদীদ চেনা","sukun and shadda"],["তানভীন","দুই যবর, দুই যের, দুই পেশ","tanween"],["মাদ","দীর্ঘ স্বর (আলিফ, ওয়াও, ইয়া)","madd (long vowels)"],["ইসম, ফে'ল, হরফ","আরবি শব্দের তিন প্রকার","ism, fi'l and harf"],["মুযাক্কার ও মুআন্নাস","পুংলিঙ্গ ও স্ত্রীলিঙ্গ","masculine and feminine nouns"],["যমীর","সর্বনাম: هُوَ، هِيَ، أَنَا…","Arabic pronouns (dhamir)"],["ফে'ল মাযী","অতীত কাল","the past tense verb (fi'l madi)"],["ফে'ল মুযারে","বর্তমান ও ভবিষ্যৎ কাল","the present tense verb (fi'l mudari)"],["নামাজের শব্দার্থ","সূরা ফাতিহার শব্দে শব্দে অর্থ","the word-by-word meaning of Surah al-Fatiha"]];
+
+/* ---------- speaking ---------- */
+function speak(text,lang){
+  if(tts){tts.speak(text,{language:lang==='en'?'en':'ar',rate:lang==='en'?0.95:0.85,voice:'airy'}).catch(()=>{});return;}
+  if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);u.lang=lang==='en'?'en-US':'ar-SA';u.rate=lang==='en'?.9:.8;speechSynthesis.cancel();speechSynthesis.speak(u);}
+}
+
+/* ---------- answer language + practice modes ---------- */
+let replyLang='auto',chatMode=null,talkLevel=0;
+try{replyLang=localStorage.getItem('lumina-reply')||'auto'}catch(e){}
+const RL_KEYS=['auto','bn','en','ar'];
+function renderRL(){
+  ['rl1','rl2'].forEach(id=>{const box=$(id);box.innerHTML=`<span class="lbl">${t('rlLbl')}</span>`;
+    RL_KEYS.forEach((k,i)=>{const b=document.createElement('button');b.type='button';b.textContent=t('rlOpts')[i];b.className=k===replyLang?'on':'';
+      b.onclick=()=>{replyLang=k;voiceLangFailed=false;try{localStorage.setItem('lumina-reply',k)}catch(e){}renderRL();};box.appendChild(b);});});
+  const sp=document.createElement('button');sp.type='button';sp.className='spk';sp.onclick=()=>{autoSpeak=!autoSpeak;try{localStorage.setItem('lumina-speak',autoSpeak?'1':'0')}catch(e){}refreshVoiceUI();if(!autoSpeak)stopSpeaking();};$('rl2').appendChild(sp);
+  if(typeof refreshVoiceUI==='function') refreshVoiceUI();
+}
+function buildSystem(){
+  let x=SYSTEM;
+  const names={bn:'Bangla (বাংলা script)',en:'English',ar:'Arabic (فصحى, with harakat on key words)'};
+  if(replyLang!=='auto') x+=`\n\nANSWER LANGUAGE: The student chose to always get answers in ${names[replyLang]}. Write your whole reply in ${names[replyLang]}, whatever language the question is in. Quran ayahs stay in Arabic with the translation in ${names[replyLang]}.`;
+  const lv=['a complete beginner','an intermediate learner','an advanced learner'][talkLevel];
+  if(chatMode==='talk-en') x+=`\n\nPRACTICE MODE: English conversation practice. The student is ${lv}. Talk ONLY in simple, natural English suited to that level (short sentences), keep a friendly conversation going and end each turn with one easy question. If the student's last message had mistakes, first add one short line starting with "✏️" that shows the corrected sentence and a brief explanation in Bangla. If they write in Bangla, help them say it in English.`;
+  if(chatMode==='talk-ar') x+=`\n\nPRACTICE MODE: Arabic conversation practice. The student is ${lv}. Reply in simple Modern Standard Arabic with full harakat (1–3 short sentences), then on new lines give the Bangla pronunciation in brackets and the Bangla meaning. End with one easy question in Arabic. If the student's Arabic had mistakes, add a short line starting with "✏️" showing the correction with a brief Bangla explanation. If they write in Bangla, help them say it in Arabic.`;
+  if(chatMode==='solve'){const sub={math:'Mathematics',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry'}[solveSubj]||'Mathematics';const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
+    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.`;}
+  x+=`\n\nATTACHMENTS: The student can attach photos and files (PDF, Word, text). File text arrives inside the message between [ফাইল: name] markers; photos arrive as images. Read them carefully, answer about their content, and say plainly if something is unreadable. For photos of homework, explain the steps.`;
+  if(voiceTurn) x+=`\n\nVOICE: The student is talking by voice and your reply will be read aloud. Reply in short, natural spoken sentences (2–5 sentences), no lists, tables, symbols or emojis. Keep Arabic short and with harakat.`;
+  return x;
+}
+function setMode(m){
+  chatMode=m;const bar=$('modebar');
+  if(m){$('modeText').textContent=m==='solve'?(t('modeSolve')+' · '+(t('subjects').find(x=>x[0]===solveSubj)||[])[2]+' · '+t('sLevels')[solveLevel]):m==='talk-en'?t('modeEn'):t('modeAr');$('modeEnd').textContent=t('endMode');bar.classList.add('on');}
+  else bar.classList.remove('on');
+}
+$('modeEnd').onclick=()=>setMode(null);
+
+/* ---------- home feature cards ---------- */
+function renderFeat(){
+  const box=$('feat');box.innerHTML='';
+  const acts=[()=>goTab('quran'),()=>goTab('hadith'),()=>{setPack('ar');goTab('learn');},()=>{setPack('en');goTab('learn');}];
+  const bgs=['linear-gradient(135deg,#1a8a70,#0f5c4a)','linear-gradient(135deg,#c8a24a,#a07c2c)','linear-gradient(135deg,#17826a,#0b4a3c)','linear-gradient(135deg,#3d6fd8,#2a4fa8)'];
+  t('feat').forEach(([ic,ti,su],i)=>{const b=document.createElement('button');
+    b.innerHTML=`<span class="fi" style="background:${bgs[i]};color:#fff;font-family:${i===2?'Amiri,serif':i===3?'Fraunces,serif':'inherit'}">${ic}</span><span><b>${ti}</b><small>${su}</small></span>`;
+    b.onclick=acts[i];box.appendChild(b);});
+  {const sb=document.createElement('button');sb.className='wide';const sj=t('subjects');
+   sb.innerHTML=`<span class="fi" style="background:linear-gradient(135deg,#3d6fd8,#2a4fa8);color:#fff">∑</span><span><b>${t('sTitle')}</b><small>${t('sSub')}</small></span>`;
+   sb.onclick=()=>goTab('solve');box.appendChild(sb);}
+  const [ic,ti,su]=t('fDesign');const d=document.createElement('button');d.className='wide';
+  d.innerHTML=`<span class="fi" style="background:linear-gradient(135deg,#e2c069,#b8862f);color:#fff">${ic}</span><span><b>${ti}</b><small>${su}</small></span>`;
+  d.onclick=()=>goTab('design');box.appendChild(d);
+}
+
+/* ---------- learning tab ---------- */
+let pack='ar',sub='abc';
+try{pack=localStorage.getItem('lumina-pack')||'ar'}catch(e){}
+const SUBS={ar:[['abc','tAbc'],['words','tWords'],['phrases','tPhrases'],['lessons','tLessons'],['quiz','tQuiz'],['talk','tTalk']],
+            en:[['words','tWords'],['phrases','tPhrases'],['lessons','tLessons'],['quiz','tQuiz'],['talk','tTalk']]};
+function setPack(p){pack=p;try{localStorage.setItem('lumina-pack',p)}catch(e){}
+  if(!SUBS[p].some(x=>x[0]===sub)) sub=SUBS[p][0][0];
+  cat=null;sc=0;tot=0;$('sc').textContent=0;$('tot').textContent=0;renderLearn();newQ();}
+document.querySelectorAll('.lsw button').forEach(b=>b.onclick=()=>setPack(b.dataset.p));
+function renderLearn(){
+  document.querySelectorAll('.lsw button').forEach(b=>b.classList.toggle('on',b.dataset.p===pack));
+  const st=$('lsub');st.innerHTML='';
+  SUBS[pack].forEach(([k,lbl])=>{const b=document.createElement('button');b.textContent=t(lbl);b.className=k===sub?'on':'';b.onclick=()=>{sub=k;renderLearn();};st.appendChild(b);});
+  document.querySelectorAll('#v-learn .sub').forEach(v=>v.classList.toggle('on',v.id==='s-'+sub));
+  renderVocab();renderPhrases();renderLessons();renderTalk();
+  $('qt').textContent=pack==='en'?t('qtEn'):t('qtAr');renderOpts();
+}
+
+/* letters */
+const grid=$('grid'),detail=$('detail');let sel=null;
+ABC.forEach((a,i)=>{const d=document.createElement('button');d.className='letter';
+  d.innerHTML=`<div class="ch">${a[0]}</div><div class="nm">${a[2]}</div>`;
+  d.onclick=()=>{sel=i;document.querySelectorAll('.letter').forEach((x,j)=>x.classList.toggle('on',j===i));showLetter(i,true);};grid.appendChild(d);});
+function showLetter(i,scroll){
+  const [c,en,bn,snd]=ABC[i],Z='‍',nj=NOJOIN.has(c);
+  const forms=[[c,t('isolated')],[nj?c:c+Z,t('initial')],[nj?Z+c:Z+c+Z,t('medial')],[Z+c,t('final')]];
+  detail.innerHTML=`<div style="display:flex;align-items:center;gap:16px"><div style="font-family:Amiri,serif;font-size:64px;line-height:1;color:var(--green)">${c}</div>
+    <div><div style="font-size:21px;font-weight:700">${L==='en'?en:bn}</div><div style="color:var(--soft)">${L==='en'?bn:snd}</div></div></div>
+    <div class="forms">${forms.map(f=>`<div><div class="f">${f[0]}</div><small>${f[1]}</small></div>`).join('')}</div>`;
+  const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;flex-wrap:wrap;align-items:center';
+  const lb=listenBtn(c);lb.style.marginTop='0';row.appendChild(lb);
+  const a=document.createElement('button');a.className='chip';a.textContent=t('askAbout');
+  a.onclick=()=>ask(L==='en'?`How do I pronounce the Arabic letter ${c} (${en})? Give me a couple of easy example words.`:L==='ar'?`كيف أنطق حرف ${c}؟ أعطني كلمتين سهلتين.`:`আরবি হরফ ${c} (${bn}) ঠিকভাবে কীভাবে উচ্চারণ করব? দুই-একটা সহজ শব্দ দিয়ে দেখাও।`);
+  row.appendChild(a);detail.appendChild(row);detail.classList.add('on');
+  if(scroll)detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* words */
+let cat=null;
+function renderVocab(){
+  const W=pack==='en'?EN_WORDS:VOCAB; if(!cat||!W[cat]) cat=Object.keys(W)[0];
+  const cats=$('cats');cats.innerHTML='';
+  Object.keys(W).forEach(k=>{const b=document.createElement('button');b.className='chip'+(k===cat?' on':'');
+    b.textContent=pack==='en'?(L==='en'?EN_CAT[k][0]:L==='ar'?EN_CAT[k][1]:k):(L==='en'?CAT_EN[k]:L==='ar'?CAT_AR[k]:k);
+    b.onclick=()=>{cat=k;renderVocab();};cats.appendChild(b);});
+  const vg=$('vgrid');vg.innerHTML='';
+  W[cat].forEach(w=>{const c=document.createElement('div');c.className='card';
+    if(pack==='en'){const [en,pr,bn,ex]=w;
+      c.innerHTML=`<div class="in"><div class="face front"><div class="w en">${en}</div><div class="t">${pr}</div></div><div class="face back"><div class="bn">${bn}</div><div class="ex">${esc(ex)}</div></div></div>`;
+      c.querySelector('.front').appendChild(listenBtn(en,'en'));}
+    else{const [ar,bn,en,tr]=w;
+      c.innerHTML=`<div class="in"><div class="face front"><div class="w">${ar}</div><div class="t">${tr}</div></div><div class="face back"><div class="bn">${L==='en'?en:bn}</div><div class="en">${L==='en'?bn:en}</div></div></div>`;
+      c.querySelector('.front').appendChild(listenBtn(ar,'ar'));}
+    c.onclick=()=>c.classList.toggle('flip');vg.appendChild(c);});
+}
+
+/* phrases */
+function renderPhrases(){
+  const box=$('plist');box.innerHTML='';
+  (pack==='en'?EN_PHRASES:AR_PHRASES).forEach(([tx,pr,mn])=>{
+    const r=document.createElement('div');r.className='prow';
+    r.innerHTML=`<div class="pt"><div class="tx1 ${pack==='ar'?'ar':''}"></div><div class="pr"></div><div class="mn"></div></div>`;
+    r.querySelector('.tx1').textContent=tx;r.querySelector('.pr').textContent=pr;r.querySelector('.mn').textContent=mn;
+    if(canSpeak()){const b=document.createElement('button');b.className='sp';b.textContent='🔊';b.onclick=()=>speak(tx.replace(' / ',' ، '),pack);r.appendChild(b);}
+    box.appendChild(r);});
+}
+
+/* lessons */
+function renderLessons(){
+  const box=$('lgrid');box.innerHTML='';
+  (pack==='en'?EN_LESSONS:AR_LESSONS).forEach(([ti,su,topic],i)=>{
+    const b=document.createElement('button');b.className='lcard';
+    b.innerHTML=`<span class="no">${num(i+1)}</span><b></b><small></small>`;b.querySelector('b').textContent=ti;b.querySelector('small').textContent=su;
+    b.onclick=()=>{setMode(null);ask(pack==='en'
+      ?(L==='en'?`Teach me ${topic} step by step with simple examples, then give me 3 practice questions.`:`আমাকে ইংরেজির "${ti}" (${topic}) ধাপে ধাপে বাংলায় শেখাও, সহজ উদাহরণ দাও, শেষে ৩টা অনুশীলনের প্রশ্ন দাও।`)
+      :(L==='en'?`Teach me ${topic} in Arabic step by step with examples (with harakat), then give me 3 practice questions.`:`আমাকে আরবির "${ti}" (${topic}) ধাপে ধাপে বাংলায় শেখাও, হারাকাতসহ উদাহরণ দাও, শেষে ৩টা অনুশীলনের প্রশ্ন দাও।`));};
+    box.appendChild(b);});
+}
+
+/* talk practice */
+function renderTalk(){
+  $('talkIcon').textContent=pack==='en'?'Aa':'ع';$('talkIcon').style.fontFamily=pack==='en'?'Fraunces,serif':'Amiri,serif';
+  $('talkIcon').style.background=pack==='en'?'linear-gradient(135deg,#3d6fd8,#2a4fa8)':'';
+  $('talkTitle').textContent=pack==='en'?t('talkTitleEn'):t('talkTitleAr');
+  $('talkDesc').textContent=pack==='en'?t('talkDescEn'):t('talkDescAr');
+  const lv=$('levels');lv.innerHTML='';
+  t('levels').forEach((x,i)=>{const b=document.createElement('button');b.className='chip'+(i===talkLevel?' on':'');b.textContent=x;b.onclick=()=>{talkLevel=i;renderTalk();};lv.appendChild(b);});
+  $('talkGo').textContent=t('talkGo');
+}
+$('talkGo').onclick=()=>{
+  history=[];thread.innerHTML='';
+  setMode(pack==='en'?'talk-en':'talk-ar');
+  ask(pack==='en'?"Hi Lumina! Let's practice English. Please start the conversation.":"السَّلَامُ عَلَيْكُمْ! চলো আরবিতে কথা বলা অনুশীলন করি। তুমি শুরু করো।");
+};
+
+/* quiz */
+let qItem=null,qOpts=[],sc=0,tot=0,answered=false;
+const quizPool=()=>pack==='en'?Object.values(EN_WORDS).flat().map(w=>({q:w[0],a:w[2],a2:w[2]})):ALLV.map(w=>({q:w[0],a:w[1],a2:w[2]}));
+function newQ(){answered=false;$('qnext').style.display='none';$('fb').textContent='';
+  const P=quizPool();qItem=P[Math.floor(Math.random()*P.length)];
+  qOpts=[qItem,...P.filter(v=>v.q!==qItem.q&&v.a!==qItem.a).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+  $('q').textContent=qItem.q;$('q').className='q'+(pack==='en'?' en':'');renderOpts();}
+function renderOpts(){if(!qItem)return;const o=$('opts');o.innerHTML='';
+  qOpts.forEach(v=>{const b=document.createElement('button');b.className='opt';b.textContent=(L==='en'&&pack==='ar')?v.a2:v.a;
+    b.onclick=()=>{if(answered)return;answered=true;tot++;const fb=$('fb');
+      if(v===qItem){sc++;b.classList.add('ok');const g=t('good');fb.textContent=g[Math.floor(Math.random()*g.length)];fb.style.color='var(--green)';}
+      else{b.classList.add('bad');o.children[qOpts.indexOf(qItem)].classList.add('ok');fb.textContent=t('bad');fb.style.color='var(--rose)';}
+      if(canSpeak()) speak(qItem.q,pack);
+      $('sc').textContent=sc;$('tot').textContent=tot;$('qnext').style.display='inline-block';};
+    o.appendChild(b);});}
+$('qnext').onclick=newQ;
+
+/* ================= DESIGN STUDIO ================= */
+const D_SIZES=[[1080,1080],[1080,1920],[1640,624],[1240,1754],[1280,720]];
+const D_TPLS=['islamic','eid','event','quote','notice','photo'];
+const D_PAL=[
+ {bg1:'#1a8a70',bg2:'#0a3f33',acc:'#e9c96f',tx:'#ffffff',soft:'rgba(255,255,255,.82)'},
+ {bg1:'#2b3a78',bg2:'#0c1230',acc:'#f2c66d',tx:'#ffffff',soft:'rgba(255,255,255,.8)'},
+ {bg1:'#8f2741',bg2:'#3a0b18',acc:'#f1cd8c',tx:'#ffffff',soft:'rgba(255,255,255,.82)'},
+ {bg1:'#2c2c2c',bg2:'#090909',acc:'#d8b14a',tx:'#ffffff',soft:'rgba(255,255,255,.78)'},
+ {bg1:'#fbf6ea',bg2:'#eadfc6',acc:'#0f5c4a',tx:'#1b2824',soft:'#55635e'},
+ {bg1:'#ffffff',bg2:'#e8f1fb',acc:'#2a5bd7',tx:'#152238',soft:'#55627a'}];
+const dState={tpl:'islamic',size:0,pal:0,photo:null};
+const dc=$('dCanvas'),dctx=dc.getContext('2d');
+let fontsReady=false;
+async function ensureFonts(){ if(fontsReady) return;
+  try{await Promise.all(['700 40px "Hind Siliguri"','500 40px "Hind Siliguri"','400 40px "Amiri"','700 40px "Amiri"','600 40px "Fraunces"'].map(f=>document.fonts.load(f,'আA'+'ع')));}catch(e){}
+  fontsReady=true; }
+const BN="'Hind Siliguri','Fraunces',sans-serif", AR="'Amiri',serif";
+function wrap(ctx,text,maxW){
+  const out=[]; String(text||'').split('\n').forEach(par=>{
+    const words=par.split(/\s+/).filter(Boolean); let line='';
+    words.forEach(w=>{const test=line?line+' '+w:w; if(ctx.measureText(test).width>maxW&&line){out.push(line);line=w;}else line=test;});
+    if(line) out.push(line);});
+  return out;
+}
+/* draws a vertical stack of text blocks, shrinking until it fits the box */
+function stack(ctx,items,box,align){
+  items=items.filter(it=>it.text&&String(it.text).trim());
+  let sc=1,lay;
+  for(;sc>0.35;sc-=0.04){
+    let h=0; lay=items.map(it=>{const size=it.size*sc*(box.k||1);ctx.font=`${it.w||400} ${size}px ${it.f||BN}`;
+      const lines=it.noWrap?[it.text]:wrap(ctx,it.text,box.w*(it.wf||1));const lh=size*(it.lh||1.35);
+      const blockH=lines.length*lh;const gap=(it.gap||0)*sc*(box.k||1);h+=blockH+gap;return {it,size,lines,lh,gap,blockH};});
+    if(h<=box.h){lay.total=h;break;}
+    lay.total=h;
+  }
+  let y=box.y+(box.valign==='top'?0:box.valign==='bottom'?box.h-lay.total:(box.h-lay.total)/2);
+  lay.forEach(({it,size,lines,lh,gap})=>{
+    ctx.font=`${it.w||400} ${size}px ${it.f||BN}`;ctx.fillStyle=it.c;ctx.textBaseline='middle';
+    const al=it.align||align;ctx.textAlign=al;ctx.direction=it.rtl?'rtl':'ltr';
+    const x=al==='center'?box.x+box.w/2:al==='right'?box.x+box.w:box.x;
+    if(it.before) it.before(ctx,x,y,size);
+    lines.forEach(l=>{ if(it.pill){const tw=ctx.measureText(l).width,ph=size*1.7,pw=tw+size*1.6;const px=al==='center'?x-pw/2:al==='right'?x-pw:x;
+        ctx.save();ctx.fillStyle=it.pill;roundRect(ctx,px,y,pw,ph,ph/2);ctx.fill();ctx.restore();ctx.fillStyle=it.c;ctx.fillText(l,al==='center'?x:al==='right'?x-size*.8:x+size*.8,y+ph/2);y+=ph;}
+      else{ctx.fillText(l,x,y+lh/2);y+=lh;} });
+    if(it.after) it.after(ctx,x,y,size);
+    y+=gap;});
+  ctx.direction='ltr';
+  return y;
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function star8(ctx,cx,cy,r){ctx.beginPath();for(let k=0;k<2;k++){ctx.save();ctx.translate(cx,cy);ctx.rotate(k*Math.PI/4);ctx.rect(-r,-r,2*r,2*r);ctx.restore();}}
+function pattern(ctx,W,H,col,alpha,step){ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=Math.max(1,step/45);
+  for(let y=0;y<H+step;y+=step)for(let x=((y/step)%2?step/2:0);x<W+step;x+=step){star8(ctx,x,y,step*.22);ctx.stroke();ctx.beginPath();ctx.arc(x,y,step*.08,0,7);ctx.stroke();}
+  ctx.restore();}
+function bgGrad(ctx,W,H,p,radial){let g;
+  if(radial){g=ctx.createRadialGradient(W/2,H*.3,0,W/2,H*.3,Math.max(W,H)*.85);}else g=ctx.createLinearGradient(0,0,W*.6,H);
+  g.addColorStop(0,p.bg1);g.addColorStop(1,p.bg2);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+function seeded(n){let x=n;return()=>{x=(x*9301+49297)%233280;return x/233280;};}
+function crescent(ctx,cx,cy,r,col){const o=document.createElement('canvas');o.width=o.height=Math.ceil(r*2+4);const x=o.getContext('2d');x.fillStyle=col;x.beginPath();x.arc(r+2,r+2,r,0,7);x.fill();x.globalCompositeOperation='destination-out';x.beginPath();x.arc(r+2+r*.42,r+2-r*.22,r*.86,0,7);x.fill();ctx.save();ctx.shadowColor=col;ctx.shadowBlur=r*.35;ctx.drawImage(o,cx-r-2,cy-r-2);ctx.restore();}
+function divider(ctx,x,y,w,col){ctx.save();ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=Math.max(2,w/200);ctx.beginPath();ctx.moveTo(x-w/2,y);ctx.lineTo(x-w*.08,y);ctx.moveTo(x+w*.08,y);ctx.lineTo(x+w/2,y);ctx.stroke();
+  ctx.translate(x,y);ctx.rotate(Math.PI/4);const r=w*.03;ctx.fillRect(-r,-r,2*r,2*r);ctx.restore();}
+
+function dContent(){return {ar:$('fAr').value.trim(),title:$('fTitle').value.trim(),sub:$('fSub').value.trim(),body:$('fBody').value.trim(),foot:$('fFoot').value.trim()};}
+
+async function drawDesign(){
+  await ensureFonts();
+  const [W,H]=D_SIZES[dState.size];dc.width=W;dc.height=H;
+  const ctx=dctx,p=(dState.tpl==='photo'&&!dState.photo&&dState.pal>=4)?D_PAL[0]:D_PAL[dState.pal],c=dContent(),u=Math.min(W,H)/1080,wide=W/H>1.6,tall=H/W>1.3;
+  ctx.clearRect(0,0,W,H);ctx.textAlign='center';
+  const pad=Math.min(W,H)*.09;
+  const T=dState.tpl;const K=wide?H/624:H/W>1.6?1.65:tall?1.3:W/1080;
+  const stackK=(ctx,items,box,al)=>stack(ctx,items,Object.assign({k:K},box),al);
+  if(T==='islamic'){
+    bgGrad(ctx,W,H,p);pattern(ctx,W,H,p.acc,.1,180*u);
+    const g=ctx.createRadialGradient(W/2,H*.35,0,W/2,H*.35,Math.max(W,H)*.6);g.addColorStop(0,'rgba(255,240,200,.18)');g.addColorStop(1,'rgba(255,240,200,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle=p.acc;ctx.lineWidth=4*u;roundRect(ctx,pad*.45,pad*.45,W-pad*.9,H-pad*.9,24*u);ctx.stroke();
+    ctx.globalAlpha=.5;ctx.lineWidth=1.5*u;roundRect(ctx,pad*.6,pad*.6,W-pad*1.2,H-pad*1.2,18*u);ctx.stroke();ctx.globalAlpha=1;
+    [[pad*.45,pad*.45],[W-pad*.45,pad*.45],[pad*.45,H-pad*.45],[W-pad*.45,H-pad*.45]].forEach(([x,y])=>{ctx.fillStyle=p.bg2;ctx.strokeStyle=p.acc;ctx.lineWidth=3*u;star8(ctx,x,y,16*u);ctx.fill();ctx.stroke();});
+    const box={x:pad*1.2,y:pad*1.1,w:W-pad*2.4,h:H-pad*2.2,valign:'center'};
+    stackK(ctx,[
+      {text:'✦',size:wide?50:70,c:p.acc,gap:10,noWrap:true},
+      {text:c.ar,f:AR,w:700,size:wide?90:120,c:p.acc,lh:1.5,gap:14,rtl:true},
+      {text:c.ar?'—':'',size:30,c:p.acc,gap:12,noWrap:true},
+      {text:c.title,w:700,size:wide?84:104,c:p.tx,lh:1.25,gap:16},
+      {text:c.sub,w:500,size:wide?40:48,c:p.soft,gap:28},
+      {text:c.body,w:400,size:wide?32:40,c:p.tx,lh:1.5,gap:34},
+      {text:c.foot,w:600,size:30,c:p.bg2,pill:p.acc,gap:0,noWrap:true}],box,'center');
+  }
+  else if(T==='eid'){
+    bgGrad(ctx,W,H,p,true);
+    const rnd=seeded(7);ctx.fillStyle=p.acc;
+    for(let i=0;i<110;i++){const x=rnd()*W,y=rnd()*H,r=(rnd()*2.2+.6)*u;ctx.globalAlpha=.25+rnd()*.6;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
+    ctx.globalAlpha=1;
+    crescent(ctx,W*(wide?.86:.78),H*(tall?.1:.17),Math.min(W,H)*.11,p.acc);
+    const lanterns=wide?[.1,.2]:[.14,.3];
+    lanterns.forEach((lx,i)=>{const x=W*lx,len=H*(.1+i*.07),s=Math.min(W,H)*.045;ctx.strokeStyle=p.acc;ctx.lineWidth=2*u;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,len);ctx.stroke();
+      ctx.fillStyle=p.acc;ctx.beginPath();ctx.moveTo(x-s*.5,len);ctx.lineTo(x+s*.5,len);ctx.lineTo(x+s*.75,len+s*.4);ctx.lineTo(x+s*.6,len+s*1.6);ctx.lineTo(x-s*.6,len+s*1.6);ctx.lineTo(x-s*.75,len+s*.4);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(255,236,170,.9)';ctx.fillRect(x-s*.32,len+s*.55,s*.64,s*.8);ctx.fillStyle=p.acc;ctx.beginPath();ctx.moveTo(x-s*.4,len+s*1.6);ctx.lineTo(x+s*.4,len+s*1.6);ctx.lineTo(x,len+s*2.1);ctx.fill();});
+    const box={x:pad,y:H*(tall?.22:.2),w:W-pad*2,h:H*(tall?.68:.72),valign:'center'};
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?96:130,c:p.acc,lh:1.45,gap:12,rtl:true},
+      {text:c.title,w:700,size:wide?80:100,c:p.tx,gap:14},
+      {text:c.sub,w:500,size:wide?38:46,c:p.soft,gap:24,after:(ctx,x,y,sz)=>divider(ctx,x,y+6*u,Math.min(W,H)*.4,p.acc)},
+      {text:c.body,w:400,size:wide?32:40,c:p.tx,lh:1.5,gap:30},
+      {text:c.foot,w:600,size:32,c:p.acc,gap:0}],box,'center');
+  }
+  else if(T==='event'){
+    bgGrad(ctx,W,H,p);pattern(ctx,W,H,p.acc,.06,220*u);
+    ctx.fillStyle=p.acc;ctx.globalAlpha=.95;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(W*(wide?.06:.1),0);ctx.lineTo(0,H*(wide?.35:.22));ctx.fill();
+    ctx.beginPath();ctx.moveTo(W,H);ctx.lineTo(W*(wide?.9:.78),H);ctx.lineTo(W,H*(wide?.55:.8));ctx.fill();ctx.globalAlpha=1;
+    const fb=c.foot?H*(wide?.16:.1):0;
+    if(c.foot){ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(0,H-fb,W,fb);}
+    const box={x:pad,y:pad,w:W-pad*2,h:H-pad*2-fb,valign:'center'};
+    const bodyT=c.body.split('\n').filter(Boolean).map(l=>'●  '+l).join('\n');
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?60:76,c:p.acc,gap:10,rtl:true,align:'left'},
+      {text:c.sub?c.sub.toUpperCase():'',w:600,size:wide?34:40,c:p.acc,gap:12},
+      {text:c.title,w:700,size:wide?96:124,c:p.tx,lh:1.15,gap:26,after:(ctx,x,y,sz)=>{ctx.fillStyle=p.acc;ctx.fillRect(x,y-4*u,130*u,8*u);}},
+      {text:bodyT,w:500,size:wide?34:42,c:p.tx,lh:1.55,gap:0}],box,'left');
+    if(c.foot){ctx.font=`600 ${Math.min(36*K,fb*.36)}px ${BN}`;ctx.fillStyle=p.tx;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(c.foot,W/2,H-fb/2,W-pad*2);}
+  }
+  else if(T==='quote'){
+    bgGrad(ctx,W,H,p);
+    ctx.fillStyle=p.acc;ctx.globalAlpha=.18;ctx.font=`700 ${Math.min(W,H)*.6}px Fraunces,serif`;ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('“',pad*.4,-pad*.6);ctx.globalAlpha=1;
+    ctx.fillStyle=p.acc;ctx.fillRect(pad,H-pad*.9,W-pad*2,3*u);
+    const box={x:pad*1.1,y:pad,w:W-pad*2.2,h:H-pad*2.2,valign:'center'};
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:400,size:wide?64:84,c:p.acc,lh:1.6,gap:22,rtl:true},
+      {text:c.title,w:600,size:wide?66:90,c:p.tx,lh:1.45,gap:30},
+      {text:c.sub?'— '+c.sub:'',w:500,size:wide?34:42,c:p.acc,gap:18},
+      {text:c.body,w:400,size:wide?28:34,c:p.soft,lh:1.5,gap:0}],box,'center');
+    if(c.foot){ctx.font=`600 ${30*K}px ${BN}`;ctx.fillStyle=p.soft;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(c.foot,W/2,H-pad*.45);}
+  }
+  else if(T==='notice'){
+    bgGrad(ctx,W,H,p);pattern(ctx,W,H,p.acc,.07,200*u);
+    const m=pad*.6,cx=m,cy=m,cw=W-m*2,ch=H-m*2;
+    ctx.save();ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=40*u;ctx.fillStyle='#ffffff';roundRect(ctx,cx,cy,cw,ch,30*u);ctx.fill();ctx.restore();
+    const hh=ch*(wide?.36:.26);ctx.save();roundRect(ctx,cx,cy,cw,ch,30*u);ctx.clip();
+    const g=ctx.createLinearGradient(cx,cy,cx+cw,cy+hh);g.addColorStop(0,p.bg1===`#ffffff`||p.bg1==='#fbf6ea'?'#17826a':p.bg1);g.addColorStop(1,p.bg2==='#e8f1fb'||p.bg2==='#eadfc6'?'#0f5c4a':p.bg2);ctx.fillStyle=g;ctx.fillRect(cx,cy,cw,hh);
+    ctx.fillStyle=p.acc==='#0f5c4a'||p.acc==='#2a5bd7'?'#e9c96f':p.acc;ctx.fillRect(cx,cy+hh,cw,8*u);ctx.restore();
+    const ip=pad*.6;
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?50:64,c:'#f6e2a2',gap:6,rtl:true},
+      {text:c.title,w:700,size:wide?72:88,c:'#ffffff',lh:1.2,gap:8},
+      {text:c.sub,w:500,size:wide?32:40,c:'rgba(255,255,255,.85)',gap:0}],{x:cx+ip,y:cy+ip*.6,w:cw-ip*2,h:hh-ip*1.2,valign:'center'},'center');
+    const fb=c.foot?ch*.11:0;
+    const bodyT=c.body.split('\n').filter(Boolean).map(l=>'✔  '+l).join('\n');
+    stackK(ctx,[{text:bodyT,w:500,size:wide?40:58,c:'#1b2824',lh:1.6,gap:0}],{x:cx+ip,y:cy+hh+ip,w:cw-ip*2,h:ch-hh-ip*2-fb,valign:'center'},'left');
+    if(c.foot){ctx.fillStyle='#f1efe8';ctx.fillRect(cx+ip,cy+ch-fb-ip*.5,cw-ip*2,2*u);ctx.font=`600 ${Math.min(34*K,fb*.4)}px ${BN}`;ctx.fillStyle='#0f5c4a';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(c.foot,W/2,cy+ch-fb/2-ip*.25,cw-ip*2);}
+  }
+  else if(T==='photo'){
+    if(dState.photo){const im=dState.photo,r=Math.max(W/im.width,H/im.height),iw=im.width*r,ih=im.height*r;ctx.drawImage(im,(W-iw)/2,(H-ih)/2,iw,ih);}
+    else{bgGrad(ctx,W,H,p);pattern(ctx,W,H,p.acc,.1,160*u);}
+    const g=ctx.createLinearGradient(0,H*.25,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.82)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=p.acc;ctx.fillRect(pad,H-pad*.55,W*.18,6*u);
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?60:80,c:p.acc==='#0f5c4a'||p.acc==='#2a5bd7'?'#f6e2a2':p.acc,gap:8,rtl:true,align:'left'},
+      {text:c.title,w:700,size:wide?84:104,c:'#ffffff',lh:1.15,gap:12},
+      {text:c.sub,w:500,size:wide?36:44,c:'rgba(255,255,255,.88)',gap:16},
+      {text:c.body,w:400,size:wide?30:36,c:'rgba(255,255,255,.85)',lh:1.5,gap:16},
+      {text:c.foot,w:600,size:30,c:p.acc==='#0f5c4a'||p.acc==='#2a5bd7'?'#f6e2a2':p.acc,gap:0}],{x:pad,y:H*.35,w:W-pad*2,h:H*.65-pad*.9,valign:'bottom'},'left');
+  }
+}
+let dTimer=null;const redraw=()=>{clearTimeout(dTimer);dTimer=setTimeout(drawDesign,80);};
+['fAr','fTitle','fSub','fBody','fFoot'].forEach(id=>$(id).addEventListener('input',redraw));
+function renderDesignUI(){
+  $('dPrompt').placeholder=t('dPh');
+  const id=$('dIdeas');id.innerHTML='';t('dIdeas').forEach(x=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=x;b.onclick=()=>{$('dPrompt').value=x;makeDesign();};id.appendChild(b);});
+  const tp=$('dTpls');tp.innerHTML='';t('tpls').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(D_TPLS[i]===dState.tpl?' on':'');b.textContent=x;b.onclick=()=>{dState.tpl=D_TPLS[i];renderDesignUI();drawDesign();};tp.appendChild(b);});
+  const sz=$('dSizes');sz.innerHTML='';t('sizes').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===dState.size?' on':'');b.textContent=x;b.onclick=()=>{dState.size=i;renderDesignUI();drawDesign();};sz.appendChild(b);});
+  const co=$('dColors');co.innerHTML='';D_PAL.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.className='sw'+(i===dState.pal?' on':'');b.style.background=`linear-gradient(135deg,${p.bg1} 0 55%,${p.acc} 55%)`;b.onclick=()=>{dState.pal=i;renderDesignUI();drawDesign();};co.appendChild(b);});
+}
+function fillDefaults(){ if($('fTitle').value) return; $('fAr').value=t('defAr');$('fTitle').value=t('defTitle');$('fSub').value=t('defSub');$('fBody').value=t('defBody');$('fFoot').value=t('defFoot'); }
+$('fPhoto').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{dState.photo=im;dState.tpl='photo';$('fPhotoX').style.display='';renderDesignUI();drawDesign();};im.src=r.result;};r.readAsDataURL(f);});
+$('fPhotoX').onclick=()=>{dState.photo=null;$('fPhoto').value='';$('fPhotoX').style.display='none';drawDesign();};
+
+/* Lumina designs it */
+const DESIGN_SYS=`You design social posts, posters and banners for Lumina's design tool. Return ONLY a JSON object, no other text:
+{"template":"islamic|eid|event|quote|notice|photo","palette":0-5,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
+Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo.
+Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue.
+Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 poster, 4 YouTube thumbnail. Pick from the request words (ব্যানার/banner→2, পোস্টার/poster→3, স্টোরি/status→1, থাম্বনেইল→4).
+Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
+Arabic line: optional, with full harakat. Only use well-known phrases (e.g. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ, جُمُعَةٌ مُبَارَكَةٌ, عِيدٌ مُبَارَكٌ, رَمَضَانُ كَرِيمٌ, اَلْحَمْدُ لِلَّهِ) or a Quran ayah you fetched with get_quran_verses (copy its Arabic exactly; then put the reference like (সূরা আল-বাকারা ২:১৫৩) in the subtitle). Never write an ayah or hadith from memory. Leave "" if not fitting.`;
+function parseJSON(txt){const m=String(txt||'').match(/\{[\s\S]*\}/);if(!m)throw new Error('no json');
+  try{return JSON.parse(m[0]);}catch(e){let out='',inS=false,esc=false;for(const ch of m[0]){
+    if(inS){if(esc){esc=false;out+=ch;continue;}if(ch==='\\'){esc=true;out+=ch;continue;}if(ch==='"'){inS=false;out+=ch;continue;}if(ch==='\n'){out+='\\n';continue;}if(ch==='\r')continue;out+=ch;}
+    else{if(ch==='"')inS=true;out+=ch;}}return JSON.parse(out);}}
+async function makeDesign(){
+  const q=$('dPrompt').value.trim();if(!q)return;
+  if(left('design')<=0){$('dStatus').textContent=limitText('design');openPlans();return;}
+  const st=$('dStatus');st.textContent=t('dMaking');$('dGo').disabled=true;
+  try{
+    let d;
+    if(window.claude){
+      if(!sample) throw new Error('unavailable');
+      const input=[{role:'user',content:DESIGN_SYS+"\n\nRequest: "+q}];
+      const r=await sample(input,{cache:false,tools:TOOLS.filter(x=>x.name==='get_quran_verses')});d=parseJSON(r.text);
+    }else{
+      const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({task:'design',messages:[{role:'user',content:q}]})});
+      if(res.status===429){const j=await res.json().catch(()=>({}));if(j.error==='limit'){applyServerUsage(j.usage);$('dStatus').textContent=limitText('design');openPlans();return;}}
+      if(!res.ok) throw new Error('http');const jj=await res.json();applyServerUsage(jj.usage);d=parseJSON(jj.text);
+    }
+    const ti=D_TPLS.indexOf(d.template);if(ti>=0&&!(d.template==='photo'&&!dState.photo))dState.tpl=d.template;
+    if(Number.isInteger(+d.palette)&&D_PAL[+d.palette])dState.pal=+d.palette;
+    if(Number.isInteger(+d.size)&&D_SIZES[+d.size])dState.size=+d.size;
+    $('fAr').value=d.arabic||'';$('fTitle').value=d.title||'';$('fSub').value=d.subtitle||'';$('fBody').value=(d.body||'').replace(/\\n/g,'\n');$('fFoot').value=d.footer||'';
+    useLocal('design',1);
+    renderDesignUI();await drawDesign();st.textContent=t('dDone');
+    $('dCanvas').scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(e){st.textContent=t('dFail');}
+  finally{$('dGo').disabled=false;}
+}
+$('dForm').addEventListener('submit',e=>{e.preventDefault();makeDesign();});
+$('dPrompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!('ontouchstart' in window)){e.preventDefault();makeDesign();}});
+
+/* save */
+let downloads=null;
+if(window.claude)(async()=>{try{downloads=await window.claude.use('downloads')}catch(e){downloads=null}})();
+$('dSave').onclick=async()=>{
+  await drawDesign();
+  const blob=await new Promise(r=>dc.toBlob(r,'image/png'));
+  const name=('lumina-'+($('fTitle').value||'design').replace(/[^\p{L}\p{N}]+/gu,'-').slice(0,40)+'.png');
+  if(window.claude){
+    if(downloads){try{await downloads.save({filename:name,data:blob});$('dStatus').textContent=t('dSaved');return;}catch(e){if(e&&e.code==='declined')return;}}
+    $('dImg').src=dc.toDataURL('image/png');$('dModal').classList.add('on');return;
+  }
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+  if(/iPhone|iPad|Android/i.test(navigator.userAgent)){$('dImg').src=dc.toDataURL('image/png');$('dModal').classList.add('on');}
+};
+$('dClose').onclick=()=>$('dModal').classList.remove('on');
+document.querySelector('.tabs button[data-v="design"]').addEventListener('click',()=>{fillDefaults();drawDesign();});
+
+loadLocal();applyLang();newQ();syncUsage();
+</script>
+</body>
+</html>

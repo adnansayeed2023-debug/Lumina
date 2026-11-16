@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lumina · অ্যাডমিন প্যানেল</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#14211d;--soft:#6b7672;--line:#ece8df;--green:#0f5c4a;--mint:#e5f1ec;--rose:#b4544a;--gold:#c8a24a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hind Siliguri',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:22px;display:flex;align-items:center;gap:10px}
+h1 span{font-size:13px;font-weight:600;background:var(--mint);color:var(--green);padding:3px 10px;border-radius:999px}
+h2{font-size:17px;margin-bottom:10px}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-top:14px;box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 18px rgba(20,60,50,.05)}
+label{display:block;font-size:13px;font-weight:600;color:var(--soft);margin:10px 0 4px}
+input,select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;background:var(--bg);outline:none}
+input:focus,select:focus{border-color:var(--green)}
+.row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.row>*{flex:1;min-width:110px}
+button{border:0;background:var(--green);color:#fff;border-radius:999px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;margin-top:10px}
+button.ghost{background:var(--mint);color:var(--green)}
+button.del{background:#f8e5e1;color:var(--rose);padding:6px 12px;margin:0;font-size:13px}
+.out{margin-top:10px;font-size:14px;line-height:1.7;word-break:break-word}
+.out code,.code{background:var(--bg);border-radius:8px;padding:2px 8px;font-size:14px;user-select:all}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:start;vertical-align:top}
+.warn{background:#fff6e0;color:#6e531b;border-radius:14px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.6}
+.err{color:var(--rose)}.ok{color:var(--green)}
+.hide{display:none}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plans .card{margin-top:0;background:var(--bg);box-shadow:none}
+small{color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚙️ Lumina অ্যাডমিন প্যানেল <span id="who" class="hide"></span></h1>
+
+  <div class="card" id="loginCard">
+    <h2>লগইন</h2>
+    <label>অ্যাডমিন কী</label>
+    <input id="key" type="password" autocomplete="current-password">
+    <button id="loginBtn">লগইন</button>
+    <div class="out" id="loginOut"></div>
+  </div>
+
+  <div id="panel" class="hide">
+    <div class="warn hide" id="memWarn">⚠️ ডেটাবেস (Upstash Redis) যুক্ত করা নেই। কোড, প্ল্যান আর অ্যাডমিন সার্ভার রিস্টার্ট হলে মুছে যাবে। README-বাংলা.md দেখে Redis যুক্ত করো।</div>
+
+    <div class="card">
+      <h2>🎟️ অ্যাক্টিভেশন কোড বানাও</h2>
+      <div class="row">
+        <div><label>প্ল্যান</label><select id="cPlan"></select></div>
+        <div><label>কত দিন</label><input id="cDays" type="number" min="1" value="30"></div>
+        <div><label>কয়টা কোড</label><input id="cCount" type="number" min="1" max="50" value="1"></div>
+      </div>
+      <button id="cBtn">কোড বানাও</button>
+      <div class="out" id="cOut"></div>
+      <button class="ghost" id="lcBtn">আগের কোডগুলো দেখো</button>
+      <div class="out" id="lcOut"></div>
+    </div>
+
+    <div class="card">
+      <h2>👤 ব্যবহারকারীকে প্ল্যান দাও</h2>
+      <small>ব্যবহারকারী Lumina-র প্ল্যান পাতায় তার "আইডি" দেখতে পায়। সেটা এখানে বসাও।</small>
+      <label>ব্যবহারকারীর আইডি</label><input id="uId">
+      <div class="row">
+        <div><label>প্ল্যান</label><select id="uPlan"></select></div>
+        <div><label>কত দিন</label><input id="uDays" type="number" min="1" value="30"></div>
+      </div>
+      <button id="uBtn">প্ল্যান দাও</button> <button class="ghost" id="uLook">ব্যবহার দেখো</button>
+      <div class="out" id="uOut"></div>
+    </div>
+
+    <div id="superOnly" class="hide">
+      <div class="card">
+        <h2>🛡️ অ্যাডমিন (শুধু সুপার অ্যাডমিন)</h2>
+        <small>অ্যাডমিনরা কোড বানাতে আর প্ল্যান দিতে পারে, আর তাদের জন্য Lumina সীমাহীন।</small>
+        <div class="row"><div><label>নতুন অ্যাডমিনের নাম</label><input id="aName" placeholder="যেমন: রাফি"></div></div>
+        <button id="aBtn">অ্যাডমিন বানাও</button>
+        <div class="out" id="aOut"></div>
+        <div class="out" id="aList"></div>
+      </div>
+
+      <div class="card">
+        <h2>✏️ প্ল্যান, দাম আর সীমা বদলাও</h2>
+        <small>সীমা −1 দিলে সেটা সীমাহীন। দাম টাকায়।</small>
+        <div class="plans" id="sPlans"></div>
+        <div class="row">
+          <div><label>রিসেট হয় কত ঘণ্টা পর</label><input id="sWin" type="number" min="1" max="168"></div>
+          <div><label>এক কেনায় কত দিন</label><input id="sDays" type="number" min="1"></div>
+        </div>
+        <label>পেমেন্টের মাধ্যম</label><input id="sMethods">
+        <label>পেমেন্ট নম্বর</label><input id="sNumber">
+        <label>যোগাযোগ (WhatsApp/ইমেইল)</label><input id="sContact">
+        <button id="sBtn">সেভ করো</button>
+        <div class="out" id="sOut"></div>
+      </div>
+    </div>
+
+    <button class="ghost" id="outBtn">লগআউট</button>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let KEY='';try{KEY=sessionStorage.getItem('lumina-admin')||'';}catch(e){}
+let device='';try{device=localStorage.getItem('lumina-device')||'';}catch(e){}
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+async function call(body){
+  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-admin-key':KEY,...(device?{'x-lumina-device':device}:{})},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j;
+}
+const KIND={chat:'প্রশ্ন',upload:'ছবি/ফাইল',design:'ডিজাইন'};
+let CFG=null;
+function fillPlans(cfg){
+  const opts=Object.entries(cfg.plans).filter(([id])=>id!=='free').map(([id,p])=>`<option value="${id}">${esc(p.name)} (৳${p.price})</option>`).join('');
+  $('cPlan').innerHTML=opts;$('uPlan').innerHTML=opts+'<option value="free">Free (প্ল্যান বাতিল)</option>';
+  $('cDays').value=$('uDays').value=cfg.planDays;
+  $('sPlans').innerHTML=Object.entries(cfg.plans).map(([id,p])=>`<div class="card" data-id="${id}"><b>${id.toUpperCase()}</b>
+    <label>নাম</label><input data-f="name" value="${esc(p.name)}"><label>দাম (৳/মাস)</label><input data-f="price" type="number" min="0" value="${p.price}">
+    ${Object.keys(KIND).map(k=>`<label>${KIND[k]} / ${cfg.windowHours} ঘণ্টা</label><input data-l="${k}" type="number" min="-1" value="${p.limits[k]}">`).join('')}</div>`).join('');
+  $('sWin').value=cfg.windowHours;$('sDays').value=cfg.planDays;
+  $('sMethods').value=cfg.payment.methods||'';$('sNumber').value=cfg.payment.number||'';$('sContact').value=cfg.payment.contact||'';
+}
+async function enter(){
+  try{const j=await call({action:'whoami'});CFG=j.config;
+    $('loginCard').classList.add('hide');$('panel').classList.remove('hide');
+    $('who').textContent=j.role==='super'?'সুপার অ্যাডমিন':('অ্যাডমিন · '+j.name);$('who').classList.remove('hide');
+    $('memWarn').classList.toggle('hide',!!j.persistent);
+    $('superOnly').classList.toggle('hide',j.role!=='super');
+    fillPlans(CFG);if(j.role==='super')loadAdmins();
+    if(device) call({action:'login'}).catch(()=>{});      // this browser becomes unlimited on Lumina too
+  }catch(e){$('loginOut').innerHTML=`<span class="err">কী সঠিক নয় (${esc(e.message)})</span>`;KEY='';try{sessionStorage.removeItem('lumina-admin')}catch(_){}}
+}
+$('loginBtn').onclick=()=>{KEY=$('key').value.trim();try{sessionStorage.setItem('lumina-admin',KEY)}catch(e){}enter();};
+$('key').onkeydown=e=>{if(e.key==='Enter')$('loginBtn').click();};
+$('outBtn').onclick=async()=>{try{await call({action:'logout'});}catch(e){}try{sessionStorage.removeItem('lumina-admin')}catch(e){}location.reload();};
+$('cBtn').onclick=async()=>{try{const j=await call({action:'create_codes',plan:$('cPlan').value,days:+$('cDays').value,count:+$('cCount').value});
+  $('cOut').innerHTML='<span class="ok">তৈরি হয়েছে:</span><br>'+j.codes.map(c=>`<code>${c}</code>`).join('<br>');}catch(e){$('cOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+$('lcBtn').onclick=async()=>{try{const j=await call({action:'list_codes'});
+  $('lcOut').innerHTML=j.codes.length?`<table><tr><th>কোড</th><th>প্ল্যান</th><th>অবস্থা</th></tr>${j.codes.map(c=>`<tr><td><code>${c.code}</code></td><td>${esc(c.plan)} · ${c.days} দিন</td><td>${c.usedBy?`ব্যবহৃত<br><small>${esc(c.usedBy).slice(0,13)}…</small>`:'<span class="ok">নতুন</span>'}</td></tr>`).join('')}</table>`:'কোনো কোড নেই।';}catch(e){$('lcOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+function showUser(u){const lim=(k)=>u.limits[k]<0?'∞':u.limits[k];
+  return `প্ল্যান: <b>${esc(u.plan)}</b>${u.until?` · মেয়াদ ${new Date(u.until).toLocaleDateString('bn-BD')}`:''}${u.role?` · <b>${u.role}</b>`:''}<br>`+Object.keys(KIND).map(k=>`${KIND[k]}: ${u.used[k]||0}/${lim(k)}`).join(' · ');}
+$('uBtn').onclick=async()=>{try{const j=await call({action:'set_plan',device:$('uId').value.trim(),plan:$('uPlan').value,days:+$('uDays').value});$('uOut').innerHTML='<span class="ok">✓ হয়েছে।</span><br>'+showUser(j.user);}catch(e){$('uOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+$('uLook').onclick=async()=>{try{const j=await call({action:'lookup',device:$('uId').value.trim()});$('uOut').innerHTML=showUser(j.user);}catch(e){$('uOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+async function loadAdmins(){try{const j=await call({action:'list_admins'});
+  $('aList').innerHTML=j.admins.length?`<table><tr><th>নাম</th><th>তৈরি</th><th></th></tr>${j.admins.map(a=>`<tr><td>${esc(a.name)}</td><td>${new Date(a.createdAt).toLocaleDateString('bn-BD')}</td><td><button class="del" data-id="${a.id}">সরাও</button></td></tr>`).join('')}</table>`:'<small>এখনো কোনো অ্যাডমিন নেই।</small>';
+  $('aList').querySelectorAll('.del').forEach(b=>b.onclick=async()=>{await call({action:'remove_admin',id:b.dataset.id});loadAdmins();});}catch(e){}}
+$('aBtn').onclick=async()=>{try{const j=await call({action:'create_admin',name:$('aName').value.trim()});
+  $('aOut').innerHTML=`<span class="ok">অ্যাডমিন তৈরি হয়েছে।</span> এই কী-টা এখনই কপি করে তাকে দাও, পরে আর দেখা যাবে না:<br><code>${esc(j.key)}</code>`;$('aName').value='';loadAdmins();}catch(e){$('aOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+$('sBtn').onclick=async()=>{const plans={};document.querySelectorAll('#sPlans .card').forEach(c=>{const id=c.dataset.id;const p={limits:{}};
+    c.querySelectorAll('[data-f]').forEach(i=>p[i.dataset.f]=i.dataset.f==='price'?+i.value:i.value);c.querySelectorAll('[data-l]').forEach(i=>p.limits[i.dataset.l]=+i.value);plans[id]=p;});
+  try{const j=await call({action:'save_settings',settings:{plans,windowHours:+$('sWin').value,planDays:+$('sDays').value,payment:{methods:$('sMethods').value.trim(),number:$('sNumber').value.trim(),contact:$('sContact').value.trim()}}});
+    CFG=j.config;fillPlans(CFG);$('sOut').innerHTML='<span class="ok">✓ সেভ হয়েছে। Lumina-তে সাথে সাথে নতুন প্ল্যান দেখাবে।</span>';}catch(e){$('sOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+if(KEY)enter();
+</script>
+</body>
+</html>

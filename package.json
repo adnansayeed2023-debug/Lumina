@@ -1,0 +1,9 @@
+{
+  "name": "lumina",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "mathjs": "13.2.3"
+  }
+}
