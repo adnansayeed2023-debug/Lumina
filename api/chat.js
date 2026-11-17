@@ -10,8 +10,9 @@ const SYSTEM = `You are Al Bayan AI, a warm, knowledgeable teacher for learners 
 
 Language & tone:
 - LANGUAGE: always reply in the same language the student writes in, whatever it is (Bangla, English, Arabic, Hindi, Urdu, French, Chinese, any language). If they write Banglish (Bangla in English letters), reply in natural everyday Bangla script. If they ask for another language explicitly, use that. Use "তুমি" in Bangla.
-- Natural, friendly, clear. No filler openers like "অবশ্যই!" or "Great question!". Don't call yourself an AI or bot. No markdown headings. Short paragraphs; a short numbered list only when it really helps. **Bold** only a few key words.
-- Length: simple questions 2–5 sentences; Islamic or detailed topics up to ~300 words. Offer to go deeper with a short question only when natural.
+- Natural, friendly, clear. No filler openers like "অবশ্যই!" or "Great question!". Don't call yourself an AI or bot. **Bold** only a few key words.
+- ANSWER QUALITY: start with the direct answer in the first sentence. For study, Islamic or detailed questions give a complete, well-organised answer: short "## " headings, numbered steps or "- " points, a worked example, and end with a one-line সারকথা / summary. Be accurate and specific (names, numbers, dates, references); if something is uncertain or scholars differ, say so briefly. Explain like the best teacher would: simple words first, then depth.
+- Length: simple or casual questions 2–5 sentences; study and detailed topics as long as needed to be complete (usually 200–600 words). Offer to go deeper with one short question only when natural.
 
 Your library (use these tools; they hold verified texts):
 - get_quran_verses: exact Arabic + Bangla + English of any ayah. ALWAYS use it before quoting or translating an ayah. Cite like (সূরা আল-বাকারা ২:২৫৫). Never quote ayahs from memory.
@@ -154,11 +155,11 @@ function limited(ip) {
   return list.length > 60;
 }
 
-async function callClaude(messages, system, tools = TOOLS, maxTokens = 1500) {
+async function callClaude(messages, system, tools = TOOLS, maxTokens = 1500, model) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: process.env.LUMINA_MODEL || 'claude-sonnet-5-5', max_tokens: maxTokens, system, ...(tools.length ? { tools } : {}), messages })
+    body: JSON.stringify({ model: model || process.env.LUMINA_MODEL || 'claude-sonnet-5-5', max_tokens: maxTokens, system, ...(tools.length ? { tools } : {}), messages })
   });
   const data = await r.json();
   return { status: r.status, ok: r.ok, data };
@@ -194,19 +195,26 @@ export default async function handler(req, res) {
   if (!device) return res.status(400).json({ error: 'no device' });
   const ipAddr = clientIp(req);
   const nUp = Math.min(10, Math.max(+body.uploads || 0, Array.isArray(body.images) ? body.images.length : 0));
-  const need = isDesign ? { design: 1, upload: nUp } : { chat: 1, upload: nUp };
+  const LPm = globalThis.LuminaPlans;
+  const mk = (!isDesign && LPm.MODELS[body.model]) ? body.model : (isPrompt ? 'lite' : 'smart');
+  const M = LPm.MODELS[mk];
+  const need = isDesign ? { design: 1, upload: nUp } : { chat: M.weight, upload: nUp };
   let gate;
   try { gate = await check(device, ipAddr, need); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
+  if (!isDesign && !gate.st.role && !(LPm.MODEL_ACCESS[gate.st.plan] || LPm.MODEL_ACCESS.free).includes(mk))
+    return res.status(403).json({ error: 'model_locked', model: mk, usage: gate.st });
   const WEB = { type: 'web_search_20250305', name: 'web_search', max_uses: 3 };
   let tools = (isArt || isPrompt) ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
   const system = isPrompt ? IMG_SYS : isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
+  const TIERS = { lite: '\n\nMODEL: Bayan Lite. Keep answers short and to the point (under ~200 words) unless the student asks for detail.', pro: '\n\nMODEL: Bayan Pro. Give deeper, more careful answers: check each step, add one extra example or exam tip.', ultra: '\n\nMODEL: Bayan Ultra. Give the most thorough, expert-level answer: careful reasoning, verified steps, multiple examples where useful, common mistakes, and a clear summary.' };
+  const systemFull = isDesign ? system : system + (TIERS[mk] || '');
   try {
     for (let step = 0; step < 8; step++) {
-      let { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : 3500);
+      let { status, ok, data } = await callClaude(messages, systemFull, tools, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : M.maxTokens, isArt || (isDesign && !isPrompt) ? undefined : M.id);
       if (!ok && status === 400 && tools.includes(WEB) && /web.?search/i.test(data?.error?.message || '')) {
         tools = tools.filter(x => x !== WEB);   // web search turned off for this account: carry on without it
-        ({ status, ok, data } = await callClaude(messages, system, tools, isDesign ? 1500 : 3500));
+        ({ status, ok, data } = await callClaude(messages, systemFull, tools, isDesign ? 1500 : M.maxTokens, isDesign ? undefined : M.id));
       }
       if (status === 429) return res.status(429).json({ error: 'busy' });
       if (!ok) return res.status(500).json({ error: data?.error?.message || 'error' });
