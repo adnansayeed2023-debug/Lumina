@@ -124,7 +124,7 @@ function fillPlans(cfg){
   $('sPlans').innerHTML=Object.entries(cfg.plans).map(([id,p])=>`<div class="card" data-id="${id}"><b>${id.toUpperCase()}</b>
     <label>নাম</label><input data-f="name" value="${esc(p.name)}"><label>দাম (৳/মাস)</label><input data-f="price" type="number" min="0" value="${p.price}">
     ${Object.keys(KIND).map(k=>`<label>${KIND[k]} / ${cfg.windowHours} ঘণ্টা</label><input data-l="${k}" type="number" min="-1" value="${p.limits[k]}">`).join('')}</div>`).join('');
-  $('sWin').value=cfg.windowHours;$('sDays').value=cfg.planDays;$('sDayUser').value=(cfg.daily||{}).freePerUser??20;$('sDayAll').value=(cfg.daily||{}).freeSiteWide??400;
+  $('sWin').value=cfg.windowHours;$('sDays').value=cfg.planDays;$('sDayUser').value=(cfg.daily||{}).freePerUser??10;$('sDayAll').value=(cfg.daily||{}).freeSiteWide??400;
   $('sMethods').value=cfg.payment.methods||'';$('sNumber').value=cfg.payment.number||'';$('sContact').value=cfg.payment.contact||'';
 }
 async function enter(){
