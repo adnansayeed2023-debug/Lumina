@@ -309,7 +309,6 @@ header{position:sticky;top:0;z-index:20;padding:10px 18px;margin:-16px -18px 0;b
 .sHero small{display:block;opacity:.85;font-size:14px;margin-top:4px;line-height:1.5}
 .subj{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .subj button{border:2px solid transparent;background:var(--card);border-radius:20px;padding:14px 12px;display:flex;align-items:center;gap:10px;text-align:start;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(20,60,50,.05)}
-.subj button:last-child:nth-child(odd){grid-column:1/-1}
 .subj button.on{border-color:#2a4fa8;background:linear-gradient(180deg,#fff,#f1f5ff)}
 .subj .si{width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:#fff}
 .subj b{font-size:15px}
@@ -400,6 +399,102 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
 .mdt{border-collapse:collapse;font-size:14.5px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);white-space:normal}
 .mdt th{background:var(--mint);color:var(--green);font-weight:700}
 .mdt th,.mdt td{border:1px solid var(--line);padding:6px 10px;text-align:center}
+
+.codeb{margin:10px 0;border-radius:12px;overflow:hidden;background:#0d1117;white-space:normal}
+.codeh{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:#161b22;color:#9ca3af;font-size:12.5px;font-family:ui-monospace,monospace}
+.codeh .cpy{border:0;background:transparent;color:#d1d5db;font-size:12.5px;cursor:pointer}
+.codeb pre.code{margin:0;border-radius:0;background:#0d1117;color:#e6edf3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.55;padding:12px}
+
+.dModes{display:flex;gap:6px;margin-bottom:10px;background:rgba(255,255,255,.12);padding:4px;border-radius:14px}
+.dModes button{flex:1;border:0;background:transparent;color:inherit;padding:9px 6px;border-radius:11px;font:inherit;font-size:14px;cursor:pointer}
+.dModes button.on{background:#fff;color:#111827;font-weight:600}
+#dStyles{justify-content:flex-start;margin-top:10px}
+.dAi .atts{margin:0 0 8px}
+
+/* ================= NORMAL THEME (clean, neutral AI app) ================= */
+:root{--bg:#ffffff;--card:#ffffff;--ink:#111827;--soft:#6b7280;--line:#e5e7eb;--mint:#f3f4f6;--green:#111827;--gold:#b08a2e}
+body{background:#fff;font-family:'Hind Siliguri',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif}
+.wrap{max-width:780px}
+header{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);margin:-16px -18px 0;padding:10px 14px}
+.hdrL{display:flex;align-items:center;gap:6px}
+.menuBtn{border:0;background:transparent;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--ink);cursor:pointer}
+.menuBtn:hover{background:var(--mint)}
+.menuBtn svg{width:22px;height:22px}
+.brand svg{width:30px;height:30px}
+.brand b{font-family:inherit;font-weight:700;font-size:19px}
+.lang,.usePill{box-shadow:none;border:1px solid var(--line);background:#fff}
+.usePill.paid{background:#fff;color:#111827}
+/* side menu */
+.tabs{position:fixed;top:0;left:0;bottom:0;width:272px;margin:0;border-radius:0;display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:14px 10px;background:#f9fafb;border-right:1px solid var(--line);box-shadow:none;transform:translateX(-100%);transition:transform .22s ease;z-index:70;overflow-y:auto}
+body.nav-open .tabs{transform:none;box-shadow:0 0 40px rgba(0,0,0,.15)}
+.tabs button[data-v],.tabs .xnav{flex:none;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;padding:10px 12px;border:0;border-radius:10px;background:transparent;font-size:15px;color:var(--ink);min-width:0;text-align:start;box-shadow:none;cursor:pointer}
+.tabs button svg{width:20px;height:20px;flex:0 0 20px}
+.tabs button[data-v]:hover,.tabs .xnav:hover{background:#eef0f3}
+.tabs button.on{background:#e5e7eb!important;color:var(--ink)!important;font-weight:600;box-shadow:none!important}
+.navHead{display:flex;align-items:center;gap:10px;padding:6px 10px 12px;font-size:18px}
+.navHead svg{width:28px;height:28px}
+.newChat{border:1px solid var(--line)!important;background:#fff!important;font-weight:600}
+.navSep{height:1px;background:var(--line);margin:8px 6px}
+.navFoot{margin-top:auto;padding:12px;color:var(--soft);font-size:12.5px}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:65}
+body.nav-open .scrim{display:block}
+@media(min-width:1024px){.tabs{transform:none!important;box-shadow:none!important}body{padding-left:272px}.menuBtn{display:none}.scrim{display:none!important}}
+.view{padding-top:18px}
+/* home */
+.hero{padding:6vh 0 4px}
+.heroCard{background:none;color:var(--ink);box-shadow:none;padding:10px 0 0;border-radius:0;overflow:visible}
+.heroCard::before,.heroCard::after{display:none}
+.hero .mark svg{width:52px;height:52px;filter:none}
+.hero h1{color:var(--ink);font-size:28px;font-weight:700;margin-top:12px}
+.hero p{color:var(--soft)}
+.box{border:1px solid #d1d5db;box-shadow:0 2px 10px rgba(0,0,0,.05)!important;border-radius:26px}
+.box:focus-within{border-color:#9ca3af}
+.go,.heroCard .go,.dAi .go{background:#111827!important;color:#fff!important}
+.rl button,.spk{border:1px solid var(--line)!important;background:#fff!important;color:var(--soft)!important}
+.rl button.on,.spk.on{background:#111827!important;color:#fff!important;border-color:#111827!important}
+.rl .lbl{color:var(--soft);opacity:1}
+.attNote{color:var(--rose)!important}
+.chip{box-shadow:none;border:1px solid var(--line);background:#fff}
+.chip:hover{background:var(--mint);color:var(--ink)}
+.chip.on{background:#111827;color:#fff;border-color:#111827}
+.feat button{box-shadow:none;border:1px solid var(--line);border-radius:16px}
+.feat button:hover{background:#f9fafb}
+.feat .fi,.subj .si{background:#f3f4f6!important;color:#111827!important;border-radius:12px}
+/* chat */
+.row.me .bubble{background:#f3f4f6;border-radius:20px}
+.arw{color:#0f5c4a}
+.listen{background:#f3f4f6;color:var(--ink)}
+.modebar{background:#f9fafb;color:var(--ink);border:1px solid var(--line)}
+.modebar button{border:1px solid var(--line)}
+.dock .box{box-shadow:0 2px 14px rgba(0,0,0,.08)!important}
+.limCard{background:#f9fafb;border:1px solid var(--line);color:var(--ink)}
+.limCard .next{background:#111827!important}
+/* cards & panels */
+.srow,.ayah,.hcard,.colc,.letter,.face,.quiz,.detail,.search input,.sCard,.tool,.lsw button,.subj button,.pcard,.redeem,.cur,.dPanel,.prow,.lcard,.talk,.att,.uatts .uf{box-shadow:none!important;border:1px solid var(--line)}
+.srow .num{background:#f3f4f6;color:var(--ink)}
+.shead,.sHero,.dAi{background:#f9fafb!important;color:var(--ink)!important;box-shadow:none!important;border:1px solid var(--line)}
+.shead .an{color:#0f5c4a}
+.shead small,.sHero small{color:var(--soft);opacity:1}
+.sIcons span{background:#fff;border:1px solid var(--line)}
+.dAi .chip{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.dAi .chip.on{background:#111827!important;color:#fff!important}
+.dModes{background:#eceef1}
+.dModes button.on{box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.dStatus{color:var(--soft)}
+.next,.sBtns .next,.tool .next{background:#111827;color:#fff}
+.letter.on{background:#111827;color:#fff;border-color:#111827}
+.face.back{background:#111827}
+.lsw button.on{border-color:#111827;background:#fff}
+.lsw .big,.lsw .big.en,.talkIcon{background:#111827!important}
+.subj button.on{border-color:#111827;background:#f9fafb}
+.opt.ok{background:#ecfdf5!important;color:#047857!important}
+.mb i{background:#111827}
+.ptag{background:#111827}
+.pcard.pop{border-color:#111827}
+.pcard.cur{border-color:#047857}
+.sheetIn{background:#fff}
+footer .cr{color:var(--soft)}
+.tabs button span{display:inline}
 </style>
 </head>
 <body>
@@ -423,7 +518,7 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
 
 <div class="wrap">
   <header>
-    <div class="brand" id="home"><svg><use href="#logo"/></svg><b>Lumina</b></div>
+    <div class="hdrL"><button class="menuBtn" id="menuBtn" aria-label="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="brand" id="home"><svg><use href="#logo"/></svg><b>Lumina</b></div></div>
     <div class="hdrR"><button class="usePill" id="usePill" aria-label="plans"></button>
     <div class="menu" id="menu">
       <button class="lang" id="langBtn"></button>
@@ -431,13 +526,20 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
     </div></div>
   </header>
 
+  <div class="scrim" id="scrim"></div>
   <nav class="tabs">
+    <div class="navHead"><svg><use href="#logo"/></svg><b>Lumina</b></div>
+    <button class="xnav newChat" id="newChatBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-t="newChat"></span></button>
+    <div class="navSep"></div>
     <button data-v="ask" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 10.5h6M9 13.5h4"/></svg><span data-t="tAsk"></span></button>
     <button data-v="quran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span data-t="tQuran"></span></button>
     <button data-v="hadith"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h10a2 2 0 0 1 2 2V17H9a2 2 0 0 0-2 2"/><path d="M7 3.5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h12v-4"/><path d="M10 8h6M10 11h4"/></svg><span data-t="tHadith"></span></button>
     <button data-v="solve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L12 4l8 16z"/><path d="M8.5 13h7"/><circle cx="18.5" cy="6" r="2.2"/></svg><span data-t="tSolve"></span></button>
     <button data-v="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7M7.5 3v2M5 11c2-1 4-3.5 4.5-6M6 8c.8 1.6 2.2 2.8 4 3.5"/><path d="M12 21l4.5-10L21 21M13.5 17.5h6"/></svg><span data-t="tLearn"></span></button>
     <button data-v="design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9" r="1.8"/><path d="M20.5 15l-4.5-4.5L6 20.5"/></svg><span data-t="tDesign"></span></button>
+    <div class="navSep"></div>
+    <button class="xnav" id="navPlans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg><span data-t="navPlans"></span></button>
+    <div class="navFoot" data-t="creator"></div>
   </nav>
 
   <section class="view on" id="v-ask">
@@ -456,7 +558,7 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
     <button class="reset" id="reset" data-t="reset"></button>
     <div class="modebar" id="modebar"><span id="modeText"></span><button id="modeEnd"></button></div>
     <div class="thread" id="thread"></div>
-    <input type="file" id="fileIn" multiple hidden accept="image/*,.pdf,.docx,.txt,.md,.csv,.tsv,.json,.html,.htm,.xml,.srt">
+    <input type="file" id="fileIn" multiple hidden>
     <div class="dock" id="dock">
       <div class="rl small" id="rl2"><span></span></div>
       <div class="atts" id="atts2"></div><div class="attNote" id="attNote2"></div><form class="box" id="f2"><button type="button" class="ib attach" aria-label="attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button><textarea id="q2" rows="1"></textarea><button type="button" class="ib mic" data-ta="q2" aria-label="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button><button class="go" id="g2" aria-label="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
@@ -588,25 +690,27 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
   <section class="view" id="v-design">
     <div class="dAi">
       <b data-t="dAiTitle"></b>
-      <form class="box" id="dForm"><textarea id="dPrompt" rows="1"></textarea><button class="go" id="dGo" aria-label="make"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button></form>
+      <div class="dModes" id="dModes"></div><div class="atts" id="dRefBox"></div><form class="box" id="dForm"><button type="button" class="ib" id="dRefBtn" aria-label="photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button><input type="file" id="dRefIn" accept="image/*" hidden><textarea id="dPrompt" rows="1"></textarea><button class="go" id="dGo" aria-label="make"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button></form>
+      <div class="chips" id="dStyles" style="display:none"></div>
       <div class="chips" id="dIdeas"></div>
       <div class="dStatus" id="dStatus"></div>
     </div>
     <div class="dStage"><canvas id="dCanvas"></canvas></div>
     <div class="dActions">
       <button class="next" id="dSave" style="display:inline-block" data-t="dSave"></button>
+      <button class="chip" id="dUseArt" style="display:none" data-t="dUseArt"></button>
     </div>
     <div class="dPanel">
-      <label data-t="dTpl"></label><div class="dRow" id="dTpls"></div>
+      <label class="txtF" data-t="dTpl"></label><div class="dRow txtF" id="dTpls"></div>
       <label data-t="dSize"></label><div class="dRow" id="dSizes"></div>
-      <label data-t="dColor"></label><div class="dRow" id="dColors"></div>
-      <label data-t="dArabic"></label><input id="fAr" dir="rtl">
-      <label data-t="dTitle"></label><input id="fTitle">
-      <label data-t="dSub"></label><input id="fSub">
-      <label data-t="dBody"></label><textarea id="fBody" rows="3"></textarea>
-      <label data-t="dFoot"></label><input id="fFoot">
-      <label data-t="dPhoto"></label>
-      <div class="dRow"><label class="chip upl"><input type="file" id="fPhoto" accept="image/*" hidden><span data-t="dPick"></span></label><button class="chip" id="fPhotoX" style="display:none" data-t="dRemove"></button></div>
+      <label class="txtF" data-t="dColor"></label><div class="dRow txtF" id="dColors"></div>
+      <label class="txtF" data-t="dArabic"></label><input class="txtF" id="fAr" dir="rtl">
+      <label class="txtF" data-t="dTitle"></label><input class="txtF" id="fTitle">
+      <label class="txtF" data-t="dSub"></label><input class="txtF" id="fSub">
+      <label class="txtF" data-t="dBody"></label><textarea class="txtF" id="fBody" rows="3"></textarea>
+      <label class="txtF" data-t="dFoot"></label><input class="txtF" id="fFoot">
+      <label class="txtF" data-t="dPhoto"></label>
+      <div class="dRow txtF"><label class="chip upl"><input type="file" id="fPhoto" accept="image/*" hidden><span data-t="dPick"></span></label><button class="chip" id="fPhotoX" style="display:none" data-t="dRemove"></button></div>
     </div>
     <div class="dModal" id="dModal"><div><p data-t="dHold"></p><img id="dImg" alt=""><br><button class="next" id="dClose" style="display:inline-block" data-t="dClose"></button></div></div>
   </section>
@@ -628,11 +732,11 @@ footer .cr{display:block;margin-top:4px;font-weight:600;color:var(--green)}
 
 <script>
 const T={
- bn:{roleSuper:"সুপার অ্যাডমিন",roleAdmin:"অ্যাডমিন",unlimited:"∞ সব কিছু সীমাহীন",pYourId:"তোমার আইডি",pIdNote:"প্ল্যান কিনলে বা সাহায্য লাগলে এই আইডিটা অ্যাডমিনকে পাঠাতে পারো।",staffTitle:"অ্যাডমিন লগইন",staffLocal:"তুমি এই পেজের মালিক/এডিটর, তাই তোমার জন্য কোনো সীমা নেই।",staffLocalNo:"অ্যাডমিন লগইন শুধু আসল Lumina ওয়েবসাইটে কাজ করে।",adminKeyPh:"অ্যাডমিন কী",login:"লগইন",logout:"লগআউট",openPanel:"⚙️ অ্যাডমিন প্যানেল",loginOk:"লগইন হয়েছে। এখন সীমাহীন 👑",loginBad:"কী সঠিক নয়।",pTitle:"Lumina প্ল্যান",limTitle:"এই সময়ের সীমা শেষ ⏳",lim_chat:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো প্রশ্ন করা যায়, সব শেষ।",lim_upload:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ছবি/ফাইল পাঠানো যায়, সব শেষ।",lim_design:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ডিজাইন বানানো যায়, সব শেষ।",limReset:"আবার পাবে {t} পরে।",seePlans:"প্ল্যান দেখো",k_chat:"💬 প্রশ্ন",k_upload:"📎 ছবি ও ফাইল",k_design:"🎨 ডিজাইন বানানো",pUntil:"মেয়াদ: {d} পর্যন্ত",pFresh:"প্রথম ব্যবহারের {h} ঘণ্টা পর সীমা আবার নতুন হয়।",pLocalNote:"এখানে (claude.ai) সীমা শুধু এই ব্রাউজারে গোনা হয়। আসল ওয়েবসাইটে সার্ভার গুনবে।",pPopular:"জনপ্রিয়",pMonth:"মাস",pFreeLbl:"ফ্রি",f_chat:"প্রতি ৪ ঘণ্টায় {n}টি প্রশ্ন",f_upload:"{n}টি ছবি/ফাইল",f_design:"{n}টি ডিজাইন",f_reset:"প্রতি {h} ঘণ্টায় রিসেট",pCurrent:"এখন চালু",pBuy:"{p} নাও",payTitle:"{p} প্ল্যান নেওয়ার নিয়ম",pay1:"{m} দিয়ে {a} পাঠাও এই নম্বরে: {n}",pay2:"Transaction ID আর \"{p}\" লিখে মেসেজ দাও: {c}",pay3:"একটা অ্যাক্টিভেশন কোড পাবে। নিচে কোডটা বসালেই {d} দিনের জন্য চালু হয়ে যাবে।",paySoon:"শীঘ্রই যোগ হবে",pHaveCode:"অ্যাক্টিভেশন কোড আছে?",pActivate:"চালু করো",pCodeWeb:"কোড শুধু আসল Lumina ওয়েবসাইটে চালু করা যায়।",pCodeOk:"অভিনন্দন! {p} প্ল্যান চালু হয়েছে 🎉",pCodeUsed:"এই কোড আগেই ব্যবহার হয়ে গেছে।",pCodeBad:"কোডটা সঠিক নয়। আবার দেখে লেখো।",tSolve:"সমাধান",creator:"নির্মাতা: আদনান (Adnan)",sTitle:"গণিত, জ্যামিতি, পদার্থ, রসায়ন ও জীববিজ্ঞান",sSub:"প্রশ্ন লেখো বা খাতার ছবি তোলো। Lumina ধাপে ধাপে সমাধান করবে, চিত্র আর গ্রাফও এঁকে দেবে।",sLevel:"তুমি কোন শ্রেণিতে পড়ো?",sProblem:"তোমার প্রশ্ন",sPh:"যেমন: x² − 5x + 6 = 0 সমাধান করো",sPhotoBtn:"📷 প্রশ্নের ছবি দাও",sGoBtn:"ধাপে ধাপে সমাধান করো",sExamples:"উদাহরণ (চাপ দিলে বসে যাবে)",sTools:"🧰 দ্রুত টুল (সাথে সাথে উত্তর)",tlBal:"⚗ রাসায়নিক সমীকরণ সমতাকরণ",tlBalSub:"সমীকরণ লেখো, সঠিক সহগ বসিয়ে দেবে",tlMol:"⚖ আণবিক / মোলার ভর",tlMolSub:"সংকেত লেখো, যেমন H2SO4, CuSO4·5H2O",tlGraph:"📈 গ্রাফ আঁকো",tlGraphSub:"যেকোনো ফাংশন: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 বৈজ্ঞানিক ক্যালকুলেটর",tlCalcSub:"একক সহ হিসাবও পারে: 20 m/s * 5 s, 5 km to m",tlGo:"করো",tlDraw:"আঁকো",drawing:"চিত্র আঁকছি…",subjects:[["math", "∑", "গণিত", "বীজগণিত, ক্যালকুলাস, পাটিগণিত"], ["geometry", "△", "জ্যামিতি", "ত্রিভুজ, বৃত্ত, স্থানাঙ্ক"], ["physics", "⚛", "পদার্থবিজ্ঞান", "গতি, বল, বিদ্যুৎ, আলো"], ["chemistry", "⚗", "রসায়ন", "সমীকরণ, মোল, দ্রবণ"], ["biology", "🧬", "জীববিজ্ঞান", "কোষ, জিনতত্ত্ব, মানবদেহ"]],sLevels:["৬ষ্ঠ–৮ম শ্রেণি", "SSC (৯ম–১০ম)", "HSC (১১শ–১২শ)", "বিশ্ববিদ্যালয়"],modeSolve:"🧮 সমাধান মোড",ex:{"math": ["x² − 5x + 6 = 0 সমীকরণটি সমাধান করো", "a + b = 5 এবং ab = 6 হলে a² + b² এর মান কত?", "∫ x·eˣ dx নির্ণয় করো", "y = x² − 4x + 3 এর গ্রাফ আঁকো এবং শীর্ষবিন্দু বের করো"], "geometry": ["একটি সমকোণী ত্রিভুজের দুই বাহু 6 cm ও 8 cm। অতিভুজ ও ক্ষেত্রফল নির্ণয় করো এবং চিত্র আঁকো", "প্রমাণ করো: ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ", "5 cm ব্যাসার্ধের বৃত্তের ক্ষেত্রফল ও পরিধি কত?", "(2, 3) ও (6, 7) বিন্দু দুটির দূরত্ব ও সংযোগ রেখার সমীকরণ নির্ণয় করো"], "physics": ["একটি গাড়ি 20 m/s বেগে চলছিল, 5 s এ থেমে গেল। মন্দন কত?", "10 kg ভরের বস্তু 5 m উঁচু থেকে পড়লে মাটিতে পৌঁছানোর মুহূর্তে বেগ কত?", "12 V ব্যাটারির সাথে 4 Ω রোধ যুক্ত। বিদ্যুৎ প্রবাহ ও ক্ষমতা কত?", "30° কোণে 20 m/s বেগে বল ছুড়লে পাল্লা ও সর্বোচ্চ উচ্চতা কত?"], "chemistry": ["Fe + O2 → Fe2O3 সমীকরণটি সমতা করো", "H2SO4 এর আণবিক ভর কত?", "0.5 mol NaOH এর ভর কত গ্রাম?", "pH = 3 হলে দ্রবণে [H⁺] কত?"], "biology": ["সালোকসংশ্লেষণ প্রক্রিয়া ধাপে ধাপে ব্যাখ্যা করো", "Tt × Tt সংকরায়নে F₂ জনুর ফিনোটাইপ ও জিনোটাইপ অনুপাত কত? Punnett square দিয়ে দেখাও", "মাইটোসিস ও মিয়োসিসের পার্থক্য লেখো", "মানুষের হৃৎপিণ্ডে রক্ত সংবহনের পথ বর্ণনা করো"]},attachDefault:"এটা দেখে আমাকে বুঝিয়ে দাও।",fTooBig:"ফাইলটা অনেক বড় (৩০MB-এর বেশি):",fMaxImg:"একবারে এর বেশি ছবি পাঠানো যাবে না।",fNoImg:"এখানে ছবি পাঠানো যাচ্ছে না। claude.ai-তে ব্রাউজারে খুলে চেষ্টা করো।",fScanPart:"স্ক্যান করা PDF: শুধু প্রথম কয়েকটা পৃষ্ঠা পাঠানো হচ্ছে।",fUnsupported:"এই ধরনের ফাইল পড়া যায় না:",fEmpty:"ফাইলে কোনো লেখা পাওয়া যায়নি:",fFail:"ফাইলটা খোলা গেল না:",vLangNo:"এই ভাষায় ভয়েস চালু নেই। আবার 🎤 চাপলে সাধারণ ভাষায় শুনবে।",vNo:"এখানে ভয়েস দিয়ে বলা যাচ্ছে না। কম্পিউটার বা ফোনের Chrome ব্রাউজারে খুলে চেষ্টা করো।",vDenied:"মাইক্রোফোনের অনুমতি দেওয়া হয়নি।",vSpeakOn:"🔊 উত্তর শোনাবে: চালু",vSpeakOff:"🔈 উত্তর শোনাবে: বন্ধ",vStop:"⏹ থামাও",listenAll:"🔊 শোনো",tDesign:"ডিজাইন",dAiTitle:"✨ কী বানাতে চাও? লিখলেই Lumina সাজিয়ে দেবে",dPh:"যেমন: জুমার দিনের শুভেচ্ছা পোস্টার",dIdeas:["জুমা মোবারক পোস্টার", "ঈদ মোবারক শুভেচ্ছা", "মাদ্রাসায় ভর্তি চলছে ব্যানার", "ইসলামিক আলোচনা সভার পোস্টার", "অনুপ্রেরণার উক্তি"],dTpl:"টেমপ্লেট",dSize:"মাপ",dColor:"রং",dArabic:"আরবি লাইন (ঐচ্ছিক)",dTitle:"শিরোনাম",dSub:"উপশিরোনাম",dBody:"বিস্তারিত (প্রতি লাইনে একটা তথ্য)",dFoot:"নিচের লেখা (প্রতিষ্ঠান, ফোন, ওয়েবসাইট)",dPhoto:"ছবি (ঐচ্ছিক)",dPick:"📷 ছবি বেছে নাও",dRemove:"ছবি সরাও",dSave:"⬇ ছবি হিসেবে সেভ করো",dHold:"ছবিটা চেপে ধরে রাখো, তারপর \"Save image\" বা \"ছবি সেভ করুন\" চাপো।",dClose:"ঠিক আছে",dMaking:"Lumina ডিজাইন সাজাচ্ছে…",dDone:"হয়ে গেছে! নিচে লেখা, রং বা মাপ বদলে নিতে পারো।",dFail:"এখন বানানো গেল না। নিচে নিজে লিখে ডিজাইন করতে পারো।",dSaved:"সেভ হয়েছে ✓",tpls:["ইসলামিক", "ঈদ ও উৎসব", "ইভেন্ট", "উক্তি", "বিজ্ঞপ্তি", "ছবিসহ"],sizes:["পোস্ট ১:১", "স্টোরি", "ফেসবুক কভার", "পোস্টার A4", "থাম্বনেইল"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"জুমা মোবারক",defSub:"সপ্তাহের শ্রেষ্ঠ দিন",defBody:"বেশি বেশি দরুদ পড়ি\nসূরা কাহফ তিলাওয়াত করি",defFoot:"Lumina",fDesign:["🎨", "পোস্টার ও ব্যানার বানাও", "লিখলেই Lumina ডিজাইন করে দেবে"],lAr:"আরবি",lArSub:"কুরআনের ভাষা",lEn:"English",lEnSub:"ইংরেজি শেখো",tWords:"শব্দ",tPhrases:"বাক্য",tLessons:"পাঠ",tTalk:"কথা বলো",phHint:"রোজকার কাজে লাগে এমন বাক্য। 🔊 চাপলে উচ্চারণ শুনবে।",lsHint:"একটা পাঠ বেছে নাও, Lumina ধাপে ধাপে শেখাবে।",rlLbl:"উত্তরের ভাষা:",rlOpts:["অটো","বাংলা","English","العربية"],qtAr:"এই আরবি শব্দের অর্থ কী?",qtEn:"এই ইংরেজি শব্দের অর্থ কী?",
+ bn:{newChat:"নতুন চ্যাট",navPlans:"প্ল্যান ও ব্যবহার",dModePoster:"📰 পোস্টার / ব্যানার",dModeArt:"🎨 AI ছবি আঁকো",dArtPh:"কী আঁকবে? যেমন: রাতের আকাশে চাঁদ আর মসজিদ",artStyles:["ফ্ল্যাট", "মিনিমাল", "ইসলামিক নকশা", "জলরং", "লাইন আর্ট", "3D", "কার্টুন", "রাতের আলো"],dArtIdeas:["চাঁদের আলোয় মসজিদ আর লণ্ঠন", "বই, কলম আর জ্ঞানের আলো", "সবুজ গ্রাম, নদী আর সূর্যাস্ত", "ইসলামিক জ্যামিতিক নকশার ব্যাকগ্রাউন্ড", "রমজানের ইফতারের টেবিল"],dArtMaking:"Lumina ছবি আঁকছে… (৩০–৯০ সেকেন্ড লাগতে পারে)",dArtDone:"ছবি তৈরি! সেভ করো, অথবা পোস্টারে ব্যবহার করো।",dArtFail:"এবার ছবিটা আঁকা গেল না। একটু অন্যভাবে লিখে আবার চেষ্টা করো।",dArtEmpty:"ওপরে লিখে ✨ চাপো",dUseArt:"📰 এই ছবি দিয়ে পোস্টার বানাও",copy:"কপি",roleSuper:"সুপার অ্যাডমিন",roleAdmin:"অ্যাডমিন",unlimited:"∞ সব কিছু সীমাহীন",pYourId:"তোমার আইডি",pIdNote:"প্ল্যান কিনলে বা সাহায্য লাগলে এই আইডিটা অ্যাডমিনকে পাঠাতে পারো।",staffTitle:"অ্যাডমিন লগইন",staffLocal:"তুমি এই পেজের মালিক/এডিটর, তাই তোমার জন্য কোনো সীমা নেই।",staffLocalNo:"অ্যাডমিন লগইন শুধু আসল Lumina ওয়েবসাইটে কাজ করে।",adminKeyPh:"অ্যাডমিন কী",login:"লগইন",logout:"লগআউট",openPanel:"⚙️ অ্যাডমিন প্যানেল",loginOk:"লগইন হয়েছে। এখন সীমাহীন 👑",loginBad:"কী সঠিক নয়।",pTitle:"Lumina প্ল্যান",limTitle:"এই সময়ের সীমা শেষ ⏳",lim_chat:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো প্রশ্ন করা যায়, সব শেষ।",lim_upload:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ছবি/ফাইল পাঠানো যায়, সব শেষ।",lim_design:"এই প্ল্যানে ৪ ঘণ্টায় যতগুলো ডিজাইন বানানো যায়, সব শেষ।",limReset:"আবার পাবে {t} পরে।",seePlans:"প্ল্যান দেখো",k_chat:"💬 প্রশ্ন",k_upload:"📎 ছবি ও ফাইল",k_design:"🎨 ডিজাইন বানানো",pUntil:"মেয়াদ: {d} পর্যন্ত",pFresh:"প্রথম ব্যবহারের {h} ঘণ্টা পর সীমা আবার নতুন হয়।",pLocalNote:"এখানে (claude.ai) সীমা শুধু এই ব্রাউজারে গোনা হয়। আসল ওয়েবসাইটে সার্ভার গুনবে।",pPopular:"জনপ্রিয়",pMonth:"মাস",pFreeLbl:"ফ্রি",f_chat:"প্রতি ৪ ঘণ্টায় {n}টি প্রশ্ন",f_upload:"{n}টি ছবি/ফাইল",f_design:"{n}টি ডিজাইন",f_reset:"প্রতি {h} ঘণ্টায় রিসেট",pCurrent:"এখন চালু",pBuy:"{p} নাও",payTitle:"{p} প্ল্যান নেওয়ার নিয়ম",pay1:"{m} দিয়ে {a} পাঠাও এই নম্বরে: {n}",pay2:"Transaction ID আর \"{p}\" লিখে মেসেজ দাও: {c}",pay3:"একটা অ্যাক্টিভেশন কোড পাবে। নিচে কোডটা বসালেই {d} দিনের জন্য চালু হয়ে যাবে।",paySoon:"শীঘ্রই যোগ হবে",pHaveCode:"অ্যাক্টিভেশন কোড আছে?",pActivate:"চালু করো",pCodeWeb:"কোড শুধু আসল Lumina ওয়েবসাইটে চালু করা যায়।",pCodeOk:"অভিনন্দন! {p} প্ল্যান চালু হয়েছে 🎉",pCodeUsed:"এই কোড আগেই ব্যবহার হয়ে গেছে।",pCodeBad:"কোডটা সঠিক নয়। আবার দেখে লেখো।",tSolve:"সমাধান",creator:"নির্মাতা: আদনান (Adnan)",sTitle:"গণিত, বিজ্ঞান, CSE ও ডেটা সায়েন্স",sSub:"প্রশ্ন লেখো বা খাতার ছবি তোলো। Lumina ধাপে ধাপে সমাধান করবে, চিত্র আর গ্রাফও এঁকে দেবে।",sLevel:"তুমি কোন শ্রেণিতে পড়ো?",sProblem:"তোমার প্রশ্ন",sPh:"যেমন: x² − 5x + 6 = 0 সমাধান করো",sPhotoBtn:"📷 প্রশ্নের ছবি দাও",sGoBtn:"ধাপে ধাপে সমাধান করো",sExamples:"উদাহরণ (চাপ দিলে বসে যাবে)",sTools:"🧰 দ্রুত টুল (সাথে সাথে উত্তর)",tlBal:"⚗ রাসায়নিক সমীকরণ সমতাকরণ",tlBalSub:"সমীকরণ লেখো, সঠিক সহগ বসিয়ে দেবে",tlMol:"⚖ আণবিক / মোলার ভর",tlMolSub:"সংকেত লেখো, যেমন H2SO4, CuSO4·5H2O",tlGraph:"📈 গ্রাফ আঁকো",tlGraphSub:"যেকোনো ফাংশন: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 বৈজ্ঞানিক ক্যালকুলেটর",tlCalcSub:"একক সহ হিসাবও পারে: 20 m/s * 5 s, 5 km to m",tlGo:"করো",tlDraw:"আঁকো",drawing:"চিত্র আঁকছি…",subjects:[["math", "∑", "গণিত", "বীজগণিত, ক্যালকুলাস, পাটিগণিত"], ["geometry", "△", "জ্যামিতি", "ত্রিভুজ, বৃত্ত, স্থানাঙ্ক"], ["physics", "⚛", "পদার্থবিজ্ঞান", "গতি, বল, বিদ্যুৎ, আলো"], ["chemistry", "⚗", "রসায়ন", "সমীকরণ, মোল, দ্রবণ"], ["biology", "🧬", "জীববিজ্ঞান", "কোষ, জিনতত্ত্ব, মানবদেহ"], ["cse", "</>", "কম্পিউটার বিজ্ঞান (CSE)", "প্রোগ্রামিং, অ্যালগরিদম, ডেটা স্ট্রাকচার"], ["statistics", "📊", "পরিসংখ্যান", "গড়, বিচ্যুতি, সম্ভাবনা"], ["datascience", "🤖", "ডেটা সায়েন্স", "ডেটা বিশ্লেষণ, মেশিন লার্নিং"]],sLevels:["৬ষ্ঠ–৮ম শ্রেণি", "SSC (৯ম–১০ম)", "HSC (১১শ–১২শ)", "বিশ্ববিদ্যালয়"],modeSolve:"🧮 সমাধান মোড",ex:{"math": ["x² − 5x + 6 = 0 সমীকরণটি সমাধান করো", "a + b = 5 এবং ab = 6 হলে a² + b² এর মান কত?", "∫ x·eˣ dx নির্ণয় করো", "y = x² − 4x + 3 এর গ্রাফ আঁকো এবং শীর্ষবিন্দু বের করো"], "geometry": ["একটি সমকোণী ত্রিভুজের দুই বাহু 6 cm ও 8 cm। অতিভুজ ও ক্ষেত্রফল নির্ণয় করো এবং চিত্র আঁকো", "প্রমাণ করো: ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ", "5 cm ব্যাসার্ধের বৃত্তের ক্ষেত্রফল ও পরিধি কত?", "(2, 3) ও (6, 7) বিন্দু দুটির দূরত্ব ও সংযোগ রেখার সমীকরণ নির্ণয় করো"], "physics": ["একটি গাড়ি 20 m/s বেগে চলছিল, 5 s এ থেমে গেল। মন্দন কত?", "10 kg ভরের বস্তু 5 m উঁচু থেকে পড়লে মাটিতে পৌঁছানোর মুহূর্তে বেগ কত?", "12 V ব্যাটারির সাথে 4 Ω রোধ যুক্ত। বিদ্যুৎ প্রবাহ ও ক্ষমতা কত?", "30° কোণে 20 m/s বেগে বল ছুড়লে পাল্লা ও সর্বোচ্চ উচ্চতা কত?"], "chemistry": ["Fe + O2 → Fe2O3 সমীকরণটি সমতা করো", "H2SO4 এর আণবিক ভর কত?", "0.5 mol NaOH এর ভর কত গ্রাম?", "pH = 3 হলে দ্রবণে [H⁺] কত?"], "biology": ["সালোকসংশ্লেষণ প্রক্রিয়া ধাপে ধাপে ব্যাখ্যা করো", "Tt × Tt সংকরায়নে F₂ জনুর ফিনোটাইপ ও জিনোটাইপ অনুপাত কত? Punnett square দিয়ে দেখাও", "মাইটোসিস ও মিয়োসিসের পার্থক্য লেখো", "মানুষের হৃৎপিণ্ডে রক্ত সংবহনের পথ বর্ণনা করো"], "cse": ["Python-এ একটা সংখ্যা মৌলিক কিনা যাচাই করার প্রোগ্রাম লেখো ও ব্যাখ্যা করো", "Binary search কীভাবে কাজ করে? Time complexity কত?", "Stack আর Queue-এর পার্থক্য উদাহরণসহ বোঝাও", "C-তে 1 থেকে n পর্যন্ত যোগফলের প্রোগ্রাম লেখো"], "statistics": ["12, 15, 18, 15, 20, 22, 15 — গড়, মধ্যমা, প্রচুরক ও আদর্শ বিচ্যুতি নির্ণয় করো", "দুইটি ছক্কা নিক্ষেপে যোগফল 7 হওয়ার সম্ভাবনা কত?", "একটি পরীক্ষায় গড় 60, আদর্শ বিচ্যুতি 10। 75 নম্বরের z-score কত?", "সংশ্লেষাঙ্ক (correlation) কী? সহজ উদাহরণ দিয়ে বোঝাও"], "datascience": ["Pandas দিয়ে CSV ফাইল পড়ে গড় ও missing value দেখার কোড লেখো", "Linear regression কী? সহজ ভাষায় উদাহরণসহ বোঝাও", "Overfitting কী, আর কীভাবে কমানো যায়?", "আমার আপলোড করা ডেটা বিশ্লেষণ করে মূল তথ্যগুলো বলো"]},attachDefault:"এটা দেখে আমাকে বুঝিয়ে দাও।",fTooBig:"ফাইলটা অনেক বড় (৩০MB-এর বেশি):",fMaxImg:"একবারে এর বেশি ছবি পাঠানো যাবে না।",fNoImg:"এখানে ছবি পাঠানো যাচ্ছে না। claude.ai-তে ব্রাউজারে খুলে চেষ্টা করো।",fScanPart:"স্ক্যান করা PDF: শুধু প্রথম কয়েকটা পৃষ্ঠা পাঠানো হচ্ছে।",fUnsupported:"এই ধরনের ফাইল পড়া যায় না:",fEmpty:"ফাইলে কোনো লেখা পাওয়া যায়নি:",fFail:"ফাইলটা খোলা গেল না:",vLangNo:"এই ভাষায় ভয়েস চালু নেই। আবার 🎤 চাপলে সাধারণ ভাষায় শুনবে।",vNo:"এখানে ভয়েস দিয়ে বলা যাচ্ছে না। কম্পিউটার বা ফোনের Chrome ব্রাউজারে খুলে চেষ্টা করো।",vDenied:"মাইক্রোফোনের অনুমতি দেওয়া হয়নি।",vSpeakOn:"🔊 উত্তর শোনাবে: চালু",vSpeakOff:"🔈 উত্তর শোনাবে: বন্ধ",vStop:"⏹ থামাও",listenAll:"🔊 শোনো",tDesign:"ডিজাইন",dAiTitle:"✨ কী বানাতে চাও? লিখলেই Lumina সাজিয়ে দেবে",dPh:"যেমন: জুমার দিনের শুভেচ্ছা পোস্টার",dIdeas:["জুমা মোবারক পোস্টার", "ঈদ মোবারক শুভেচ্ছা", "মাদ্রাসায় ভর্তি চলছে ব্যানার", "ইসলামিক আলোচনা সভার পোস্টার", "অনুপ্রেরণার উক্তি"],dTpl:"টেমপ্লেট",dSize:"মাপ",dColor:"রং",dArabic:"আরবি লাইন (ঐচ্ছিক)",dTitle:"শিরোনাম",dSub:"উপশিরোনাম",dBody:"বিস্তারিত (প্রতি লাইনে একটা তথ্য)",dFoot:"নিচের লেখা (প্রতিষ্ঠান, ফোন, ওয়েবসাইট)",dPhoto:"ছবি (ঐচ্ছিক)",dPick:"📷 ছবি বেছে নাও",dRemove:"ছবি সরাও",dSave:"⬇ ছবি হিসেবে সেভ করো",dHold:"ছবিটা চেপে ধরে রাখো, তারপর \"Save image\" বা \"ছবি সেভ করুন\" চাপো।",dClose:"ঠিক আছে",dMaking:"Lumina ডিজাইন সাজাচ্ছে…",dDone:"হয়ে গেছে! নিচে লেখা, রং বা মাপ বদলে নিতে পারো।",dFail:"এখন বানানো গেল না। নিচে নিজে লিখে ডিজাইন করতে পারো।",dSaved:"সেভ হয়েছে ✓",tpls:["ইসলামিক", "ঈদ ও উৎসব", "ইভেন্ট", "উক্তি", "বিজ্ঞপ্তি", "ছবিসহ", "মিনিমাল", "আধুনিক", "AI ছবি"],sizes:["পোস্ট ১:১", "স্টোরি", "ফেসবুক কভার", "পোস্টার A4", "থাম্বনেইল"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"জুমা মোবারক",defSub:"সপ্তাহের শ্রেষ্ঠ দিন",defBody:"বেশি বেশি দরুদ পড়ি\nসূরা কাহফ তিলাওয়াত করি",defFoot:"Lumina",fDesign:["🎨", "পোস্টার ও ব্যানার বানাও", "লিখলেই Lumina ডিজাইন করে দেবে"],lAr:"আরবি",lArSub:"কুরআনের ভাষা",lEn:"English",lEnSub:"ইংরেজি শেখো",tWords:"শব্দ",tPhrases:"বাক্য",tLessons:"পাঠ",tTalk:"কথা বলো",phHint:"রোজকার কাজে লাগে এমন বাক্য। 🔊 চাপলে উচ্চারণ শুনবে।",lsHint:"একটা পাঠ বেছে নাও, Lumina ধাপে ধাপে শেখাবে।",rlLbl:"উত্তরের ভাষা:",rlOpts:["অটো","বাংলা","English","العربية"],qtAr:"এই আরবি শব্দের অর্থ কী?",qtEn:"এই ইংরেজি শব্দের অর্থ কী?",
 talkTitleEn:"ইংরেজিতে কথা বলার অনুশীলন",talkDescEn:"Lumina তোমার সাথে সহজ ইংরেজিতে গল্প করবে। ভুল হলে বাংলায় ছোট করে শুধরে দেবে।",talkTitleAr:"আরবিতে কথা বলার অনুশীলন",talkDescAr:"Lumina তোমার সাথে সহজ আরবিতে কথা বলবে, সাথে বাংলা উচ্চারণ ও অর্থ দেবে, ভুল হলে শুধরে দেবে।",
 levels:["নতুন শিখছি","কিছুটা পারি","ভালো পারি"],talkGo:"শুরু করো",modeEn:"🗣 ইংরেজি অনুশীলন চলছে",modeAr:"🗣 আরবি অনুশীলন চলছে",endMode:"শেষ করো",
 feat:[["📖","কুরআন","অনুবাদ ও তাফসীরসহ"],["📜","হাদিস","৮টি গ্রন্থ, মানসহ"],["ع","আরবি শেখো","হরফ থেকে কথা বলা"],["Aa","English শেখো","শব্দ, বাক্য, গ্রামার"]],tQuran:"কুরআন",tHadith:"হাদিস",tLearn:"ভাষা শিখি",qSrc:"আরবি পাঠ ও অনুবাদ: quran-json (CC BY 4.0) · তাফসীর: Quranic Universal Library (Tarteel) / quran.com",hLead:"কুতুবুস সিত্তাহ, মুয়াত্তা মালিক আর নববীর ৪০ হাদিস: আরবি মূল পাঠ, বাংলা অনুবাদ আর হাদিসের মান (সহীহ/হাসান/যঈফ) সহ।",hSrc:"বাংলা অনুবাদ: hadithbd.com · সংকলন: fawazahmed0/hadith-api · হাদিসের মান: আলবানী, যুবাইর আলী যাঈ প্রমুখ",numPh:"হাদিস নম্বর লেখো, যেমন ১",allCols:"← সব কিতাব",allSecs:"← সব অধ্যায়",ch:"অধ্যায়",hadithW:"হাদিস",notFound:"এই নম্বরের হাদিস পাওয়া যায়নি",showAr:"আরবি পাঠ",simple:"সহজে বুঝিয়ে দাও",readMore:"আরও পড়ো ↓",ik:"তাফসীর ইবনে কাসীর",zk:"আবু বকর যাকারিয়া",ab:"আহসানুল বায়ান",other:"অন্যান্য",sqPh:"সূরা খোঁজো: নাম বা নম্বর",hqPh:"হাদিস খোঁজো…",back:"← সব সূরা",tafsir:"ব্যাখ্যা",verses:"আয়াত",meccan:"মাক্কী",medinan:"মাদানী",hExplain:"বাংলায় বুঝিয়ে দাও",more:"পুরোটা দেখাও",langName:"বাংলা",tAsk:"প্রশ্ন",tAbc:"বর্ণমালা",tVocab:"শব্দ",tQuiz:"অনুশীলন",
-  h:"কুরআন, হাদিস, আরবি আর ইংরেজি, এক জায়গায়",sub:"যেকোনো প্রশ্ন করো। উত্তর পাবে বাংলা, English বা আরবিতে, তুমি যেটা চাও।",
+  h:"আজ কীভাবে সাহায্য করতে পারি?",sub:"প্রশ্ন করো, ছবি বা ফাইল দাও, অথবা মাইকে বলো।",
   ph:"কী জানতে চাও?",ph2:"আরও কিছু জিজ্ঞেস করো…",reset:"← নতুন প্রশ্ন",
   abcHint:"হরফে চাপ দিলে উচ্চারণ আর লেখার রূপ দেখবে",vocabHint:"কার্ডে চাপ দিলে অর্থ দেখবে",
   score:"সঠিক",next:"পরেরটা",qt:"এই শব্দের অর্থ কী?",good:["দারুণ! ঠিক বলেছ।","একদম ঠিক!","বাহ, চমৎকার!"],bad:"প্রায় হয়েছে! সঠিক উত্তর সবুজে দেখানো আছে।",
@@ -641,11 +745,11 @@ feat:[["📖","কুরআন","অনুবাদ ও তাফসীরসহ
   err:"একটু সমস্যা হলো, আবার চেষ্টা করবে?",rate:"একসাথে অনেক প্রশ্ন হয়ে গেছে, একটু পরে আবার জিজ্ঞেস করো।",
   isolated:"একা",initial:"শুরুতে",medial:"মাঝে",final:"শেষে",
   chips:["আয়াতুল কুরসির অর্থ ও ফজিলত","সূরা ফাতিহার তাফসীর","Tenses সহজে বুঝিয়ে দাও","আরবি পড়া কোথা থেকে শুরু করব?"]},
- en:{roleSuper:"Super admin",roleAdmin:"Admin",unlimited:"∞ Everything unlimited",pYourId:"Your ID",pIdNote:"Send this ID to an admin when you buy a plan or need help.",staffTitle:"Admin login",staffLocal:"You own or can edit this page, so you have no limits.",staffLocalNo:"Admin login works on the real Lumina website.",adminKeyPh:"Admin key",login:"Log in",logout:"Log out",openPanel:"⚙️ Admin panel",loginOk:"Logged in. Unlimited now 👑",loginBad:"That key isn't right.",pTitle:"Lumina plans",limTitle:"Limit reached for now ⏳",lim_chat:"You've used all the questions in this plan's 4-hour window.",lim_upload:"You've used all the photo/file uploads in this plan's 4-hour window.",lim_design:"You've used all the designs in this plan's 4-hour window.",limReset:"They come back in {t}.",seePlans:"See plans",k_chat:"💬 Questions",k_upload:"📎 Photos & files",k_design:"🎨 Designs",pUntil:"Valid until {d}",pFresh:"Limits renew {h} hours after your first use.",pLocalNote:"Here on claude.ai, limits are counted in this browser only. On the real website, the server counts them.",pPopular:"Popular",pMonth:"month",pFreeLbl:"Free",f_chat:"{n} questions every 4 hours",f_upload:"{n} photos/files",f_design:"{n} designs",f_reset:"Resets every {h} hours",pCurrent:"Current plan",pBuy:"Get {p}",payTitle:"How to get {p}",pay1:"Send {a} via {m} to: {n}",pay2:"Message your Transaction ID and \"{p}\" to: {c}",pay3:"You'll get an activation code. Enter it below to unlock {d} days.",paySoon:"coming soon",pHaveCode:"Have an activation code?",pActivate:"Activate",pCodeWeb:"Codes can only be activated on the real Lumina website.",pCodeOk:"Congratulations! {p} is active 🎉",pCodeUsed:"This code has already been used.",pCodeBad:"That code isn't valid. Please check it.",tSolve:"Solve",creator:"Created by Adnan",sTitle:"Maths, Geometry, Physics, Chemistry & Biology",sSub:"Type a problem or take a photo. Lumina solves it step by step, with diagrams and graphs.",sLevel:"Your level",sProblem:"Your problem",sPh:"e.g. Solve x² − 5x + 6 = 0",sPhotoBtn:"📷 Add a photo",sGoBtn:"Solve step by step",sExamples:"Examples (tap to use)",sTools:"🧰 Quick tools (instant)",tlBal:"⚗ Balance a chemical equation",tlBalSub:"Type the equation, get the right coefficients",tlMol:"⚖ Molar mass",tlMolSub:"Type a formula, e.g. H2SO4, CuSO4·5H2O",tlGraph:"📈 Draw a graph",tlGraphSub:"Any function: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 Scientific calculator",tlCalcSub:"Works with units too: 20 m/s * 5 s, 5 km to m",tlGo:"Go",tlDraw:"Draw",drawing:"Drawing the figure…",subjects:[["math", "∑", "Maths", "Algebra, calculus, arithmetic"], ["geometry", "△", "Geometry", "Triangles, circles, coordinates"], ["physics", "⚛", "Physics", "Motion, force, electricity"], ["chemistry", "⚗", "Chemistry", "Equations, moles, solutions"], ["biology", "🧬", "Biology", "Cells, genetics, human body"]],sLevels:["Class 6–8", "SSC (9–10)", "HSC (11–12)", "University"],modeSolve:"🧮 Solve mode",ex:{"math": ["Solve x² − 5x + 6 = 0", "If a + b = 5 and ab = 6, find a² + b²", "Find ∫ x·eˣ dx", "Graph y = x² − 4x + 3 and find its vertex"], "geometry": ["A right triangle has legs 6 cm and 8 cm. Find the hypotenuse and area, and draw it", "Prove that the angles of a triangle add up to 180°", "Find the area and circumference of a circle of radius 5 cm", "Find the distance between (2, 3) and (6, 7) and the equation of the line"], "physics": ["A car moving at 20 m/s stops in 5 s. Find the deceleration", "A 10 kg object falls from 5 m. Find its speed just before it hits the ground", "A 4 Ω resistor is connected to a 12 V battery. Find current and power", "A ball is thrown at 20 m/s at 30°. Find the range and maximum height"], "chemistry": ["Balance Fe + O2 → Fe2O3", "What is the molar mass of H2SO4?", "What is the mass of 0.5 mol NaOH?", "Find [H⁺] when pH = 3"], "biology": ["Explain photosynthesis step by step", "Cross Tt × Tt: give the F₂ phenotype and genotype ratios with a Punnett square", "Differences between mitosis and meiosis", "Describe the path of blood through the human heart"]},attachDefault:"Please look at this and explain it to me.",fTooBig:"File is too large (over 30MB):",fMaxImg:"Can't send more images at once.",fNoImg:"Images can't be sent here. Try opening it on claude.ai in a browser.",fScanPart:"Scanned PDF: only the first pages are sent.",fUnsupported:"Can't read this file type:",fEmpty:"No text found in:",fFail:"Couldn't open:",vLangNo:"Voice isn't available in this language. Tap 🎤 again to use the default language.",vNo:"Voice isn't available here. Try Chrome on a computer or phone.",vDenied:"Microphone permission was not given.",vSpeakOn:"🔊 Read replies aloud: on",vSpeakOff:"🔈 Read replies aloud: off",vStop:"⏹ Stop",listenAll:"🔊 Listen",tDesign:"Design",dAiTitle:"✨ What do you want to make? Lumina will design it",dPh:"e.g. A Jumu'ah greeting poster",dIdeas:["Jumu'ah Mubarak poster", "Eid Mubarak greeting", "Admission open banner", "Islamic talk event poster", "Motivational quote"],dTpl:"Template",dSize:"Size",dColor:"Colour",dArabic:"Arabic line (optional)",dTitle:"Title",dSub:"Subtitle",dBody:"Details (one per line)",dFoot:"Footer (organisation, phone, website)",dPhoto:"Photo (optional)",dPick:"📷 Choose photo",dRemove:"Remove photo",dSave:"⬇ Save as image",dHold:"Press and hold the image, then choose \"Save image\".",dClose:"OK",dMaking:"Lumina is designing…",dDone:"Done! Change the text, colours or size below.",dFail:"Couldn't make it now. You can design it yourself below.",dSaved:"Saved ✓",tpls:["Islamic", "Eid & festive", "Event", "Quote", "Notice", "With photo"],sizes:["Post 1:1", "Story", "Facebook cover", "Poster A4", "Thumbnail"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"Jumu'ah Mubarak",defSub:"The best day of the week",defBody:"Send salawat on the Prophet ﷺ\nRecite Surah al-Kahf",defFoot:"Lumina",fDesign:["🎨", "Make posters & banners", "Describe it, Lumina designs it"],lAr:"Arabic",lArSub:"Language of the Quran",lEn:"English",lEnSub:"Speak with confidence",tWords:"Words",tPhrases:"Phrases",tLessons:"Lessons",tTalk:"Speak",phHint:"Everyday sentences. Tap 🔊 to hear them.",lsHint:"Pick a lesson and Lumina will teach you step by step.",rlLbl:"Answer in:",rlOpts:["Auto","বাংলা","English","العربية"],qtAr:"What does this Arabic word mean?",qtEn:"What does this English word mean?",
+ en:{newChat:"New chat",navPlans:"Plans & usage",dModePoster:"📰 Poster / banner",dModeArt:"🎨 AI illustration",dArtPh:"What should Lumina draw? e.g. A mosque under the moon",artStyles:["Flat", "Minimal", "Islamic pattern", "Watercolour", "Line art", "3D", "Cartoon", "Night glow"],dArtIdeas:["A mosque with lanterns in moonlight", "Books, a pen and the light of knowledge", "Green village, river and sunset", "Islamic geometric background", "An iftar table in Ramadan"],dArtMaking:"Lumina is drawing… (30–90 seconds)",dArtDone:"Done! Save it, or use it in a poster.",dArtFail:"Couldn't draw it this time. Try describing it a little differently.",dArtEmpty:"Describe it above and tap ✨",dUseArt:"📰 Make a poster with this",copy:"Copy",roleSuper:"Super admin",roleAdmin:"Admin",unlimited:"∞ Everything unlimited",pYourId:"Your ID",pIdNote:"Send this ID to an admin when you buy a plan or need help.",staffTitle:"Admin login",staffLocal:"You own or can edit this page, so you have no limits.",staffLocalNo:"Admin login works on the real Lumina website.",adminKeyPh:"Admin key",login:"Log in",logout:"Log out",openPanel:"⚙️ Admin panel",loginOk:"Logged in. Unlimited now 👑",loginBad:"That key isn't right.",pTitle:"Lumina plans",limTitle:"Limit reached for now ⏳",lim_chat:"You've used all the questions in this plan's 4-hour window.",lim_upload:"You've used all the photo/file uploads in this plan's 4-hour window.",lim_design:"You've used all the designs in this plan's 4-hour window.",limReset:"They come back in {t}.",seePlans:"See plans",k_chat:"💬 Questions",k_upload:"📎 Photos & files",k_design:"🎨 Designs",pUntil:"Valid until {d}",pFresh:"Limits renew {h} hours after your first use.",pLocalNote:"Here on claude.ai, limits are counted in this browser only. On the real website, the server counts them.",pPopular:"Popular",pMonth:"month",pFreeLbl:"Free",f_chat:"{n} questions every 4 hours",f_upload:"{n} photos/files",f_design:"{n} designs",f_reset:"Resets every {h} hours",pCurrent:"Current plan",pBuy:"Get {p}",payTitle:"How to get {p}",pay1:"Send {a} via {m} to: {n}",pay2:"Message your Transaction ID and \"{p}\" to: {c}",pay3:"You'll get an activation code. Enter it below to unlock {d} days.",paySoon:"coming soon",pHaveCode:"Have an activation code?",pActivate:"Activate",pCodeWeb:"Codes can only be activated on the real Lumina website.",pCodeOk:"Congratulations! {p} is active 🎉",pCodeUsed:"This code has already been used.",pCodeBad:"That code isn't valid. Please check it.",tSolve:"Solve",creator:"Created by Adnan",sTitle:"Maths, Science, CSE & Data Science",sSub:"Type a problem or take a photo. Lumina solves it step by step, with diagrams and graphs.",sLevel:"Your level",sProblem:"Your problem",sPh:"e.g. Solve x² − 5x + 6 = 0",sPhotoBtn:"📷 Add a photo",sGoBtn:"Solve step by step",sExamples:"Examples (tap to use)",sTools:"🧰 Quick tools (instant)",tlBal:"⚗ Balance a chemical equation",tlBalSub:"Type the equation, get the right coefficients",tlMol:"⚖ Molar mass",tlMolSub:"Type a formula, e.g. H2SO4, CuSO4·5H2O",tlGraph:"📈 Draw a graph",tlGraphSub:"Any function: x^2, sin(x), 2*x+1, sqrt(x)…",tlCalc:"🧮 Scientific calculator",tlCalcSub:"Works with units too: 20 m/s * 5 s, 5 km to m",tlGo:"Go",tlDraw:"Draw",drawing:"Drawing the figure…",subjects:[["math", "∑", "Maths", "Algebra, calculus, arithmetic"], ["geometry", "△", "Geometry", "Triangles, circles, coordinates"], ["physics", "⚛", "Physics", "Motion, force, electricity"], ["chemistry", "⚗", "Chemistry", "Equations, moles, solutions"], ["biology", "🧬", "Biology", "Cells, genetics, human body"], ["cse", "</>", "Computer Science (CSE)", "Programming, algorithms, data structures"], ["statistics", "📊", "Statistics", "Mean, deviation, probability"], ["datascience", "🤖", "Data Science", "Data analysis, machine learning"]],sLevels:["Class 6–8", "SSC (9–10)", "HSC (11–12)", "University"],modeSolve:"🧮 Solve mode",ex:{"math": ["Solve x² − 5x + 6 = 0", "If a + b = 5 and ab = 6, find a² + b²", "Find ∫ x·eˣ dx", "Graph y = x² − 4x + 3 and find its vertex"], "geometry": ["A right triangle has legs 6 cm and 8 cm. Find the hypotenuse and area, and draw it", "Prove that the angles of a triangle add up to 180°", "Find the area and circumference of a circle of radius 5 cm", "Find the distance between (2, 3) and (6, 7) and the equation of the line"], "physics": ["A car moving at 20 m/s stops in 5 s. Find the deceleration", "A 10 kg object falls from 5 m. Find its speed just before it hits the ground", "A 4 Ω resistor is connected to a 12 V battery. Find current and power", "A ball is thrown at 20 m/s at 30°. Find the range and maximum height"], "chemistry": ["Balance Fe + O2 → Fe2O3", "What is the molar mass of H2SO4?", "What is the mass of 0.5 mol NaOH?", "Find [H⁺] when pH = 3"], "biology": ["Explain photosynthesis step by step", "Cross Tt × Tt: give the F₂ phenotype and genotype ratios with a Punnett square", "Differences between mitosis and meiosis", "Describe the path of blood through the human heart"], "cse": ["Write a Python program to check if a number is prime, and explain it", "How does binary search work? What is its time complexity?", "Explain the difference between a stack and a queue with examples", "Write a C program for the sum from 1 to n"], "statistics": ["For 12, 15, 18, 15, 20, 22, 15 find the mean, median, mode and standard deviation", "Two dice are rolled. What is the probability that the sum is 7?", "Mean 60, standard deviation 10. What is the z-score of 75?", "What is correlation? Explain with a simple example"], "datascience": ["Write Pandas code to read a CSV and show averages and missing values", "What is linear regression? Explain simply with an example", "What is overfitting and how can it be reduced?", "Analyse my uploaded data and tell me the key findings"]},attachDefault:"Please look at this and explain it to me.",fTooBig:"File is too large (over 30MB):",fMaxImg:"Can't send more images at once.",fNoImg:"Images can't be sent here. Try opening it on claude.ai in a browser.",fScanPart:"Scanned PDF: only the first pages are sent.",fUnsupported:"Can't read this file type:",fEmpty:"No text found in:",fFail:"Couldn't open:",vLangNo:"Voice isn't available in this language. Tap 🎤 again to use the default language.",vNo:"Voice isn't available here. Try Chrome on a computer or phone.",vDenied:"Microphone permission was not given.",vSpeakOn:"🔊 Read replies aloud: on",vSpeakOff:"🔈 Read replies aloud: off",vStop:"⏹ Stop",listenAll:"🔊 Listen",tDesign:"Design",dAiTitle:"✨ What do you want to make? Lumina will design it",dPh:"e.g. A Jumu'ah greeting poster",dIdeas:["Jumu'ah Mubarak poster", "Eid Mubarak greeting", "Admission open banner", "Islamic talk event poster", "Motivational quote"],dTpl:"Template",dSize:"Size",dColor:"Colour",dArabic:"Arabic line (optional)",dTitle:"Title",dSub:"Subtitle",dBody:"Details (one per line)",dFoot:"Footer (organisation, phone, website)",dPhoto:"Photo (optional)",dPick:"📷 Choose photo",dRemove:"Remove photo",dSave:"⬇ Save as image",dHold:"Press and hold the image, then choose \"Save image\".",dClose:"OK",dMaking:"Lumina is designing…",dDone:"Done! Change the text, colours or size below.",dFail:"Couldn't make it now. You can design it yourself below.",dSaved:"Saved ✓",tpls:["Islamic", "Eid & festive", "Event", "Quote", "Notice", "With photo", "Minimal", "Modern", "AI art"],sizes:["Post 1:1", "Story", "Facebook cover", "Poster A4", "Thumbnail"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"Jumu'ah Mubarak",defSub:"The best day of the week",defBody:"Send salawat on the Prophet ﷺ\nRecite Surah al-Kahf",defFoot:"Lumina",fDesign:["🎨", "Make posters & banners", "Describe it, Lumina designs it"],lAr:"Arabic",lArSub:"Language of the Quran",lEn:"English",lEnSub:"Speak with confidence",tWords:"Words",tPhrases:"Phrases",tLessons:"Lessons",tTalk:"Speak",phHint:"Everyday sentences. Tap 🔊 to hear them.",lsHint:"Pick a lesson and Lumina will teach you step by step.",rlLbl:"Answer in:",rlOpts:["Auto","বাংলা","English","العربية"],qtAr:"What does this Arabic word mean?",qtEn:"What does this English word mean?",
 talkTitleEn:"English speaking practice",talkDescEn:"Chat with Lumina in simple English. Mistakes get gently corrected in Bangla.",talkTitleAr:"Arabic speaking practice",talkDescAr:"Chat with Lumina in simple Arabic with Bangla pronunciation and meaning, plus gentle corrections.",
 levels:["Beginner","Intermediate","Advanced"],talkGo:"Start",modeEn:"🗣 English practice on",modeAr:"🗣 Arabic practice on",endMode:"End",
 feat:[["📖","Quran","With translation & tafsir"],["📜","Hadith","8 books, with grades"],["ع","Learn Arabic","Letters to conversation"],["Aa","Learn English","Words, phrases, grammar"]],tQuran:"Quran",tHadith:"Hadith",tLearn:"Languages",qSrc:"Arabic text & translations: quran-json (CC BY 4.0) · Tafsir: Quranic Universal Library (Tarteel) / quran.com",hLead:"The six major collections, Muwatta Malik and Nawawi's 40: Arabic text, Bangla translation and grading.",hSrc:"Bangla translation: hadithbd.com · Collection data: fawazahmed0/hadith-api · Grades: al-Albani, Zubair Ali Zai and others",numPh:"Hadith number, e.g. 1",allCols:"← All books",allSecs:"← All chapters",ch:"Chapter",hadithW:"Hadith",notFound:"No hadith with that number",showAr:"Arabic text",simple:"Explain simply",readMore:"Read more ↓",ik:"Ibn Kathir",zk:"Abu Bakr Zakaria",ab:"Ahsanul Bayan",other:"Other",sqPh:"Search surah by name or number",hqPh:"Search hadith…",back:"← All surahs",tafsir:"Tafsir",verses:"verses",meccan:"Meccan",medinan:"Medinan",hExplain:"Explain this",more:"Show all",langName:"English",tAsk:"Ask",tAbc:"Letters",tVocab:"Words",tQuiz:"Practice",
-  h:"Quran, Hadith, Arabic and English in one place",sub:"Ask anything. Get answers in Bangla, English or Arabic.",
+  h:"How can I help you today?",sub:"Ask anything, attach a photo or file, or just speak.",
   ph:"What would you like to know?",ph2:"Ask something else…",reset:"← New question",
   abcHint:"Tap a letter to see its sound and forms",vocabHint:"Tap a card to see its meaning",
   score:"Correct",next:"Next",qt:"What does this word mean?",good:["Great, that's right!","Exactly!","Well done!"],bad:"Almost! The right answer is in green.",
@@ -654,11 +758,11 @@ feat:[["📖","Quran","With translation & tafsir"],["📜","Hadith","8 books, wi
   err:"Something went wrong. Try again?",rate:"Too many questions at once, please try again in a bit.",
   isolated:"Alone",initial:"Start",medial:"Middle",final:"End",
   chips:["Meaning of Ayat al-Kursi","Tafsir of Surah al-Fatiha","Explain English tenses simply","Where do I start reading Arabic?"]},
- ar:{roleSuper:"المشرف العام",roleAdmin:"مشرف",unlimited:"∞ كل شيء بلا حدود",pYourId:"معرّفك",pIdNote:"أرسل هذا المعرّف إلى المشرف عند الاشتراك أو طلب المساعدة.",staffTitle:"دخول المشرف",staffLocal:"أنت مالك/محرر هذه الصفحة، فلا حدود لك.",staffLocalNo:"دخول المشرف يعمل على موقع لومينا فقط.",adminKeyPh:"مفتاح المشرف",login:"دخول",logout:"خروج",openPanel:"⚙️ لوحة الإدارة",loginOk:"تم الدخول. بلا حدود الآن 👑",loginBad:"المفتاح غير صحيح.",pTitle:"خطط لومينا",limTitle:"انتهى الحد مؤقتًا ⏳",lim_chat:"استخدمت كل الأسئلة المتاحة في هذه الساعات الأربع.",lim_upload:"استخدمت كل رفع الصور والملفات المتاح في هذه الساعات الأربع.",lim_design:"استخدمت كل التصاميم المتاحة في هذه الساعات الأربع.",limReset:"تتجدد بعد {t}.",seePlans:"عرض الخطط",k_chat:"💬 أسئلة",k_upload:"📎 صور وملفات",k_design:"🎨 تصاميم",pUntil:"صالحة حتى {d}",pFresh:"تتجدد الحدود بعد {h} ساعات من أول استخدام.",pLocalNote:"هنا على claude.ai تُحسب الحدود في هذا المتصفح فقط.",pPopular:"الأكثر طلبًا",pMonth:"شهر",pFreeLbl:"مجاني",f_chat:"{n} سؤالًا كل 4 ساعات",f_upload:"{n} صورة/ملف",f_design:"{n} تصميمًا",f_reset:"تتجدد كل {h} ساعات",pCurrent:"الخطة الحالية",pBuy:"اشترك في {p}",payTitle:"طريقة الاشتراك في {p}",pay1:"أرسل {a} عبر {m} إلى: {n}",pay2:"أرسل رقم العملية و\"{p}\" إلى: {c}",pay3:"ستصلك رمز تفعيل، أدخله بالأسفل لتفعيل {d} يومًا.",paySoon:"قريبًا",pHaveCode:"لديك رمز تفعيل؟",pActivate:"تفعيل",pCodeWeb:"يمكن تفعيل الرموز على موقع لومينا فقط.",pCodeOk:"مبروك! تم تفعيل {p} 🎉",pCodeUsed:"هذا الرمز مستخدم من قبل.",pCodeBad:"الرمز غير صحيح.",tSolve:"حلول",creator:"من إنشاء عدنان (Adnan)",sTitle:"الرياضيات والهندسة والفيزياء والكيمياء والأحياء",sSub:"اكتب المسألة أو صوّرها، وستحلها لومينا خطوة بخطوة مع الرسوم.",sLevel:"المستوى",sProblem:"مسألتك",sPh:"مثال: حل x² − 5x + 6 = 0",sPhotoBtn:"📷 أضف صورة",sGoBtn:"حل خطوة بخطوة",sExamples:"أمثلة",sTools:"🧰 أدوات سريعة",tlBal:"⚗ موازنة معادلة كيميائية",tlBalSub:"اكتب المعادلة لتحصل على المعاملات",tlMol:"⚖ الكتلة المولية",tlMolSub:"اكتب الصيغة مثل H2SO4",tlGraph:"📈 ارسم دالة",tlGraphSub:"x^2، sin(x)، 2*x+1 …",tlCalc:"🧮 آلة حاسبة علمية",tlCalcSub:"تدعم الوحدات: 20 m/s * 5 s",tlGo:"احسب",tlDraw:"ارسم",drawing:"أرسم الشكل…",subjects:[["math", "∑", "الرياضيات", "جبر وتفاضل وحساب"], ["geometry", "△", "الهندسة", "مثلثات ودوائر وإحداثيات"], ["physics", "⚛", "الفيزياء", "حركة وقوة وكهرباء"], ["chemistry", "⚗", "الكيمياء", "معادلات ومولات ومحاليل"], ["biology", "🧬", "الأحياء", "الخلية والوراثة وجسم الإنسان"]],sLevels:["الصف ٦–٨", "SSC (٩–١٠)", "HSC (١١–١٢)", "الجامعة"],modeSolve:"🧮 وضع الحل",ex:{"math": ["حل x² − 5x + 6 = 0", "إذا كان a + b = 5 و ab = 6 فأوجد a² + b²", "أوجد ∫ x·eˣ dx", "ارسم y = x² − 4x + 3 وأوجد الرأس"], "geometry": ["مثلث قائم ضلعاه 6 cm و 8 cm، أوجد الوتر والمساحة وارسمه", "برهن أن مجموع زوايا المثلث 180°", "أوجد مساحة ومحيط دائرة نصف قطرها 5 cm", "أوجد المسافة بين (2, 3) و (6, 7) ومعادلة المستقيم"], "physics": ["سيارة سرعتها 20 m/s توقفت خلال 5 s، أوجد التباطؤ", "جسم كتلته 10 kg سقط من ارتفاع 5 m، أوجد سرعته عند الأرض", "مقاومة 4 Ω موصولة ببطارية 12 V، أوجد التيار والقدرة", "قُذفت كرة بسرعة 20 m/s بزاوية 30°، أوجد المدى وأقصى ارتفاع"], "chemistry": ["وازن Fe + O2 → Fe2O3", "ما الكتلة المولية لـ H2SO4؟", "ما كتلة 0.5 mol من NaOH؟", "أوجد [H⁺] إذا كان pH = 3"], "biology": ["اشرح البناء الضوئي خطوة بخطوة", "في التهجين Tt × Tt ما نسب الطرز الشكلية والجينية في الجيل الثاني؟ ارسم مربع بانيت", "الفرق بين الانقسام المتساوي والاختزالي", "صف مسار الدم في قلب الإنسان"]},attachDefault:"انظر إلى هذا واشرحه لي.",fTooBig:"الملف كبير جدًا (أكثر من 30MB):",fMaxImg:"لا يمكن إرسال المزيد من الصور مرة واحدة.",fNoImg:"لا يمكن إرسال الصور هنا.",fScanPart:"ملف PDF ممسوح: تُرسل الصفحات الأولى فقط.",fUnsupported:"لا يمكن قراءة هذا النوع:",fEmpty:"لا يوجد نص في:",fFail:"تعذّر فتح:",vLangNo:"الصوت غير متاح بهذه اللغة. اضغط 🎤 مرة أخرى.",vNo:"الصوت غير متاح هنا. جرّب متصفح Chrome.",vDenied:"لم يُسمح باستخدام الميكروفون.",vSpeakOn:"🔊 قراءة الردود: تشغيل",vSpeakOff:"🔈 قراءة الردود: إيقاف",vStop:"⏹ إيقاف",listenAll:"🔊 استمع",tDesign:"تصميم",dAiTitle:"✨ ماذا تريد أن تصمم؟ ستصممه لومينا",dPh:"مثال: ملصق تهنئة بيوم الجمعة",dIdeas:["جمعة مباركة", "عيد مبارك", "التسجيل مفتوح", "محاضرة إسلامية", "حكمة ملهمة"],dTpl:"القالب",dSize:"المقاس",dColor:"اللون",dArabic:"سطر عربي (اختياري)",dTitle:"العنوان",dSub:"العنوان الفرعي",dBody:"التفاصيل (سطر لكل معلومة)",dFoot:"التذييل",dPhoto:"صورة (اختياري)",dPick:"📷 اختر صورة",dRemove:"إزالة الصورة",dSave:"⬇ حفظ كصورة",dHold:"اضغط مطولًا على الصورة ثم اختر حفظ الصورة.",dClose:"حسنًا",dMaking:"لومينا تصمم…",dDone:"تم! يمكنك تعديل النص والألوان والمقاس.",dFail:"تعذّر التصميم الآن، صمّمه بنفسك بالأسفل.",dSaved:"تم الحفظ ✓",tpls:["إسلامي", "عيد ومناسبات", "فعالية", "اقتباس", "إعلان", "مع صورة"],sizes:["منشور ١:١", "ستوري", "غلاف فيسبوك", "ملصق A4", "صورة مصغرة"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"جمعة مباركة",defSub:"خير يوم طلعت عليه الشمس",defBody:"أكثروا من الصلاة على النبي ﷺ\nاقرؤوا سورة الكهف",defFoot:"Lumina",fDesign:["🎨", "صمّم ملصقات ولافتات", "صِف ما تريد وستصممه لومينا"],lAr:"العربية",lArSub:"لغة القرآن",lEn:"English",lEnSub:"تعلّم الإنجليزية",tWords:"كلمات",tPhrases:"جمل",tLessons:"دروس",tTalk:"تحدّث",phHint:"جمل يومية. اضغط 🔊 لتسمعها.",lsHint:"اختر درسًا وستعلّمك لومينا خطوة بخطوة.",rlLbl:"لغة الجواب:",rlOpts:["تلقائي","বাংলা","English","العربية"],qtAr:"ما معنى هذه الكلمة؟",qtEn:"ما معنى هذه الكلمة الإنجليزية؟",
+ ar:{newChat:"محادثة جديدة",navPlans:"الخطط والاستخدام",dModePoster:"📰 ملصق / لافتة",dModeArt:"🎨 رسم بالذكاء",dArtPh:"ماذا ترسم لومينا؟ مثال: مسجد تحت القمر",artStyles:["مسطح", "بسيط", "زخرفة إسلامية", "ألوان مائية", "خطوط", "ثلاثي الأبعاد", "كرتوني", "ضوء ليلي"],dArtIdeas:["مسجد وفوانيس في ضوء القمر", "كتب وقلم ونور العلم", "قرية خضراء ونهر وغروب", "خلفية زخرفة هندسية إسلامية", "مائدة إفطار رمضانية"],dArtMaking:"لومينا ترسم… (٣٠–٩٠ ثانية)",dArtDone:"تم! احفظها أو استخدمها في ملصق.",dArtFail:"تعذّر الرسم هذه المرة، جرّب وصفًا مختلفًا.",dArtEmpty:"اكتب الوصف واضغط ✨",dUseArt:"📰 اصنع ملصقًا بهذه الصورة",copy:"نسخ",roleSuper:"المشرف العام",roleAdmin:"مشرف",unlimited:"∞ كل شيء بلا حدود",pYourId:"معرّفك",pIdNote:"أرسل هذا المعرّف إلى المشرف عند الاشتراك أو طلب المساعدة.",staffTitle:"دخول المشرف",staffLocal:"أنت مالك/محرر هذه الصفحة، فلا حدود لك.",staffLocalNo:"دخول المشرف يعمل على موقع لومينا فقط.",adminKeyPh:"مفتاح المشرف",login:"دخول",logout:"خروج",openPanel:"⚙️ لوحة الإدارة",loginOk:"تم الدخول. بلا حدود الآن 👑",loginBad:"المفتاح غير صحيح.",pTitle:"خطط لومينا",limTitle:"انتهى الحد مؤقتًا ⏳",lim_chat:"استخدمت كل الأسئلة المتاحة في هذه الساعات الأربع.",lim_upload:"استخدمت كل رفع الصور والملفات المتاح في هذه الساعات الأربع.",lim_design:"استخدمت كل التصاميم المتاحة في هذه الساعات الأربع.",limReset:"تتجدد بعد {t}.",seePlans:"عرض الخطط",k_chat:"💬 أسئلة",k_upload:"📎 صور وملفات",k_design:"🎨 تصاميم",pUntil:"صالحة حتى {d}",pFresh:"تتجدد الحدود بعد {h} ساعات من أول استخدام.",pLocalNote:"هنا على claude.ai تُحسب الحدود في هذا المتصفح فقط.",pPopular:"الأكثر طلبًا",pMonth:"شهر",pFreeLbl:"مجاني",f_chat:"{n} سؤالًا كل 4 ساعات",f_upload:"{n} صورة/ملف",f_design:"{n} تصميمًا",f_reset:"تتجدد كل {h} ساعات",pCurrent:"الخطة الحالية",pBuy:"اشترك في {p}",payTitle:"طريقة الاشتراك في {p}",pay1:"أرسل {a} عبر {m} إلى: {n}",pay2:"أرسل رقم العملية و\"{p}\" إلى: {c}",pay3:"ستصلك رمز تفعيل، أدخله بالأسفل لتفعيل {d} يومًا.",paySoon:"قريبًا",pHaveCode:"لديك رمز تفعيل؟",pActivate:"تفعيل",pCodeWeb:"يمكن تفعيل الرموز على موقع لومينا فقط.",pCodeOk:"مبروك! تم تفعيل {p} 🎉",pCodeUsed:"هذا الرمز مستخدم من قبل.",pCodeBad:"الرمز غير صحيح.",tSolve:"حلول",creator:"من إنشاء عدنان (Adnan)",sTitle:"الرياضيات والعلوم والحاسوب وعلم البيانات",sSub:"اكتب المسألة أو صوّرها، وستحلها لومينا خطوة بخطوة مع الرسوم.",sLevel:"المستوى",sProblem:"مسألتك",sPh:"مثال: حل x² − 5x + 6 = 0",sPhotoBtn:"📷 أضف صورة",sGoBtn:"حل خطوة بخطوة",sExamples:"أمثلة",sTools:"🧰 أدوات سريعة",tlBal:"⚗ موازنة معادلة كيميائية",tlBalSub:"اكتب المعادلة لتحصل على المعاملات",tlMol:"⚖ الكتلة المولية",tlMolSub:"اكتب الصيغة مثل H2SO4",tlGraph:"📈 ارسم دالة",tlGraphSub:"x^2، sin(x)، 2*x+1 …",tlCalc:"🧮 آلة حاسبة علمية",tlCalcSub:"تدعم الوحدات: 20 m/s * 5 s",tlGo:"احسب",tlDraw:"ارسم",drawing:"أرسم الشكل…",subjects:[["math", "∑", "الرياضيات", "جبر وتفاضل وحساب"], ["geometry", "△", "الهندسة", "مثلثات ودوائر وإحداثيات"], ["physics", "⚛", "الفيزياء", "حركة وقوة وكهرباء"], ["chemistry", "⚗", "الكيمياء", "معادلات ومولات ومحاليل"], ["biology", "🧬", "الأحياء", "الخلية والوراثة وجسم الإنسان"], ["cse", "</>", "علوم الحاسوب", "البرمجة والخوارزميات وهياكل البيانات"], ["statistics", "📊", "الإحصاء", "المتوسط والانحراف والاحتمال"], ["datascience", "🤖", "علم البيانات", "تحليل البيانات وتعلّم الآلة"]],sLevels:["الصف ٦–٨", "SSC (٩–١٠)", "HSC (١١–١٢)", "الجامعة"],modeSolve:"🧮 وضع الحل",ex:{"math": ["حل x² − 5x + 6 = 0", "إذا كان a + b = 5 و ab = 6 فأوجد a² + b²", "أوجد ∫ x·eˣ dx", "ارسم y = x² − 4x + 3 وأوجد الرأس"], "geometry": ["مثلث قائم ضلعاه 6 cm و 8 cm، أوجد الوتر والمساحة وارسمه", "برهن أن مجموع زوايا المثلث 180°", "أوجد مساحة ومحيط دائرة نصف قطرها 5 cm", "أوجد المسافة بين (2, 3) و (6, 7) ومعادلة المستقيم"], "physics": ["سيارة سرعتها 20 m/s توقفت خلال 5 s، أوجد التباطؤ", "جسم كتلته 10 kg سقط من ارتفاع 5 m، أوجد سرعته عند الأرض", "مقاومة 4 Ω موصولة ببطارية 12 V، أوجد التيار والقدرة", "قُذفت كرة بسرعة 20 m/s بزاوية 30°، أوجد المدى وأقصى ارتفاع"], "chemistry": ["وازن Fe + O2 → Fe2O3", "ما الكتلة المولية لـ H2SO4؟", "ما كتلة 0.5 mol من NaOH؟", "أوجد [H⁺] إذا كان pH = 3"], "biology": ["اشرح البناء الضوئي خطوة بخطوة", "في التهجين Tt × Tt ما نسب الطرز الشكلية والجينية في الجيل الثاني؟ ارسم مربع بانيت", "الفرق بين الانقسام المتساوي والاختزالي", "صف مسار الدم في قلب الإنسان"], "cse": ["اكتب برنامج بايثون للتحقق من العدد الأولي واشرحه", "كيف يعمل البحث الثنائي؟ وما تعقيده الزمني؟", "ما الفرق بين المكدس والطابور مع أمثلة؟", "اكتب برنامج C لمجموع الأعداد من 1 إلى n"], "statistics": ["للقيم 12, 15, 18, 15, 20, 22, 15 أوجد المتوسط والوسيط والمنوال والانحراف المعياري", "عند رمي حجري نرد، ما احتمال أن يكون المجموع 7؟", "المتوسط 60 والانحراف المعياري 10، ما الدرجة المعيارية لـ 75؟", "ما الارتباط؟ اشرحه بمثال بسيط"], "datascience": ["اكتب كود Pandas لقراءة ملف CSV وعرض المتوسطات والقيم المفقودة", "ما الانحدار الخطي؟ اشرحه ببساطة", "ما فرط التخصيص وكيف نقلله؟", "حلل بياناتي المرفوعة وأخبرني بأهم النتائج"]},attachDefault:"انظر إلى هذا واشرحه لي.",fTooBig:"الملف كبير جدًا (أكثر من 30MB):",fMaxImg:"لا يمكن إرسال المزيد من الصور مرة واحدة.",fNoImg:"لا يمكن إرسال الصور هنا.",fScanPart:"ملف PDF ممسوح: تُرسل الصفحات الأولى فقط.",fUnsupported:"لا يمكن قراءة هذا النوع:",fEmpty:"لا يوجد نص في:",fFail:"تعذّر فتح:",vLangNo:"الصوت غير متاح بهذه اللغة. اضغط 🎤 مرة أخرى.",vNo:"الصوت غير متاح هنا. جرّب متصفح Chrome.",vDenied:"لم يُسمح باستخدام الميكروفون.",vSpeakOn:"🔊 قراءة الردود: تشغيل",vSpeakOff:"🔈 قراءة الردود: إيقاف",vStop:"⏹ إيقاف",listenAll:"🔊 استمع",tDesign:"تصميم",dAiTitle:"✨ ماذا تريد أن تصمم؟ ستصممه لومينا",dPh:"مثال: ملصق تهنئة بيوم الجمعة",dIdeas:["جمعة مباركة", "عيد مبارك", "التسجيل مفتوح", "محاضرة إسلامية", "حكمة ملهمة"],dTpl:"القالب",dSize:"المقاس",dColor:"اللون",dArabic:"سطر عربي (اختياري)",dTitle:"العنوان",dSub:"العنوان الفرعي",dBody:"التفاصيل (سطر لكل معلومة)",dFoot:"التذييل",dPhoto:"صورة (اختياري)",dPick:"📷 اختر صورة",dRemove:"إزالة الصورة",dSave:"⬇ حفظ كصورة",dHold:"اضغط مطولًا على الصورة ثم اختر حفظ الصورة.",dClose:"حسنًا",dMaking:"لومينا تصمم…",dDone:"تم! يمكنك تعديل النص والألوان والمقاس.",dFail:"تعذّر التصميم الآن، صمّمه بنفسك بالأسفل.",dSaved:"تم الحفظ ✓",tpls:["إسلامي", "عيد ومناسبات", "فعالية", "اقتباس", "إعلان", "مع صورة", "بسيط", "عصري", "رسم ذكي"],sizes:["منشور ١:١", "ستوري", "غلاف فيسبوك", "ملصق A4", "صورة مصغرة"],defAr:"جُمُعَةٌ مُبَارَكَةٌ",defTitle:"جمعة مباركة",defSub:"خير يوم طلعت عليه الشمس",defBody:"أكثروا من الصلاة على النبي ﷺ\nاقرؤوا سورة الكهف",defFoot:"Lumina",fDesign:["🎨", "صمّم ملصقات ولافتات", "صِف ما تريد وستصممه لومينا"],lAr:"العربية",lArSub:"لغة القرآن",lEn:"English",lEnSub:"تعلّم الإنجليزية",tWords:"كلمات",tPhrases:"جمل",tLessons:"دروس",tTalk:"تحدّث",phHint:"جمل يومية. اضغط 🔊 لتسمعها.",lsHint:"اختر درسًا وستعلّمك لومينا خطوة بخطوة.",rlLbl:"لغة الجواب:",rlOpts:["تلقائي","বাংলা","English","العربية"],qtAr:"ما معنى هذه الكلمة؟",qtEn:"ما معنى هذه الكلمة الإنجليزية؟",
 talkTitleEn:"تدريب المحادثة بالإنجليزية",talkDescEn:"تحدّث مع لومينا بإنجليزية بسيطة مع تصحيح لطيف للأخطاء.",talkTitleAr:"تدريب المحادثة بالعربية",talkDescAr:"تحدّث مع لومينا بعربية بسيطة مع تصحيح لطيف للأخطاء.",
 levels:["مبتدئ","متوسط","متقدم"],talkGo:"ابدأ",modeEn:"🗣 تدريب الإنجليزية",modeAr:"🗣 تدريب العربية",endMode:"إنهاء",
 feat:[["📖","القرآن","مع الترجمة والتفسير"],["📜","الحديث","٨ كتب مع الدرجات"],["ع","تعلّم العربية","من الحروف إلى المحادثة"],["Aa","تعلّم الإنجليزية","كلمات وجمل وقواعد"]],tQuran:"القرآن",tHadith:"الحديث",tLearn:"اللغات",qSrc:"النص والترجمات: quran-json (CC BY 4.0) · التفاسير: Quranic Universal Library (Tarteel) / quran.com",hLead:"الكتب الستة وموطأ مالك والأربعون النووية: النص العربي والترجمة البنغالية ودرجة الحديث.",hSrc:"الترجمة البنغالية: hadithbd.com · البيانات: fawazahmed0/hadith-api · الدرجات: الألباني وزبير علي زئي وغيرهم",numPh:"رقم الحديث، مثل ١",allCols:"كل الكتب →",allSecs:"كل الأبواب →",ch:"باب",hadithW:"حديث",notFound:"لا يوجد حديث بهذا الرقم",showAr:"النص العربي",simple:"اشرح ببساطة",readMore:"اقرأ المزيد ↓",ik:"تفسير ابن كثير",zk:"أبو بكر زكريا",ab:"أحسن البيان",other:"أخرى",sqPh:"ابحث عن سورة بالاسم أو الرقم",hqPh:"ابحث في الأحاديث…",back:"كل السور →",tafsir:"تفسير",verses:"آية",meccan:"مكية",medinan:"مدنية",hExplain:"اشرح الحديث",more:"عرض الكل",langName:"العربية",tAsk:"اسأل",tAbc:"الحروف",tVocab:"كلمات",tQuiz:"تدريب",
-  h:"القرآن والحديث والعربية والإنجليزية في مكان واحد",sub:"اسأل أي سؤال، واحصل على الجواب بالبنغالية أو الإنجليزية أو العربية.",
+  h:"كيف يمكنني مساعدتك اليوم؟",sub:"اسأل أي شيء، أرفق صورة أو ملفًا، أو تحدّث.",
   ph:"ماذا تريد أن تعرف؟",ph2:"اسأل سؤالًا آخر…",reset:"سؤال جديد →",
   abcHint:"اضغط على حرف لترى نطقه وأشكاله",vocabHint:"اضغط على البطاقة لترى المعنى",
   score:"صحيح",next:"التالي",qt:"ما معنى هذه الكلمة؟",good:["أحسنت!","صحيح تمامًا!","ممتاز!"],bad:"قريب! الجواب الصحيح بالأخضر.",
@@ -705,8 +809,9 @@ function applyLang(){
 $('langBtn').onclick=e=>{e.stopPropagation();$('menu').classList.toggle('open');};
 document.addEventListener('click',()=>$('menu').classList.remove('open'));
 document.querySelectorAll('.list button').forEach(b=>b.onclick=()=>{L=b.dataset.l;try{localStorage.setItem('lumina-lang',L)}catch(e){}applyLang();});
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+document.querySelectorAll('.tabs button[data-v]').forEach(b=>b.onclick=()=>{
+  document.body.classList.remove('nav-open');
+  document.querySelectorAll('.tabs button[data-v]').forEach(x=>x.classList.toggle('on',x===b));
   document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
 });
 const goTab=v=>document.querySelector(`.tabs button[data-v="${v}"]`).click();
@@ -1063,7 +1168,22 @@ async function addFiles(list){
       }else if(ext==='docx'){
         await loadScript('https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js');
         const r=await window.mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()});Object.assign(ph,{kind:'text',text:r.value.trim()});
-      }else if(/^(txt|md|csv|tsv|json|html?|xml|js|py|java|c|cpp|css|srt|log)$/.test(ext)||f.type.startsWith('text/')){
+      }else if(/^(xlsx|xlsm|xls|ods)$/.test(ext)){
+        await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
+        const wb=window.XLSX.read(new Uint8Array(await f.arrayBuffer()),{type:'array'});
+        const parts=wb.SheetNames.slice(0,10).map(n=>`[শিট: ${n}]\n`+window.XLSX.utils.sheet_to_csv(wb.Sheets[n]).split('\n').filter(l=>l.replace(/,/g,'').trim()).join('\n'));
+        Object.assign(ph,{kind:'text',text:parts.join('\n\n').trim()});
+      }else if(ext==='pptx'){
+        await loadScript('https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js');
+        const zip=await window.JSZip.loadAsync(await f.arrayBuffer());
+        const slides=Object.keys(zip.files).filter(n=>/^ppt\/slides\/slide\d+\.xml$/.test(n)).sort((a,b)=>+a.match(/(\d+)\.xml/)[1]-+b.match(/(\d+)\.xml/)[1]);
+        let text='';for(const sl of slides){const x=await zip.file(sl).async('string');const words=[...x.matchAll(/<a:t>([^<]*)<\/a:t>/g)].map(m=>m[1]);text+=`\n[স্লাইড ${sl.match(/(\d+)\.xml/)[1]}]\n`+words.join(' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"');}
+        Object.assign(ph,{kind:'text',text:text.trim()});
+      }else if(ext==='ipynb'){
+        const nb=JSON.parse(await f.text());
+        const text=(nb.cells||[]).map((c,i)=>`[${c.cell_type==='code'?'Code':'Text'} ${i+1}]\n`+(Array.isArray(c.source)?c.source.join(''):String(c.source||''))).join('\n\n');
+        Object.assign(ph,{kind:'text',text:text.trim()});
+      }else if(/^(txt|md|markdown|csv|tsv|json|jsonl|html?|xml|ya?ml|toml|ini|cfg|log|srt|vtt|tex|bib|rtf|js|mjs|jsx|ts|tsx|py|java|kt|c|h|cpp|hpp|cc|cs|go|rs|php|rb|swift|dart|r|m|sql|sh|bat|ps1|css|scss|vue|svelte|lua|pl|asm|s)$/.test(ext)||f.type.startsWith('text/')||f.type==='application/json'){
         Object.assign(ph,{kind:'text',text:(await f.text()).trim()});
       }else{atts.splice(atts.indexOf(ph),1);attNote(t('fUnsupported')+' '+name);}
       if(ph.kind==='text'&&!ph.text){atts.splice(atts.indexOf(ph),1);attNote(t('fEmpty')+' '+name);}
@@ -1168,6 +1288,7 @@ TOOLS.push(
 
 /* ---- rich text: code blocks, figures, plots, math ---- */
 function escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function copyCode(btn){const pre=btn.closest('.codeb').querySelector('pre');try{navigator.clipboard.writeText(pre.textContent).then(()=>{btn.textContent='✓';setTimeout(()=>btn.textContent=t('copy'),1500);});}catch(e){}}
 function mdRich(s){
   const blocks=[];
   s=String(s).replace(/```(\w*)[^\n]*\n?([\s\S]*?)```/g,(m,lang,body)=>{blocks.push({lang:(lang||'').toLowerCase(),body});return `\u0001B${blocks.length-1}\u0001`;});
@@ -1179,7 +1300,7 @@ function mdRich(s){
   h=h.replace(/\u0001B(\d+)\u0001/g,(m,i)=>{const b=blocks[+i];
     if(b.lang==='__table') return `<div class="tblw"><table class="mdt">${b.body.map((r,i)=>`<tr>${r.map(c=>i?`<td>${md(c)}</td>`:`<th>${md(c)}</th>`).join('')}</tr>`).join('')}</table></div>`;
     if(b.lang==='figure'||b.lang==='plot') return `<div class="fig" data-kind="${b.lang}" data-spec="${encodeURIComponent(b.body)}"></div>`;
-    return `<pre class="code">${escHTML(b.body)}</pre>`;});
+    return `<div class="codeb"><div class="codeh"><span>${escHTML(b.lang||'code')}</span><button type="button" class="cpy" onclick="copyCode(this)">${t('copy')}</button></div><pre class="code">${escHTML(b.body)}</pre></div>`;});
   if(pending) h+=`<div class="typing">${t('drawing')}</div>`;
   return h;
 }
@@ -1268,7 +1389,7 @@ async function drawPlot(sp){
 /* ---- Solve tab ---- */
 let solveSubj='math',solveLevel=1;
 try{solveLevel=+(localStorage.getItem('lumina-level')||1)}catch(e){}
-const SUBJ_BG={math:'linear-gradient(135deg,#3d6fd8,#2a4fa8)',geometry:'linear-gradient(135deg,#17826a,#0f5c4a)',physics:'linear-gradient(135deg,#8e44ad,#5b2c83)',chemistry:'linear-gradient(135deg,#d9822b,#a85d14)',biology:'linear-gradient(135deg,#2fa36b,#1b7a4b)'};
+const SUBJ_BG={math:'linear-gradient(135deg,#3d6fd8,#2a4fa8)',geometry:'linear-gradient(135deg,#17826a,#0f5c4a)',physics:'linear-gradient(135deg,#8e44ad,#5b2c83)',chemistry:'linear-gradient(135deg,#d9822b,#a85d14)',biology:'linear-gradient(135deg,#2fa36b,#1b7a4b)',cse:'linear-gradient(135deg,#374151,#111827)',statistics:'linear-gradient(135deg,#0ea5e9,#0369a1)',datascience:'linear-gradient(135deg,#db2777,#9d174d)'};
 function renderSolveUI(){
   const sj=$('subj');sj.innerHTML='';
   t('subjects').forEach(([id,ic,nm,su])=>{const b=document.createElement('button');b.type='button';b.className=id===solveSubj?'on':'';
@@ -1393,6 +1514,22 @@ $('pIdCopy').onclick=async()=>{try{await navigator.clipboard.writeText(deviceId)
 if(window.claude)(async()=>{try{const u=await window.claude.use('user');if(u){if(u.isOwner())usage.role='super';else if(u.canEdit())usage.role='admin';renderUsage();}}catch(e){}})();
 setInterval(()=>{if(usage.resetAt&&Date.now()>=usage.resetAt){refreshWindow();renderUsage();}},60000);
 
+
+/* design: reference photo for Lumina to look at */
+let dRef=null;
+function renderDRef(){const b=$('dRefBox');b.innerHTML='';b.style.display=dRef?'flex':'none';if(!dRef)return;
+  const c=document.createElement('div');c.className='att';c.innerHTML=`<img src="${dRef.url}" alt="">`;const x=document.createElement('button');x.type='button';x.className='ax';x.textContent='✕';x.onclick=()=>{dRef=null;renderDRef();};c.appendChild(x);b.appendChild(c);}
+$('dRefBtn').onclick=()=>$('dRefIn').click();
+$('dRefIn').addEventListener('change',async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+  if(left('upload')<=0){$('dStatus').textContent=limitText('upload');openPlans();return;}
+  if(window.claude&&!imgLimits){$('dStatus').textContent=t('fNoImg');return;}
+  const blob=await toJpeg(f);dRef={blob,url:URL.createObjectURL(blob)};renderDRef();});
+
+/* side menu */
+$('menuBtn').onclick=()=>document.body.classList.toggle('nav-open');
+$('scrim').onclick=()=>document.body.classList.remove('nav-open');
+$('newChatBtn').onclick=()=>{document.body.classList.remove('nav-open');goTab('ask');reset.onclick();setTimeout(()=>q1.focus(),50);};
+$('navPlans').onclick=()=>{document.body.classList.remove('nav-open');openPlans();};
 /* ---------- language packs ---------- */
 const EN_WORDS={
  "রোজকার":[["water","ওয়াটার","পানি","Please give me some water."],["food","ফুড","খাবার","The food is delicious."],["house","হাউস","বাড়ি","This is my house."],["friend","ফ্রেন্ড","বন্ধু","She is my best friend."],["family","ফ্যামিলি","পরিবার","I love my family."],["morning","মর্নিং","সকাল","I wake up early in the morning."],["money","মানি","টাকা","I need some money."],["road","রোড","রাস্তা","The road is very busy."]],
@@ -1430,8 +1567,8 @@ function buildSystem(){
   const lv=['a complete beginner','an intermediate learner','an advanced learner'][talkLevel];
   if(chatMode==='talk-en') x+=`\n\nPRACTICE MODE: English conversation practice. The student is ${lv}. Talk ONLY in simple, natural English suited to that level (short sentences), keep a friendly conversation going and end each turn with one easy question. If the student's last message had mistakes, first add one short line starting with "✏️" that shows the corrected sentence and a brief explanation in Bangla. If they write in Bangla, help them say it in English.`;
   if(chatMode==='talk-ar') x+=`\n\nPRACTICE MODE: Arabic conversation practice. The student is ${lv}. Reply in simple Modern Standard Arabic with full harakat (1–3 short sentences), then on new lines give the Bangla pronunciation in brackets and the Bangla meaning. End with one easy question in Arabic. If the student's Arabic had mistakes, add a short line starting with "✏️" showing the correction with a brief Bangla explanation. If they write in Bangla, help them say it in Arabic.`;
-  if(chatMode==='solve'){const sub={math:'Mathematics',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry',biology:'Biology'}[solveSubj]||'Mathematics';const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
-    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}`;}
+  if(chatMode==='solve'){const sub={math:'Mathematics',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry',biology:'Biology',cse:'Computer Science & Engineering (programming)',statistics:'Statistics & Probability',datascience:'Data Science & Machine Learning'}[solveSubj]||'Mathematics';const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
+    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}${solveSubj==='cse'?' For CSE: put all code in fenced blocks with the language name (```python, ```c, ```java, ```cpp, ```javascript); keep code correct and runnable; explain the logic step by step, show a dry run with a small example input and the expected output, and state time and space complexity (Big-O). If the student shares their code, find bugs and show the fixed version.':''}${solveSubj==='statistics'?' For Statistics: show the formula, then substitute values; use the calculate tool for every value (math.js: mean, median, mode, std(data) = sample SD, std(data, "uncorrected") = population SD, variance, quantileSeq, combinations, factorial); say whether you used sample or population formulas; use markdown tables for frequency distributions and a plot block for distributions or trends when helpful.':''}${solveSubj==='datascience'?' For Data Science: explain concepts simply with small examples; give Python code (pandas, numpy, matplotlib, scikit-learn) in ```python blocks; if the student uploaded data (CSV/Excel text in the message), first describe its columns and size, then compute key numbers with the calculate tool, point out missing or odd values, and suggest next analysis steps; use tables and a plot block where helpful.':''}`;}
   x+=`\n\nATTACHMENTS: The student can attach photos and files (PDF, Word, text). File text arrives inside the message between [ফাইল: name] markers; photos arrive as images. Read them carefully, answer about their content, and say plainly if something is unreadable. For photos of homework, explain the steps.`;
   if(voiceTurn) x+=`\n\nVOICE: The student is talking by voice and your reply will be read aloud. Reply in short, natural spoken sentences (2–5 sentences), no lists, tables, symbols or emojis. Keep Arabic short and with harakat.`;
   return x;
@@ -1573,7 +1710,7 @@ $('qnext').onclick=newQ;
 
 /* ================= DESIGN STUDIO ================= */
 const D_SIZES=[[1080,1080],[1080,1920],[1640,624],[1240,1754],[1280,720]];
-const D_TPLS=['islamic','eid','event','quote','notice','photo'];
+const D_TPLS=['islamic','eid','event','quote','notice','photo','minimal','modern','art'];
 const D_PAL=[
  {bg1:'#1a8a70',bg2:'#0a3f33',acc:'#e9c96f',tx:'#ffffff',soft:'rgba(255,255,255,.82)'},
  {bg1:'#2b3a78',bg2:'#0c1230',acc:'#f2c66d',tx:'#ffffff',soft:'rgba(255,255,255,.8)'},
@@ -1733,12 +1870,43 @@ async function drawDesign(){
       {text:c.body,w:400,size:wide?30:36,c:'rgba(255,255,255,.85)',lh:1.5,gap:16},
       {text:c.foot,w:600,size:30,c:p.acc==='#0f5c4a'||p.acc==='#2a5bd7'?'#f6e2a2':p.acc,gap:0}],{x:pad,y:H*.35,w:W-pad*2,h:H*.65-pad*.9,valign:'bottom'},'left');
   }
+  else if(T==='minimal'){
+    const light=p.bg1==='#ffffff'||p.bg1==='#fbf6ea';ctx.fillStyle=light?p.bg1:'#ffffff';ctx.fillRect(0,0,W,H);
+    const ac=light?p.acc:p.bg1;ctx.fillStyle=ac;ctx.fillRect(pad,pad,10*K,H-pad*2);
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?54:70,c:ac,gap:10,rtl:true,align:'left'},
+      {text:c.title,w:700,size:wide?96:120,c:'#111827',lh:1.12,gap:20},
+      {text:c.sub,w:500,size:wide?38:46,c:'#4b5563',gap:26},
+      {text:c.body,w:400,size:wide?32:38,c:'#374151',lh:1.55,gap:0}],{x:pad*1.6,y:pad,w:W-pad*2.6,h:H-pad*2.4,valign:'center'},'left');
+    if(c.foot){ctx.font=`600 ${28*K}px ${BN}`;ctx.fillStyle=ac;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(c.foot,pad*1.6,H-pad*.8,W-pad*2.6);}
+  }
+  else if(T==='modern'){
+    ctx.fillStyle=p.bg2;ctx.fillRect(0,0,W,H);
+    const blob=(x,y,r,col)=>{const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);};
+    blob(W*.15,H*.2,Math.max(W,H)*.6,p.bg1);blob(W*.9,H*.85,Math.max(W,H)*.55,p.acc+'aa');blob(W*.85,H*.1,Math.max(W,H)*.35,'rgba(255,255,255,.18)');
+    const m=pad*.7;ctx.save();ctx.fillStyle='rgba(255,255,255,.12)';ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=2*u;roundRect(ctx,m,m,W-m*2,H-m*2,40*u);ctx.fill();ctx.stroke();ctx.restore();
+    const light=p.bg1==='#ffffff'||p.bg1==='#fbf6ea',tc=light?'#111827':'#ffffff',sc=light?'#374151':'rgba(255,255,255,.85)';
+    stackK(ctx,[
+      {text:c.ar,f:AR,w:700,size:wide?64:84,c:light?p.acc:'#ffffff',gap:12,rtl:true},
+      {text:c.title,w:700,size:wide?90:112,c:tc,lh:1.15,gap:16},
+      {text:c.sub,w:500,size:wide?38:46,c:sc,gap:24},
+      {text:c.body,w:400,size:wide?32:38,c:sc,lh:1.55,gap:28},
+      {text:c.foot,w:600,size:30,c:light?'#ffffff':p.bg2,pill:light?p.acc:'#ffffff',gap:0,noWrap:true}],{x:m+pad*.6,y:m+pad*.5,w:W-(m+pad*.6)*2,h:H-(m+pad*.5)*2,valign:'center'},'center');
+  }
+  else if(T==='art'){
+    if(dState.art){const im=dState.art,r=Math.max(W/im.width,H/im.height),iw=im.width*r,ih=im.height*r;ctx.drawImage(im,(W-iw)/2,(H-ih)/2,iw,ih);}
+    else{ctx.fillStyle='#f3f4f6';ctx.fillRect(0,0,W,H);ctx.fillStyle='#9ca3af';ctx.font=`500 ${40*K}px ${BN}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🎨 '+t('dArtEmpty'),W/2,H/2,W-pad*2);}
+  }
 }
 let dTimer=null;const redraw=()=>{clearTimeout(dTimer);dTimer=setTimeout(drawDesign,80);};
 ['fAr','fTitle','fSub','fBody','fFoot'].forEach(id=>$(id).addEventListener('input',redraw));
 function renderDesignUI(){
-  $('dPrompt').placeholder=t('dPh');
-  const id=$('dIdeas');id.innerHTML='';t('dIdeas').forEach(x=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=x;b.onclick=()=>{$('dPrompt').value=x;makeDesign();};id.appendChild(b);});
+  const art=typeof dMode!=='undefined'&&dMode==='art';
+  $('dPrompt').placeholder=art?t('dArtPh'):t('dPh');
+  const md=$('dModes');md.innerHTML='';[['poster',t('dModePoster')],['art',t('dModeArt')]].forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.className=k===(art?'art':'poster')?'on':'';b.textContent=l;b.onclick=()=>setDMode(k);md.appendChild(b);});
+  const sy=$('dStyles');sy.style.display=art?'flex':'none';sy.innerHTML='';if(art)t('artStyles').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===artStyle?' on':'');b.textContent=x;b.onclick=()=>{artStyle=i;renderDesignUI();};sy.appendChild(b);});
+  document.querySelectorAll('.dPanel .txtF').forEach(el=>el.style.display=art?'none':'');
+  const id=$('dIdeas');id.innerHTML='';(art?t('dArtIdeas'):t('dIdeas')).forEach(x=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=x;b.onclick=()=>{$('dPrompt').value=x;art?makeArt():makeDesign();};id.appendChild(b);});
   const tp=$('dTpls');tp.innerHTML='';t('tpls').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(D_TPLS[i]===dState.tpl?' on':'');b.textContent=x;b.onclick=()=>{dState.tpl=D_TPLS[i];renderDesignUI();drawDesign();};tp.appendChild(b);});
   const sz=$('dSizes');sz.innerHTML='';t('sizes').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===dState.size?' on':'');b.textContent=x;b.onclick=()=>{dState.size=i;renderDesignUI();drawDesign();};sz.appendChild(b);});
   const co=$('dColors');co.innerHTML='';D_PAL.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.className='sw'+(i===dState.pal?' on':'');b.style.background=`linear-gradient(135deg,${p.bg1} 0 55%,${p.acc} 55%)`;b.onclick=()=>{dState.pal=i;renderDesignUI();drawDesign();};co.appendChild(b);});
@@ -1747,10 +1915,60 @@ function fillDefaults(){ if($('fTitle').value) return; $('fAr').value=t('defAr')
 $('fPhoto').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{dState.photo=im;dState.tpl='photo';$('fPhotoX').style.display='';renderDesignUI();drawDesign();};im.src=r.result;};r.readAsDataURL(f);});
 $('fPhotoX').onclick=()=>{dState.photo=null;$('fPhoto').value='';$('fPhotoX').style.display='none';drawDesign();};
 
+
+/* ---- AI illustration (SVG) ---- */
+let dMode='poster',artStyle=0;
+const ART_SYS=`You are a skilled illustrator. Draw ONE complete, beautiful illustration as SVG code for Lumina's image maker.
+Return ONLY the SVG markup, starting with <svg and ending with </svg>, nothing else.
+Rules:
+- Root: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">. Fill the whole canvas with a background.
+- Make it rich and polished: layered shapes, linear/radial gradients, soft shadows or glows (filters with feGaussianBlur are fine), depth (foreground/middle/background), pleasing colour harmony, at least 40 shapes. Clean geometry, no broken paths.
+- No <script>, no <foreignObject>, no <image>, no external links, fonts or URLs, no event attributes.
+- Do not add text unless the request asks for words. If it does, keep text short, large and centred, font-family="Hind Siliguri, Noto Sans Bengali, sans-serif" (Arabic: font-family="Amiri, serif").
+- Never draw real or identifiable people, copyrighted or trademarked characters, brand logos, nudity, gore or violence. For Islamic themes, never depict prophets, angels or faces of holy figures; prefer mosques, lanterns, crescents, geometric patterns, nature, books and calligraphy-like ornaments (do not write Quran verses unless they are given in the request).
+- Keep the SVG under about 25,000 characters.`;
+function sanitizeSVG(txt){
+  const m=String(txt||'').match(/<svg[\s\S]*<\/svg>/i);if(!m)throw new Error('no svg');
+  const doc=new DOMParser().parseFromString(m[0],'image/svg+xml');const root=doc.documentElement;
+  if(!root||root.nodeName.toLowerCase()!=='svg'||doc.querySelector('parsererror'))throw new Error('bad svg');
+  root.querySelectorAll('script,foreignObject,iframe,image,use[href^="http"],a').forEach(n=>n.remove());
+  root.querySelectorAll('*').forEach(n=>{[...n.attributes].forEach(a=>{const v=a.value||'';if(/^on/i.test(a.name)||(/href$/i.test(a.name)&&!v.startsWith('#'))||/url\(\s*['"]?(?!#)/i.test(v)||/javascript:/i.test(v))n.removeAttribute(a.name);});});
+  if(!root.getAttribute('xmlns'))root.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  return new XMLSerializer().serializeToString(root);
+}
+function svgToImage(svg,W,H){return new Promise((res,rej)=>{const doc=new DOMParser().parseFromString(svg,'image/svg+xml');const r=doc.documentElement;if(!r.getAttribute('width')){r.setAttribute('width',W);r.setAttribute('height',H);}
+  const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(r)],{type:'image/svg+xml'}));const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=url;});}
+async function makeArt(){
+  const q=$('dPrompt').value.trim();if(!q)return;
+  if(left('design')<=0){$('dStatus').textContent=limitText('design');openPlans();return;}
+  if(dRef&&left('upload')<=0){$('dStatus').textContent=limitText('upload');openPlans();return;}
+  const [W,H]=D_SIZES[dState.size];const style=t('artStyles')[artStyle];
+  const prompt=ART_SYS.replace(/\{W\}/g,W).replace(/\{H\}/g,H)+`\n\nStyle: ${['flat vector illustration','minimal, lots of white space, few colours','Islamic geometric art with arabesque ornaments','soft watercolour look (use blurred, translucent layered shapes)','clean line art with a few accent colours','glossy 3D-looking shapes with highlights and shadows','cute, friendly cartoon style','dreamy night scene with glowing light'][artStyle]||'flat vector'}.\nCanvas: ${W}×${H}.${dRef?'\nA reference photo is attached: use its subject, colours or composition as inspiration (do not trace a real person).':''}\nRequest: ${q}`;
+  const st=$('dStatus');st.textContent=t('dArtMaking');$('dGo').disabled=true;
+  try{
+    let text;
+    if(window.claude){
+      if(!sample) throw new Error('unavailable');
+      const opts={cache:false,modelTier:'complex'};if(dRef)opts.images=[dRef.blob];
+      text=(await sample(prompt,opts)).text;
+    }else{
+      const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({task:'art',uploads:dRef?1:0,images:dRef?[await blobToB64(dRef.blob)]:undefined,messages:[{role:'user',content:prompt}]})});
+      if(res.status===429){const j=await res.json().catch(()=>({}));if(j.error==='limit'){applyServerUsage(j.usage);st.textContent=limitText(j.kind||'design');openPlans();return;}}
+      if(!res.ok) throw new Error('http');const jj=await res.json();applyServerUsage(jj.usage);text=jj.text;
+    }
+    const svg=sanitizeSVG(text);dState.art=await svgToImage(svg,W,H);dState.artSvg=svg;dState.tpl='art';
+    useLocal('design',1);if(dRef)useLocal('upload',1);
+    renderDesignUI();await drawDesign();st.textContent=t('dArtDone');$('dUseArt').style.display='';
+    $('dCanvas').scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(e){st.textContent=t('dArtFail');}
+  finally{$('dGo').disabled=false;}
+}
+$('dUseArt').onclick=()=>{if(!dState.art)return;dState.photo=dState.art;dState.tpl='photo';$('fPhotoX').style.display='';fillDefaults();setDMode('poster');drawDesign();};
+function setDMode(m){dMode=m;renderDesignUI();}
 /* Lumina designs it */
 const DESIGN_SYS=`You design social posts, posters and banners for Lumina's design tool. Return ONLY a JSON object, no other text:
 {"template":"islamic|eid|event|quote|notice|photo","palette":0-5,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
-Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo.
+Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo; minimal = clean, simple, professional; modern = trendy social media post with soft gradients.
 Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue.
 Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 poster, 4 YouTube thumbnail. Pick from the request words (ব্যানার/banner→2, পোস্টার/poster→3, স্টোরি/status→1, থাম্বনেইল→4).
 Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
@@ -1768,9 +1986,10 @@ async function makeDesign(){
     if(window.claude){
       if(!sample) throw new Error('unavailable');
       const input=[{role:'user',content:DESIGN_SYS+"\n\nRequest: "+q}];
-      const r=await sample(input,{cache:false,tools:TOOLS.filter(x=>x.name==='get_quran_verses')});d=parseJSON(r.text);
+      const o={cache:false,tools:TOOLS.filter(x=>x.name==='get_quran_verses')};if(dRef){o.images=[dRef.blob];input[0].content+='\n(A reference photo is attached: read any text or details from it and use them.)';}
+      const r=await sample(input,o);d=parseJSON(r.text);
     }else{
-      const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({task:'design',messages:[{role:'user',content:q}]})});
+      const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({task:'design',uploads:dRef?1:0,images:dRef?[await blobToB64(dRef.blob)]:undefined,messages:[{role:'user',content:q+(dRef?'\n(A reference photo is attached: read any text or details from it and use them.)':'')}]})});
       if(res.status===429){const j=await res.json().catch(()=>({}));if(j.error==='limit'){applyServerUsage(j.usage);$('dStatus').textContent=limitText('design');openPlans();return;}}
       if(!res.ok) throw new Error('http');const jj=await res.json();applyServerUsage(jj.usage);d=parseJSON(jj.text);
     }
@@ -1778,14 +1997,14 @@ async function makeDesign(){
     if(Number.isInteger(+d.palette)&&D_PAL[+d.palette])dState.pal=+d.palette;
     if(Number.isInteger(+d.size)&&D_SIZES[+d.size])dState.size=+d.size;
     $('fAr').value=d.arabic||'';$('fTitle').value=d.title||'';$('fSub').value=d.subtitle||'';$('fBody').value=(d.body||'').replace(/\\n/g,'\n');$('fFoot').value=d.footer||'';
-    useLocal('design',1);
+    useLocal('design',1);if(dRef)useLocal('upload',1);
     renderDesignUI();await drawDesign();st.textContent=t('dDone');
     $('dCanvas').scrollIntoView({behavior:'smooth',block:'center'});
   }catch(e){st.textContent=t('dFail');}
   finally{$('dGo').disabled=false;}
 }
-$('dForm').addEventListener('submit',e=>{e.preventDefault();makeDesign();});
-$('dPrompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!('ontouchstart' in window)){e.preventDefault();makeDesign();}});
+$('dForm').addEventListener('submit',e=>{e.preventDefault();dMode==='art'?makeArt():makeDesign();});
+$('dPrompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!('ontouchstart' in window)){e.preventDefault();dMode==='art'?makeArt():makeDesign();}});
 
 /* save */
 let downloads=null;

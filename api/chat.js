@@ -33,14 +33,14 @@ function buildSystem({ replyLang = 'auto', mode = null, level = 0, voice = false
   const talkLevel = [0, 1, 2].includes(+level) ? +level : 0;
   const chatMode = ['talk-en', 'talk-ar', 'solve'].includes(mode) ? mode : null;
   const voiceTurn = !!voice;
-  const solveSubj = ['math', 'geometry', 'physics', 'chemistry', 'biology'].includes(subject) ? subject : 'math';
+  const solveSubj = ['math', 'geometry', 'physics', 'chemistry', 'biology', 'cse', 'statistics', 'datascience'].includes(subject) ? subject : 'math';
   const names={bn:'Bangla (বাংলা script)',en:'English',ar:'Arabic (فصحى, with harakat on key words)'};
   if(replyLang!=='auto') x+=`\n\nANSWER LANGUAGE: The student chose to always get answers in ${names[replyLang]}. Write your whole reply in ${names[replyLang]}, whatever language the question is in. Quran ayahs stay in Arabic with the translation in ${names[replyLang]}.`;
   const lv=['a complete beginner','an intermediate learner','an advanced learner'][talkLevel];
   if(chatMode==='talk-en') x+=`\n\nPRACTICE MODE: English conversation practice. The student is ${lv}. Talk ONLY in simple, natural English suited to that level (short sentences), keep a friendly conversation going and end each turn with one easy question. If the student's last message had mistakes, first add one short line starting with "✏️" that shows the corrected sentence and a brief explanation in Bangla. If they write in Bangla, help them say it in English.`;
   if(chatMode==='talk-ar') x+=`\n\nPRACTICE MODE: Arabic conversation practice. The student is ${lv}. Reply in simple Modern Standard Arabic with full harakat (1–3 short sentences), then on new lines give the Bangla pronunciation in brackets and the Bangla meaning. End with one easy question in Arabic. If the student's Arabic had mistakes, add a short line starting with "✏️" showing the correction with a brief Bangla explanation. If they write in Bangla, help them say it in Arabic.`;
-  if(chatMode==='solve'){const sub={math:'Mathematics',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry',biology:'Biology'}[solveSubj]||'Mathematics';const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
-    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}`;}
+  if(chatMode==='solve'){const sub={math:'Mathematics',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry',biology:'Biology',cse:'Computer Science & Engineering (programming)',statistics:'Statistics & Probability',datascience:'Data Science & Machine Learning'}[solveSubj]||'Mathematics';const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
+    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}${solveSubj==='cse'?' For CSE: put all code in fenced blocks with the language name (```python, ```c, ```java, ```cpp, ```javascript); keep code correct and runnable; explain the logic step by step, show a dry run with a small example input and the expected output, and state time and space complexity (Big-O). If the student shares their code, find bugs and show the fixed version.':''}${solveSubj==='statistics'?' For Statistics: show the formula, then substitute values; use the calculate tool for every value (math.js: mean, median, mode, std(data) = sample SD, std(data, "uncorrected") = population SD, variance, quantileSeq, combinations, factorial); say whether you used sample or population formulas; use markdown tables for frequency distributions and a plot block for distributions or trends when helpful.':''}${solveSubj==='datascience'?' For Data Science: explain concepts simply with small examples; give Python code (pandas, numpy, matplotlib, scikit-learn) in ```python blocks; if the student uploaded data (CSV/Excel text in the message), first describe its columns and size, then compute key numbers with the calculate tool, point out missing or odd values, and suggest next analysis steps; use tables and a plot block where helpful.':''}`;}
   x+=`\n\nATTACHMENTS: The student can attach photos and files (PDF, Word, text). File text arrives inside the message between [ফাইল: name] markers; photos arrive as images. Read them carefully, answer about their content, and say plainly if something is unreadable. For photos of homework, explain the steps.`;
   if(voiceTurn) x+=`\n\nVOICE: The student is talking by voice and your reply will be read aloud. Reply in short, natural spoken sentences (2–5 sentences), no lists, tables, symbols or emojis. Keep Arabic short and with harakat.`;
   return x;
@@ -48,10 +48,10 @@ function buildSystem({ replyLang = 'auto', mode = null, level = 0, voice = false
 
 const DESIGN_SYS = `You design social posts, posters and banners for Lumina's design tool. Return ONLY a JSON object, no other text:
 {"template":"islamic|eid|event|quote|notice|photo","palette":0-5,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
-Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo.
+Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo; minimal = clean, simple, professional; modern = trendy social media post with soft gradients.
 Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue.
 Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 poster, 4 YouTube thumbnail. Pick from the request words (ব্যানার/banner→2, পোস্টার/poster→3, স্টোরি/status→1, থাম্বনেইল→4).
-Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
+Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\\\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
 Arabic line: optional, with full harakat. Only use well-known phrases (e.g. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ, جُمُعَةٌ مُبَارَكَةٌ, عِيدٌ مُبَارَكٌ, رَمَضَانُ كَرِيمٌ, اَلْحَمْدُ لِلَّهِ) or a Quran ayah you fetched with get_quran_verses (copy its Arabic exactly; then put the reference like (সূরা আল-বাকারা ২:১৫৩) in the subtitle). Never write an ayah or hadith from memory. Leave "" if not fitting.`;
 
 const CDN = {
@@ -143,11 +143,11 @@ function limited(ip) {
   return list.length > 60;
 }
 
-async function callClaude(messages, system, tools = TOOLS) {
+async function callClaude(messages, system, tools = TOOLS, maxTokens = 1500) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: process.env.LUMINA_MODEL || 'claude-sonnet-5-5', max_tokens: 1500, system, tools, messages })
+    body: JSON.stringify({ model: process.env.LUMINA_MODEL || 'claude-sonnet-5-5', max_tokens: maxTokens, system, ...(tools.length ? { tools } : {}), messages })
   });
   const data = await r.json();
   return { status: r.status, ok: r.ok, data };
@@ -168,8 +168,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'bad request' });
 
   const body = req.body || {};
-  const isDesign = body.task === 'design';
-  if (!isDesign && Array.isArray(body.images) && body.images.length) {
+  const isArt = body.task === 'art';
+  const isDesign = body.task === 'design' || isArt;
+  if (Array.isArray(body.images) && body.images.length) {
     const imgs = body.images.slice(0, 4)
       .filter(i => i && typeof i.data === 'string' && /^image\/(jpeg|png|webp|gif)$/.test(i.media_type) && i.data.length < 5_000_000)
       .map(i => ({ type: 'image', source: { type: 'base64', media_type: i.media_type, data: i.data } }));
@@ -180,15 +181,16 @@ export default async function handler(req, res) {
   const device = deviceOf(req);
   if (!device) return res.status(400).json({ error: 'no device' });
   const ipAddr = clientIp(req);
-  const need = isDesign ? { design: 1 } : { chat: 1, upload: Math.min(10, Math.max(+body.uploads || 0, Array.isArray(body.images) ? body.images.length : 0)) };
+  const nUp = Math.min(10, Math.max(+body.uploads || 0, Array.isArray(body.images) ? body.images.length : 0));
+  const need = isDesign ? { design: 1, upload: nUp } : { chat: 1, upload: nUp };
   let gate;
   try { gate = await check(device, ipAddr, need); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
-  const tools = isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : TOOLS;
-  const system = isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
+  const tools = isArt ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : TOOLS;
+  const system = isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
   try {
     for (let step = 0; step < 6; step++) {
-      const { status, ok, data } = await callClaude(messages, system, tools);
+      const { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isDesign ? 1500 : 2500);
       if (status === 429) return res.status(429).json({ error: 'busy' });
       if (!ok) return res.status(500).json({ error: data?.error?.message || 'error' });
       if (data.stop_reason !== 'tool_use') {
