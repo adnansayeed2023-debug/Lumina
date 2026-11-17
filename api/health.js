@@ -22,6 +22,11 @@ export default async function handler(req, res) {
       if (!r.ok) out.anthropic_status = r.status;
     } catch (e) { out.anthropic_key_works = false; out.anthropic_error = (e && (e.name || 'error')) + (e && e.cause && e.cause.code ? ':' + e.cause.code : ''); }
   }
+  // ?models=1 lists the model ids this key can use (ids only)
+  if (out.anthropic_key_works && req.query && req.query.models === '1') {
+    try { const r = await fetch('https://api.anthropic.com/v1/models?limit=100', { headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' } });
+      const j = await r.json(); out.models = (j.data || []).map(m => m.id); } catch (e) { out.models = null; }
+  }
   // ?deep=1 also sends one tiny test message (max 10 tests per hour)
   if (out.anthropic_key_works && req.query && req.query.deep === '1') {
     const n = ((await kget('health:deep')) || 0) + 1; await kset('health:deep', n, 3600);
