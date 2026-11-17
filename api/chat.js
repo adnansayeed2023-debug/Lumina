@@ -135,7 +135,8 @@ async function runTool(name, input, base) {
     const c = idx.find(x => x.id === col); if (!c) return { error: 'unknown collection' };
     const cands = c.sections.filter(s => num >= s[2] && num <= s[3]).sort((a, b) => (a[0] === 0) - (b[0] === 0) || (a[3] - a[2]) - (b[3] - b[2]));
     for (const s of cands) {
-      const [bn, ar] = await Promise.all([getJSON(CDN.hadith('ben-' + col, s[0])), getJSON(CDN.hadith('ara-' + col, s[0]))]);
+      const file = (s[5] || []).includes(num) ? 0 : s[0];   // stray hadiths live in the source's section 0 file
+      const [bn, ar] = await Promise.all([getJSON(CDN.hadith('ben-' + col, file)), getJSON(CDN.hadith('ara-' + col, file))]);
       const h = bn.hadiths.find(x => x.hadithnumber === num);
       if (h) {
         const a = ar.hadiths.find(x => x.hadithnumber === num) || {};
