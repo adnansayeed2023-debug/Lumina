@@ -50,7 +50,7 @@ function buildSystem({ replyLang = 'auto', mode = null, level = 0, voice = false
   if (talkX) { const n = LANG_NAMES[talkX];
     x += `\n\nPRACTICE MODE: ${n} conversation practice. The student is ${lv}; their own language is ${uiN}. Reply mainly in simple ${n} (1–3 short sentences suited to the level). If ${n} is not written in Latin letters, add the pronunciation on the next line (in ${uiN === 'Bangla' ? 'Bangla' : 'Latin'} letters). Then give the meaning in ${uiN}. End with one easy question in ${n}. If the student's message had mistakes, first add one line starting with "✏️" with the correction and a short explanation in ${uiN}. If they write in ${uiN}, help them say it in ${n}.`; }
   if(chatMode==='solve'){const sub={math:'Mathematics',highermath:'Higher Mathematics (vectors, matrices & determinants, trigonometry, calculus, binomial theorem, conics, complex numbers)',geometry:'Geometry',physics:'Physics',chemistry:'Chemistry',biology:'Biology',cse:'Computer Science & Engineering (programming)',statistics:'Statistics & Probability',datascience:'Data Science & Machine Learning'}[solveSubj]||(UNI_SUBJ[solveSubj]?UNI_SUBJ[solveSubj]+' (university course, Bangladesh)':'Mathematics');const lvl=['Class 6–8','SSC (Class 9–10)','HSC (Class 11–12)','University'][solveLevel]||'SSC';
-    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. For theory or non-numerical questions (humanities, law, literature, business concepts, definitions, essays) skip the Given/To-find format and write a well-organised exam-style answer instead: ভূমিকা / Introduction → মূল আলোচনা with short headings and points → উদাহরণ → উপসংহার / Conclusion. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}${solveSubj==='cse'?' For CSE: put all code in fenced blocks with the language name (```python, ```c, ```java, ```cpp, ```javascript); keep code correct and runnable; explain the logic step by step, show a dry run with a small example input and the expected output, and state time and space complexity (Big-O). If the student shares their code, find bugs and show the fixed version.':''}${solveSubj==='statistics'?' For Statistics: show the formula, then substitute values; use the calculate tool for every value (math.js: mean, median, mode, std(data) = sample SD, std(data, "uncorrected") = population SD, variance, quantileSeq, combinations, factorial); say whether you used sample or population formulas; use markdown tables for frequency distributions and a plot block for distributions or trends when helpful.':''}${solveSubj==='datascience'?' For Data Science: explain concepts simply with small examples; give Python code (pandas, numpy, matplotlib, scikit-learn) in ```python blocks; if the student uploaded data (CSV/Excel text in the message), first describe its columns and size, then compute key numbers with the calculate tool, point out missing or odd values, and suggest next analysis steps; use tables and a plot block where helpful.':''}`;}
+    x+=`\n\nSOLVER MODE: Subject ${sub}, student level ${lvl} in Bangladesh (follow NCTB textbook style and terms where relevant). Solve completely, step by step, in the answer language. Subject craft: Physics → write the known quantities with SI units, draw/describe the diagram (use a figure block when useful), state the law used, substitute with units, and check the unit of the answer. Chemistry → balanced equations with states, IUPAC names, mole steps with the molar_mass/balance tools, and reaction conditions. Biology → correct scientific terms (Bangla with English in brackets), describe labelled diagrams part by part, processes as numbered steps, and comparisons as tables. Mathematics/Higher Mathematics → state the formula or theorem first, show every algebraic step, verify by substitution with the calculate tool, and give the final answer in simplest form. Languages and literature → give examples, grammar rules with exceptions, and model answers in exam format. For SSC/HSC use NCTB board style: creative questions (সৃজনশীল) have knowledge, comprehension, application and higher-order parts; mention marks distribution when giving model answers. End solutions with one common mistake to avoid (সাধারণ ভুল). For theory or non-numerical questions (humanities, law, literature, business concepts, definitions, essays) skip the Given/To-find format and write a well-organised exam-style answer instead: ভূমিকা / Introduction → মূল আলোচনা with short headings and points → উদাহরণ → উপসংহার / Conclusion. Structure: দেওয়া আছে / Given → নির্ণেয় / To find → সূত্র / Formula → ধাপে ধাপে সমাধান (numbered steps, one idea per step, LaTeX) → **উত্তর / Answer** (bold, with units). Use the calculate tool for arithmetic and to verify the final answer (substitute back); for chemistry always use balance_chemical_equation / molar_mass. For geometry always include a "figure" block; for functions, motion graphs or projectiles include a "plot" block when useful. If the problem came as a photo, first write the problem as you read it; if anything is unclear, say what you assumed. Finish with one short tip or common mistake to avoid. Do not shorten steps because of voice or chat length rules.${solveSubj==='biology'?' For Biology: explain processes as numbered stages; give each key term in Bangla with the English/scientific term in brackets (e.g. সালোকসংশ্লেষণ (Photosynthesis)); use markdown tables for comparisons and Punnett squares; work out genetic ratios and probabilities with the calculate tool; for structures (cell, heart, flower) describe the labelled parts clearly as a numbered list since you cannot draw organs; mention the NCTB chapter topic when relevant.':''}${solveSubj==='cse'?' For CSE: put all code in fenced blocks with the language name (```python, ```c, ```java, ```cpp, ```javascript); keep code correct and runnable; explain the logic step by step, show a dry run with a small example input and the expected output, and state time and space complexity (Big-O). If the student shares their code, find bugs and show the fixed version.':''}${solveSubj==='statistics'?' For Statistics: show the formula, then substitute values; use the calculate tool for every value (math.js: mean, median, mode, std(data) = sample SD, std(data, "uncorrected") = population SD, variance, quantileSeq, combinations, factorial); say whether you used sample or population formulas; use markdown tables for frequency distributions and a plot block for distributions or trends when helpful.':''}${solveSubj==='datascience'?' For Data Science: explain concepts simply with small examples; give Python code (pandas, numpy, matplotlib, scikit-learn) in ```python blocks; if the student uploaded data (CSV/Excel text in the message), first describe its columns and size, then compute key numbers with the calculate tool, point out missing or odd values, and suggest next analysis steps; use tables and a plot block where helpful.':''}`;}
   x+=`\n\nATTACHMENTS: The student can attach photos and files (PDF, Word, text). File text arrives inside the message between [ফাইল: name] markers; photos arrive as images. Read them carefully, answer about their content, and say plainly if something is unreadable. For photos of homework, explain the steps.`;
   if(voiceTurn) x+=`\n\nVOICE: The student is talking by voice and your reply will be read aloud. Reply in short, natural spoken sentences (2–5 sentences), no lists, tables, symbols or emojis. Keep Arabic short and with harakat.`;
   return x;
@@ -165,6 +165,39 @@ async function callClaude(messages, system, tools = TOOLS, maxTokens = 1500, mod
   return { status: r.status, ok: r.ok, data };
 }
 
+// Streaming version: calls onText(delta) for each piece of text and rebuilds the full message at the end.
+async function callClaudeStream(messages, system, tools, maxTokens, model, onText) {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({ model: model || process.env.LUMINA_MODEL || 'claude-sonnet-5-5', max_tokens: maxTokens, system, stream: true, ...(tools.length ? { tools } : {}), messages })
+  });
+  if (!r.ok) { const data = await r.json().catch(() => ({})); return { status: r.status, ok: false, data }; }
+  const blocks = [], partial = {}; let stop_reason = null, buf = '';
+  const dec = new TextDecoder();
+  const handle = ev => {
+    if (ev.type === 'content_block_start') { blocks[ev.index] = JSON.parse(JSON.stringify(ev.content_block)); if (blocks[ev.index].type === 'text') blocks[ev.index].text = blocks[ev.index].text || ''; }
+    else if (ev.type === 'content_block_delta') {
+      const b = blocks[ev.index], d = ev.delta || {};
+      if (d.type === 'text_delta' && b) { b.text += d.text; onText(d.text); }
+      else if (d.type === 'input_json_delta') partial[ev.index] = (partial[ev.index] || '') + (d.partial_json || '');
+      else if (d.type === 'citations_delta' && b) (b.citations = b.citations || []).push(d.citation);
+    }
+    else if (ev.type === 'content_block_stop') { const b = blocks[ev.index]; if (b && (b.type === 'tool_use' || b.type === 'server_tool_use')) { try { b.input = partial[ev.index] ? JSON.parse(partial[ev.index]) : (b.input || {}); } catch (e) { b.input = {}; } } }
+    else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) stop_reason = ev.delta.stop_reason;
+    else if (ev.type === 'error') throw new Error((ev.error && ev.error.message) || 'stream error');
+  };
+  for await (const chunk of r.body) {
+    buf += dec.decode(chunk, { stream: true });
+    let i;
+    while ((i = buf.indexOf('\n')) >= 0) {
+      const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
+      if (line.startsWith('data:')) { const j = line.slice(5).trim(); if (j && j !== '[DONE]') { let ev; try { ev = JSON.parse(j); } catch (e) { continue; } handle(ev); } }
+    }
+  }
+  return { status: 200, ok: true, data: { content: blocks.filter(Boolean), stop_reason } };
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || 'x';
@@ -209,19 +242,28 @@ export default async function handler(req, res) {
   const system = isPrompt ? IMG_SYS : isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
   const TIERS = { lite: '\n\nMODEL: Bayan Lite. Keep answers short and to the point (under ~200 words) unless the student asks for detail.', pro: '\n\nMODEL: Bayan Pro. Give deeper, more careful answers: check each step, add one extra example or exam tip.', ultra: '\n\nMODEL: Bayan Ultra. Give the most thorough, expert-level answer: careful reasoning, verified steps, multiple examples where useful, common mistakes, and a clear summary.' };
   const systemFull = isDesign ? system : system + (TIERS[mk] || '');
+  const streaming = !isDesign && body.stream === true;
+  let started = false;
+  const out = obj => { if (!started) { res.statusCode = 200; res.setHeader('Content-Type', 'application/x-ndjson; charset=utf-8'); res.setHeader('Cache-Control', 'no-cache, no-transform'); res.setHeader('X-Accel-Buffering', 'no'); started = true; } res.write(JSON.stringify(obj) + '\n'); };
+  const call = (tl) => streaming
+    ? callClaudeStream(messages, systemFull, tl, M.maxTokens, M.id, d => out({ t: d }))
+    : callClaude(messages, systemFull, tl, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : M.maxTokens, isArt || (isDesign && !isPrompt) ? undefined : M.id);
   try {
     for (let step = 0; step < 8; step++) {
-      let { status, ok, data } = await callClaude(messages, systemFull, tools, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : M.maxTokens, isArt || (isDesign && !isPrompt) ? undefined : M.id);
+      if (streaming && step > 0) out({ reset: true });
+      let { status, ok, data } = await call(tools);
       if (!ok && status === 400 && tools.includes(WEB) && /web.?search/i.test(data?.error?.message || '')) {
         tools = tools.filter(x => x !== WEB);   // web search turned off for this account: carry on without it
-        ({ status, ok, data } = await callClaude(messages, systemFull, tools, isDesign ? 1500 : M.maxTokens, isDesign ? undefined : M.id));
+        ({ status, ok, data } = await call(tools));
       }
+      if (started && !ok) { out({ error: status === 429 ? 'busy' : 'error' }); return res.end(); }
       if (status === 429) return res.status(429).json({ error: 'busy' });
       if (!ok) return res.status(500).json({ error: data?.error?.message || 'error' });
       if (data.stop_reason === 'pause_turn') { messages.push({ role: 'assistant', content: data.content }); continue; }
       if (data.stop_reason !== 'tool_use') {
         const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
         let usage = gate.st; try { usage = await commit(device, ipAddr, need, gate.st); } catch (e) {}
+        if (streaming) { out({ done: true, text, usage }); return res.end(); }
         return res.status(200).json({ text, usage });
       }
       messages.push({ role: 'assistant', content: data.content });
@@ -233,8 +275,10 @@ export default async function handler(req, res) {
       }
       messages.push({ role: 'user', content: results });
     }
+    if (started) { out({ done: true, text: '…' }); return res.end(); }
     return res.status(200).json({ text: '…' });
   } catch (e) {
+    if (started) { try { out({ error: 'error' }); res.end(); } catch (_) {} return; }
     return res.status(500).json({ error: 'error' });
   }
 }
