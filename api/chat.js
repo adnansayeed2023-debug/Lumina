@@ -2,7 +2,7 @@
 // Set ANTHROPIC_API_KEY in Vercel → Project → Settings → Environment Variables.
 import { create, all } from 'mathjs';
 import '../lib/chem.js';
-import { deviceOf, ipOf as clientIp, check, commit } from '../lib/account.js';
+import { whoOf, ipOf as clientIp, check, commit } from '../lib/account.js';
 const math = create(all);
 const Chem = globalThis.LuminaChem;
 
@@ -227,7 +227,7 @@ export default async function handler(req, res) {
     if (imgs.length) last.content = [...imgs, { type: 'text', text: last.content }];
   }
   if (isDesign) messages = messages.slice(-1);
-  const device = deviceOf(req);
+  const W = await whoOf(req), device = W.id;
   if (!device) return res.status(400).json({ error: 'no device' });
   const ipAddr = clientIp(req);
   const nUp = Math.min(10, Math.max(+body.uploads || 0, Array.isArray(body.images) ? body.images.length : 0));
@@ -236,7 +236,7 @@ export default async function handler(req, res) {
   const M = LPm.MODELS[mk];
   const need = isDesign ? { design: 1, upload: nUp } : { chat: M.weight, upload: nUp };
   let gate;
-  try { gate = await check(device, ipAddr, need); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
+  try { gate = await check(device, ipAddr, need, W.device); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
   if (!isDesign && !gate.st.role && !(LPm.MODEL_ACCESS[gate.st.plan] || LPm.MODEL_ACCESS.free).includes(mk))
     return res.status(403).json({ error: 'model_locked', model: mk, usage: gate.st });

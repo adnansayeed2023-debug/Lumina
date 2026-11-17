@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       case 'list_codes':
         return res.status(200).json({ codes: await listCodes() });
       case 'set_plan': {    // give a user a plan directly by their ID
-        const id = String(body.device || '').replace(/[^a-zA-Z0-9-]/g, '');
+        const id = String(body.device || '').replace(/[^a-zA-Z0-9_-]/g, '');
         if (!id) return res.status(400).json({ error: 'no user id' });
         await setPlan(id, body.plan, +body.days);
         return res.status(200).json({ ok: true, user: await getState(id) });
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ days });
       }
       case 'lookup': {
-        const id = String(body.device || '').replace(/[^a-zA-Z0-9-]/g, '');
+        const id = String(body.device || '').replace(/[^a-zA-Z0-9_-]/g, '');
         return res.status(200).json({ user: await getState(id) });
       }
       // ---- super admin only ----
