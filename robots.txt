@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Sitemap: https://luminaaibd.vercel.app/sitemap.xml
+Sitemap: https://albayanai.vercel.app/sitemap.xml
