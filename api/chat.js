@@ -19,6 +19,8 @@ Your library (use these tools; they hold verified texts):
 - get_hadith: exact hadith (Arabic + Bangla + grades) by collection and number. Collections: bukhari, muslim, abudawud, tirmidhi, nasai, ibnmajah, malik, nawawi. Whenever you cite a hadith with a number, verify it with get_hadith first; if the returned text doesn't match what you meant, don't give that number. Mention the grade (সহীহ/হাসান/যঈফ) when the data gives one; Bukhari and Muslim are sahih.
 - Never invent a hadith, its wording, number or grade. If you can't verify, say so honestly.
 - ARABIC TEXT ALWAYS: whenever you quote, cite or explain any ayah or hadith, first write its full Arabic text with harakat exactly as returned by the tool, on its own line, then the Bangla (or the reply language) translation, then the reference, e.g. (সূরা আল-বাকারা ২:২৫৫) or (সহীহ বুখারী, হাদিস ১). For a long hadith give the key Arabic sentence(s). Never skip the Arabic.
+- Broad knowledge: you are an expert tutor in every field: Islam, Bangla, English and Arabic language and literature, all school, college and university subjects (NCTB curriculum, SSC, HSC, admission tests, BCS), history, geography, Bangladesh affairs, general knowledge, science, technology, programming, health basics, careers, writing (রচনা, অনুচ্ছেদ, পত্র, দরখাস্ত, ভাবসম্প্রসারণ, সারাংশ). Never refuse an ordinary question as "outside my subject"; answer it fully and accurately.
+- web_search: use it for anything current or time-sensitive (news, today's events, prices, exchange rates, results, dates of exams/admissions, who currently holds a post, new technology), for facts you are not sure about, and when the student asks you to search. Don't search for Quran/hadith texts (use the library tools) or for things you know well. After searching, answer in your own words in the reply language and mention the source names briefly at the end (e.g. সূত্র: প্রথম আলো, BBC). Don't paste long passages.
 - Tafhimul Quran (Maududi) is NOT in this library, so you cannot quote it. If asked, say it isn't available here and suggest reading the published book; you may only describe its general approach in a sentence if you're confident.
 - Fiqh: give the common view, note where madhhabs differ (Bangladesh mostly Hanafi); for personal or serious rulings, gently suggest asking a trusted alem/mufti.
 - Write Arabic with harakat; for Arabic words give Bangla pronunciation in brackets and the meaning, e.g. كِتَابٌ (কিতাবুন) মানে বই।
@@ -187,13 +189,19 @@ export default async function handler(req, res) {
   let gate;
   try { gate = await check(device, ipAddr, need); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
-  const tools = isArt ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : TOOLS;
+  const WEB = { type: 'web_search_20250305', name: 'web_search', max_uses: 3 };
+  let tools = isArt ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
   const system = isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
   try {
-    for (let step = 0; step < 6; step++) {
-      const { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isDesign ? 1500 : 2500);
+    for (let step = 0; step < 8; step++) {
+      let { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isDesign ? 1500 : 3500);
+      if (!ok && status === 400 && tools.includes(WEB) && /web.?search/i.test(data?.error?.message || '')) {
+        tools = tools.filter(x => x !== WEB);   // web search turned off for this account: carry on without it
+        ({ status, ok, data } = await callClaude(messages, system, tools, isDesign ? 1500 : 3500));
+      }
       if (status === 429) return res.status(429).json({ error: 'busy' });
       if (!ok) return res.status(500).json({ error: data?.error?.message || 'error' });
+      if (data.stop_reason === 'pause_turn') { messages.push({ role: 'assistant', content: data.content }); continue; }
       if (data.stop_reason !== 'tool_use') {
         const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
         let usage = gate.st; try { usage = await commit(device, ipAddr, need, gate.st); } catch (e) {}
