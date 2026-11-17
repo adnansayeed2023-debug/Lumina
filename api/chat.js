@@ -55,9 +55,9 @@ function buildSystem({ replyLang = 'auto', mode = null, level = 0, voice = false
 }
 
 const DESIGN_SYS = `You design social posts, posters and banners for Al Bayan AI's design tool. Return ONLY a JSON object, no other text:
-{"template":"islamic|eid|event|quote|notice|photo","palette":0-5,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
+{"template":"islamic|eid|event|quote|notice|photo","palette":0-7,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
 Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo; minimal = clean, simple, professional; modern = trendy social media post with soft gradients.
-Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue.
+Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue, 6 Al Bayan red-white (default, brand), 7 white with red.
 Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 poster, 4 YouTube thumbnail. Pick from the request words (ব্যানার/banner→2, পোস্টার/poster→3, স্টোরি/status→1, থাম্বনেইল→4).
 Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\\\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
 Arabic line: optional, with full harakat. Only use well-known phrases (e.g. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ, جُمُعَةٌ مُبَارَكَةٌ, عِيدٌ مُبَارَكٌ, رَمَضَانُ كَرِيمٌ, اَلْحَمْدُ لِلَّهِ) or a Quran ayah you fetched with get_quran_verses (copy its Arabic exactly; then put the reference like (সূরা আল-বাকারা ২:১৫৩) in the subtitle). Never write an ayah or hadith from memory. Leave "" if not fitting.`;

@@ -627,6 +627,37 @@ html.dark .aiHero{background:#2a1d20}
 html.dark .aiGrid .ai{background:#3a1a20}
 html.dark .lLangs button.on,html.dark .aiGrid .wide{background:#e11d48;border-color:#e11d48}
 
+/* ===== polish v2 ===== */
+.hero{position:relative}
+.hero::before{content:"";position:absolute;inset:-18px -18px auto;height:360px;z-index:-1;pointer-events:none;opacity:.55;
+  background:radial-gradient(ellipse at 50% 0,rgba(200,16,46,.10),rgba(200,16,46,0) 65%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23c8102e' stroke-opacity='.10' stroke-width='1'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(#000 40%,transparent);mask-image:linear-gradient(#000 40%,transparent)}
+.salam{font-family:'Amiri',serif;color:#c8102e;font-size:22px;margin-top:10px}
+.hero h1{margin-top:2px!important;letter-spacing:-.2px}
+.chips .chip{background:#fff;border-color:#f0d3d8}
+.chips .chip:hover{border-color:#c8102e;color:#c8102e;background:#fff7f8}
+.row{animation:rowIn .25s ease}
+@keyframes rowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.row.me .bubble{background:#fdecee!important;color:#2a0a10;border-bottom-right-radius:6px}
+[dir=rtl] .row.me .bubble{border-bottom-right-radius:20px;border-bottom-left-radius:6px}
+.row .av svg{width:30px;height:30px;border-radius:8px;box-shadow:0 0 0 1px #f1d4d8}
+.arBlock{font-family:'Amiri','Noto Naskh Arabic',serif;font-size:1.42em;line-height:2.05;text-align:right;direction:rtl;color:#3b0a12;background:linear-gradient(180deg,#fff9fa,#fdf0f2);border:1px solid #f3d5da;border-right:4px solid #c8102e;border-radius:14px;padding:10px 16px;margin:8px 0;white-space:normal}
+.arBlock .arw{font-size:1em;color:inherit}
+.bubble b{color:#7f0d1f}
+.dock .box,.heroCard .box{border-color:#e9c9cf}
+.box:focus-within{border-color:#c8102e!important;box-shadow:0 0 0 3px rgba(200,16,46,.10)!important}
+.ayah{border-radius:18px}
+.ayah .arv{font-size:29px}
+.dStage{background:repeating-conic-gradient(#f4e6e8 0 25%,#fff 0 50%) 0 0/18px 18px!important}
+html.dark .hero::before{opacity:.35}
+html.dark .salam{color:#fb7185}
+html.dark .row.me .bubble{background:#3a1a20!important;color:#fde2e4}
+html.dark .arBlock{background:#2a1d20;border-color:#4a2a30;border-right-color:#e11d48;color:#fde2e4}
+html.dark .bubble b{color:#fda4af}
+html.dark .chips .chip{background:#2a2b2f;border-color:#3a3c41}
+html.dark .dStage{background:repeating-conic-gradient(#2a2b2f 0 25%,#232427 0 50%) 0 0/18px 18px!important}
+
 /* ================= DARK MODE ================= */
 html.dark{color-scheme:dark}
 html.dark body{background:#1e1f22;color:#e8e8ea}
@@ -718,6 +749,7 @@ html.dark .arw,html.dark .shead .an{color:#fb7185}
     <div class="hero" id="hero">
       <div class="heroCard">
         <div class="mark"><svg><use href="#logo"/></svg></div>
+        <div class="salam">السَّلَامُ عَلَيْكُمْ</div>
         <h1 data-t="h"></h1>
         <p data-t="sub"></p>
         <div class="atts" id="atts1"></div><div class="attNote" id="attNote1"></div><form class="box" id="f1"><button type="button" class="ib attach" aria-label="attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button><textarea id="q1" rows="1"></textarea><button type="button" class="ib mic" data-ta="q1" aria-label="voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button><button class="go" id="g1" aria-label="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
@@ -1260,9 +1292,13 @@ document.querySelector('.tabs button[data-v="hadith"]').addEventListener('click'
 const q1=$('q1'),q2=$('q2'),thread=$('thread'),hero=$('hero'),dock=$('dock'),reset=$('reset'),notice=$('notice');
 let history=[],busy=false;
 function md(s){
-  const e=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let e=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  e=e.split('\n').map(line=>{const x=line.replace(/^#{1,6}\s*/,'').replace(/^\s*(?:[-*>]|\d+[.)])\s+/,'');
+    const ar=(x.match(/[\u0600-\u06FF]/g)||[]).length,other=(x.match(/[A-Za-z\u0980-\u09FF0-9]/g)||[]).length;
+    return (ar>=12&&ar>other*4&&!/\$/.test(x))?'\u0002'+x.replace(/\*\*/g,'').trim()+'\u0003':line;}).join('\n');
   return e.replace(/^#{1,6}\s*/gm,'').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
-    .replace(/([؀-ۿ][؀-ۿً-ْٰ\s،؟]*[؀-ۿً-ْٰ؟])/g,'<span class="arw">$1</span>');
+    .replace(/\n?\u0002([^\u0003]*)\u0003\n?/g,'<div class="arBlock" dir="rtl">$1</div>')
+    .replace(/(<div class="arBlock" dir="rtl">[^<]*<\/div>)|([؀-ۿ][؀-ۿً-ْٰ\s،؟]*[؀-ۿً-ْٰ؟])/g,(m,blk,run)=>blk||'<span class="arw">'+run+'</span>');
 }
 function addRow(role,text){
   const r=document.createElement('div');r.className='row '+(role==='user'?'me':'bot');
@@ -2054,8 +2090,10 @@ const D_PAL=[
  {bg1:'#8f2741',bg2:'#3a0b18',acc:'#f1cd8c',tx:'#ffffff',soft:'rgba(255,255,255,.82)'},
  {bg1:'#2c2c2c',bg2:'#090909',acc:'#d8b14a',tx:'#ffffff',soft:'rgba(255,255,255,.78)'},
  {bg1:'#fbf6ea',bg2:'#eadfc6',acc:'#0f5c4a',tx:'#1b2824',soft:'#55635e'},
- {bg1:'#ffffff',bg2:'#e8f1fb',acc:'#2a5bd7',tx:'#152238',soft:'#55627a'}];
-const dState={tpl:'islamic',size:0,pal:2,photo:null};
+ {bg1:'#ffffff',bg2:'#e8f1fb',acc:'#2a5bd7',tx:'#152238',soft:'#55627a'},
+ {bg1:'#d4142f',bg2:'#7f0a1c',acc:'#ffffff',tx:'#ffffff',soft:'rgba(255,255,255,.86)'},
+ {bg1:'#ffffff',bg2:'#fde8eb',acc:'#c8102e',tx:'#2a0a10',soft:'#7a4a52'}];
+const dState={tpl:'islamic',size:0,pal:6,photo:null};
 const dc=$('dCanvas'),dctx=dc.getContext('2d');
 let fontsReady=false;
 async function ensureFonts(){ if(fontsReady) return;
@@ -2112,7 +2150,7 @@ function dContent(){return {ar:$('fAr').value.trim(),title:$('fTitle').value.tri
 async function drawDesign(){
   await ensureFonts();
   const [W,H]=D_SIZES[dState.size];dc.width=W;dc.height=H;
-  const ctx=dctx,p=(dState.tpl==='photo'&&!dState.photo&&dState.pal>=4)?D_PAL[0]:D_PAL[dState.pal],c=dContent(),u=Math.min(W,H)/1080,wide=W/H>1.6,tall=H/W>1.3;
+  const ctx=dctx,p=(dState.tpl==='photo'&&!dState.photo&&[4,5,7].includes(dState.pal))?D_PAL[6]:D_PAL[dState.pal],c=dContent(),u=Math.min(W,H)/1080,wide=W/H>1.6,tall=H/W>1.3;
   ctx.clearRect(0,0,W,H);ctx.textAlign='center';
   const pad=Math.min(W,H)*.09;
   const T=dState.tpl;const K=wide?H/624:H/W>1.6?1.65:tall?1.3:W/1080;
@@ -2183,7 +2221,7 @@ async function drawDesign(){
     const m=pad*.6,cx=m,cy=m,cw=W-m*2,ch=H-m*2;
     ctx.save();ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=40*u;ctx.fillStyle='#ffffff';roundRect(ctx,cx,cy,cw,ch,30*u);ctx.fill();ctx.restore();
     const hh=ch*(wide?.36:.26);ctx.save();roundRect(ctx,cx,cy,cw,ch,30*u);ctx.clip();
-    const g=ctx.createLinearGradient(cx,cy,cx+cw,cy+hh);g.addColorStop(0,p.bg1===`#ffffff`||p.bg1==='#fbf6ea'?'#17826a':p.bg1);g.addColorStop(1,p.bg2==='#e8f1fb'||p.bg2==='#eadfc6'?'#0f5c4a':p.bg2);ctx.fillStyle=g;ctx.fillRect(cx,cy,cw,hh);
+    const g=ctx.createLinearGradient(cx,cy,cx+cw,cy+hh);const redW=p.acc==='#c8102e';g.addColorStop(0,redW?'#d4142f':p.bg1===`#ffffff`||p.bg1==='#fbf6ea'?'#17826a':p.bg1);g.addColorStop(1,redW?'#7f0a1c':p.bg2==='#e8f1fb'||p.bg2==='#eadfc6'?'#0f5c4a':p.bg2);ctx.fillStyle=g;ctx.fillRect(cx,cy,cw,hh);
     ctx.fillStyle=p.acc==='#0f5c4a'||p.acc==='#2a5bd7'?'#e9c96f':p.acc;ctx.fillRect(cx,cy+hh,cw,8*u);ctx.restore();
     const ip=pad*.6;
     stackK(ctx,[
@@ -2193,7 +2231,7 @@ async function drawDesign(){
     const fb=c.foot?ch*.11:0;
     const bodyT=c.body.split('\n').filter(Boolean).map(l=>'✔  '+l).join('\n');
     stackK(ctx,[{text:bodyT,w:500,size:wide?40:58,c:'#1b2824',lh:1.6,gap:0}],{x:cx+ip,y:cy+hh+ip,w:cw-ip*2,h:ch-hh-ip*2-fb,valign:'center'},'left');
-    if(c.foot){ctx.fillStyle='#f1efe8';ctx.fillRect(cx+ip,cy+ch-fb-ip*.5,cw-ip*2,2*u);ctx.font=`600 ${Math.min(34*K,fb*.4)}px ${BN}`;ctx.fillStyle='#0f5c4a';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(c.foot,W/2,cy+ch-fb/2-ip*.25,cw-ip*2);}
+    if(c.foot){ctx.fillStyle='#f1efe8';ctx.fillRect(cx+ip,cy+ch-fb-ip*.5,cw-ip*2,2*u);ctx.font=`600 ${Math.min(34*K,fb*.4)}px ${BN}`;ctx.fillStyle=(p.acc==='#c8102e'||p.bg1==='#d4142f')?'#c8102e':(p.bg1==='#ffffff'||p.bg1==='#fbf6ea')?'#0f5c4a':p.bg2;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(c.foot,W/2,cy+ch-fb/2-ip*.25,cw-ip*2);}
   }
   else if(T==='photo'){
     if(dState.photo){const im=dState.photo,r=Math.max(W/im.width,H/im.height),iw=im.width*r,ih=im.height*r;ctx.drawImage(im,(W-iw)/2,(H-ih)/2,iw,ih);}
@@ -2263,7 +2301,9 @@ Rules:
 - No <script>, no <foreignObject>, no <image>, no external links, fonts or URLs, no event attributes.
 - Do not add text unless the request asks for words. If it does, keep text short, large and centred, font-family="Hind Siliguri, Noto Sans Bengali, sans-serif" (Arabic: font-family="Amiri, serif").
 - Never draw real or identifiable people, copyrighted or trademarked characters, brand logos, nudity, gore or violence. For Islamic themes, never depict prophets, angels or faces of holy figures; prefer mosques, lanterns, crescents, geometric patterns, nature, books and calligraphy-like ornaments (do not write Quran verses unless they are given in the request).
-- Keep the SVG under about 25,000 characters.`;
+- Plan the picture before drawing: one clear focal subject placed on the centre or a third line, a horizon or ground, a light source (moon, sun, lamp) that sets highlights and soft shadows, and 3–5 harmonious colours plus one accent. Add atmosphere: a gradient sky or backdrop, subtle stars, particles, clouds or bokeh, and a soft vignette at the edges.
+- Detail: 60–150 shapes; small decorative details (windows, tiles, leaves, ripples, pattern borders) make it look finished. Use rounded, smooth curves (cubic Béziers) rather than jagged lines.
+- Keep the SVG under about 30,000 characters.`;
 function sanitizeSVG(txt){
   const m=String(txt||'').match(/<svg[\s\S]*<\/svg>/i);if(!m)throw new Error('no svg');
   const doc=new DOMParser().parseFromString(m[0],'image/svg+xml');const root=doc.documentElement;
@@ -2304,9 +2344,9 @@ $('dUseArt').onclick=()=>{if(!dState.art)return;dState.photo=dState.art;dState.t
 function setDMode(m){dMode=m;renderDesignUI();}
 /* Al Bayan AI designs it */
 const DESIGN_SYS=`You design social posts, posters and banners for Al Bayan AI's design tool. Return ONLY a JSON object, no other text:
-{"template":"islamic|eid|event|quote|notice|photo","palette":0-5,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
+{"template":"islamic|eid|event|quote|notice|photo","palette":0-7,"size":0-4,"arabic":"","title":"","subtitle":"","body":"","footer":""}
 Templates: islamic = Islamic greeting/reminder/dua/ayah; eid = Eid, Ramadan, festive greetings; event = event, programme, admission, offer banner; quote = quote/saying/motivation; notice = notice, announcement, rules, list; photo = only if the user mentions their own photo; minimal = clean, simple, professional; modern = trendy social media post with soft gradients.
-Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue.
+Palettes: 0 green-gold, 1 night blue-gold, 2 maroon-gold, 3 black-gold, 4 light cream-green, 5 white-blue, 6 Al Bayan red-white (default, brand), 7 white with red.
 Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 poster, 4 YouTube thumbnail. Pick from the request words (ব্যানার/banner→2, পোস্টার/poster→3, স্টোরি/status→1, থাম্বনেইল→4).
 Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
 Arabic line: optional, with full harakat. Only use well-known phrases (e.g. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ, جُمُعَةٌ مُبَارَكَةٌ, عِيدٌ مُبَارَكٌ, رَمَضَانُ كَرِيمٌ, اَلْحَمْدُ لِلَّهِ) or a Quran ayah you fetched with get_quran_verses (copy its Arabic exactly; then put the reference like (সূরা আল-বাকারা ২:১৫৩) in the subtitle). Never write an ayah or hadith from memory. Leave "" if not fitting.`;
