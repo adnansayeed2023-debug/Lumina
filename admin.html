@@ -75,6 +75,13 @@ small{color:var(--soft)}
       <div class="out" id="uOut"></div>
     </div>
 
+    <div class="card">
+      <h2>📊 গত ৭ দিন</h2>
+      <small>👍/👎 = মানুষ উত্তর পছন্দ করেছে কি না · ফ্রি = ফ্রি ব্যবহারকারীদের মোট প্রশ্ন</small>
+      <button class="ghost" id="fbBtn">দেখো</button>
+      <div class="out" id="fbOut"></div>
+    </div>
+
     <div id="superOnly" class="hide">
       <div class="card">
         <h2>🛡️ অ্যাডমিন (শুধু সুপার অ্যাডমিন)</h2>
@@ -157,6 +164,8 @@ $('sBtn').onclick=async()=>{const plans={};document.querySelectorAll('#sPlans .c
     c.querySelectorAll('[data-f]').forEach(i=>p[i.dataset.f]=i.dataset.f==='price'?+i.value:i.value);c.querySelectorAll('[data-l]').forEach(i=>p.limits[i.dataset.l]=+i.value);plans[id]=p;});
   try{const j=await call({action:'save_settings',settings:{plans,windowHours:+$('sWin').value,planDays:+$('sDays').value,daily:{freePerUser:+$('sDayUser').value,freeSiteWide:+$('sDayAll').value},payment:{methods:$('sMethods').value.trim(),number:$('sNumber').value.trim(),contact:$('sContact').value.trim()}}});
     CFG=j.config;fillPlans(CFG);$('sOut').innerHTML='<span class="ok">✓ সেভ হয়েছে। Al Bayan AI-তে সাথে সাথে নতুন প্ল্যান দেখাবে।</span>';}catch(e){$('sOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
+$('fbBtn').onclick=async()=>{try{const j=await call({action:'feedback'});
+  $('fbOut').innerHTML=`<table><tr><th>তারিখ</th><th>👍</th><th>👎</th><th>ফ্রি প্রশ্ন</th></tr>${j.days.map(d=>`<tr><td>${d.day}</td><td>${d.up}</td><td>${d.down}</td><td>${d.free}</td></tr>`).join('')}</table>`;}catch(e){$('fbOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
 if(KEY)enter();
 </script>
 </body>

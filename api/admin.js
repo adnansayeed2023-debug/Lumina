@@ -4,7 +4,7 @@ import {
   deviceOf, staffFromKey, getState, getConfig, saveConfig, setPlan, createCodes, listCodes,
   createAdmin, listAdmins, removeAdmin, loginDevice, logoutDevice
 } from '../lib/account.js';
-import { persistent } from '../lib/store.js';
+import { persistent, kget } from '../lib/store.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
@@ -35,6 +35,12 @@ export default async function handler(req, res) {
         if (!id) return res.status(400).json({ error: 'no user id' });
         await setPlan(id, body.plan, +body.days);
         return res.status(200).json({ ok: true, user: await getState(id) });
+      }
+      case 'feedback': {
+        const days = [];
+        for (let i = 0; i < 7; i++) { const d = new Date(Date.now() + 6 * 3600e3 - i * 86400e3).toISOString().slice(0, 10);
+          days.push({ day: d, up: (await kget('fb:' + d + ':up')) || 0, down: (await kget('fb:' + d + ':down')) || 0, free: (await kget('dayall:' + d)) || 0 }); }
+        return res.status(200).json({ days });
       }
       case 'lookup': {
         const id = String(body.device || '').replace(/[^a-zA-Z0-9-]/g, '');
