@@ -202,6 +202,20 @@ async function callClaudeStream(messages, system, tools, maxTokens, model, onTex
   return { status: 200, ok: true, data: { content: blocks.filter(Boolean), stop_reason } };
 }
 
+const MCQ_SYS = `You write exam-quality multiple-choice questions for students in Bangladesh (NCTB school and madrasah curriculum, SSC/HSC/Dakhil/Alim board exams, university admission tests, BCS and job exams, and university courses).
+Return ONLY one valid JSON object — no markdown, no code fences, no text before or after it:
+{"title": "short test title", "questions": [{"q": "question", "o": ["option 1", "option 2", "option 3", "option 4"], "a": 0, "e": "1–2 sentence explanation of why the answer is right"}]}
+Rules:
+- Exactly the number of questions requested, no duplicates, mixed difficulty matching the exam named (board-exam style for SSC/HSC, harder and trickier for admission and BCS).
+- Exactly 4 options, exactly one correct. "a" is the 0-based index of the correct option. Solve each question yourself and double-check the key before writing it. Spread the correct answer across all four positions.
+- Options are short and do not start with ক/খ/A/B labels.
+- Use plain text with Unicode for maths and science (x², √2, H₂O, π, ≤, →); no LaTeX.
+- If study material or pictures are provided, base every question on that material.`;
+const CARDS_SYS = `You make study flashcards for students in Bangladesh.
+Return ONLY one valid JSON object — no markdown, no code fences, no text before or after it:
+{"title": "short title", "cards": [{"f": "front: a key term, question or formula name", "b": "back: the answer or definition, at most 40 words"}]}
+Make 12–20 cards that cover the most important, exam-relevant points. Be accurate. Use plain text with Unicode (x², H₂O); no LaTeX. If study material or pictures are provided, use only that material.`;
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || 'x';
@@ -220,6 +234,7 @@ export default async function handler(req, res) {
   const isArt = body.task === 'art';
   const isPrompt = body.task === 'imgprompt';
   const isDesign = body.task === 'design' || isArt || isPrompt;
+  const isJson = body.task === 'mcq' || body.task === 'cards';   // study tools: model tests and flashcards, answered as JSON
   if (Array.isArray(body.images) && body.images.length) {
     const imgs = body.images.slice(0, 4)
       .filter(i => i && typeof i.data === 'string' && /^image\/(jpeg|png|webp|gif)$/.test(i.media_type) && i.data.length < 5_000_000)
@@ -235,23 +250,24 @@ export default async function handler(req, res) {
   const LPm = globalThis.LuminaPlans;
   const mk = (!isDesign && LPm.MODELS[body.model]) ? body.model : (isPrompt ? 'lite' : 'smart');
   const M = LPm.MODELS[mk];
-  const need = isDesign ? { design: 1, upload: nUp } : { chat: M.weight, upload: nUp };
+  const need = isDesign ? { design: 1, upload: nUp } : { chat: M.weight * (body.task === 'mcq' && +body.count > 20 ? 2 : 1), upload: nUp };
   let gate;
   try { gate = await check(device, ipAddr, need, W.device); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
   if (!isDesign && !gate.st.role && !(LPm.MODEL_ACCESS[gate.st.plan] || LPm.MODEL_ACCESS.free).includes(mk))
     return res.status(403).json({ error: 'model_locked', model: mk, usage: gate.st });
   const WEB = { type: 'web_search_20250305', name: 'web_search', max_uses: 3 };
-  let tools = (isArt || isPrompt) ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
-  const system = isPrompt ? IMG_SYS : isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
+  let tools = (isArt || isPrompt || isJson) ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
+  const uiLang = { bn: 'Bangla (বাংলা script)', en: 'English', ar: 'Arabic' }[body.ui] || 'Bangla (বাংলা script)';
+  const system = isJson ? (body.task === 'mcq' ? MCQ_SYS : CARDS_SYS) + `\n\nWrite everything in ${uiLang} unless the request names another language (e.g. an English or Arabic subject).` : isPrompt ? IMG_SYS : isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
   const TIERS = { lite: '\n\nMODEL: Bayan Lite. Keep answers short and to the point (under ~200 words) unless the student asks for detail.', pro: '\n\nMODEL: Bayan Pro. Give deeper, more careful answers: check each step, add one extra example or exam tip.', ultra: '\n\nMODEL: Bayan Ultra. Give the most thorough, expert-level answer: careful reasoning, verified steps, multiple examples where useful, common mistakes, and a clear summary.' };
-  const systemFull = isDesign ? system : system + (TIERS[mk] || '');
-  const streaming = !isDesign && body.stream === true;
+  const systemFull = (isDesign || isJson) ? system : system + (TIERS[mk] || '');
+  const streaming = !isDesign && !isJson && body.stream === true;
   let started = false;
   const out = obj => { if (!started) { res.statusCode = 200; res.setHeader('Content-Type', 'application/x-ndjson; charset=utf-8'); res.setHeader('Cache-Control', 'no-cache, no-transform'); res.setHeader('X-Accel-Buffering', 'no'); started = true; } res.write(JSON.stringify(obj) + '\n'); };
   const call = (tl) => streaming
     ? callClaudeStream(messages, systemFull, tl, M.maxTokens, M.id, d => out({ t: d }))
-    : callClaude(messages, systemFull, tl, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : M.maxTokens, isArt || (isDesign && !isPrompt) ? undefined : M.id);
+    : callClaude(messages, systemFull, tl, isJson ? 12000 : isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : M.maxTokens, isArt || (isDesign && !isPrompt) ? undefined : M.id);
   try {
     for (let step = 0; step < 8; step++) {
       if (streaming && step > 0) out({ reset: true });
