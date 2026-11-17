@@ -92,6 +92,8 @@ small{color:var(--soft)}
         <div class="row">
           <div><label>রিসেট হয় কত ঘণ্টা পর</label><input id="sWin" type="number" min="1" max="168"></div>
           <div><label>এক কেনায় কত দিন</label><input id="sDays" type="number" min="1"></div>
+          <div><label>ফ্রি: একজন দিনে কত প্রশ্ন (0 = সীমা নেই)</label><input id="sDayUser" type="number" min="0"></div>
+          <div><label>ফ্রি: সব মিলিয়ে দিনে কত প্রশ্ন (0 = সীমা নেই)</label><input id="sDayAll" type="number" min="0"></div>
         </div>
         <label>পেমেন্টের মাধ্যম</label><input id="sMethods">
         <label>পেমেন্ট নম্বর</label><input id="sNumber">
@@ -122,7 +124,7 @@ function fillPlans(cfg){
   $('sPlans').innerHTML=Object.entries(cfg.plans).map(([id,p])=>`<div class="card" data-id="${id}"><b>${id.toUpperCase()}</b>
     <label>নাম</label><input data-f="name" value="${esc(p.name)}"><label>দাম (৳/মাস)</label><input data-f="price" type="number" min="0" value="${p.price}">
     ${Object.keys(KIND).map(k=>`<label>${KIND[k]} / ${cfg.windowHours} ঘণ্টা</label><input data-l="${k}" type="number" min="-1" value="${p.limits[k]}">`).join('')}</div>`).join('');
-  $('sWin').value=cfg.windowHours;$('sDays').value=cfg.planDays;
+  $('sWin').value=cfg.windowHours;$('sDays').value=cfg.planDays;$('sDayUser').value=(cfg.daily||{}).freePerUser??20;$('sDayAll').value=(cfg.daily||{}).freeSiteWide??400;
   $('sMethods').value=cfg.payment.methods||'';$('sNumber').value=cfg.payment.number||'';$('sContact').value=cfg.payment.contact||'';
 }
 async function enter(){
@@ -153,7 +155,7 @@ $('aBtn').onclick=async()=>{try{const j=await call({action:'create_admin',name:$
   $('aOut').innerHTML=`<span class="ok">অ্যাডমিন তৈরি হয়েছে।</span> এই কী-টা এখনই কপি করে তাকে দাও, পরে আর দেখা যাবে না:<br><code>${esc(j.key)}</code>`;$('aName').value='';loadAdmins();}catch(e){$('aOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
 $('sBtn').onclick=async()=>{const plans={};document.querySelectorAll('#sPlans .card').forEach(c=>{const id=c.dataset.id;const p={limits:{}};
     c.querySelectorAll('[data-f]').forEach(i=>p[i.dataset.f]=i.dataset.f==='price'?+i.value:i.value);c.querySelectorAll('[data-l]').forEach(i=>p.limits[i.dataset.l]=+i.value);plans[id]=p;});
-  try{const j=await call({action:'save_settings',settings:{plans,windowHours:+$('sWin').value,planDays:+$('sDays').value,payment:{methods:$('sMethods').value.trim(),number:$('sNumber').value.trim(),contact:$('sContact').value.trim()}}});
+  try{const j=await call({action:'save_settings',settings:{plans,windowHours:+$('sWin').value,planDays:+$('sDays').value,daily:{freePerUser:+$('sDayUser').value,freeSiteWide:+$('sDayAll').value},payment:{methods:$('sMethods').value.trim(),number:$('sNumber').value.trim(),contact:$('sContact').value.trim()}}});
     CFG=j.config;fillPlans(CFG);$('sOut').innerHTML='<span class="ok">✓ সেভ হয়েছে। Al Bayan AI-তে সাথে সাথে নতুন প্ল্যান দেখাবে।</span>';}catch(e){$('sOut').innerHTML=`<span class="err">${esc(e.message)}</span>`;}};
 if(KEY)enter();
 </script>
