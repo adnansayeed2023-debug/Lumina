@@ -63,6 +63,8 @@ Sizes: 0 square post (default), 1 story/status, 2 Facebook cover/banner, 3 A4 po
 Text rules: write in the user's language (Bangla by default). title max ~6 words, subtitle max ~10 words, body 0-4 short lines separated by \\\\n, footer short (organisation/contact) or "". Use placeholders like "[তারিখ]", "[স্থান]", "[ফোন]" when details are unknown; never invent real phone numbers, dates or addresses.
 Arabic line: optional, with full harakat. Only use well-known phrases (e.g. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ, جُمُعَةٌ مُبَارَكَةٌ, عِيدٌ مُبَارَكٌ, رَمَضَانُ كَرِيمٌ, اَلْحَمْدُ لِلَّهِ) or a Quran ayah you fetched with get_quran_verses (copy its Arabic exactly; then put the reference like (সূরা আল-বাকারা ২:১৫৩) in the subtitle). Never write an ayah or hadith from memory. Leave "" if not fitting.`;
 
+const IMG_SYS = "You write prompts for an AI image generator for Al Bayan AI. Turn the user's request (any language; a reference photo may be attached, describe its relevant look) into ONE vivid English prompt of 30-80 words: main subject, setting, composition, lighting, colours, mood, and the given style. End with: highly detailed, beautiful composition, no text, no watermark. Only include written words in the image if the user explicitly asks for words, and then keep them to 1-3 English words.\nSafety: if the request is sexual or suggestive, involves nudity, gore, violence against people, hate, self-harm, drugs, weapons, real identifiable people (celebrities, politicians, private persons), children in any unsafe context, copyrighted characters or brand logos, or a depiction of the Prophet Muhammad, any prophet, angels or the Companions, reply exactly BLOCKED. For Islamic themes prefer mosques, the Kaaba, calligraphy-like ornaments, lanterns, crescents, prayer mats, nature and light; people only from behind or as silhouettes without faces.\nReply with the prompt only, nothing else.";
+
 const CDN = {
   quran: (lang, n) => `https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/chapters/${lang}/${n}.json`,
   tafsir: (slug, n) => `https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/${slug}/${n}.json`,
@@ -178,7 +180,8 @@ export default async function handler(req, res) {
 
   const body = req.body || {};
   const isArt = body.task === 'art';
-  const isDesign = body.task === 'design' || isArt;
+  const isPrompt = body.task === 'imgprompt';
+  const isDesign = body.task === 'design' || isArt || isPrompt;
   if (Array.isArray(body.images) && body.images.length) {
     const imgs = body.images.slice(0, 4)
       .filter(i => i && typeof i.data === 'string' && /^image\/(jpeg|png|webp|gif)$/.test(i.media_type) && i.data.length < 5_000_000)
@@ -196,11 +199,11 @@ export default async function handler(req, res) {
   try { gate = await check(device, ipAddr, need); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
   const WEB = { type: 'web_search_20250305', name: 'web_search', max_uses: 3 };
-  let tools = isArt ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
-  const system = isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
+  let tools = (isArt || isPrompt) ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
+  const system = isPrompt ? IMG_SYS : isArt ? 'You are an illustrator. Follow the instructions in the message exactly and reply with only the SVG code.' : isDesign ? DESIGN_SYS : buildSystem({ replyLang: ['auto','bn','en','ar'].includes(body.replyLang) ? body.replyLang : 'auto', mode: body.mode, level: body.level, ui: ['bn','en','ar'].includes(body.ui) ? body.ui : 'bn', voice: body.voice, subject: body.subject, solveLevel: [0,1,2,3].includes(+body.solveLevel) ? +body.solveLevel : 1 });
   try {
     for (let step = 0; step < 8; step++) {
-      let { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isDesign ? 1500 : 3500);
+      let { status, ok, data } = await callClaude(messages, system, tools, isArt ? 16000 : isPrompt ? 400 : isDesign ? 1500 : 3500);
       if (!ok && status === 400 && tools.includes(WEB) && /web.?search/i.test(data?.error?.message || '')) {
         tools = tools.filter(x => x !== WEB);   // web search turned off for this account: carry on without it
         ({ status, ok, data } = await callClaude(messages, system, tools, isDesign ? 1500 : 3500));
