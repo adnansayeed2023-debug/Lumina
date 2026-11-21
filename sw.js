@@ -1,6 +1,6 @@
 // Lumina service worker: lets the app install on phones and open quickly.
 // Pages: network first, cached copy when offline. API calls are never cached.
-const CACHE = 'albayan-v38';
+const CACHE = 'albayan-v39';
 const SHELL = ['/', '/manifest.webmanifest', '/icons/icon-192.png', '/lib/chem.js', '/lib/plans.js', '/lib/katex/katex.min.css'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).catch(() => {}));
@@ -10,6 +10,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', e => {
+  if (e.request.url.includes('/media/')) return;
   const r = e.request;
   if (r.method !== 'GET') return;
   const u = new URL(r.url);
