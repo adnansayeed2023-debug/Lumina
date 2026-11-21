@@ -1403,8 +1403,8 @@ html.dark .adCard{background:#2a2b2f;border-color:#3a3c41}html.dark .adT b{color
   </div></div>
 
   <div class="atSheet" id="invSheet"><div class="atIn"><div class="atHd" data-t="invTitle"></div><div id="invBody"></div><button type="button" class="atX" data-t="atCancel"></button></div></div>
-  <div class="vModal" id="adModal"><div class="vIn"><video id="adVid" src="media/al-bayan-ai-ad.mp4" poster="media/ad-poster.jpg" controls playsinline preload="none"></video>
-    <div class="vActs"><button type="button" class="next" id="adShare" style="display:inline-block" data-t="adShare"></button><a class="chip" href="media/al-bayan-ai-ad.mp4" download="al-bayan-ai.mp4" data-t="adDl"></a><button type="button" class="chip" id="adClose" data-t="atCancel"></button></div></div></div>
+  <div class="vModal" id="adModal"><div class="vIn"><video id="adVid" src="media/al-bayan-ai-ad.mp4?v=2" poster="media/ad-poster.jpg" controls playsinline preload="none"></video>
+    <div class="vActs"><button type="button" class="next" id="adShare" style="display:inline-block" data-t="adShare"></button><a class="chip" href="media/al-bayan-ai-ad.mp4?v=2" download="al-bayan-ai.mp4" data-t="adDl"></a><button type="button" class="chip" id="adClose" data-t="atCancel"></button></div></div></div>
   <div class="atSheet" id="picSheet"><div class="atIn"><div class="atHd" data-t="pcTitle"></div><div class="pcGrid" id="picList"></div><div id="picExtra"></div><button type="button" class="atX" data-t="atCancel"></button></div></div>
   <div class="atSheet" id="islSheet"><div class="atIn"><div class="atHd" data-t="isTitle"></div><div id="islList"></div><button type="button" class="atX" data-t="atCancel"></button></div></div>
   <div class="atSheet" id="mdlSheet"><div class="atIn"><div class="atHd" data-t="mdlTitle"></div><div id="mdlList"></div><button type="button" class="atX" data-t="atCancel"></button></div></div>
@@ -3082,7 +3082,7 @@ $('adCard').onclick=()=>{$('adModal').classList.add('on');const v=$('adVid');try
 const adClose=()=>{$('adModal').classList.remove('on');try{$('adVid').pause();}catch(e){}};
 $('adClose').onclick=adClose;$('adModal').addEventListener('click',e=>{if(e.target.id==='adModal')adClose();});
 $('adShare').onclick=async()=>{const txt=t('adShareTxt')+' '+location.origin;
-  try{const r=await fetch('media/al-bayan-ai-ad.mp4');const b=await r.blob();const f=new File([b],'al-bayan-ai.mp4',{type:'video/mp4'});
+  try{const r=await fetch("media/al-bayan-ai-ad.mp4?v=2");const b=await r.blob();const f=new File([b],'al-bayan-ai.mp4',{type:'video/mp4'});
     if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:txt});return;}}catch(e){if(e&&e.name==='AbortError')return;}
   if(navigator.share)navigator.share({text:txt,url:location.origin}).catch(()=>{});else location.href='https://wa.me/?text='+encodeURIComponent(txt);};
 $('picSheet').addEventListener('click',e=>{if(e.target.id==='picSheet'||e.target.closest('.atX'))$('picSheet').classList.remove('on');});
