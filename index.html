@@ -1117,7 +1117,7 @@ html.dark .adCard{background:#2a2b2f;border-color:#3a3c41}html.dark .adT b{color
 html.dark .mdlIn{background:#2a1d20;border-color:#4a2a30;color:#fda4af}
 
 /* home: question box sits at the bottom like a chat app; placeholder on one line */
-#v-ask .hero{min-height:calc(100vh - 220px);display:flex;flex-direction:column;justify-content:center;padding-bottom:110px}
+#v-ask .hero:not(.hide){min-height:calc(100vh - 220px);display:flex;flex-direction:column;justify-content:center;padding-bottom:110px}
 .homeBar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(255,255,255,0),#fff 35%)}
 .homeBar>*{max-width:744px;margin-left:auto!important;margin-right:auto!important}
 .homeBar .box{margin-top:0!important;background:#fff}
