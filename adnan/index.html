@@ -427,6 +427,50 @@ section h2::before{content:"";flex:none;width:18px;height:18px;background:var(--
 .skills,.awards{background:linear-gradient(180deg,var(--bg2),var(--bg))}
 .daily{box-shadow:0 30px 60px -44px rgba(0,49,53,.5);border-top:4px solid var(--coral)}
 @media (prefers-reduced-motion:no-preference){.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}}
+/* v6: bars and sections */
+.prog{height:4px;background:linear-gradient(90deg,var(--apricot),var(--coral))!important;border-radius:0 4px 4px 0}
+nav{transition:box-shadow .3s,background .3s}
+nav .wrap{min-height:70px;transition:min-height .3s}
+nav.scrolled{box-shadow:0 10px 30px -18px rgba(0,49,53,.45),0 1px 0 var(--line)}
+nav.scrolled .wrap{min-height:58px}
+.links{gap:4px;background:var(--bg2);border:1px solid var(--line);padding:4px;border-radius:999px}
+.links a{position:relative;min-height:38px;padding:0 14px;border-radius:999px;font-weight:600;font-size:15px;color:var(--soft);transition:color .2s,background .2s}
+.links a:hover{background:var(--bg);color:var(--ink)}
+.links a.on{background:var(--bg);color:var(--acc);box-shadow:0 2px 8px -3px rgba(0,49,53,.25)}
+.links a.on::after{content:"";position:absolute;left:50%;bottom:4px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--coral)}
+.drawer{box-shadow:0 20px 40px -24px rgba(0,49,53,.45)}
+.drawer .wrap{padding-top:12px;padding-bottom:16px}
+.drawer a{justify-content:space-between;border:1px solid var(--line);background:var(--bg)}
+.drawer a::after{content:"›";font-size:22px;color:var(--coral);line-height:1}
+.drawer a.on{color:var(--acc);border-color:var(--coral)}
+.stats{background:linear-gradient(180deg,#213843,#1a2e37)!important;padding:0}
+.stats .wrap{gap:0}
+.stat{display:flex;align-items:center;gap:16px;padding:24px 20px!important}
+.stat:first-child{padding-inline-start:0!important}
+.sic{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(254,175,118,.12);border:1px solid rgba(254,175,118,.28)}
+.sic svg{width:26px;height:26px;stroke:var(--apricot)}
+.stat b{font-size:clamp(28px,3vw,36px)!important;line-height:1}
+.stat span{display:block;margin-top:6px;font-size:14.5px}
+@media(max-width:600px){.stat{padding:16px 0!important}.sic{width:44px;height:44px}}
+main section,body>section{position:relative}
+section>.wrap>h2{font-size:clamp(32px,4.2vw,46px)}
+.kicker{position:relative;padding-bottom:20px;margin-bottom:34px}
+.kicker::after{content:"";position:absolute;inset-inline-start:0;bottom:0;width:72px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--apricot),var(--coral))}
+.about,#services,#journey{background:var(--bg)}
+.skills,#work,.awards{background-color:var(--bg2)!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='%23468D8B' fill-opacity='.07'%3E%3Crect x='22' y='22' width='20' height='20'/%3E%3Crect x='22' y='22' width='20' height='20' transform='rotate(45 32 32)'/%3E%3C/g%3E%3C/svg%3E")!important}
+:root[data-theme=dark] .skills,:root[data-theme=dark] #work,:root[data-theme=dark] .awards{background-color:#062a2e!important}
+.skills::before,#work::before,.awards::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+#skills .card,#services .card{position:relative;overflow:hidden}
+#skills .card::before,#services .card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--aqua),var(--apricot),var(--coral));opacity:0;transition:opacity .25s}
+#skills .card:hover::before,#services .card:hover::before{opacity:1}
+#skills .ico,#services .ico{background:linear-gradient(145deg,#e3f3f4,#cbe7ea)!important;box-shadow:inset 0 0 0 1px #bfe0e4}
+:root[data-theme=dark] #skills .ico,:root[data-theme=dark] #services .ico{background:linear-gradient(145deg,#0f3b3f,#0a2d30)!important;box-shadow:inset 0 0 0 1px #1d4d52}
+.totop{position:fixed;inset-inline-end:22px;bottom:96px;z-index:25;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -14px rgba(0,49,53,.5);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s,transform .25s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{color:var(--acc);border-color:var(--coral)}
+.totop:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+@media(max-width:600px){.totop{bottom:84px;inset-inline-end:16px}}
+.stat .sic{display:grid!important;margin:0!important;color:var(--apricot)}
 </style>
 </head>
 <body>
@@ -654,6 +698,7 @@ section h2::before{content:"";flex:none;width:18px;height:18px;background:var(--
   </div></div>
 </section>
 
+<button type="button" class="totop" id="totop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <footer><div class="wrap">
   <div class="fgrid">
     <div>
@@ -767,11 +812,12 @@ section h2::before{content:"";flex:none;width:18px;height:18px;background:var(--
   const countUp=()=>{document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n;if(reduce){el.textContent=dig(n);return}const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/900);el.textContent=dig(Math.round(n*(1-(1-k)**3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})};
   let tyTimer=null,chatReady=false;
   const typer=()=>{clearTimeout(tyTimer);const words=T[lang].ty,el=$('typ');if(reduce){el.textContent=words[0];return}let w=0,c=0,del=false;const tick=()=>{const word=words[w];c+=del?-1:1;el.textContent=word.slice(0,c);let d=del?40:85;if(!del&&c>=word.length){del=true;d=1500}else if(del&&c<=0){del=false;w=(w+1)%words.length;d=300}tyTimer=setTimeout(tick,d)};tick()};
+  const SIC=["<circle cx=\"12\" cy=\"9\" r=\"6\"/><path d=\"M8.5 14L7 22l5-3 5 3-1.5-8\"/>", "<rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"2\"/><path d=\"M8 21h8M12 17v4M8 10l2 2-2 2M13 14h3\"/>", "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18\"/>", "<path d=\"M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z\"/><path d=\"M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3\"/>"];
   const render=()=>{
     const t=T[lang];
     document.documentElement.lang=lang;document.documentElement.dir=lang=="ar"?"rtl":"ltr";document.querySelector('.ayah .tr').hidden=lang=="ar";
     document.querySelectorAll('[data-k]').forEach(el=>{const v=t[el.dataset.k];if(typeof v=="string")el.textContent=v});
-    $('stats').innerHTML=t.stats.map(([n,x,b])=>`<div class="stat"><b><em data-n="${n}">${dig(n)}</em>${x}</b><span>${b}</span></div>`).join('');
+    $('stats').innerHTML=t.stats.map(([n,x,b],k)=>`<div class="stat"><span class="sic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${SIC[k]}</svg></span><div><b><em data-n="${n}">${dig(n)}</em>${x}</b><span>${b}</span></div></div>`).join('');
     countUp();
     $('facts').innerHTML=t.facts.map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
     $('skillGrid').innerHTML=t.skills.map(([h,d],i)=>`<div class="card"><div class="ico" style="background:${icons[i][0]}"><svg viewBox="0 0 24 24" fill="none" stroke="${icons[i][1]}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icons[i][2]}</svg></div><h3>${h}</h3><p>${d}</p></div>`).join('');
@@ -793,7 +839,15 @@ section h2::before{content:"";flex:none;width:18px;height:18px;background:var(--
   mb.addEventListener('click',()=>{const on=dr.classList.toggle('on');mb.setAttribute('aria-expanded',on)});
   dr.addEventListener('click',e=>{if(e.target.closest('a')){dr.classList.remove('on');mb.setAttribute('aria-expanded',false)}});
   const pg=$('prog');
-  const onScroll=()=>{const h=document.documentElement;const m=h.scrollHeight-h.clientHeight;pg.style.width=(m>0?h.scrollTop/m*100:0)+'%'};
+  const navEl=document.querySelector('nav'),tt=$('totop');
+  const secs=['about','skills','services','work','awards','journey','contact'].map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks=[...document.querySelectorAll('.links a,.drawer a')];
+  let curSec='';
+  const onScroll=()=>{const h=document.documentElement;const m=h.scrollHeight-h.clientHeight;pg.style.width=(m>0?h.scrollTop/m*100:0)+'%';
+    navEl.classList.toggle('scrolled',h.scrollTop>10);tt.classList.toggle('show',h.scrollTop>700);
+    let cur='';for(const s of secs){if(s.getBoundingClientRect().top<=140)cur=s.id}
+    if(cur!==curSec){curSec=cur;navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')=='#'+cur))}};
+  tt.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   const isDark=()=>{const d=document.documentElement.dataset.theme;return d?d=="dark":matchMedia('(prefers-color-scheme: dark)').matches};
   $('theme').addEventListener('click',()=>{const m=isDark()?"light":"dark";document.documentElement.dataset.theme=m;try{localStorage.setItem('abs-theme',m)}catch(e){}});
