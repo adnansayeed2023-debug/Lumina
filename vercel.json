@@ -30,6 +30,16 @@
   ],
   "redirects": [
     {
+      "source": "/adnan",
+      "destination": "https://adnanbinsayeed.vercel.app/",
+      "permanent": true
+    },
+    {
+      "source": "/adnan/:path*",
+      "destination": "https://adnanbinsayeed.vercel.app/:path*",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
