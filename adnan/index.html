@@ -123,6 +123,12 @@ html[lang=bn] .hero h1{font-size:clamp(46px,7vw,86px)}
 .award{display:grid;grid-template-columns:100px minmax(0,1fr);gap:22px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;position:relative;overflow:hidden}
 .award::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:var(--gold);opacity:.12}
 .award svg{width:100px;height:124px;display:block}
+.aw{grid-template-columns:minmax(0,1fr)}
+.award.pic{grid-column:1/-1;grid-template-columns:minmax(0,1.25fr) 100px minmax(0,1fr);align-items:center}
+.aph{margin:0;border-radius:18px;overflow:hidden;background:var(--bg2);position:relative}
+.aph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.aph figcaption{font-size:13.5px;color:var(--soft);padding:10px 14px;line-height:1.45}
+@media(max-width:860px){.award.pic{grid-template-columns:100px minmax(0,1fr)}.award.pic .aph{grid-column:1/-1}}
 .rank{font-size:clamp(26px,3vw,32px);font-weight:800;line-height:1.1;color:var(--red);margin:4px 0 8px}
 :root[data-theme=dark] .rank{color:#ff6b80}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .rank{color:#ff6b80}}
@@ -602,7 +608,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10p
     ['#f3f3f5','#b3122e','<path d="M13 3L5 14h6l-1 7 8-11h-6Z"/>']
   ];
   const awards=[
-    {mark:"1",rib:["#b3122e","#8e0d24"],en:{rank:"1st position",t:"Intermediate Sarf-Nahu & Arabic Language Course",m:[["By","Al Bayan Institute"],["Course","50 hours"],["Awarded","16 January 2026"]]},ar:{rank:"المركز الأول",t:"دورة الصرف والنحو واللغة العربية – المستوى المتوسط",m:[["الجهة","معهد البيان"],["المدة","٥٠ ساعة تعليمية"],["التاريخ","١٦ يناير ٢٠٢٦"]]},bn:{rank:"প্রথম স্থান",t:"ইন্টারমিডিয়েট সরফ-নাহু ও আরবি ভাষা কোর্স",m:[["প্রতিষ্ঠান","আল-বায়ান ইনস্টিটিউট"],["কোর্স","৫০ ঘণ্টা"],["প্রদান","১৬ জানুয়ারি ২০২৬"]]}},
+    {img:"/adnan/ceremony.jpg",cap:{en:"Receiving the certificate at the Certificate & Prize Giving Ceremony, Al Bayan Institute, 16 January 2026",bn:"সনদ ও পুরস্কার বিতরণী অনুষ্ঠানে সার্টিফিকেট গ্রহণ, আল-বায়ান ইনস্টিটিউট, ১৬ জানুয়ারি ২০২৬",ar:"استلام الشهادة في حفل توزيع الشهادات والجوائز، معهد البيان، ١٦ يناير ٢٠٢٦"},mark:"1",rib:["#b3122e","#8e0d24"],en:{rank:"1st position",t:"Intermediate Sarf-Nahu & Arabic Language Course",m:[["By","Al Bayan Institute"],["Course","50 hours"],["Awarded","16 January 2026"]]},ar:{rank:"المركز الأول",t:"دورة الصرف والنحو واللغة العربية – المستوى المتوسط",m:[["الجهة","معهد البيان"],["المدة","٥٠ ساعة تعليمية"],["التاريخ","١٦ يناير ٢٠٢٦"]]},bn:{rank:"প্রথম স্থান",t:"ইন্টারমিডিয়েট সরফ-নাহু ও আরবি ভাষা কোর্স",m:[["প্রতিষ্ঠান","আল-বায়ান ইনস্টিটিউট"],["কোর্স","৫০ ঘণ্টা"],["প্রদান","১৬ জানুয়ারি ২০২৬"]]}},
     {mark:"★",rib:["#b3122e","#8e0d24"],en:{rank:"Special Grade",t:"National Merit Scholarship Examination 2025",m:[["By","Islamic Education Society"],["Class","Seven (Madrasah)"],["Held on","20 December 2025"]]},ar:{rank:"تقدير خاص",t:"اختبار المنحة الوطنية للمتفوقين ٢٠٢٥",m:[["الجهة","جمعية التعليم الإسلامي"],["الصف","السابع (مدرسة)"],["التاريخ","٢٠ ديسمبر ٢٠٢٥"]]},bn:{rank:"বিশেষ গ্রেড",t:"জাতীয় মেধাবৃত্তি পরীক্ষা ২০২৫",m:[["প্রতিষ্ঠান","ইসলামিক এডুকেশন সোসাইটি"],["শ্রেণি","সপ্তম (মাদ্রাসা)"],["পরীক্ষা","২০ ডিসেম্বর ২০২৫"]]}}
   ];
   const tl=[
@@ -646,7 +652,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10p
     const nf=n=>lang=="bn"?bnNum(n):lang=="ar"?String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]):n;
     $('servGrid').innerHTML=t.serv.map(([h,d],i)=>`<div class="card"><span class="num">${nf('0'+(i+1))}</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b3122e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${sic[i]}</svg></div><h3>${h}</h3><p>${d}</p></div>`).join('');
     $('feats').innerHTML=t.feats.map(x=>`<li>${x}</li>`).join('');
-    $('awGrid').innerHTML=awards.map(a=>{const o=a[lang];return `<article class="award">${medal(a.rib,a.mark)}<div><div class="rank">${o.rank}</div><h3>${o.t}</h3><div class="meta">${o.m.map(([k,v])=>`<div>${k}: <b>${v}</b></div>`).join('')}</div></div></article>`}).join('');
+    $('awGrid').innerHTML=awards.map(a=>{const o=a[lang];return `<article class="award${a.img?' pic':''}">${a.img?`<figure class="aph"><img src="${a.img}" alt="${a.cap[lang]}" width="1400" height="1050" loading="lazy"><figcaption>${a.cap[lang]}</figcaption></figure>`:''}${medal(a.rib,a.mark)}<div><div class="rank">${o.rank}</div><h3>${o.t}</h3><div class="meta">${o.m.map(([k,v])=>`<div>${k}: <b>${v}</b></div>`).join('')}</div></div></article>`}).join('');
     $('tl').innerHTML=tl.map(o=>{const [y,h,d]=o[lang];return `<li${o.g?' class="g"':''}><span class="yr">${y}</span><div><h3>${h}</h3><p>${d}</p></div></li>`}).join('');
     ['En','Bn','Ar'].forEach(k=>$('b'+k).setAttribute('aria-pressed',lang==k.toLowerCase()));
     $('note').textContent='';
