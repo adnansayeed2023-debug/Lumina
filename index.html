@@ -1170,9 +1170,8 @@ html.dark .homeBar{background:linear-gradient(180deg,rgba(30,31,34,0),#1e1f22 35
     <div class="navSep"></div>
     <button class="xnav" id="navPlans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg><span data-t="navPlans"></span></button>
     <button class="xnav" id="adCard"><span>🎬</span><span data-t="adNav"></span></button>
-    <a class="xnav" id="navFb" href="https://www.facebook.com/albayanarabi/" target="_blank" rel="noopener" style="text-decoration:none"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></span><span data-t="fbNav"></span></a>
     <a class="xnav" id="navMe" href="https://adnanbinsayeed.vercel.app/" target="_blank" rel="noopener" style="text-decoration:none"><span>👤</span><span data-t="meNav"></span></a>
-    <button class="xnav" id="navInvite" style="display:none"><span>🎁</span><span data-t="navInvite"></span></button>
+    
     <div class="acctBox" id="acctBox"></div>
     <button class="xnav" id="themeBtn"></button>
     <button class="xnav" id="installBtn" style="display:none"></button>
@@ -3112,7 +3111,7 @@ async function openInvite(){document.body.classList.remove('nav-open');const box
     w.append(lk,sh,st);
   }catch(e){ld.textContent=t('invErr');}
 }
-$('navInvite').onclick=openInvite;
+if($('navInvite'))$('navInvite').onclick=openInvite;
 $('pfGal').onclick=()=>$('pfIn').click();$('pfCam').onclick=()=>$('pfCamIn').click();
 ['pfIn','pfCamIn'].forEach(id=>$(id).addEventListener('change',e=>{pfLoad(e.target.files[0]);e.target.value='';}));
 $('pfText').addEventListener('input',e=>{dState.pfText=e.target.value;drawDesign();});
