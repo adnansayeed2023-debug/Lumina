@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem("abs-theme");document.documentElement.dataset.theme=(t==="light"||t==="dark")?t:"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <meta name="google-site-verification" content="h8XiQp1boOX9tJlSWwIzLa7VXgnmbygaI2L60jJY01E">
 <meta name="google-site-verification" content="sv7Xpfj4L_FCkenDig7QFcFTjwz894_u1hSGs-wAeWo">
 <title>Adnan Bin Sayeed</title>
@@ -20,7 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* VOICE personal page, proud and warm: an illustrated poster for a young maker
    IDEA an illuminated Islamic tile panel: a pointed arch of eight-point stars framing his name in Arabic
@@ -529,6 +530,100 @@ html[lang=en] .logo em,html[lang=ar] .logo em{display:none}
 .feat .pic{background:linear-gradient(180deg,#003135,#024950 60%,#0a6c72)!important}
 .award .aph{box-shadow:0 18px 36px -24px rgba(0,49,53,.6)}
 .stats{background:linear-gradient(90deg,#1c3540,#213843 40%,#2a3b3f 100%)!important}
+/* v8 night-tech look (dark theme, default) */
+:root[data-theme=dark]{--bg:#061418;--bg2:#0a1d22;--card:rgba(12,32,38,.72);--line:rgba(148,205,212,.14);--ink:#e8f3f4;--soft:#93aeb3;--acc:#2fc4cf;--aqua:#2fc4cf;--mono:"JetBrains Mono",ui-monospace,monospace}
+:root[data-theme=dark] body{background-color:#061418!important;background-image:radial-gradient(900px 600px at 12% -8%,rgba(15,164,175,.16),transparent 60%),radial-gradient(900px 700px at 100% 108%,rgba(254,175,118,.13),transparent 60%),linear-gradient(rgba(120,190,200,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,200,.055) 1px,transparent 1px)!important;background-size:auto,auto,44px 44px,44px 44px!important;background-attachment:fixed,fixed,fixed,fixed!important}
+:root[data-theme=dark] .hero,:root[data-theme=dark] .stats,:root[data-theme=dark] section,:root[data-theme=dark] .skills,:root[data-theme=dark] #work,:root[data-theme=dark] .awards,:root[data-theme=dark] .contact,:root[data-theme=dark] footer{background:transparent!important;background-image:none!important}
+:root[data-theme=dark] .hero .land,:root[data-theme=dark] .hero .moon,:root[data-theme=dark] .birds,:root[data-theme=dark] .contact::after,:root[data-theme=dark] .contact .crescent,:root[data-theme=dark] .skills::before,:root[data-theme=dark] #work::before,:root[data-theme=dark] .awards::before,:root[data-theme=dark] .skills::after,:root[data-theme=dark] #work::after,:root[data-theme=dark] .awards::after,:root[data-theme=dark] .story-quote::after{display:none!important}
+:root[data-theme=dark] .hero::before{opacity:.5}
+:root[data-theme=dark] nav{background:rgba(6,20,24,.78)!important;backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)!important}
+:root[data-theme=dark] .logo span{color:#fff}
+:root[data-theme=dark] .links{background:rgba(255,255,255,.03);border-color:var(--line)}
+:root[data-theme=dark] .links a{color:#a9c3c7}
+:root[data-theme=dark] .links a.on,:root[data-theme=dark] .links a:hover{background:rgba(47,196,207,.12);color:#fff;box-shadow:none}
+:root[data-theme=dark] .links a.on::after{background:var(--acc)}
+:root[data-theme=dark] .seg{border-color:var(--line);background:rgba(255,255,255,.03)}
+:root[data-theme=dark] .seg button{color:#cfe1e3}
+:root[data-theme=dark] .seg button[aria-pressed=true]{background:var(--acc)!important;color:#03181b!important}
+:root[data-theme=dark] .ibtn,:root[data-theme=dark] .menu{border-color:var(--line);color:#cfe1e3;background:rgba(255,255,255,.03)}
+:root[data-theme=dark] .drawer{background:#071a1f}
+:root[data-theme=dark] .drawer a{background:rgba(255,255,255,.03);color:#e8f3f4}
+:root[data-theme=dark] .hero{padding-bottom:clamp(40px,6vw,80px)!important}
+:root[data-theme=dark] .hero .htext{padding-bottom:0!important}
+:root[data-theme=dark] .hero .badge{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:0;padding:0;color:#7fa6ab}
+:root[data-theme=dark] .hero .badge i{width:28px;height:1px;border-radius:0;background:#7fa6ab}
+:root[data-theme=dark] .hero h1 .l2{color:var(--acc)!important;background:linear-gradient(90deg,#2fc4cf,#FEAF76);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+:root[data-theme=dark] .hero .typer{font-family:var(--mono);font-size:clamp(15px,1.6vw,18px);font-weight:500}
+:root[data-theme=dark] .hero .typer #typ{color:#FEAF76}
+:root[data-theme=dark] .caret{background:var(--acc)}
+:root[data-theme=dark] .hero .intro{color:#a9c3c7}
+:root[data-theme=dark] .hero .btn{border:1px solid rgba(47,196,207,.55);color:#7fe3ea;background:transparent}
+:root[data-theme=dark] .hero .btn:hover{background:rgba(47,196,207,.1)}
+:root[data-theme=dark] .hero .btn.main{background:var(--acc);border-color:var(--acc);color:#03181b;box-shadow:0 10px 30px -10px rgba(47,196,207,.6)}
+:root[data-theme=dark] .hero .arch{background:rgba(12,32,38,.6);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+:root[data-theme=dark] .hero .arch svg{position:relative!important;inset:auto!important;filter:none!important}
+:root[data-theme=dark] .stats .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden;padding:0}
+:root[data-theme=dark] .stats{box-shadow:none!important;padding:0 0 10px!important}
+:root[data-theme=dark] .stat{flex-direction:column;align-items:flex-start;gap:8px;padding:26px 24px!important;border-inline-start:1px solid var(--line)!important}
+:root[data-theme=dark] .stat:first-child{border-inline-start:0!important;padding-inline-start:24px!important}
+:root[data-theme=dark] .sic{display:none!important}
+:root[data-theme=dark] .stat b{font-family:var(--mono);font-weight:500;color:#e8f3f4!important;font-size:clamp(26px,3vw,34px)!important}
+:root[data-theme=dark] .stat span{font-family:var(--mono);font-size:11.5px!important;letter-spacing:.1em;text-transform:uppercase;color:#7fa6ab!important}
+@media(max-width:700px){:root[data-theme=dark] .stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}:root[data-theme=dark] .stat:nth-child(3){border-inline-start:0!important}:root[data-theme=dark] .stat:nth-child(n+3){border-top:1px solid var(--line)!important}}
+:root[data-theme=dark] section h2{color:#fff;font-size:clamp(28px,3.6vw,40px)!important;flex-wrap:wrap}
+:root[data-theme=dark] section h2::before{width:32px!important;height:1px!important;clip-path:none!important;background:var(--acc)!important;margin-inline-end:4px}
+:root[data-theme=dark] .kicker{color:#93aeb3}
+:root[data-theme=dark] .kicker::after{background:linear-gradient(90deg,var(--acc),transparent)}
+:root[data-theme=dark] .card,:root[data-theme=dark] .award,:root[data-theme=dark] .feat,:root[data-theme=dark] .daily,:root[data-theme=dark] form{background:var(--card)!important;border:1px solid var(--line)!important;backdrop-filter:blur(8px);box-shadow:none!important}
+:root[data-theme=dark] .card:hover{border-color:rgba(47,196,207,.45)!important;box-shadow:0 0 0 1px rgba(47,196,207,.15),0 20px 50px -30px rgba(47,196,207,.35)!important}
+:root[data-theme=dark] .card h3,:root[data-theme=dark] .award h3,:root[data-theme=dark] .feat h3{color:#fff}
+:root[data-theme=dark] .facts{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:0!important;padding:0!important;background:var(--card)!important;border:1px solid var(--line)!important;border-radius:18px!important;overflow:hidden}
+:root[data-theme=dark] .facts div{flex-direction:column;justify-content:flex-start;gap:6px;padding:16px 18px!important;border-bottom:1px solid var(--line)!important;border-inline-end:1px solid var(--line)}
+:root[data-theme=dark] .facts div:nth-child(2n){border-inline-end:0}
+:root[data-theme=dark] .facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7fa6ab}
+:root[data-theme=dark] .facts dd{text-align:start!important;color:#fff;font-size:15px}
+:root[data-theme=dark] .goal{background:transparent!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;padding:18px 0 0!important}
+:root[data-theme=dark] .goal h3{font-family:var(--mono);font-size:12px!important;letter-spacing:.14em;text-transform:uppercase;color:#7fa6ab!important}
+:root[data-theme=dark] .goal p{color:#cfe1e3}
+:root[data-theme=dark] .lead{color:#e8f3f4}
+:root[data-theme=dark] .story-quote{background:var(--card)!important;border:1px solid var(--line)}
+:root[data-theme=dark] .story-quote .qm{color:var(--acc)}
+:root[data-theme=dark] .story-quote figcaption{margin-bottom:0;color:#FEAF76;font-family:var(--mono);font-size:13px;letter-spacing:.06em}
+:root[data-theme=dark] .story-text p{color:#c6dadd}
+:root[data-theme=dark] .story-text p:first-child::first-letter{color:var(--acc)}
+:root[data-theme=dark] #skills .card::before,:root[data-theme=dark] #services .card::before{display:none}
+:root[data-theme=dark] #skills .card .ico,:root[data-theme=dark] #services .card .ico{background:rgba(47,196,207,.1)!important;box-shadow:inset 0 0 0 1px rgba(47,196,207,.3)!important}
+:root[data-theme=dark] #skills .card .ico svg,:root[data-theme=dark] #services .card .ico svg{stroke:#7fe3ea!important}
+:root[data-theme=dark] .wlink,:root[data-theme=dark] .pct{color:var(--acc)}
+:root[data-theme=dark] .feat .pic{background:linear-gradient(160deg,#0a2a30,#061418)!important}
+:root[data-theme=dark] .visit{background:var(--acc)!important;color:#03181b!important}
+:root[data-theme=dark] .live{color:#4ee08f;background:rgba(78,224,143,.1)}
+:root[data-theme=dark] .rank{color:#FEAF76!important}
+:root[data-theme=dark] .meta{color:#93aeb3}
+:root[data-theme=dark] .aph{background:#0a1d22}
+:root[data-theme=dark] .aph figcaption{color:#93aeb3}
+:root[data-theme=dark] .timeline::before{background:linear-gradient(180deg,var(--acc),rgba(47,196,207,.1))!important;width:1px!important;inset-inline-start:7px}
+:root[data-theme=dark] .timeline li::before{background:#061418!important;border:2px solid var(--acc)!important;box-shadow:0 0 12px rgba(47,196,207,.6)!important;border-radius:50%;transform:none!important;width:12px!important;height:12px!important;inset-inline-start:2px!important}
+:root[data-theme=dark] .yr{font-family:var(--mono);font-size:13px;color:var(--acc)!important;letter-spacing:.04em}
+:root[data-theme=dark] .timeline h3{color:#fff}
+:root[data-theme=dark] .contact h2::before{background:var(--acc)!important}
+:root[data-theme=dark] .contact .mail{border-bottom-color:var(--acc)}
+:root[data-theme=dark] .contact .copy,:root[data-theme=dark] .contact .send{background:var(--acc)!important;color:#03181b!important}
+:root[data-theme=dark] .contact .socials a,:root[data-theme=dark] .contact .sharebtn{border-color:rgba(47,196,207,.4)!important;color:#7fe3ea!important}
+:root[data-theme=dark] .contact input,:root[data-theme=dark] .contact textarea{background:rgba(255,255,255,.04)!important;color:#fff!important;border:1px solid var(--line)!important}
+:root[data-theme=dark] .contact label{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7fa6ab}
+:root[data-theme=dark] footer{border-top:1px solid var(--line)!important}
+:root[data-theme=dark] footer h4{font-family:var(--mono);font-size:12px!important;letter-spacing:.14em;text-transform:uppercase;color:#7fa6ab!important}
+:root[data-theme=dark] .prog{background:linear-gradient(90deg,var(--acc),#FEAF76)!important}
+:root[data-theme=dark] .fab{background:rgba(12,32,38,.9)!important;border:1px solid rgba(47,196,207,.5)!important;color:#7fe3ea!important;box-shadow:0 0 24px -4px rgba(47,196,207,.45)!important}
+:root[data-theme=dark] .totop{background:rgba(12,32,38,.9);border-color:var(--line);color:#cfe1e3}
+:root[data-theme=dark] .hero .arch{aspect-ratio:auto!important;max-height:none!important;max-width:460px}
+:root[data-theme=dark] .hero .arch svg{width:100%!important;height:auto!important;display:block}
+:root[data-theme=dark] .hero .wrap{align-items:center!important}
+html[lang=bn][data-theme=dark] .hero .badge,html[lang=bn][data-theme=dark] .stat span,html[lang=bn][data-theme=dark] .facts dt,html[lang=bn][data-theme=dark] .goal h3,html[lang=bn][data-theme=dark] .contact label,html[lang=bn][data-theme=dark] footer h4,html[lang=bn][data-theme=dark] .yr,html[lang=bn][data-theme=dark] .hero .typer,html[lang=bn][data-theme=dark] .story-quote figcaption,
+html[lang=ar][data-theme=dark] .hero .badge,html[lang=ar][data-theme=dark] .stat span,html[lang=ar][data-theme=dark] .facts dt,html[lang=ar][data-theme=dark] .goal h3,html[lang=ar][data-theme=dark] .contact label,html[lang=ar][data-theme=dark] footer h4,html[lang=ar][data-theme=dark] .yr,html[lang=ar][data-theme=dark] .hero .typer{font-family:inherit!important;letter-spacing:0!important;text-transform:none!important}
+html[lang=bn][data-theme=dark] .stat span,html[lang=bn][data-theme=dark] .facts dt,html[lang=bn][data-theme=dark] .hero .badge{font-size:14px!important}
+:root[data-theme=dark] .stats .wrap{width:calc(100% - 2 * max(5vw,16px));max-width:1200px;margin-inline:auto}
 </style>
 </head>
 <body>
