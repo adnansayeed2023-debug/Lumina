@@ -173,6 +173,10 @@ header{display:flex;align-items:center;justify-content:space-between}
 .hcard.ar-open .harr{display:block;max-height:none}
 .tpanel{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
 .tsrc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.fups{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}
+.fup{border:1px solid #f0c9cf;background:#fff7f8;color:#9f1239;border-radius:14px;padding:8px 12px;font:inherit;font-size:14px;text-align:start;cursor:pointer;max-width:100%}
+.fup::before{content:'↳ ';opacity:.6}
+html.dark .fup{background:#2a1d20;border-color:#4a2a30;color:#fda4af}
 .tnote{font-size:12.5px;color:var(--soft);background:var(--bg);border-radius:8px;padding:6px 10px;margin-bottom:8px}
 .sIntro{margin:12px 0 4px;text-align:start}
 .sIntroBtn{margin-top:10px}
@@ -1561,6 +1565,11 @@ Language & tone:
 - Natural, friendly, clear. No filler openers like "অবশ্যই!" or "Great question!". Don't call yourself an AI or bot. **Bold** only a few key words.
 - ANSWER QUALITY: start with the direct answer in the first sentence. For study, Islamic or detailed questions give a complete, well-organised answer: short "## " headings, numbered steps or "- " points, a worked example, and end with a one-line সারকথা / summary. Be accurate and specific (names, numbers, dates, references); if something is uncertain or scholars differ, say so briefly. Explain like the best teacher would: simple words first, then depth.
 - Length: simple or casual questions 2–5 sentences; study and detailed topics as long as needed to be complete (usually 200–600 words). Offer to go deeper with one short question only when natural.
+- ISLAMIC ANSWER SHAPE: for a ruling, practice or belief question use this order and skip parts that don't apply: (1) the direct answer or ruling in 1–2 sentences; (2) দলিল: the key ayah and/or sahih hadith, fetched with the library tools, with Arabic, translation and reference; (3) short explanation, and the scholars' views where they differ; (4) how to act on it in daily life (কীভাবে আমল করবে); (5) a one-line সারকথা.
+- MOBILE READING: most students read on a phone. Keep paragraphs to 2–3 sentences, use headings only when the answer is longer than about 150 words, keep tables to at most 3 columns, and never write a wall of text.
+- BANGLA QUALITY: write standard, correctly spelled চলিত Bangla; use Bangla digits (১২৩) in Bangla prose (keep normal digits inside maths, LaTeX and code); write ﷺ after the Prophet's name and (রাঃ)/(রহঃ) where customary.
+- CONTEXT: read the whole conversation. For follow-ups like "আরো বলো", "বুঝিনি", "উদাহরণ দাও", continue from your previous answer in simpler or deeper words without repeating it. If a question is unclear, answer the most likely meaning and ask one short clarifying question at the end.
+- FOLLOW-UPS: after a substantive study or Islamic answer (not casual chat, greetings, quizzes, language-practice turns or voice replies), end with a fenced block with language "followups" containing only a JSON array of 3 short questions the student might naturally ask next, in the reply language, each under 60 characters, e.g. \`\`\`followups\n["…","…","…"]\n\`\`\`. Never mention this block in the text.
 
 Your library (use these tools; they hold verified texts):
 - get_quran_verses: exact Arabic + Bangla + English of any ayah. ALWAYS use it before quoting or translating an ayah. Cite like (সূরা আল-বাকারা ২:২৫৫). Never quote ayahs from memory.
@@ -1939,7 +1948,7 @@ const IC={copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L12 5.6"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4L12 18.4"/></svg>',
  share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>'};
-function addActs(b,out){
+function addActs(b,out){out=String(out||'').replace(/```followups[\s\S]*?(```|$)/g,'').trim();
   const a=document.createElement('div');a.className='acts';
   const mk=(ic,lbl,fn)=>{const x=document.createElement('button');x.type='button';x.innerHTML=IC[ic];x.title=lbl;x.setAttribute('aria-label',lbl);x.onclick=()=>fn(x);a.appendChild(x);return x;};
   mk('copy',t('copy'),x=>{try{navigator.clipboard.writeText(out).then(()=>{x.innerHTML=IC.check;x.classList.add('on');setTimeout(()=>{x.innerHTML=IC.copy;x.classList.remove('on');},1500);});}catch(e){}});
@@ -2204,7 +2213,7 @@ function copyCode(btn){const pre=btn.closest('.codeb').querySelector('pre');try{
 function mdRich(s){
   const blocks=[];
   s=String(s).replace(/```(\w*)[^\n]*\n?([\s\S]*?)```/g,(m,lang,body)=>{blocks.push({lang:(lang||'').toLowerCase(),body});return `\u0001B${blocks.length-1}\u0001`;});
-  let pending=false;const k=s.indexOf('```');if(k>=0){s=s.slice(0,k);pending=true;}
+  let pending=false;const k=s.indexOf('```');if(k>=0){pending=!/^```followups/.test(s.slice(k));s=s.slice(0,k);}
   s=s.replace(/((?:^|\n)\|[^\n]*\|[ \t]*\n\|[ \t:|-]+\|[ \t]*(?:\n\|[^\n]*\|[ \t]*)*)/g,(m,tb)=>{const rows=tb.trim().split('\n').filter((r,i)=>i!==1).map(r=>r.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim()));
     blocks.push({lang:'__table',body:rows});return `\n\u0001B${blocks.length-1}\u0001\n`;});
   s=s.replace(/\n*(\u0001B\d+\u0001)\n*/g,'$1').replace(/\n*(\$\$[\s\S]*?\$\$)\n*/g,'$1').replace(/\n{3,}/g,'\n\n');
@@ -2212,6 +2221,8 @@ function mdRich(s){
   h=h.replace(/\u0001B(\d+)\u0001/g,(m,i)=>{const b=blocks[+i];
     if(b.lang==='__table') return `<div class="tblw"><table class="mdt">${b.body.map((r,i)=>`<tr>${r.map(c=>i?`<td>${md(c)}</td>`:`<th>${md(c)}</th>`).join('')}</tr>`).join('')}</table></div>`;
     if(b.lang==='image') return `<div class="genImg" data-spec="${encodeURIComponent(b.body)}"><div class="giWait"><span class="dots"><i></i><i></i><i></i></span>${t('giMaking')}</div></div>`;
+    if(b.lang==='followups'){let q=[];try{q=JSON.parse(b.body)}catch(e){}if(!Array.isArray(q))q=[];q=q.filter(x=>typeof x==='string'&&x.trim()).slice(0,3);
+      return q.length?`<div class="fups">${q.map(x=>`<button type="button" class="fup" data-q="${escHTML(x)}">${escHTML(x)}</button>`).join('')}</div>`:'';}
     if(b.lang==='figure'||b.lang==='plot') return `<div class="fig" data-kind="${b.lang}" data-spec="${encodeURIComponent(b.body)}"></div>`;
     return `<div class="codeb"><div class="codeh"><span>${escHTML(b.lang||'code')}</span><button type="button" class="cpy" onclick="copyCode(this)">${t('copy')}</button></div><pre class="code">${escHTML(b.body)}</pre></div>`;});
   if(pending) h+=`<div class="typing">${t('drawing')}</div>`;
@@ -2234,7 +2245,6 @@ function renderGenImg(box){
           const blob=await new Promise(r=>c.toBlob(r,'image/png'));const u=URL.createObjectURL(blob);const l=document.createElement('a');l.href=u;l.download='al-bayan-image.png';document.body.appendChild(l);l.click();l.remove();
           if(/iPhone|iPad|Android/i.test(navigator.userAgent)){$('dImg').src=c.toDataURL('image/png');$('dModal').classList.add('on');}}catch(e){window.open(img.src,'_blank');}});
       mk('🔄',t('giAgain'),load);
-      mk('📰',t('giPoster'),()=>{dState.art=img;dState.photo=img;dState.tpl='photo';try{fillDefaults();setDMode('poster');goTab('design');drawDesign();markMade();}catch(e){}});
       box.appendChild(a);};
     const fail=()=>{box.innerHTML=`<div class="giWait">⚠️ ${t('giFail')} <button type="button" class="giRetry">${t('giAgain')}</button></div>`;box.querySelector('.giRetry').onclick=load;};
     img.onerror=()=>{clearTimeout(tm);fail();};
@@ -2242,6 +2252,7 @@ function renderGenImg(box){
   load();
 }
 async function postRender(el){
+  el.querySelectorAll('.fup:not([data-on])').forEach(b=>{b.dataset.on='1';b.onclick=()=>ask(b.dataset.q);});
   el.querySelectorAll('.genImg').forEach(renderGenImg);
   for(const f of el.querySelectorAll('.fig:not([data-done])')){
     f.dataset.done='1';
