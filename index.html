@@ -2364,7 +2364,7 @@ function renderSolveUI(){
 $('sPhoto').onclick=()=>openAttach('solve');
 $('uniSearch').addEventListener('input',()=>renderSolveUI());
 function renderPractice(){const g=$('prGrid');if(!g)return;g.innerHTML='';
-  t('prTools').forEach(([k,ic,lbl])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span></span><b></b>';b.firstChild.textContent=ic;b.lastChild.textContent=lbl;
+  t('prTools').filter(([k])=>k!=='test'&&k!=='check').forEach(([k,ic,lbl])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span></span><b></b>';b.firstChild.textContent=ic;b.lastChild.textContent=lbl;
     b.onclick=()=>{const topic=$('sProb').value.trim();const lvl=t('sLevels')[solveLevel];
       if(k==='test'||k==='check'){goTab('study');openTool(k);const si=document.querySelector('#stBody input[list^=stSubjList]');if(si)si.value=subjName(solveSubj);
         if(k==='test'&&topic){const tp=document.querySelectorAll('#stBody .stField input[type=text]')[1];if(tp)tp.value=topic;}
@@ -3191,9 +3191,6 @@ function renderFeat(){
   {const sb=document.createElement('button');sb.className='wide';const sj=t('subjects');
    sb.innerHTML=`<span class="fi" style="background:linear-gradient(135deg,#3d6fd8,#2a4fa8);color:#fff">∑</span><span><b>${t('sTitle')}</b><small>${t('sSub')}</small></span>`;
    sb.onclick=()=>{closeTopics();goTab('solve');};box.appendChild(sb);}
-  const [ic,ti,su]=t('fDesign');const d=document.createElement('button');d.className='wide';
-  d.innerHTML=`<span class="fi" style="background:linear-gradient(135deg,#e2c069,#b8862f);color:#fff">${ic}</span><span><b>${ti}</b><small>${su}</small></span>`;
-  d.onclick=()=>{closeTopics();goTab('design');};box.appendChild(d);
   renderTopics();
 }
 
