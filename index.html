@@ -1163,7 +1163,7 @@ html.dark .homeBar{background:linear-gradient(180deg,rgba(30,31,34,0),#1e1f22 35
     <button data-v="quran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span data-t="tQuran"></span></button>
     <button data-v="hadith"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h10a2 2 0 0 1 2 2V17H9a2 2 0 0 0-2 2"/><path d="M7 3.5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h12v-4"/><path d="M10 8h6M10 11h4"/></svg><span data-t="tHadith"></span></button>
     <button data-v="dua"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V6.5a1.5 1.5 0 0 1 3 0V12"/><path d="M11 11V4.5a1.5 1.5 0 0 1 3 0V12"/><path d="M14 11.5V6a1.5 1.5 0 0 1 3 0v8a7 7 0 0 1-7 7h-.5A6.5 6.5 0 0 1 4 15.2V12a1.5 1.5 0 0 1 3 0v2"/></svg><span data-t="tDua"></span></button>
-    <button data-v="solve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L12 4l8 16z"/><path d="M8.5 13h7"/><circle cx="18.5" cy="6" r="2.2"/></svg><span data-t="tSolve"></span></button>
+    <button data-v="solve" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L12 4l8 16z"/><path d="M8.5 13h7"/><circle cx="18.5" cy="6" r="2.2"/></svg><span data-t="tSolve"></span></button>
     <button data-v="study" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h4"/><path d="M15.5 15.5l1.5 1.5 3-3"/></svg><span data-t="tStudy"></span></button>
     <button data-v="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7M7.5 3v2M5 11c2-1 4-3.5 4.5-6M6 8c.8 1.6 2.2 2.8 4 3.5"/><path d="M12 21l4.5-10L21 21M13.5 17.5h6"/></svg><span data-t="tLearn"></span></button>
     <button data-v="design" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9" r="1.8"/><path d="M20.5 15l-4.5-4.5L6 20.5"/></svg><span data-t="tDesign"></span></button>
@@ -3188,9 +3188,7 @@ function renderFeat(){
   t('feat').forEach(([ic,ti,su],i)=>{const b=document.createElement('button');
     b.innerHTML=`<span class="fi" style="background:${bgs[i]};color:#fff;font-family:${i===2?'Amiri,serif':i===3?'Fraunces,serif':'inherit'}">${ic}</span><span><b>${ti}</b><small>${su}</small></span>`;
     b.onclick=()=>{closeTopics();acts[i]();};box.appendChild(b);});
-  {const sb=document.createElement('button');sb.className='wide';const sj=t('subjects');
-   sb.innerHTML=`<span class="fi" style="background:linear-gradient(135deg,#3d6fd8,#2a4fa8);color:#fff">∑</span><span><b>${t('sTitle')}</b><small>${t('sSub')}</small></span>`;
-   sb.onclick=()=>{closeTopics();goTab('solve');};box.appendChild(sb);}
+
   renderTopics();
 }
 
