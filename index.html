@@ -1684,7 +1684,7 @@ async function getAnswer(history,onText,images,nUploads){
     return r.text||'';
   }
   const res=await fetch('/api/chat',{method:'POST',signal:abortCtl?abortCtl.signal:undefined,headers:{'Content-Type':'application/json','x-lumina-device':deviceId},body:JSON.stringify({stream:!!(window.ReadableStream&&window.TextDecoder),uploads:nUploads||0,messages:history,replyLang,ui:L,model:curModel,mode:chatMode,level:talkLevel,voice:voiceTurn,subject:solveSubj,solveLevel,images:images&&images.length?await Promise.all(images.map(blobToB64)):undefined})});
-  if(res.status===403){const jj=await res.json().catch(()=>({}));if(jj.error==='model_locked'){applyServerUsage(jj.usage);curModel='smart';try{localStorage.setItem('albayan-model','smart')}catch(e){};renderModelBtns();throw {code:'limit',kind:'chat'};}}
+  if(res.status===403){const jj=await res.json().catch(()=>({}));if(jj.error==='model_locked'){applyServerUsage(jj.usage);curModel=bestModel();try{localStorage.setItem('albayan-model',curModel)}catch(e){};renderModelBtns();throw {code:'limit',kind:'chat'};}}
   if(res.status===429){const j=await res.json().catch(()=>({}));if(j.error==='limit'){applyServerUsage(j.usage);throw {code:'limit',kind:j.kind};}throw {code:'rate_limited'};}
   if(!res.ok) throw {code:'error'};
   if((res.headers.get('content-type')||'').includes('ndjson')&&res.body){
@@ -2562,7 +2562,8 @@ const MODELS=()=>LP.MODELS||{};
 const planHas=(k,plan)=>isStaff()||((LP.MODEL_ACCESS||{})[plan||usage.plan]||['lite','smart']).includes(k);
 const firstPlanFor=k=>['free','go','plus','pro'].find(p=>((LP.MODEL_ACCESS||{})[p]||[]).includes(k))||'pro';
 const mWeight=()=>((MODELS()[curModel]||{}).weight||1);
-function renderModelBtns(){if(!MODELS()[curModel]||!planHas(curModel))curModel='smart';const m=MODELS()[curModel]||{icon:'✨',name:'Bayan Smart'};
+const bestModel=()=>planHas('smart')?'smart':'lite';
+function renderModelBtns(){if(!MODELS()[curModel]||!planHas(curModel))curModel=bestModel();const m=MODELS()[curModel]||{icon:'✨',name:'Bayan Smart'};
   ['mdlBtn1','mdlBtn2'].forEach(id=>{const b=$(id);if(b){b.innerHTML='<span></span><span class="mn"></span> ▾';b.firstChild.textContent=m.icon;b.children[1].textContent=m.name.replace(/^Bayan\s+/,'');b.title=m.name;}});}
 function openModels(){const box=$('mdlList');box.innerHTML='';
   Object.entries(MODELS()).forEach(([k,m])=>{const ok=planHas(k),b=document.createElement('button');b.type='button';b.dataset.a=k;b.className='mdlItem'+(k===curModel?' on':'')+(ok?'':' locked');

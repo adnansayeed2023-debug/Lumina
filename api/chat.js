@@ -270,14 +270,20 @@ export default async function handler(req, res) {
   const ipAddr = clientIp(req);
   const nUp = Math.min(10, Math.max(+body.uploads || 0, Array.isArray(body.images) ? body.images.length : 0));
   const LPm = globalThis.LuminaPlans;
-  const mk = (!isDesign && LPm.MODELS[body.model]) ? body.model : 'smart';
-  const M = LPm.MODELS[mk];
+  let mk = (!isDesign && LPm.MODELS[body.model]) ? body.model : 'smart';
+  let M = LPm.MODELS[mk];
   const need = isDesign ? { design: 1, upload: nUp } : { chat: M.weight * (body.task === 'mcq' && +body.count > 20 ? 2 : 1), upload: nUp };
   let gate;
   try { gate = await check(device, ipAddr, need, W.device); } catch (e) { return res.status(500).json({ error: 'storage error' }); }
   if (!gate.ok) return res.status(429).json({ error: 'limit', kind: gate.kind, usage: gate.st });
-  if (!isDesign && !gate.st.role && !(LPm.MODEL_ACCESS[gate.st.plan] || LPm.MODEL_ACCESS.free).includes(mk))
-    return res.status(403).json({ error: 'model_locked', model: mk, usage: gate.st });
+  if (!isDesign && !gate.st.role) {
+    const allowed = LPm.MODEL_ACCESS[gate.st.plan] || LPm.MODEL_ACCESS.free;
+    if (!allowed.includes(mk)) {
+      // Lite/Smart picked without access (e.g. free plan): quietly use the best model the plan allows
+      if (M.weight <= 1) { mk = allowed.includes('smart') ? 'smart' : allowed[0]; M = LPm.MODELS[mk]; }
+      else return res.status(403).json({ error: 'model_locked', model: mk, usage: gate.st });
+    }
+  }
   const WEB = { type: 'web_search_20250305', name: 'web_search', max_uses: 3 };
   let tools = (isArt || isPrompt || isJson) ? [] : isDesign ? TOOLS.filter(t => t.name === 'get_quran_verses') : [...TOOLS, WEB];
   const uiLang = { bn: 'Bangla (বাংলা script)', en: 'English', ar: 'Arabic' }[body.ui] || 'Bangla (বাংলা script)';
