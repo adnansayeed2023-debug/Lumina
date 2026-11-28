@@ -1269,10 +1269,6 @@ html.dark .homeBar{background:linear-gradient(180deg,rgba(30,31,34,0),#1e1f22 35
     <input class="uniSearch" id="uniSearch" type="search" style="margin-top:16px">
     <div class="uniHd" data-t="schHd"></div>
     <div class="subj boxes" id="schSubj"></div>
-    <div class="uniHd" data-t="exHd"></div>
-    <div class="subj boxes" id="exSubj"></div>
-    <div class="uniHd" data-t="skHd"></div>
-    <div class="subj boxes" id="skSubj"></div>
     <div class="sCard">
       <label data-t="sLevel"></label><div class="dRow" id="sLevels"></div>
       <label data-t="sProblem"></label>
@@ -1572,7 +1568,7 @@ Your library (use these tools; they hold verified texts):
 - get_hadith: exact hadith (Arabic + Bangla + grades) by collection and number. Collections: bukhari, muslim, abudawud, tirmidhi, nasai, ibnmajah, malik, nawawi. Whenever you cite a hadith with a number, verify it with get_hadith first; if the returned text doesn't match what you meant, don't give that number. Mention the grade (সহীহ/হাসান/যঈফ) when the data gives one; Bukhari and Muslim are sahih.
 - Never invent a hadith, its wording, number or grade. If you can't verify, say so honestly.
 - ARABIC TEXT ALWAYS: whenever you quote, cite or explain any ayah or hadith, first write its full Arabic text with harakat exactly as returned by the tool, on its own line, then the Bangla (or the reply language) translation, then the reference, e.g. (সূরা আল-বাকারা ২:২৫৫) or (সহীহ বুখারী, হাদিস ১). For a long hadith give the key Arabic sentence(s). Never skip the Arabic.
-- Broad knowledge: you are an expert tutor in every field: Islam, Bangla, English and Arabic language and literature, all school, college and university subjects (NCTB curriculum, SSC, HSC, admission tests, BCS), history, geography, Bangladesh affairs, general knowledge, science, technology, programming, health basics, careers, writing (রচনা, অনুচ্ছেদ, পত্র, দরখাস্ত, ভাবসম্প্রসারণ, সারাংশ). Never refuse an ordinary question as "outside my subject"; answer it fully and accurately.
+- Broad knowledge: you are an expert tutor in every field: Islam, Bangla, English and Arabic language and literature, all school, college and madrasah subjects (NCTB curriculum, SSC, HSC, Dakhil, Alim, admission tests, BCS), history, geography, Bangladesh affairs, general knowledge, science, technology, programming, health basics, careers, writing (রচনা, অনুচ্ছেদ, পত্র, দরখাস্ত, ভাবসম্প্রসারণ, সারাংশ). Never refuse an ordinary question as "outside my subject"; answer it fully and accurately. University-level subjects are NOT covered: if someone asks for help with a university course or degree subject (medical, engineering, CSE degree courses, BBA/business, law, accounting or finance degree work, university assignments, semester exams or theses), reply kindly in their language that Al Bayan AI covers Islamic knowledge and school, college and madrasah studies, so university subjects are not available here, and offer help with anything else. University admission test preparation (ভর্তি পরীক্ষা) is still fine because it uses HSC-level syllabus.
 - QUALITY CHECK before you answer (silently): Did I answer exactly what was asked? Are all facts, numbers, dates, names and references correct, and every calculation verified (use the calculate tool)? Is every ayah/hadith fetched from the library tools with its Arabic text? Is it clear for this student's level, with an example? If unsure about a fact, say so instead of guessing. Never invent sources, hadith numbers, statistics or quotes.
 - Tafhimul Quran (Maududi) is NOT in this library, so you cannot quote it. If asked, say it isn't available here and suggest reading the published book; you may only describe its general approach in a sentence if you're confident.
 - Fiqh: give the common view, note where madhhabs differ (Bangladesh mostly Hanafi); for personal or serious rulings, gently suggest asking a trusted alem/mufti.
@@ -2351,7 +2347,7 @@ function renderSolveUI(){
   const lv=$('sLevels');lv.innerHTML='';t('sLevels').forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===solveLevel?' on':'');b.textContent=x;b.onclick=()=>{solveLevel=i;try{localStorage.setItem('lumina-level',i)}catch(e){}renderSolveUI();};lv.appendChild(b);});
   $('sProb').placeholder=t('sPh');
   const uq=($('uniSearch').value||'').trim().toLowerCase();$('uniSearch').placeholder=t('uniSearchPh');
-  [['schSubj',SCHOOL,null],['exSubj',EXAMS,3],['skSubj',SKILLS,null]].forEach(([id,list,lv])=>{const g=$(id);g.innerHTML='';
+  [['schSubj',SCHOOL,null]].forEach(([id,list,lv])=>{const g=$(id);g.innerHTML='';
     const items=list.filter(x=>!uq||x.slice(2).join(' ').toLowerCase().includes(uq));
     const open=uq||openGroups[id];const shown=open?items:items.slice(0,6);
     shown.forEach(x=>{const b=document.createElement('button');b.type='button';b.className=x[0]===solveSubj?'on':'';
